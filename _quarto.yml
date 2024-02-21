@@ -3,8 +3,8 @@ project:
 
 book:
   title: "Thesis"
-  author: "Norah Jones"
-  date: "2/8/2024"
+  author: "Ivan Dubrovin"
+  date: today
   chapters:
     - index.qmd
     - chapters/01_introduction.qmd
@@ -13,6 +13,7 @@ book:
     - chapters/04_results.qmd
     - chapters/05_conclusion.qmd
     - chapters/99_references.qmd
+  cover-image: cover.png
 
 bibliography: references.bib
 
