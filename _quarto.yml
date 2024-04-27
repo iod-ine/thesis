@@ -8,7 +8,7 @@ book:
   chapters:
     - index.qmd
     - chapters/01_introduction.qmd
-    - chapters/02_related_workds.qmd
+    - chapters/02_literature_review.qmd
     - chapters/03_materials_and_methods.qmd
     - chapters/04_results.qmd
     - chapters/05_conclusion.qmd
