@@ -1,15 +1,17 @@
-[tool.poetry]
+[project]
 name = "thesis"
 version = "0.1.0"
-description = ""
-authors = ["Ivan Dubrovin"]
+description = "Default template for PDM package"
+authors = [
+    {name = "Ivan Dubrovin", email = "Ivan.Dubrovin@skoltech.ru"},
+]
+dependencies = [
+    "jupyter>=1.0.0",
+]
+requires-python = "==3.10.*"
 readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "^3.10"
-jupyter = "^1.0.0"
+license = {text = "GPL-3.0-or-later"}
 
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.pdm]
+distribution = false
