@@ -2,7 +2,7 @@ project:
   type: book
 
 book:
-  title: "Thesis"
+  title: "A deep learning framework for mixed dense forests parameter estimation at individual tree scale"
   author: "Ivan Dubrovin"
   date: today
   chapters:
