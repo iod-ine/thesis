@@ -3,8 +3,14 @@ project:
 
 book:
   title: "A deep learning framework for mixed dense forests parameter estimation at individual tree scale"
+  output-file: "my-book"
+  subtitle: "Here goes nothing"
   author: "Ivan Dubrovin"
   date: today
+  abstract: |
+    This is an abstract.
+    It is relatively long.
+    It summarizes everything nicely.
   chapters:
     - index.qmd
     - chapters/01_introduction.qmd
@@ -14,14 +20,22 @@ book:
     - chapters/05_conclusion.qmd
     - chapters/99_references.qmd
   cover-image: cover.png
+  downloads: [pdf]
+  repo-url: https://github.com/iod-ine/thesis
+  repo-actions: [edit, issue, source]
+  sidebar:
+    search: true
+    title: "Shorter title here"
 
 bibliography: references.bib
+
+execute:
+  include: false
 
 format:
   html:
     theme: cosmo
   pdf:
     documentclass: scrreprt
-
-
-
+    cite-method: biblatex
+    output-file: "my-book"
