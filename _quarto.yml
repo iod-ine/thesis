@@ -32,6 +32,8 @@ bibliography: references.bib
 execute:
   include: false
 
+lightbox: true
+
 format:
   html:
     theme: cosmo
