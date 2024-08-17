@@ -1,3 +1,11 @@
 # Materials and methods
 
+## Lysva dataset
+
 {{< embed 03a_lysva_dataset.ipynb >}}
+
+## Individual trees dataset
+
+## NeonTreeEvaluation Benchmark
+
+[@weinsteinDataNeonTreeEvaluationBenchmark2022]
