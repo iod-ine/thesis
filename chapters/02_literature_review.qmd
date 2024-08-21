@@ -4,6 +4,7 @@
 
 The most common way to use LiDAR for forestry is the area-based approach [@whiteABAGuide2013].
 
+![Area-based approach schematic. Figure from [@whiteABAGuide2013]](../images/aba_schematic.jpg)
 
 ## Deep learning on point clouds
 
