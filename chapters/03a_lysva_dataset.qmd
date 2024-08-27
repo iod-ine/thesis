@@ -1,0 +1,9 @@
+## Lysva dataset
+
+{{< embed 03a_lysva_dataset.ipynb#tbl-inventory-example >}}
+
+{{< embed 03a_lysva_dataset.ipynb#fig-example-3d-point-cloud >}}
+
+{{< embed 03a_lysva_dataset.ipynb#fig-lysva-species-distribution >}}
+
+{{< embed 03a_lysva_dataset.ipynb#fig-intensity-with-example >}}

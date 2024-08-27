@@ -1,8 +1,8 @@
 # Materials and methods
 
-## Lysva dataset
+This chapter describes the datasets and the methods used.
 
-{{< embed 03a_lysva_dataset.ipynb >}}
+{{< include 03a_lysva_dataset.qmd >}}
 
 ## Individual trees dataset
 
