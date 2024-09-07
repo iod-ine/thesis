@@ -9,3 +9,8 @@ This chapter describes the datasets and the methods used.
 ## NeonTreeEvaluation Benchmark
 
 [@weinsteinDataNeonTreeEvaluationBenchmark2022]
+
+## Methods
+
+{{< embed 03b_augmentations.ipynb#fig-random-jitter-effect >}}
+
