@@ -10,6 +10,6 @@
 
 {{< embed 03a_lysva_dataset.ipynb#fig-intensity-with-example >}}
 
-Even though some sources report it's an awesome feature, seems super unreliable because of all the physics involved.
+Even though some sources report it's a useful feature [@shiImportantLiDARMetrics2018], seems super unreliable because of all the physics involved.
 @fig-intensity-with-example shows the distribution of intensity values for every point in the Lysva dataset, and shows an example plot in 3D colored by intensity.
 It seems like noise.
