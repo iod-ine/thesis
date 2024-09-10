@@ -1,5 +1,7 @@
 # Literature review
 
+This chapter provides an overview of the current state of literature on a variety of related subjects.
+
 ## Area-based approach
 
 The most common way to use LiDAR for forestry is the area-based approach [@whiteABAGuide2013].
