@@ -6,7 +6,11 @@
 
 {{< embed 03a_lysva_dataset.ipynb#fig-lysva-species-distribution >}}
 
-### On using intensity as a feature
+@tbl-lysva-plot-stats shows stats for plots in the Lysva dataset.
+
+{{< embed 03a_lysva_dataset.ipynb#tbl-lysva-plot-stats >}}
+
+### On using intensity as a feature {#sec-intensity-as-a-feature}
 
 {{< embed 03a_lysva_dataset.ipynb#fig-intensity-with-example >}}
 
