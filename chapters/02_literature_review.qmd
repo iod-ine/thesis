@@ -14,13 +14,23 @@ These metrics are then used as input features for modeling the forest attributes
 The same metrics are calculated for the entire area of interest, using a grid with a cell size similar in area to the area of a single ground plot.
 The models are then applied to the grid, generating an extrapolation of the required attributes.
 
+Area-based approach has been extensively used and provides many advantages.
+It is relatively easy to implement and extend with other data sources, it works even with sparse data.
+Still, it requires a lot of field inventory data to work, and provides very coarse results.
+The models that can be used are relatively simple, because of how expensive the data collection is – every ground plot becomes a single example.
+Data-hungry approaches usually don't have enough to train.
+
+A brief discussion on the use of intensity of the reflection as an additional source of information can be found in @sec-intensity-as-a-feature
+
 ::: {#fig-aba-schema}
 ![](../images/aba_schematic.jpg)
 
 Area-based approach schematic. Figure from [@whiteABAGuide2013]
 :::
 
-## Deep learning on point clouds
+## Classic machine learning on point clouds {#sec-classic-machine-learning}
+
+## Deep learning on point clouds {#sec-deep-learning}
 
 PointNet [@qiPointNet2017] and PointNet++ [@qiPointNetPlusPlus2017]
 
