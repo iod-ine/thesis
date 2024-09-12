@@ -2,6 +2,19 @@
 
 This chapter provides an overview of the current state of literature on a variety of related subjects.
 
+### Terrestrial LiDAR
+
+Terrestrial LiDAR surveys usually provide very dense and detailed point clouds.
+Most importantly for the task of localizing individual trees, terrestrial measurements always capture the trunks of the trees clearly.
+Tree trunks are very useful for tree detection and segmentation, and there are many algorithms that use bottom-to-top approaches that trace the trunks into the canopies.
+
+[@nurunnabiDevelopmentPreciseTree2024] offers a compelling example of how such detailed data can be used to provide very detailed analyses on tree level.
+The authors report high accuracies on the task of segmenting the point clouds
+
+### Fusion of data
+[@balestraLiDARDataFusion2024] offers a review of 151 publications concerning fusion of LiDAR data with other remote sensing data.
+The authors report that in most cases fusion improves the results.
+
 ## Area-based approach
 
 The most common way to use LiDAR for mapping forest attributes is the area-based approach [@whiteABAGuide2013].
