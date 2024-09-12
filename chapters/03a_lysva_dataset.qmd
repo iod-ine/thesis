@@ -10,10 +10,16 @@
 
 {{< embed 03a_lysva_dataset.ipynb#tbl-lysva-plot-stats >}}
 
-### On using intensity as a feature {#sec-intensity-as-a-feature}
+### On using intensity-based features {#sec-intensity-based-features}
 
 {{< embed 03a_lysva_dataset.ipynb#fig-intensity-with-example >}}
 
-Even though some sources report it's a useful feature [@shiImportantLiDARMetrics2018], seems super unreliable because of all the physics involved.
-@fig-intensity-with-example shows the distribution of intensity values for every point in the Lysva dataset, and shows an example plot in 3D colored by intensity.
-It seems like noise.
+Even though some sources report intensity-based features as some of the most important ones [@shiImportantLiDARMetrics2018], the features seem to me unreliable in the context of forestry because of the physics of light reflection.
+There are simply too many factors that affect the amplitude of the reflected signal, which might be useful when imaging stable targets such as urban environments but become completely unpredictable on highly unstable targets such as trees: they move in the wind in the time span of a single survey, they grow in the time span between repeated surveys, the leaves and branches are angled in every possible way.
+Moreover, the quality of the recorded intensities highly depends on the used sensor.
+As an example, @fig-intensity-with-example shows the distribution of intensity values for every point in the Lysva dataset, and shows plot number 10 in 3D colored by intensity.
+The distribution of intensities seems like an artifact of faulty quantization (the fact that the maximum overall value is 63 makes me suspect it is stored by the hardware using a 6-bit unsigned integer, probably an ad hoc optimization by the vendor).
+With this distribution in mind, it is not surprising that visualizing the intensities in 3D scatter plot of the ground plots results in images that look like noise.
+
+Some sensors provide more consistent values.
+However, it limits the relying on intensity-based features limits the applicability of developed models and methods, as any such model would surely fail on data like this.

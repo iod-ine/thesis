@@ -22,7 +22,7 @@ The most common way to use LiDAR for mapping forest attributes is the area-based
 It consists of a LiDAR survey covering the whole area of interest and a manual forest inventory providing ground truth data for fitting statistical models and validating the results.
 The inventory usually consists of many circular ground plots with every tree within counted and attributes of interest either directly measured or calculated and averaged.
 The point cloud is clipped by the extents of the ground plots, and for each plot it is reduced to a collection of manually selected metrics.
-The metrics usually include descriptions of the height distribution of the points, but often reflection intensities and other sensor-provided information is used as well, such as the return number, the number of returns, etc. (a brief discussion on the use of intensity-based features can be found in @sec-intensity-as-a-feature).
+The metrics usually include descriptions of the height distribution of the points, but often reflection intensities and other sensor-provided information is used as well, such as the return number, the number of returns, etc. (a brief discussion on the use of intensity-based features can be found in @sec-intensity-based-features).
 In general, any summary statistic that can be derived from a collection of points can be used, including features mentioned in @sec-classic-machine-learning.
 These metrics are then used as input features for fitting regression and classification models to predict the forest attributes measured on the corresponding plots.
 The same metrics are calculated for the entire area of interest, using a grid with a cell size similar in area to the area of a single ground plot.
