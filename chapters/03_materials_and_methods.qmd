@@ -16,8 +16,6 @@ This chapter describes the datasets and the methods used.
 
 {{< embed 03b_augmentations.ipynb#fig-random-jitter-effect >}}
 
-{{< embed 03b_augmentations.ipynb#fig-random-flip-effect >}}
-
 {{< embed 03b_augmentations.ipynb#fig-random-rotate-effect >}}
 
 {{< embed 03b_augmentations.ipynb#fig-random-scale-effect >}}
