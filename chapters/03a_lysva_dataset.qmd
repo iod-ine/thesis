@@ -1,8 +1,22 @@
-## Lysva dataset
+## Lysva field inventory dataset
+
+The main original dataset used in the study is the Lysva field inventory dataset, named by the closest town to its location.
+It is located in Perm Krai, Russia, 86 kilometers to the east of Perm.
+It consists of a field inventory of 3600 trees across 10 rectangular ground plots 100 meters in lengths and 50 meters in width fully covered by a UAV LiDAR and RGB orthophoto surveys.
+Every tree is represented as a point in UTM 40N coordinate reference system (EPSG:32640),
+
+
+@tbl-inventory-example shows a sample of entries from the field inventory table.
 
 {{< embed 03a_lysva_dataset.ipynb#tbl-inventory-example >}}
 
+@fig-example-3d-point-cloud is a 3D visualization of the point cloud over plot number 10.
+
 {{< embed 03a_lysva_dataset.ipynb#fig-example-3d-point-cloud >}}
+
+{{< embed 03a_lysva_dataset.ipynb#fig-example-ortho >}}
+
+@fig-lysva-species-distribution show the distribution of species in the Lysva dataset.
 
 {{< embed 03a_lysva_dataset.ipynb#fig-lysva-species-distribution >}}
 
