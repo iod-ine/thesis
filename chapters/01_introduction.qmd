@@ -9,6 +9,7 @@ Significantly reduce the required effort, especially in the form of the amount o
 Ideally, a method that doesn't require any field data at all, only for validation and quality assessment.
 Match or exceed the accuracy of the area-based approach.
 
+Managing atmospheric $CO_2$ [@faheyForestCarbonStorage2010]
 
 
 There is a huge variety of remote sensing data sources that have been successfully used to solve various problems in forestry applications.
