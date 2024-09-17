@@ -65,3 +65,6 @@ PointNet architecture. Figure from [@qiPointNet2017]
 
 PointNet++ architecture. Figure from [@qiPointNetPlusPlus2017]
 :::
+
+[@vermeerLidarbasedNorwegianTree2023] uses a UNet [@ronnebergerUNetConvolutionalNetworks2015] image semantic segmentation model on LiDAR-derived 1-meter resolution digital terrain models and canopy height maps to predict the distribution of three main tree species in a Norwegian forest.
+They achieve a macro $F_1$ of 0.70 when including the background class, and 0.63 when including only the target species classes as evaluated on independent field inventory plots.
