@@ -4,6 +4,10 @@ This chapter provides an overview of the current state of literature on a variet
 
 LiDAR has been used for forestry applications for a long time with publications on the topic dating back to 1984 [@nelsonDeterminingForestCanopy1984; @nilssonEstimationTreeHeights1996; @naessetDeterminationMeanTree1997; @naessetEstimatingTimberVolume1997; @carson2004lidar].
 
+[@sinica-sinavskisForestStandVolume2022] combines LiDAR point clouds with Sentinel-2 images to predict timber volume on a stand level.
+They use an unusual approach, using Sentinel-2 images for species detection by clustering, LiDAR point clouds for estimating tree counts and average tree heights, and combining them into to variables used to fit the final regression models.
+The reported relative RMSE values are 14-22%, with errors larger for deciduous tree species.
+
 ### Terrestrial LiDAR
 
 Terrestrial LiDAR surveys usually provide very dense and detailed point clouds.
