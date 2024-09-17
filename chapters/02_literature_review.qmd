@@ -58,10 +58,13 @@ Data-hungry approaches like neural networks usually don't have enough data to tr
 The results are also very coarse – predicted on a grid with the size defined by the area of a plot (a common plot shape is a circle with 9-meter radius, which is approximately equivalent to a square grid cell with 16-meter side).
 This is why they are usually further aggregated to stand level.
 
+[@kcEstimationAboveGroundForest2024]
+
 ## Classic machine learning on point clouds {#sec-classic-machine-learning}
 
 [@weinmannFeatureRelevanceAssessment2013]
 [@lucasIdentificationLinearVegetation2019]
+[@liFusionApproachesIndividual2023]
 
 ## Deep learning on point clouds {#sec-deep-learning}
 
