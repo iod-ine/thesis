@@ -4,7 +4,7 @@ This chapter describes the datasets and the methods used.
 
 {{< include 03a_lysva_dataset.qmd >}}
 
-## Individual trees dataset
+{{< include 03b_individual_trees_dataset.qmd >}}
 
 ## NeonTreeEvaluation Benchmark
 

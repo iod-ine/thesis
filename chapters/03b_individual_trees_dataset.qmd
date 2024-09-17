@@ -1,0 +1,4 @@
+## Individual trees dataset
+
+The main dataset used for training the models is a collection of point clouds of individual trees extracted manually from larger UAV LiDAR point clouds.
+It consist of X trees, Y of which are extracted from the previously described Lysva survey, and Z from other surveys in Perm Krai.
