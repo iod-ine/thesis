@@ -8,6 +8,8 @@ LiDAR has been used for forestry applications for a long time with publications 
 They use an unusual approach, using Sentinel-2 images for species detection by clustering, LiDAR point clouds for estimating tree counts and average tree heights, and combining them into to variables used to fit the final regression models.
 The reported relative RMSE values are 14-22%, with errors larger for deciduous tree species.
 
+[@eysnAlpineITDBenchmark2015] is a benchmark dataset similar to ...
+
 ### Terrestrial LiDAR
 
 Terrestrial LiDAR surveys usually provide very dense and detailed point clouds.
@@ -20,6 +22,10 @@ The authors report high accuracies on the task of segmenting the point clouds
 ### Fusion of data
 [@balestraLiDARDataFusion2024] offers a review of 151 publications concerning fusion of LiDAR data with other remote sensing data.
 The authors report that in most cases fusion improves the results.
+
+### CHM-based methods
+
+[@lisiewiczCorrectingResultsCHMBased2022] proposes a way to improve the results of CHM-based individual tree detection algorithms.
 
 ## Area-based approach
 
@@ -53,6 +59,9 @@ The results are also very coarse – predicted on a grid with the size defined b
 This is why they are usually further aggregated to stand level.
 
 ## Classic machine learning on point clouds {#sec-classic-machine-learning}
+
+[@weinmannFeatureRelevanceAssessment2013]
+[@lucasIdentificationLinearVegetation2019]
 
 ## Deep learning on point clouds {#sec-deep-learning}
 
