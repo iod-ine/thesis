@@ -1,5 +1,8 @@
 .DS_Store
 
+latex/.texpadtmp/
+latex/main.pdf
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
