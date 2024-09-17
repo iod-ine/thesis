@@ -2,6 +2,8 @@
 
 This chapter provides an overview of the current state of literature on a variety of related subjects.
 
+LiDAR has been used for forestry applications for a long time with publications on the topic dating back to 1984 [@nelsonDeterminingForestCanopy1984; @nilssonEstimationTreeHeights1996; @naessetDeterminationMeanTree1997; @naessetEstimatingTimberVolume1997; @carson2004lidar].
+
 ### Terrestrial LiDAR
 
 Terrestrial LiDAR surveys usually provide very dense and detailed point clouds.
