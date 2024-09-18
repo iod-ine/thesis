@@ -6,6 +6,8 @@ This chapter describes the datasets and the methods used.
 
 {{< include 03b_individual_trees_dataset.qmd >}}
 
+{{< include 03c_synthetic_forest_datasets.qmd >}}
+
 ## NeonTreeEvaluation Benchmark
 
 [@weinsteinDataNeonTreeEvaluationBenchmark2022]
