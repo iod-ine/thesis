@@ -10,6 +10,10 @@ The reported relative RMSE values are 14-22%, with errors larger for deciduous t
 
 [@eysnAlpineITDBenchmark2015] is a benchmark dataset similar to ...
 
+[@lassalleDeepLearningbasedIndividual2022] used high resolution satellite imagery.
+
+[@weinsteinDeepForestPythonPackage2020] is a Python package for image based tree detection.
+
 ### Terrestrial LiDAR
 
 Terrestrial LiDAR surveys usually provide very dense and detailed point clouds.
@@ -65,6 +69,9 @@ The results are also very coarse – predicted on a grid with the size defined b
 This is why they are usually further aggregated to stand level.
 
 [@kcEstimationAboveGroundForest2024]
+
+[@bouvierGeneralizingPredictiveModels2015]
+
 
 ## Classic machine learning on point clouds {#sec-classic-machine-learning}
 
