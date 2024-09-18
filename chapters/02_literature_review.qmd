@@ -19,7 +19,7 @@ Tree trunks are very useful for tree detection and segmentation, and there are m
 [@nurunnabiDevelopmentPreciseTree2024] offers a compelling example of how such detailed data can be used to provide very detailed analyses on tree level.
 The authors report high accuracies on the task of segmenting the point clouds
 
-[@allenTreeSpeciesClassification] - classifying manually extracted terrestrial LiDAR point clouds of individual trees using multi-view representation based on [@goyalRevisitingPointCloud2021] and a convolutional network ResNet [@heDeepResidualLearning2016].
+[@allenTreeSpeciesClassification2022] - classifying manually extracted terrestrial LiDAR point clouds of individual trees using multi-view representation based on [@goyalRevisitingPointCloud2021] and a convolutional network ResNet [@heDeepResidualLearning2016].
 
 [@lopezserranoArtificialIntelligencebasedSoftware2022] describes a framework for fully automatic processing of terrestrial LiDAR point clouds based on trunk detection.
 
