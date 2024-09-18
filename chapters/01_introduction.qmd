@@ -11,6 +11,7 @@ Match or exceed the accuracy of the area-based approach.
 
 Managing atmospheric $CO_2$ [@faheyForestCarbonStorage2010]
 
+[@burleyEncyclopediaForestSciences2004]
 
 There is a huge variety of remote sensing data sources that have been successfully used to solve various problems in forestry applications.
 
