@@ -21,6 +21,10 @@ The authors report high accuracies on the task of segmenting the point clouds
 
 [@allenTreeSpeciesClassification] - classifying manually extracted terrestrial LiDAR point clouds of individual trees using multi-view representation based on [@goyalRevisitingPointCloud2021] and a convolutional network ResNet [@heDeepResidualLearning2016].
 
+[@lopezserranoArtificialIntelligencebasedSoftware2022] describes a framework for fully automatic processing of terrestrial LiDAR point clouds based on trunk detection.
+
+[@vianaTimberVolumeEstimation2022] use a small dataset to compare tree-level inventory metrics extracted from a terrestrial LiDAR survey and from a manual inventory.
+
 ### Fusion of data
 [@balestraLiDARDataFusion2024] offers a review of 151 publications concerning fusion of LiDAR data with other remote sensing data.
 The authors report that in most cases fusion improves the results.
