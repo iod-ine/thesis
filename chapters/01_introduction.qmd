@@ -1,17 +1,16 @@
 # Introduction
 
-Forests are a crucial part of the global ecosystem.
-It is an essential renewable natural resource, provided that sustainable management practices are implemented.
+Forests are a crucial part of the global ecosystem, both environmentally and economically.
+They cover a third of the land area, contain over 80% of terrestrial biodiversity, and somewhere around one-third of humanity depends on forests and forest products for their livelihoods [@aertsForestRestorationBiodiversity2011; @StateWorldsForests2020].
+Forests are an essential renewable natural resource and a huge, dynamic part of the global carbon cycle.
+Responsible management of forests allows using the resources efficiently and sustainably, preserving the biodiversity, and regulating atmospheric $CO_2$, which is becoming especially important as the anthropogenic climate change is ongoing and accelerating [@faheyForestCarbonStorage2010; @forsterIndicatorsGlobalClimate2024].
+This drives the need for accurate, detailed, up-to-date information about various forest attributes such as distributions of species, heights, ages of trees, timber volume and above ground biomass estimates, and others.
 
-Managing forests responsibly and sustainably requires data on a wide variety of forest attributes, such as distribution of species, heights, ages, above ground biomass, etc.
+The traditional manual forest inventories are extremely labor-intensive and time-consuming, which makes them infeasible to cover extensive areas with sufficient detail, speed, and frequency [@burleyEncyclopediaForestSciences2004].
 
 Significantly reduce the required effort, especially in the form of the amount of field inventory data required.
 Ideally, a method that doesn't require any field data at all, only for validation and quality assessment.
 Match or exceed the accuracy of the area-based approach.
-
-Managing atmospheric $CO_2$ [@faheyForestCarbonStorage2010]
-
-[@burleyEncyclopediaForestSciences2004]
 
 There is a huge variety of remote sensing data sources that have been successfully used to solve various problems in forestry applications.
 
