@@ -21,3 +21,6 @@ Higher resolution data is however only available for money, and it isn't cheap.
 
 
 UAV measurements offer a good balance between the affordability, required effort, and quality of the data.
+
+PyTorch [@Ansel_PyTorch_2_Faster_2024], PyTorch Geometric [@Fey_Fast_Graph_Representation_2019], scikit-learn [@scikit-learn]
+
