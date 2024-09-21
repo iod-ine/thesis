@@ -31,27 +31,34 @@ Approximately 20% of the trees have height data measured during the inventory, a
 
 {{< embed 03a_lysva_dataset.ipynb#fig-lysva-species-distribution >}}
 
-@tbl-lysva-plot-stats shows some descriptive statistics for each plot in the field inventory: the number of trees in the plot, average LiDAR point density in points per square meter, and dominant species type.
-The overall average point density is 37 points per square meters.
-Exactly half of the plots are predominantly coniferous and half are predominantly deciduous.
-@fig-lysva-canopy-structure shows two of the point clouds in 3D, highlighting the differences in canopy structure complexity between predominantly deciduous and coniferous plots.
-The figure highlights that the forest is indeed dense and mixed, with non-uniform, complex canopy structure.
-
-{{< embed 03a_lysva_dataset.ipynb#tbl-lysva-plot-stats >}}
-
-{{< embed 03a_lysva_dataset.ipynb#fig-lysva-canopy-structure >}}
-
-The camera used in the orthophoto survey is Sony A6000. The resolution of the RGB orthophoto is 7 cm per pixel.
-
+The LiDAR sensor used for the survey is AGM-MS3 produced by AGM Systems.
+It has 640 kHz acquisition rate, 300-meter range, and spatial accuracy of 3–5 centimeters.
+The raw point clouds were processed with the combination of the AGM ScanWorks software from the sensor vendor and the TerraScan software.
+The point clouds were preprocessed by removing duplicate points and high and low noise points.
+The duplicate removal was run with a threshold distance between points of 1 mm.
+Noise was removed by visually inspecting the point cloud and manually selecting height thresholds to cut off points that are lower than the ground or higher than the canopies.
+Ground point classification was performed and ground points were used to normalize height by subtracting the ground level from the Z coordinate of every point.
+Height normalization allows treating the Z coordinate as height above ground rather than the absolute elevation, which simplifies many subsequent steps.
+The camera used for the orthophoto survey is Sony A6000.
+The resolution of the orthophoto is 7 cm per pixel.
 @fig-example-3d-point-cloud is a 3D visualization of the point cloud over plot number 10.
+It shows the unmodified point cloud on the left, with points colored by height above ground, and a point cloud enriched with color information by sampling the orthophoto at the planar coordinates of the points.
+@fig-example-ortho shows the orthophoto for the same plot.
+The carrier UAV was configured to follow the terrain at 150 meter height using the SRTM elevation map as a reference [@farrShuttleRadarTopography2000].
 
 {{< embed 03a_lysva_dataset.ipynb#fig-example-3d-point-cloud >}}
 
 {{< embed 03a_lysva_dataset.ipynb#fig-example-ortho >}}
 
+@tbl-lysva-plot-stats shows some descriptive statistics for each plot in the field inventory: the number of trees in the plot, average LiDAR point density in points per square meter, and dominant species type.
+The overall average point density is 37 points per square meters.
+Exactly half of the plots are predominantly coniferous and half are predominantly deciduous.
+@fig-lysva-canopy-structure shows two of point clouds clipped by plot bounds in 3D, highlighting the differences in canopy structure complexity between predominantly deciduous and coniferous plots.
+The figure highlights that the forest is indeed dense and mixed, with non-uniform, complex canopy structure.
 
-@tbl-lysva-plot-stats shows stats for plots in the Lysva dataset.
+{{< embed 03a_lysva_dataset.ipynb#tbl-lysva-plot-stats >}}
 
+{{< embed 03a_lysva_dataset.ipynb#fig-lysva-canopy-structure >}}
 
 ### On using intensity-based features {#sec-intensity-based-features}
 
