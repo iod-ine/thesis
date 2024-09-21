@@ -1,7 +1,20 @@
 ## Individual trees dataset
 
-The main dataset used for training the models is a collection of point clouds of individual trees extracted manually from larger UAV LiDAR point clouds.
+The main dataset used for training the models is a collection of point clouds of individual trees extracted manually from larger UAV LiDAR point clouds, referred to in this text as tree clouds.
+The dataset is released into open access, and was originally presented in [@dubrovinExplorationPropertiesPoint2024], although it has been expanded since the submission and now contains twice as many individual trees.
 It consists of 394 trees, 192 of which are extracted from the previously described Lysva survey, and 202 from other surveys in Perm Krai.
+The distinction between the parts is important because the Lysva dataset has RGB orthophoto coverage, making it possible to infuse the tree clouds with orthophoto features.
+Thus, for training the tree segmentation networks, the effective size of the dataset is 192 tree clouds, as only the former part is used.
+However, the whole dataset is used for training regression and classification models that process segmented trees.
+
+@fig-individual-trees-species-distribution shows the distribution of species in the individual trees dataset.
+The split between coniferous and deciduous trees is almost even: there are 202 coniferous and 193 deciduous trees.
+Note that this dataset has pine trees, which are not present in the Lysva field inventory data.
+All the pine trees are from other field surveys.
+@fig-individual-trees-visualization is a visualization of the data.
+It shows a random tree of every species as a 2D scatter plot and a single spruce as a 3D scatter plot with points colored by height.
+
+{{< embed 03b_individual_trees.ipynb#fig-individual-trees-species-distribution >}}
 
 {{< embed 03b_individual_trees.ipynb#fig-individual-trees-visualization >}}
 
