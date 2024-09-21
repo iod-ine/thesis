@@ -31,10 +31,13 @@ Approximately 20% of the trees have height data measured during the inventory, a
 
 {{< embed 03a_lysva_dataset.ipynb#fig-lysva-species-distribution >}}
 
+@tbl-lysva-plot-stats shows some descriptive statistics for each plot in the field inventory: the number of trees in the plot, average LiDAR point density in points per square meter, and dominant species type.
+The overall average point density is 37 points per square meters.
+Exactly half of the plots are predominantly coniferous and half are predominantly deciduous.
+@fig-lysva-canopy-structure shows two of the point clouds in 3D, highlighting the differences in canopy structure complexity between predominantly deciduous and coniferous plots.
+The figure highlights that the forest is indeed dense and mixed, with non-uniform, complex canopy structure.
+
 {{< embed 03a_lysva_dataset.ipynb#tbl-lysva-plot-stats >}}
-
-Figure @fig-lysva-canopy-structure shows two of the point clouds in 3D, highlighting the differences in canopy structure complexity between predominantly deciduous and coniferous plots.
-
 
 {{< embed 03a_lysva_dataset.ipynb#fig-lysva-canopy-structure >}}
 
