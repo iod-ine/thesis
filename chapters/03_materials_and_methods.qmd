@@ -1,4 +1,4 @@
-# Materials and methods
+# Materials and methods {#sec-materials-and-methods}
 
 This chapter describes the datasets and the methods used.
 

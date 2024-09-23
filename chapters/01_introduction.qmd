@@ -1,4 +1,4 @@
-# Introduction
+# Introduction {#sec-introduction}
 
 Forests are a crucial part of the global ecosystem, both environmentally and economically.
 They cover a third of the land area, contain over 80% of terrestrial biodiversity, and somewhere around one-third of humanity depends on forests and forest products for their livelihoods [@aertsForestRestorationBiodiversity2011; @StateWorldsForests2020].
@@ -21,6 +21,15 @@ There are even many free data sources such as Sentinels (some studies of using S
 Higher resolution data is however only available for money, and it isn't cheap.
 
 UAV measurements offer a good balance between the affordability, required effort, and quality of the data.
+
+## Thesis structure
+
+@sec-literature-review
+@sec-materials-and-methods
+@sec-results
+@sec-conclusion
+
+## Data and code availability
 
 Original datasets described in the thesis are openly available on Kaggle.
 All the code used for the project is on GitHub at [iod-ine/phd](https://github.com/iod-ine/phd).
