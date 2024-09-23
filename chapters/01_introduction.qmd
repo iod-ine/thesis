@@ -31,10 +31,11 @@ UAV measurements offer a good balance between the affordability, required effort
 
 ## Data and code availability
 
-Original datasets described in the thesis are openly available on Kaggle.
-All the code used for the project is on GitHub at [iod-ine/phd](https://github.com/iod-ine/phd).
+Original datasets described in the thesis are openly available on Kaggle at [sentinel3734/tree-detection-lidar-rgb](https://www.kaggle.com/datasets/sentinel3734/tree-detection-lidar-rgb) and [sentinel3734/uav-point-clouds-of-individual-trees](https://www.kaggle.com/datasets/sentinel3734/uav-point-clouds-of-individual-trees).
+All the code used for the project is available on GitHub at [iod-ine/phd](https://github.com/iod-ine/phd).
+The thesis document was developed using Quarto [@Allaire_Quarto_2024] using the literate programming approach [@knuth84], and a link to an HTML version hosted through GitHub Pages is available in the repository.
 The deep learning part is implemented using PyTorch [@Ansel_PyTorch_2_Faster_2024], PyTorch Geometric [@Fey_Fast_Graph_Representation_2019], and PyTorch Lightning [@Falcon_PyTorch_Lightning_2019].
 Classic machine learning models implementations are from scikit-learn [@scikit-learn].
-NumPy [@2020NumPy-Array], pandas [@The_pandas_development_team_pandas-dev_pandas_Pandas], scikit-image [@van_der_Walt_scikit-image_image_processing_2014] libraries are used for processing the data.
+NumPy [@2020NumPy-Array], SciPy [@2020SciPy-NMeth], pandas [@The_pandas_development_team_pandas-dev_pandas_Pandas], scikit-image [@van_der_Walt_scikit-image_image_processing_2014] libraries are used for processing the data.
 ratserio [@gillies_2019], geopandas, laspy, lazrs libraries are used for working with geospatial data formats.
 matplotlib [@Hunter_Matplotlib_A_2D_2007] and seaborn [@waskomSeabornStatisticalData2021] libraries are used for visualization.
