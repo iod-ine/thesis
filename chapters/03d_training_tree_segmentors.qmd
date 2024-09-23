@@ -2,14 +2,42 @@
 
 PointNet++ tree segmentation networks.
 
+Early stopping [@precheltAutomaticEarlyStopping1998]
+
 ### Augmentations
 
-The main goal of data augmentation is to increase the volume, quality and diversity of training data [@mumuniDataAugmentationComprehensive2022].
+The primary objective of data augmentation is to enhance the quantity, quality, and variety of data used for training [@mumuniDataAugmentationComprehensive2022].
+This is especially important when the sizes of the available datasets are limited, like in the case of the individual trees data that is the base of the synthetic forest datasets.
+Carefully selected augmentations allows to increase the effective dataset size.
+Important to pay attention is that the augmentations must keep the label the same.
 
-{{< embed 03b_augmentations.ipynb#fig-random-jitter-effect >}}
+#### Per-tree augmentations
+
+The first transformation that changes the shape but doesn't affect any semantics is a random rotation.
+A tree remains completely the same when rotated.
+@fig-random-rotate-effect show the effect of applying rotation transformations to a single aspen tree.
+For visualization purposes, the rotation is forced to apply with full magnitude for every value of the range.
+During training, the angle is uniformly sampled from the specified range, which is set to $[-180, 180]$ degrees.
 
 {{< embed 03b_augmentations.ipynb#fig-random-rotate-effect >}}
 
 {{< embed 03b_augmentations.ipynb#fig-random-scale-effect >}}
 
+{{< embed 03b_augmentations.ipynb#fig-random-jitter-effect >}}
+
+As was mentioned in @sec-individual-trees-dataset, there is a selection bias in the dataset of individual trees: the trees that are easiest to manually separate are exponentially more likely to end up in the data.
+As such, almost all the trees have trunks, making them different from the trees in dense forest stands.
+One way to mitigate that issue 
+A probability threshold that is around zero for the highest points
+An example function that satisfies these criteria is a modified sigmoid:
+
+$$
+\text{threshold}(z) = \big[1 + e^{z \times \text{scale} + \text{shift}}\big]^{-1},
+$$
+
+where $z$ is the height normalized to $[0, 1]$ and reversed by subtraction from 1, range and $\text{scale}$ and $\text{shift}$ are hyperparameters that control the shape of the curve.
+@fig-height-dropout shows an example of applying such dropout function to a single aspen tree.
+
 {{< embed 03b_augmentations.ipynb#fig-height-dropout >}}
+
+#### Per-patch augmentations
