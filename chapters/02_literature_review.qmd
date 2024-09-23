@@ -84,6 +84,9 @@ This is why they are usually further aggregated to stand level.
 [@goodfellowDeepLearning2016]
 [@wangRecentAdvancesDeep2020]
 
+[@guoDeepLearning3D2021]
+[@belloReviewDeepLearning2020]
+
 PointNet [@qiPointNet2017] and PointNet++ [@qiPointNetPlusPlus2017]
 
 ::: {#fig-pointnet-architecture}
