@@ -7,6 +7,7 @@ Responsible management of forests allows using the resources efficiently and sus
 This drives the need for accurate, detailed, up-to-date information about various forest attributes such as distributions of species, heights, ages of trees, timber volume and above ground biomass estimates, and others.
 
 The traditional manual forest inventories are extremely labor-intensive and time-consuming, which makes them infeasible to cover extensive areas with sufficient detail, speed, and frequency [@burleyEncyclopediaForestSciences2004].
+Various remote sensing techniques are used to extend and interpolate manual inventories 
 
 Significantly reduce the required effort, especially in the form of the amount of field inventory data required.
 Ideally, a method that doesn't require any field data at all, only for validation and quality assessment.
@@ -19,8 +20,12 @@ There are even many free data sources such as Sentinels (some studies of using S
 
 Higher resolution data is however only available for money, and it isn't cheap.
 
-
 UAV measurements offer a good balance between the affordability, required effort, and quality of the data.
 
-PyTorch [@Ansel_PyTorch_2_Faster_2024], PyTorch Geometric [@Fey_Fast_Graph_Representation_2019], scikit-learn [@scikit-learn]
-
+Original datasets described in the thesis are openly available on Kaggle.
+All the code used for the project is on GitHub at [iod-ine/phd](https://github.com/iod-ine/phd).
+The deep learning part is implemented using PyTorch [@Ansel_PyTorch_2_Faster_2024], PyTorch Geometric [@Fey_Fast_Graph_Representation_2019], and PyTorch Lightning [@Falcon_PyTorch_Lightning_2019].
+Classic machine learning models implementations are from scikit-learn [@scikit-learn].
+NumPy [@2020NumPy-Array], pandas [@The_pandas_development_team_pandas-dev_pandas_Pandas], scikit-image [@van_der_Walt_scikit-image_image_processing_2014] libraries are used for processing the data.
+ratserio [@gillies_2019], geopandas, laspy, lazrs libraries are used for working with geospatial data formats.
+matplotlib [@Hunter_Matplotlib_A_2D_2007] and seaborn [@waskomSeabornStatisticalData2021] libraries are used for visualization.
