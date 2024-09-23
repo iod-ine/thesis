@@ -81,6 +81,9 @@ This is why they are usually further aggregated to stand level.
 
 ## Deep learning on point clouds {#sec-deep-learning}
 
+[@goodfellowDeepLearning2016]
+[@wangRecentAdvancesDeep2020]
+
 PointNet [@qiPointNet2017] and PointNet++ [@qiPointNetPlusPlus2017]
 
 ::: {#fig-pointnet-architecture}
