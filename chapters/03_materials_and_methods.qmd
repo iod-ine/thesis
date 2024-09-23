@@ -14,17 +14,4 @@ This chapter describes the datasets and the methods used.
 
 ## Methods
 
-## Training tree segmentor models
-
-PointNet++ tree segmentors.
-Implemented using `toch_geometric` [@Fey_Fast_Graph_Representation_2019].
-
-### Augmentations
-
-{{< embed 03b_augmentations.ipynb#fig-random-jitter-effect >}}
-
-{{< embed 03b_augmentations.ipynb#fig-random-rotate-effect >}}
-
-{{< embed 03b_augmentations.ipynb#fig-random-scale-effect >}}
-
-{{< embed 03b_augmentations.ipynb#fig-height-dropout >}}
+{{< include 03d_training_tree_segmentors.qmd >}}

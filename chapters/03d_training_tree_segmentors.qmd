@@ -1,0 +1,15 @@
+## Training tree segmentation neural networks
+
+PointNet++ tree segmentation networks.
+
+### Augmentations
+
+The main goal of data augmentation is to increase the volume, quality and diversity of training data [@mumuniDataAugmentationComprehensive2022].
+
+{{< embed 03b_augmentations.ipynb#fig-random-jitter-effect >}}
+
+{{< embed 03b_augmentations.ipynb#fig-random-rotate-effect >}}
+
+{{< embed 03b_augmentations.ipynb#fig-random-scale-effect >}}
+
+{{< embed 03b_augmentations.ipynb#fig-height-dropout >}}
