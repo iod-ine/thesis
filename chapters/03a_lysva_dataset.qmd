@@ -4,11 +4,11 @@ The main original dataset used in the study is the Lysva field inventory dataset
 The dataset is released into open access with an accompanying paper that describes the data in detail and provides a basic baseline for individual tree detection [@dubrovinExplorationPropertiesPoint2024].
 The study area is located in Perm Krai, Russia, 86 kilometers to the east of Perm.
 The dataset consists of a field inventory of 3600 trees across 10 rectangular ground plots 100 meters in lengths and 50 meters in width fully covered by a UAV LiDAR and RGB orthophoto surveys.
-@fig-aba-schema shows the locations of the ground plots over the full size RGB orthophoto and a visualization of the field inventory for a single plot on top of the LiDAR point cloud.
+@fig-lysva-roi shows the locations of the ground plots over the full size RGB orthophoto and a visualization of the field inventory for a single plot on top of the LiDAR point cloud.
 Colored points represent trees, with different colors mapping to different species.
 The point cloud is visualized as a 2D scatter plot with points colored by height (darker points are lower, brighter points are higher).
 
-::: {#fig-aba-schema}
+::: {#fig-lysva-roi}
 ![](../images/lysva_roi.jpg)
 
 The study region for the Lysva field inventory dataset.
@@ -76,4 +76,27 @@ However, relying on intensity-based features limits the applicability of develop
 
 ### Comparison to other datasets
 
- - Alpine benchmark [@eysnAlpineITDBenchmark2015]
+TODO: Rephrase this. This is directly from the Scientific Reports paper.
+
+Our dataset is in many ways similar to the NewFor benchmark \cite{eysnAlpineITDBenchmark2015}.
+It serves the same purpose and also offers overlapping field survey ground plots and UAV LiDAR point clouds.
+There are, however, many notable differences.
+The NewFor benchmark covers much more diverse regions, including ground plots from France, Italy, Switzerland, Austria, and Slovenia, while all our data comes from the same area.
+The tree species covered by the datasets are also different: both contain spruce and fir, but the NewFor data also has beech, Scots pine, larch, sycamore, and poplar, while ours also has birch, aspen, tilia, alder, and willow.
+Our dataset has more than twice as many individual trees as the Alpine benchmark, and the forest is denser, more complex, and more diverse, making it more complicated to detect trees in.
+Our data contains very mild terrain variations, while the slopes of the terrain in Alpine data are very steep.
+This plays a role during height normalization, since subtraction of steep terrain introduces artificial slope to the points in the canopy, changing the overall shape of the tree.
+The point clouds in our dataset are denser as well, making them more detailed, but more computationally heavy to work with.
+Our dataset has an additional information source – an RGB orthophoto that allows development of algorithms that fuse multimodal data, which, we believe, is a key to success in such complex environments.
+Our dataset has species labels for every surveyed tree, but only partial coverage of tree heights and no timber volume information at all.
+
+Another similar dataset is the NeonTreeEvaluation Benchmark \cite{weinsteinDataNeonTreeEvaluationBenchmark2022}, which offers bounding box annotation for tree detection across a wide range of different forest types.
+It offers coregistered RGB, LiDAR, and hyperspectral images over 31,000 individual trees.
+The main difference in the reference data between the NeonTreeEvaluation Benchmark and our dataset is the source: our data comes from a field inventory and thus has additional tree information that can be used in downstream tasks, such as species classification or timber volume prediction, while the NeonTreeEvaluation Benchmark annotations are created from the RGB photo and thus only offer the positions and sized of trees.
+
+Another dataset is the IDTReeS 2020 Competition Data \cite{gravesIDTReeS2020Competition2020} aimed to develop algorithms for delineation and species classification of individual tree crowns in RGB, LiDAR, and hyperspectral data.
+It offers bounding box annotations for 1200 individual trees covered by RGB, LiDAR, and hyperspectral images in 3 national forests in the USA.
+Similarly, the source of the data is annotation of images, not a field inventory.
+
+There are also datasets available that don't have LiDAR point cloud coverage, or use terrestrial LiDAR instead of UAV LiDAR, or use photogrammetric point clouds instead of LiDAR  point clouds.
+We do not mention them here because we specifically focus on UAV LiDAR.
