@@ -2,29 +2,22 @@
 
 The architecture chosen to serve as the tree segmentation network is the PointNet++ [@qiPointNetPlusPlus2017], described in detail in @sec-deep-learning.
 It is a relatively simple architecture, and further potential quality improvements might be achieved by using more modern and advanced architectures instead.
-However, the main goal of this thesis was to develop and verify an overall framework, and thus the choice was set on a model that is simple to implement and work with to allow easily experimenting with other parts of the proposed system.
+However, the main goal of this thesis was to develop and verify an overall framework, and thus the choice was set on a model that is simple to implement and work with to allow easy experimentation with other parts of the proposed system.
 
 The architecture of the used PointNet++ is similar to the segmentation architecture shown in @fig-pointnet2-architecture.
-The main differences are the usage of one more stacked set abstraction layer to make the network deeper, and instead of using a classification head that predicts per-point class scores it uses a regression head that predicts a continuous value for each point, since it needs to assign a unique ID to every tree.
-Architecture uses three consecutive set abstraction blocks with proportions of selected points set to 0.75, 0.5, and 0.5 and neighborhood radii set to 0.1, 0.2, and 0.4.
-Note that the scale of the input is normalized, so the radii are not in meters.
-Total of 30 million trainable parameters.
+The main differences are the use of one more stacked set abstraction layer to make the network deeper, and the use of a regression head that predicts a continuous value for each point instead of a classification head that predicts per-point class scores, since the model needs to assign a unique ID to every tree in the patch.
+The three stacked set abstraction layers have the proportions of points sampled set to 0.75, 0.5, and 0.5, and neighborhood radii for feature aggregation set to 0.1, 0.2, and 0.4.
+Note that the scale of the input is normalized (see next paragraph for details), so the radii are not in meters.
+The model has 30 million trainable parameters.
 
-The batch size is limited by the available GPU device memory, and in the described setup directly competes with the synthetic forest patch dimensions used in the training dataset.
-The preference is given to the size of the patch, and the batch size is set to 1, but is compensated for by using gradient accumulation steps – updates to the model parameters are made after the gradient is accumulated for a set number of iterations.
-This slows down the training, but enables usage of larger batches when there is not enough memory to fit them, making the training procedure overall more stable.
+### Coordinate and feature normalization
 
-Before going through the network, a set of augmentations and transformations is applied to each synthetic forest patch.
-The augmentations are described in detailed with visualized examples in @sec-augmentations.
-The transformations include scale and feature normalization – the coordinates are centered and normalized to the interval $(-1, 1)$ and the features are normalized to sum up to 1.
 It's a well established practice to scale the inputs to neural networks that is known to improve the speed and accuracy of gradient descent convergence [@bishop2006pattern].
+Before going through the network, a set of augmentations and transformations is applied to each synthetic forest patch.
+The augmentations are described in detail with visualized examples in @sec-augmentations.
+The transformations include scale and feature normalization – the coordinates are centered and normalized to the interval $(-1, 1)$ and the features are normalized to sum up to 1.
 
-Early stopping [@precheltAutomaticEarlyStopping1998] is set up to terminate training early if there is no improvement in average validation loss in a set number of epochs.
-This makes sure that valuable GPU time is not wasted on continuing training models that are likely to have started overfitting.
-
-The learning rate schedule is set to follow a fast linear warm up and slow linear decay.
-
-### Augmentations {#sec-augmentations}
+### Data augmentation {#sec-augmentations}
 
 The primary objective of data augmentation is to enhance the quantity, quality, and variety of data used for training [@mumuniDataAugmentationComprehensive2022].
 This is especially important when the sizes of the available datasets are limited, like in the case of the individual trees data that is the base of the synthetic forest datasets.
@@ -85,6 +78,19 @@ where $z$ is the height normalized to $[0, 1]$ and reversed by subtraction from 
 #### Per-patch augmentations
 
 Random rotation within $[0; 45]$ degrees range.
+
+### Other training parameters
+
+The batch size is limited by the available GPU device memory, and in the described setup competes for memory space with the synthetic forest patch dimensions used in the training dataset.
+The preference is given to the size of the patch, so the batch size is set to 1, but is compensated for by using gradient accumulation steps – updates to the model parameters are made after the gradient is accumulated for a set number of iterations.
+This slows down the training, but enables usage of larger batches when there is not enough memory to fit them, making the training procedure overall more stable.
+
+Early stopping [@precheltAutomaticEarlyStopping1998] is set up to terminate training early if there is no improvement in average validation loss in a set number of epochs.
+This makes sure that valuable GPU time is not wasted on continuing training models that are likely to have started overfitting.
+
+The best model is saved using the accuracy as a metric.
+
+The learning rate schedule is set to follow a fast linear warm up and slow linear decay.
 
 ### On implementation of PointNet++
 

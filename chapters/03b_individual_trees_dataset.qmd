@@ -1,4 +1,4 @@
-## Individual trees dataset
+## Individual trees dataset {#sec-individual-trees-dataset}
 
 The main dataset used for training the models is a collection of point clouds of individual trees extracted manually from larger UAV LiDAR point clouds, referred to in this text as tree clouds.
 The dataset is released into open access, and was originally presented in [@dubrovinExplorationPropertiesPoint2024], although it has been expanded since the submission and now contains twice as many individual trees.

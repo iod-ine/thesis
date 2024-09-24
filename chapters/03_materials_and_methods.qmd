@@ -1,6 +1,6 @@
 # Materials and methods {#sec-materials-and-methods}
 
-This chapter describes the datasets and the methods used.
+This chapter describes in detail used datasets, processing techniques and the methods used.
 
 {{< include 03a_lysva_dataset.qmd >}}
 
@@ -8,10 +8,20 @@ This chapter describes the datasets and the methods used.
 
 {{< include 03c_synthetic_forest_datasets.qmd >}}
 
-## NeonTreeEvaluation Benchmark
-
-[@weinsteinDataNeonTreeEvaluationBenchmark2022]
-
-## Methods
-
 {{< include 03d_training_tree_segmentors.qmd >}}
+
+## Matching detected trees to the field inventory ground truth
+
+TODO: Rephrase this. This is directly from the Scientific Reports paper.
+
+To evaluate the results, an automated and deterministic method for matching detected trees to the ground truth data is required.
+It should determine which ground truth trees, if any, the detected candidates correspond to.
+It should also classify all the trees from both sets as either a true positive, meaning that the ground truth tree was successfully detected, a false negative, meaning that a ground truth tree was not detected, or a false positive, meaning a tree was detected when there is none.
+
+We implemented a matching procedure that considers the locations and heights of the trees, and falls back to using only locations when the height information is not available for the ground truth tree.
+It is parametrized by the maximum allowed 2D distance and the maximum height difference between a detected and a ground truth tree to consider them a match.
+First, it constructs a distance matrix between the ground truth tree locations and the detected candidates and filters out the pairs for which the distance is larger than the allowed maximum.
+It then iterates over the remaining pairs in the order of increasing distance, and marks the pairs with suitable heights in which both trees are not yet assigned a class as a true positive.
+The pairs in which one of the trees is already assigned a class are marked as either a false positive or a false negative, and the pairs in which both trees are assigned a class are skipped.
+Finally, it marks all unmatched ground truth trees as false negatives, and all unmatched candidate trees as false positives.
+

@@ -1,2 +1,15 @@
-## Synthetic forests generated from individual trees
+## Synthetic forests generated from individual trees {#sec-synthetic-forest-dataset}
+
+To train tree segmentation models, training data where every point is assigned to an individual tree is required. Data like that is very labor-intensive to label. An alternative way to create such data is by generating it from patches of forest with every point assigned to a tree is by combining point clouds of individual trees  into synthetc
+
+A patch of fixed size, filled by randomly sampled trees and the ability to add overlap.
+
+(show example patches of different size)
+(show example patches colored by RGB and different false color combinations)
+
+Each tree has features sampled from preprocessed orthophoto (multiscale basic features).
+
+Fixed size is better than fixed number because of the scale normalization.
+
+- Height threshold applied
 

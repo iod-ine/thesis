@@ -73,3 +73,7 @@ With this distribution in mind, it is not surprising that coloring points by the
 
 Some sensors do provide more consistent values.
 However, relying on intensity-based features limits the applicability of developed models and methods, as any such model would surely fail on data like this.
+
+### Comparison to other datasets
+
+ - Alpine benchmark [@eysnAlpineITDBenchmark2015]
