@@ -7,20 +7,30 @@ Responsible management of forests allows using the resources efficiently and sus
 This drives the need for accurate, detailed, up-to-date information about various forest attributes such as distributions of species, heights, ages of trees, timber volume and above ground biomass estimates, and others.
 
 The traditional manual forest inventories are extremely labor-intensive and time-consuming, which makes them infeasible to cover extensive areas with sufficient detail, speed, and frequency [@burleyEncyclopediaForestSciences2004].
-Various remote sensing techniques are used to extend and interpolate manual inventories 
+Various remote sensing techniques are widely used to extend and extrapolate manual inventories.
+All sorts of data, from satellite and aerial imagery to very detailed terrestrial LiDAR surveys, are used in all sorts of applications that require mapping forest attributes.
+There are even many free data sources such as Sentinels (some studies of using S1 and S2, maybe even GEDI).
+Higher resolution data is however only available for money, and it isn't cheap.
 
+The most common way to use LiDAR surveys for mapping forest attributes in industry is the area-based approach described in detail in @sec-area-based-approach.
+
+However, modern sensors and processing techniques allow not aggregating at all and instead working on the level of individual trees.
+This requires robust algorithms that allow detecting individual trees in dense multimodal data.
+This is relatively easy in urban environments, manually planted forest stands, or forests that are either sparse or predominantly coniferous, where the structure of the canopy is easy to interpret.
+Forest that are mixed and dense are much harder to work with and are a very active area of research for developing methods of detection of individual trees.
+
+The framework described in this thesis focuses on fusion of two remote sensing data sources: UAV LiDAR point clouds and UAV RGB orthophotos.
+The choice is explained mostly by practicality.
+
+LiDAR is an active sensor, which means it does not depend on external conditions such as lightning.
+
+UAV measurements offer a good balance between the affordability, required effort, and quality of the data.
+
+The main research question ...
+The main hypothesis is ...
 Significantly reduce the required effort, especially in the form of the amount of field inventory data required.
 Ideally, a method that doesn't require any field data at all, only for validation and quality assessment.
 Match or exceed the accuracy of the area-based approach.
-
-There is a huge variety of remote sensing data sources that have been successfully used to solve various problems in forestry applications.
-
-Starting from the satellite observations ...
-There are even many free data sources such as Sentinels (some studies of using S1 and S2, maybe even GEDI).
-
-Higher resolution data is however only available for money, and it isn't cheap.
-
-UAV measurements offer a good balance between the affordability, required effort, and quality of the data.
 
 ## Thesis structure
 
@@ -31,22 +41,22 @@ This section briefly describes the contents and aims of each one.
 It defines the main research question and the hypothesis, and gives a high-level overview of the proposed framework.
 It also provides the links to the original datasets and the code.
 
-@sec-literature-review gives an overview of the scientific literature on topics most relevant to the project.
+@sec-literature-review aims to give an overview of the scientific literature on topics most relevant to the project.
 Its main goals are to provide the reader with context for the research described in the thesis, provide references for in-depth materials on topics that are out of scope of this work, and to highlight the research gap that the work tries to address.
 
 @sec-materials-and-methods describes in detail the datasets, methods and methodological choices used in the proposed framework.
-It's aim it to make the work reproducible.
+It's aim it to make the work reproducible and to explain the methodological choices made.
 
-@sec-results describes the results and the validation approach used to verify the framework.
+@sec-results describes the results of each stage of the framework preparation and the validation approach used to verify its applicability and effectiveness on realistic data.
 
-@sec-conclusion offers concluding thoughts and potential perspectives for improvement of the proposed framework.
+@sec-conclusion offers a brief summary of the thesis as a whole, potential perspectives for further improvement of the proposed framework, and some concluding thoughts.
 
 ## Data and code availability
 
 Original datasets described in the thesis are openly available on Kaggle at [sentinel3734/tree-detection-lidar-rgb](https://www.kaggle.com/datasets/sentinel3734/tree-detection-lidar-rgb) and [sentinel3734/uav-point-clouds-of-individual-trees](https://www.kaggle.com/datasets/sentinel3734/uav-point-clouds-of-individual-trees).
 All the code used for the project is available on GitHub at [iod-ine/phd](https://github.com/iod-ine/phd).
 The thesis document was developed using Quarto [@Allaire_Quarto_2024] using the literate programming approach [@knuth84], and a link to an HTML version hosted through GitHub Pages is available in the repository.
-The deep learning part is implemented using PyTorch [@Ansel_PyTorch_2_Faster_2024], PyTorch Geometric [@Fey_Fast_Graph_Representation_2019], and PyTorch Lightning [@Falcon_PyTorch_Lightning_2019].
+The deep learning part is implemented using PyTorch [@Ansel_PyTorch_2_Faster_2024], PyTorch Geometric [@Fey_Fast_Graph_Representation_2019], and PyTorch Lightning [@Falcon_PyTorch_Lightning_2019], with experiment tracking using MLflow.
 Classic machine learning models implementations are from scikit-learn [@scikit-learn].
 NumPy [@2020NumPy-Array], SciPy [@2020SciPy-NMeth], pandas [@The_pandas_development_team_pandas-dev_pandas_Pandas], scikit-image [@van_der_Walt_scikit-image_image_processing_2014] libraries are used for processing the data.
 ratserio [@gillies_2019], geopandas, laspy, lazrs libraries are used for working with geospatial data formats.
