@@ -54,6 +54,10 @@ The reported relative RMSE values are 14-22%, with errors larger for deciduous t
 
 [@weinsteinDeepForestPythonPackage2020] is a Python package for image-based tree detection.
 
+[@ferreiraImprovingUrbanTree2024] use a U-Net semantic segmentation model for fusion of VNIR images and UAV LiDAR-derived feature maps including surface normals of the canopies, reflection intensities, canopy heights, and leaf-area index for mapping tree species in urban tropical areas.
+Their results show that adding LiDAR-based features improves $F_1$-scores across all considered species, with average $F_1$-score 84.1.
+They also use the segment anything model [@Kirillov_2023_ICCV] to automatically segment tree crowns with outstanding 98% boundary $F_1$-score.
+
 ### Terrestrial LiDAR
 
 Terrestrial LiDAR surveys usually provide very dense and detailed point clouds.
