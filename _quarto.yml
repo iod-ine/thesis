@@ -4,7 +4,6 @@ project:
 book:
   title: "A deep learning framework for mixed dense forests parameter estimation at individual tree scale"
   output-file: "my-book"
-  subtitle: "Here goes nothing"
   author: "Ivan Dubrovin"
   date: today
   abstract: |
@@ -25,7 +24,7 @@ book:
   repo-actions: [edit, issue, source]
   sidebar:
     search: true
-    title: "Shorter title here"
+    title: "Tree-scale parameter estimation with deep learning"
 
 bibliography: references.bib
 
