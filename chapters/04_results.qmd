@@ -1,1 +1,9 @@
 # Results {#sec-results}
+
+## Tree segmentation training results
+
+## Postprocessor model training results
+
+## Validation on the Lysva field inventory data
+
+## Validation on the NeonTreeEvaluation Benchmark data?
