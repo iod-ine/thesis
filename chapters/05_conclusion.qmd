@@ -1,1 +1,11 @@
 # Conclusion {#sec-conclusion}
+
+> "A PhD research project is an academic exercise of given effort and length." 
+>
+> – <cite>Dr. Ron Anderson, PhD adviser of my PhD adviser, prof. Clement Fortin</cite>
+
+Briefly recap what was done.
+
+Potential further improvements:
+- more advanced architectures (point transformers maybe)
+- more advanced feature extraction techniques for orthophotos (based on CNNs)
