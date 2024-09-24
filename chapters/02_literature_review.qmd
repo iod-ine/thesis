@@ -1,6 +1,46 @@
-# Literature review
+# Literature review {#sec-literature-review}
 
 This chapter provides an overview of the current state of literature on a variety of related subjects.
+Its main goals are to provide the reader with context for the research described in the thesis, provide references for in-depth materials on topics that are out of scope of this work, and to highlight the research gap that the work tries to address.
+
+## Machine learning and deep learning on point clouds {#sec-deep-learning}
+
+The reader is assumed to be familiar with general concepts of machine learning and deep learning.
+For an introduction or a refresher, one of the best resources is [@goodfellowDeepLearning2016].
+For a more detailed exploration, [@wangRecentAdvancesDeep2020] offers a selection of papers on topics relevant to modern deep learning techniques.
+The section is focused on providing a short overview of machine learning and deep learning for point clouds, as LiDAR point clouds are the main source of data for the framework described in this thesis.
+
+Classic machine learning approaches rely on manual feature preparation.
+[@weinmannFeatureRelevanceAssessment2013] show that careful selection of features is crucial for interpretation of point cloud data.
+They also provide definitions of some of the most used manual features that aim to describe the 3D structure of point sets.
+The features are based on combinations of eigenvalues of a local covariance matrix of a set of points.
+They can be calculated on a per-point basis by using fixed-size or nearest-neighbor neighborhoods, or for whole segments of point clouds.
+The features include linearity, planarity, and scatter, aiming to indicate the presence of a linear, planar, or a volumetric object, 
+
+[@lucasIdentificationLinearVegetation2019]
+[@liFusionApproachesIndividual2023]
+
+[@belloReviewDeepLearning2020] and [@guoDeepLearning3D2021] offer detailed reviews of the deep learning approaches used in various problems related to processing point clouds.
+Below is a very short summary.
+
+The first model to work directly work on point clouds is the PointNet [@qiPointNet2017].
+
+::: {#fig-pointnet-architecture}
+![](../images/pointnet_architecture.jpg)
+
+PointNet architecture. Figure from [@qiPointNet2017]
+:::
+
+PointNet++ [@qiPointNetPlusPlus2017] addresses the drawbacks of the original PointNet model, namely only two scales for feature caclulation.
+It introdcuces hierarchical feature learning by consecutive application of set abstraction modules
+
+::: {#fig-pointnet2-architecture}
+![](../images/pointnet2_architecture.jpg)
+
+PointNet++ architecture. Figure from [@qiPointNetPlusPlus2017]
+:::
+
+## Applications for mapping forests
 
 LiDAR has been used for forestry applications for a long time with publications on the topic dating back to 1984 [@nelsonDeterminingForestCanopy1984; @nilssonEstimationTreeHeights1996; @naessetDeterminationMeanTree1997; @naessetEstimatingTimberVolume1997; @carson2004lidar].
 
@@ -10,9 +50,9 @@ The reported relative RMSE values are 14-22%, with errors larger for deciduous t
 
 [@eysnAlpineITDBenchmark2015] is a benchmark dataset similar to ...
 
-[@lassalleDeepLearningbasedIndividual2022] used high resolution satellite imagery.
+[@lassalleDeepLearningbasedIndividual2022] used high-resolution satellite imagery.
 
-[@weinsteinDeepForestPythonPackage2020] is a Python package for image based tree detection.
+[@weinsteinDeepForestPythonPackage2020] is a Python package for image-based tree detection.
 
 ### Terrestrial LiDAR
 
@@ -35,9 +75,10 @@ The authors report that in most cases fusion improves the results.
 
 ### CHM-based methods
 
+A common approach to utilize LiDAR point cloud data for tree detection is by calculating canopy height maps.
 [@lisiewiczCorrectingResultsCHMBased2022] proposes a way to improve the results of CHM-based individual tree detection algorithms.
 
-## Area-based approach
+## Area-based approach {#sec-area-based-approach}
 
 The most common way to use LiDAR for mapping forest attributes is the area-based approach [@whiteABAGuide2013].
 @fig-aba-schema shows its schematic representation.
@@ -59,8 +100,7 @@ Area-based approach schematic. Figure from [@whiteABAGuide2013]
 Area-based approach is extensively used both in research and in industry because it provides many advantages.
 <!--TODO: Add citations for ABA.-->
 It is relatively easy to implement.
-In fact, basic familiarity with the R programming language is enough to create your own area-based approach pipelines since a full, scalable implementation exists in the `lidR` package 
-[@rousselLidRPackage2020].
+In fact, basic familiarity with the R programming language is enough to create your own area-based approach pipelines since a full, scalable implementation exists in the `lidR` package [@rousselLidRPackage2020].
 It is also straightforward to extend with other data sources such as satellite or aerial images, and it works even with sparse data: for successful plot and stand level modeling point densities as low as 0.5 points per square meter have been reported to be enough [@treitzLiDARSamplingDensity2012; @jakubowskiTradeoffsLidarPulse2013].
 Still, it requires a lot of field inventory data to work, since every ground plot becomes a single example for the models.
 The models that can be used are also relatively simple, because of how expensive the data collection is.
@@ -72,34 +112,5 @@ This is why they are usually further aggregated to stand level.
 
 [@bouvierGeneralizingPredictiveModels2015]
 
-
-## Classic machine learning on point clouds {#sec-classic-machine-learning}
-
-[@weinmannFeatureRelevanceAssessment2013]
-[@lucasIdentificationLinearVegetation2019]
-[@liFusionApproachesIndividual2023]
-
-## Deep learning on point clouds {#sec-deep-learning}
-
-[@goodfellowDeepLearning2016]
-[@wangRecentAdvancesDeep2020]
-
-[@guoDeepLearning3D2021]
-[@belloReviewDeepLearning2020]
-
-PointNet [@qiPointNet2017] and PointNet++ [@qiPointNetPlusPlus2017]
-
-::: {#fig-pointnet-architecture}
-![](../images/pointnet_architecture.jpg)
-
-PointNet architecture. Figure from [@qiPointNet2017]
-:::
-
-::: {#fig-pointnet2-architecture}
-![](../images/pointnet2_architecture.jpg)
-
-PointNet++ architecture. Figure from [@qiPointNetPlusPlus2017]
-:::
-
 [@vermeerLidarbasedNorwegianTree2023] uses a UNet [@ronnebergerUNetConvolutionalNetworks2015] image semantic segmentation model on LiDAR-derived 1-meter resolution digital terrain models and canopy height maps to predict the distribution of three main tree species in a Norwegian forest.
-They achieve a macro $F_1$ of 0.70 when including the background class, and 0.63 when including only the target species classes as evaluated on independent field inventory plots.
+They achieve a macro $F_1$ of 0.70 when including the background class, and 0.63 when including only the target species classes, as evaluated on independent field inventory plots.
