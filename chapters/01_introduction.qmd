@@ -32,6 +32,16 @@ Significantly reduce the required effort, especially in the form of the amount o
 Ideally, a method that doesn't require any field data at all, only for validation and quality assessment.
 Match or exceed the accuracy of the area-based approach.
 
+The proposed framework described in this thesis consist of a neural-network based tree segmentation in UAV LiDAR point clouds enhanced with RGB orthophoto-based features and processing the segments with a collection of specialized classic machine learning models that predict the parameters of interest for each detected tree.
+The tree segmentation model is trained on synthetic forest patches constructed from a dataset of point clouds of individual trees extracted manually from a large UAV LiDAR survey, heavily relying on augmentations to make the synthetic forest closer to real forest.
+The parameter prediction classification and regression models are trained on the same dataset of individual trees using a collection of widely used manual point cloud features.
+
+::: {#fig-frameworkschema}
+![](../images/framework_schematic.jpg)
+
+The schematic representation of the framework in the application stage.
+:::
+
 ## Thesis structure
 
 The thesis consists of 5 chapters.
