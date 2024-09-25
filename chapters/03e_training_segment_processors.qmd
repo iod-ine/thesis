@@ -1,1 +1,20 @@
-## Training segmented trees processing models
+## Training segmented trees processing models {#sec-training-tree-processors}
+
+$\lambda_1 \ge \lambda_2 \ge \lambda_3$
+
+The features are defined as follows:
+
+$$
+\begin{aligned}
+\text{linearity} &= \frac{\lambda_1 - \lambda_2}{\lambda_1} \\
+\text{planarity} &= \frac{\lambda_2 - \lambda_3}{\lambda_1} \\
+\text{scatter} &= \frac{\lambda_3}{\lambda_1}  \\
+\text{omnivariance} &= \sqrt[3]{\lambda_1\lambda_2\lambda_3} \\
+\text{anisotropy} &= \frac{\lambda_1 - \lambda_3}{\lambda_1} \\
+\text{eigentropy} &= -\sum_{i=1}^{3} \lambda_i \ln(\lambda_i) \\
+\text{sum of eigenvalues} &= \lambda_1 + \lambda_2 + \lambda_3 \\
+\text{curvature} &= \frac{\lambda_3}{\lambda_1 + \lambda_2 + \lambda_3} \\
+\end{aligned}
+$$
+
+Insert an image from IGARSS paper that visualizes the effects
