@@ -53,9 +53,17 @@ For the final tree segmentation model, the range is set to $[0.8, 1.2]$.
 
 {{< embed 03d_augmentations.ipynb#fig-random-scale-effect >}}
 
+Another way to change the positions is to slightly translate each point for a random distance in a random direction.
+That transformation is commonly referred to as random jitter.
+Since LiDAR sensors have limited spatial accuracy, introducing random translations within the accuracy range should not have any effect on the result of tree segmentation.
+Going further, small translations even outside the accuracy range make sense, since they have very limited effect on the overall shape of the tree.
+@fig-random-jitter-effect shows this effect on a single aspen tree.
+The amount of translation is uniformly sampled independently for each point from a set range.
 Note that the random jitter augmentation is applied before the scale normalization.
 It matters because the augmentation's only parameter is the translation range, which depends on the scale.
-The parameters on the figure are thus in meters.
+The parameters on the figure are thus in the original coordinate units – meters.
+Note how the shape of the tree almost doesn't change when the maximum range is set to 20 centimeters, and starts to become fuzzy and loose shape at 1 meter and higher.
+For the final tree segmentation model, the maximum translation is set to 30 centimeters.
 
 {{< embed 03d_augmentations.ipynb#fig-random-jitter-effect >}}
 
