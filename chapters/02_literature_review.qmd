@@ -18,9 +18,10 @@ The reported relative RMSE values are 14-22%, with errors larger for deciduous t
 They show that the fusion approach outperforms single modality approaches, especially when there is any cloud cover present.
 
 LiDAR has been used for forestry applications for a long time with publications on the topic dating back 40 years.
-[@nelsonDeterminingForestCanopy1984] is one of the earliest studies that explores usage of airborne LiDAR for measuring forest canopy profiles and estimating tree heights and canopy closure (a measure of forest canopy coverage that indicates what proportion of the sky is obscured by the tree crowns when viewed from the ground).
-
-[@nilssonEstimationTreeHeights1996; @naessetDeterminationMeanTree1997; @naessetEstimatingTimberVolume1997; @carson2004lidar].
+@nelsonDeterminingForestCanopy1984 is one of the earliest studies that explores usage of airborne LiDAR for measuring forest canopy profiles and estimating tree heights and canopy closure (a measure of forest canopy coverage that indicates what proportion of the sky is obscured by the tree crowns when viewed from the ground).
+@nilssonEstimationTreeHeights1996 is a study looking into tree height and timber volume estimation using airborne LiDAR across a range of point densities and seasons on a coniferous forest stand.
+@naessetDeterminationMeanTree1997 and @naessetEstimatingTimberVolume1997 are studies exploring the use of airborne LiDAR for estimating mean tree height and timber volume, suggesting the ways to correct the systematic underestimation of height and showing how regression on LiDAR-derived metrics can predict volume.
+@carson2004lidar offers an overview of some of the applications and approaches and a summary of contemporary state-of-the-art.
 
 ## Machine learning and deep learning on point clouds {#sec-ml-dl}
 
