@@ -1,12 +1,14 @@
 # Literature review {#sec-literature-review}
 
-This chapter provides an overview of the current state of literature on a variety of related subjects.
-Its main goals are to provide the reader with context for the research described in the thesis and to highlight the research gap that the work tries to address.
+This chapter provides an overview of the current state of literature on a variety of subjects related to the thesis.
+Its main goals are to provide the reader with context for the research described here and to highlight the research gap that the work tries to address.
 Where appropriate, references for in-depth materials on topics that are out of scope of this work are provided.
 
 ## Remote sensing for forestry applications
 
-LiDAR has been used for forestry applications for a long time with publications on the topic dating back to 1984 [@nelsonDeterminingForestCanopy1984; @nilssonEstimationTreeHeights1996; @naessetDeterminationMeanTree1997; @naessetEstimatingTimberVolume1997; @carson2004lidar].
+As was mentioned in the introduction, remote sensing is widely used for extending labor-intensive and time-consuming manual forest inventories.
+This is especially relevant in countries where massive areas are covered by forests, such as Russia, Brazil, Canada, USA, and China, which are the top five countries for forest area according to [@GlobalForestResources2020].
+This section provides examples of various remote sensing techniques used in various forestry applications, before going in more detail into specifically UAV LiDAR and RGB, which are the focus of the described framework.
 
 [@sinica-sinavskisForestStandVolume2022] combines LiDAR point clouds with Sentinel-2 images to predict timber volume on a stand level.
 They use an unusual approach, using Sentinel-2 images for species detection by clustering, LiDAR point clouds for estimating tree counts and average tree heights, and combining them into to variables used to fit the final regression models.
@@ -14,6 +16,11 @@ The reported relative RMSE values are 14-22%, with errors larger for deciduous t
 
 [@ferrariFusingSentinel1Sentinel22023] use Fully Convolutional Networks [@longFullyConvolutionalNetworks2015] for fusion of optical Sentinel-2 and SAR Sentinel-1 data.
 They show that the fusion approach outperforms single modality approaches, especially when there is any cloud cover present.
+
+LiDAR has been used for forestry applications for a long time with publications on the topic dating back 40 years.
+[@nelsonDeterminingForestCanopy1984] is one of the earliest studies that explores usage of airborne LiDAR for measuring forest canopy profiles and estimating tree heights and canopy closure (a measure of forest canopy coverage that indicates what proportion of the sky is obscured by the tree crowns when viewed from the ground).
+
+[@nilssonEstimationTreeHeights1996; @naessetDeterminationMeanTree1997; @naessetEstimatingTimberVolume1997; @carson2004lidar].
 
 ## Machine learning and deep learning on point clouds {#sec-ml-dl}
 
@@ -71,7 +78,6 @@ Area-based approach schematic. Figure from [@whiteABAGuide2013]
 :::
 
 Area-based approach is extensively used both in research and in industry because it provides many advantages.
-<!--TODO: Add citations for ABA.-->
 It is relatively easy to implement.
 In fact, basic familiarity with the R programming language is enough to create your own area-based approach pipelines since a full, scalable implementation exists in the `lidR` package [@rousselLidRPackage2020].
 It is also straightforward to extend with other data sources such as satellite or aerial images, and it works even with sparse data: for successful plot and stand level modeling point densities as low as 0.5 points per square meter have been reported to be enough [@treitzLiDARSamplingDensity2012; @jakubowskiTradeoffsLidarPulse2013].
@@ -81,12 +87,15 @@ Data-hungry approaches like neural networks usually don't have enough data to tr
 The results are also very coarse – predicted on a grid with the size defined by the area of a plot (a common plot shape is a circle with 9-meter radius, which is approximately equivalent to a square grid cell with 16-meter side).
 This is why they are usually further aggregated to stand level.
 
-[@kcEstimationAboveGroundForest2024]
-
 [@bouvierGeneralizingPredictiveModels2015]
+
+[@zhangImprovedAreabasedApproach2023] use a modification of the area-based approach to predict plot-level diameter at breast height (dbh) by utilizing known allometric dependencies between tree height as a hypothesis set for fitting statistical models.
+They use airborne LiDAR measurements with an average density of 9.6 points per square meter and report a relative error of 11%.
 
 [@vermeerLidarbasedNorwegianTree2023] uses a U-Net [@ronnebergerUNetConvolutionalNetworks2015] image semantic segmentation model on LiDAR-derived 1-meter resolution digital terrain models and canopy height maps to predict the distribution of three main tree species in a Norwegian forest.
 They achieve a macro $F_1$ of 0.70 when including the background class, and 0.63 when including only the target species classes, as evaluated on independent field inventory plots.
+
+[@kcEstimationAboveGroundForest2024]
 
 ## Individual tree-based approach {#sec-individual-tree-approach}
 
