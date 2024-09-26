@@ -17,4 +17,11 @@ $$
 \end{aligned}
 $$
 
-Insert an image from IGARSS paper that visualizes the effects
+::: {#fig-feature-ranges}
+![](../images/fig-feature-ranges-output-1.png)
+
+![](../images/fig-feature-ranges-output-2.png)
+
+Visualizations of how values of commonly used features map to the shapes of individual trees.
+Figure reused from [@dubrovinExplorationPropertiesPoint2024]
+:::
