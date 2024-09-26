@@ -1,6 +1,6 @@
 ## Training tree segmentation neural networks
 
-The architecture chosen to serve as the tree segmentation network is the PointNet++ [@qiPointNetPlusPlus2017], described in detail in @sec-deep-learning.
+The architecture chosen to serve as the tree segmentation network is the PointNet++ [@qiPointNetPlusPlus2017], described in detail in @sec-ml-dl.
 It is a relatively simple architecture, and further potential quality improvements might be achieved by using more modern and advanced architectures instead.
 However, the main goal of this thesis was to develop and verify an overall framework, and thus the choice was set on a model that is simple to implement and work with to allow easy experimentation with other parts of the proposed system.
 
@@ -91,6 +91,9 @@ This makes sure that valuable GPU time is not wasted on continuing training mode
 The best model is saved using the accuracy as a metric.
 
 The learning rate schedule is set to follow a fast linear warm up and slow linear decay.
+
+Training was performed on a NVIDIA NVIDIA A100-SXM4-80GB GPU with X memory.
+Inference works even on a much smaller GPU Tesla T4 
 
 ### On implementation of PointNet++
 

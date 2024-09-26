@@ -78,23 +78,21 @@ However, relying on intensity-based features limits the applicability of develop
 
 TODO: Rephrase this. This is directly from the Scientific Reports paper.
 
-Our dataset is in many ways similar to the NewFor benchmark \cite{eysnAlpineITDBenchmark2015}.
+Our dataset is in many ways similar to the NewFor benchmark [@eysnAlpineITDBenchmark2015].
 It serves the same purpose and also offers overlapping field survey ground plots and UAV LiDAR point clouds.
 There are, however, many notable differences.
 The NewFor benchmark covers much more diverse regions, including ground plots from France, Italy, Switzerland, Austria, and Slovenia, while all our data comes from the same area.
 The tree species covered by the datasets are also different: both contain spruce and fir, but the NewFor data also has beech, Scots pine, larch, sycamore, and poplar, while ours also has birch, aspen, tilia, alder, and willow.
-Our dataset has more than twice as many individual trees as the Alpine benchmark, and the forest is denser, more complex, and more diverse, making it more complicated to detect trees in.
-Our data contains very mild terrain variations, while the slopes of the terrain in Alpine data are very steep.
-This plays a role during height normalization, since subtraction of steep terrain introduces artificial slope to the points in the canopy, changing the overall shape of the tree.
-The point clouds in our dataset are denser as well, making them more detailed, but more computationally heavy to work with.
+Our dataset has more than twice as many individual trees as the Alpine benchmark, and the forest is denser and more complex, making it more complicated to detect trees in.
+Our data contains very mild terrain variations, while the slopes of the terrain in Alpine data are very steep, which plays a role during height normalization, since subtraction of steep terrain introduces artificial slope to the points in the canopy, changing the overall shape of the tree.
 Our dataset has an additional information source – an RGB orthophoto that allows development of algorithms that fuse multimodal data, which, we believe, is a key to success in such complex environments.
 Our dataset has species labels for every surveyed tree, but only partial coverage of tree heights and no timber volume information at all.
 
-Another similar dataset is the NeonTreeEvaluation Benchmark \cite{weinsteinDataNeonTreeEvaluationBenchmark2022}, which offers bounding box annotation for tree detection across a wide range of different forest types.
+Another similar dataset is the NeonTreeEvaluation Benchmark [@weinsteinDataNeonTreeEvaluationBenchmark2022], which offers bounding box annotation for tree detection across a wide range of different forest types.
 It offers coregistered RGB, LiDAR, and hyperspectral images over 31,000 individual trees.
 The main difference in the reference data between the NeonTreeEvaluation Benchmark and our dataset is the source: our data comes from a field inventory and thus has additional tree information that can be used in downstream tasks, such as species classification or timber volume prediction, while the NeonTreeEvaluation Benchmark annotations are created from the RGB photo and thus only offer the positions and sized of trees.
 
-Another dataset is the IDTReeS 2020 Competition Data \cite{gravesIDTReeS2020Competition2020} aimed to develop algorithms for delineation and species classification of individual tree crowns in RGB, LiDAR, and hyperspectral data.
+Another dataset is the IDTReeS 2020 Competition Data [@gravesIDTReeS2020Competition2020] aimed to develop algorithms for delineation and species classification of individual tree crowns in RGB, LiDAR, and hyperspectral data.
 It offers bounding box annotations for 1200 individual trees covered by RGB, LiDAR, and hyperspectral images in 3 national forests in the USA.
 Similarly, the source of the data is annotation of images, not a field inventory.
 

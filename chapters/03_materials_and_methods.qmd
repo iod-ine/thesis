@@ -1,6 +1,8 @@
 # Materials and methods {#sec-materials-and-methods}
 
-This chapter describes in detail used datasets, processing techniques and the methods used.
+This chapter describes in detail used datasets, processing techniques and the methods used, and comments on the reasoning behind the choices.
+Hopefully, by the end of this chapter the reader will be confident in their ability to recreate the framework from scratch.
+The code of the project on my GitHub might be a helpful addition for that.
 
 {{< include 03a_lysva_dataset.qmd >}}
 
@@ -8,7 +10,14 @@ This chapter describes in detail used datasets, processing techniques and the me
 
 {{< include 03c_synthetic_forest_datasets.qmd >}}
 
+
+
+{{< embed 03c_synthetic_forest.ipynb#fig-synthetic-forest-patch-example-1 >}}
+
+
 {{< include 03d_training_tree_segmentors.qmd >}}
+
+{{< include 03e_training_segment_processors.qmd >}}
 
 ## Matching detected trees to the field inventory ground truth
 
