@@ -359,7 +359,7 @@ reserved.\par\permission}}
 %% \copyrightnoticetext{stuff} to specify the exact text of the copyright
 %% notice.
 \ifodd\vithesis \copyrightnoticetext{\copyright\ \@author,
-\uppercase\expandafter{\@degreeyear}.  All rights reserved.\par\permission}
+\uppercase\expandafter{\@degreeyear}.}
 %% or just
 %%\@degreeyear}}
 \typeout{Copyright given to author,
@@ -415,6 +415,8 @@ by\par
 \unvbox\@titlesupervisor
 \par
 \vfill
+Moscow – \@degreeyear
+\vfill
 \@copyrightnotice
 \par
 \vfill
@@ -463,12 +465,6 @@ on \@thesisdate, in partial fulfillment of the requirements for the \\
 
 \def\SKOLTECH{SKOLKOVO INSTITUTE OF SCIENCE AND TECHNOLOGY}
 \def\Skoltech{Skolkovo Institue of Science and Technology}
-
-\def\permission{\par\noindent{\centering
-   The author hereby grants to \Skoltech{} permission to reproduce and to
-   distribute publicly paper and electronic copies of this thesis
-   document in whole or in part in any medium now known or hereafter
-   created.}\par}
 
 \def\signature#1#2{\par\noindent#1\dotfill\null\\*
   {\raggedleft #2\par}}
