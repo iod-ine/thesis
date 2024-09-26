@@ -7,14 +7,14 @@ Where appropriate, references for in-depth materials on topics that are out of s
 ## Remote sensing for forestry applications
 
 As was mentioned in the introduction, remote sensing is widely used for extending labor-intensive and time-consuming manual forest inventories.
-This is especially relevant in countries where massive areas are covered by forests, such as Russia, Brazil, Canada, USA, and China, which are the top five countries for forest area according to [@GlobalForestResources2020].
+This is especially relevant in countries where massive areas are covered by forests, such as Russia, Brazil, Canada, USA, and China, which are the top five countries for forest area according to @GlobalForestResources2020.
 This section provides examples of various remote sensing techniques used in various forestry applications, before going in more detail into specifically UAV LiDAR and RGB, which are the focus of the described framework.
 
-[@sinica-sinavskisForestStandVolume2022] combines LiDAR point clouds with Sentinel-2 images to predict timber volume on a stand level.
+@sinica-sinavskisForestStandVolume2022 combines LiDAR point clouds with Sentinel-2 images to predict timber volume on a stand level.
 They use an unusual approach, using Sentinel-2 images for species detection by clustering, LiDAR point clouds for estimating tree counts and average tree heights, and combining them into to variables used to fit the final regression models.
 The reported relative RMSE values are 14-22%, with errors larger for deciduous tree species.
 
-[@ferrariFusingSentinel1Sentinel22023] use Fully Convolutional Networks [@longFullyConvolutionalNetworks2015] for fusion of optical Sentinel-2 and SAR Sentinel-1 data.
+@ferrariFusingSentinel1Sentinel22023 use Fully Convolutional Networks [@longFullyConvolutionalNetworks2015] for fusion of optical Sentinel-2 and SAR Sentinel-1 data.
 They show that the fusion approach outperforms single modality approaches, especially when there is any cloud cover present.
 
 LiDAR has been used for forestry applications for a long time with publications on the topic dating back 40 years.
