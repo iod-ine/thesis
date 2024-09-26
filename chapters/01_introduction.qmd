@@ -36,10 +36,16 @@ The proposed framework described in this thesis consist of a neural-network base
 The tree segmentation model is trained on synthetic forest patches constructed from a dataset of point clouds of individual trees extracted manually from a large UAV LiDAR survey, heavily relying on augmentations to make the synthetic forest closer to real forest.
 The parameter prediction classification and regression models are trained on the same dataset of individual trees using a collection of widely used manual point cloud features.
 
-::: {#fig-frameworkschema}
-![](../images/framework_schematic.jpg)
+::: {#fig-framework-apply}
+![](../images/framework_application_schematic.jpg)
 
 The schematic representation of the framework in the application stage.
+:::
+
+::: {#fig-framework-prepare}
+![](../images/framework_preparation_schematic.jpg)
+
+The schematic representation of the framework in the preparation stage.
 :::
 
 ## Thesis structure
