@@ -69,19 +69,24 @@ For the final tree segmentation model, the maximum translation is set to 30 cent
 
 Another useful effect augmentations can provide is to make synthetic data look more like real data.
 As was mentioned in @sec-individual-trees-dataset, there is a selection bias in the dataset of individual trees: the trees that are easiest to manually separate are exponentially more likely to end up in the data.
-As such, almost all the trees have trunks, making them different from the trees in dense forest stands.
-One way to mitigate that issue 
-A probability threshold that is around zero for the highest points
+As such, the tree clouds in the individual tree dataset are significantly different from trees of the same species with similar sizes and shapes, but standing in dense clusters.
+One of the most important differences is that almost all the tree clouds have trunks, while in actual forest, dense canopy cover blocks most pulses and the trunk representation is very poor.
+One way to mitigate that issue is to apply a height-dependent dropout function to each tree cloud.
+For that purpose a probability threshold function that is around zero for the highest points of the tree and quickly ramps up to almost one for the lowest points is needed.
 An example function that satisfies these criteria is a modified sigmoid:
 
 $$
 \text{threshold}(z) = \big[1 + e^{z \times \text{scale} + \text{shift}}\big]^{-1},
 $$
 
-where $z$ is the height normalized to $[0, 1]$ and reversed by subtraction from 1, range and $\text{scale}$ and $\text{shift}$ are hyperparameters that control the shape of the curve.
-@fig-height-dropout shows an example of applying such dropout function to a single aspen tree.
+where $z$ is the height normalized to $[0, 1]$ and reversed by subtraction from 1, $\text{scale}$ and $\text{shift}$ are hyperparameters that control the shape of the curve.
+Changing $\text{scale}$ controls how steep is the climb from 0 to 1: the larger, the steeper.
+Changing $\text{shift}$ controls the position of the climb: the larger, the lower.
+@fig-height-dropout shows an example of applying such dropout function to a single aspen tree, and @fig-height-dropout-aggressive show the same tree with more aggressive parameters, resulting in much more points being dropped from the tree cloud.
 
 {{< embed 03d_augmentations.ipynb#fig-height-dropout >}}
+
+{{< embed 03d_augmentations.ipynb#fig-height-dropout-aggressive >}}
 
 #### Per-patch augmentations
 
