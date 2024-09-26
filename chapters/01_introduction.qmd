@@ -4,11 +4,13 @@ Forests are a crucial part of the global ecosystem, both environmentally and eco
 They cover a third of the land area, contain over 80% of terrestrial biodiversity, and somewhere around one-third of humanity depends on forests and forest products for their livelihoods [@aertsForestRestorationBiodiversity2011; @StateWorldsForests2020].
 Forests are an essential renewable natural resource and a huge, dynamic part of the global carbon cycle.
 Responsible management of forests allows using the resources efficiently and sustainably, preserving the biodiversity, and regulating atmospheric $CO_2$, which is becoming especially important as the anthropogenic climate change is ongoing and accelerating [@faheyForestCarbonStorage2010; @forsterIndicatorsGlobalClimate2024].
-This drives the need for accurate, detailed, up-to-date information about various forest attributes such as distributions of species, heights, ages of trees, timber volume and above ground biomass estimates, and others.
+This drives the need for accurate, detailed, up-to-date information about various forest attributes such as distributions of tree species, average heights and ages of trees, estimates of trunk diameter, timber volume, and above ground biomass, and others.
 
 The traditional manual forest inventories are extremely labor-intensive and time-consuming, which makes them infeasible to cover extensive areas with sufficient detail, speed, and frequency [@burleyEncyclopediaForestSciences2004].
 Various remote sensing techniques are widely used to extend and extrapolate manual inventories.
 All sorts of data, from satellite and aerial imagery to very detailed terrestrial LiDAR surveys, are used in all sorts of applications that require mapping forest attributes.
+
+
 There are even many free data sources such as Sentinels (some studies of using S1 and S2, maybe even GEDI).
 Higher resolution data is however only available for money, and it isn't cheap.
 
@@ -16,7 +18,7 @@ The most common way to use LiDAR surveys for mapping forest attributes in indust
 
 However, modern sensors and processing techniques allow not aggregating at all and instead working on the level of individual trees.
 This requires robust algorithms that allow detecting individual trees in dense multimodal data.
-This is relatively easy in urban environments, manually planted forest stands, or forests that are either sparse or predominantly coniferous, where the structure of the canopy is easy to interpret.
+This is relatively easy in urban environments, manually planted and managed forest stands, or forests that are either sparse or predominantly coniferous, where the structure of the canopy is easy to interpret.
 Forest that are mixed and dense are much harder to work with and are a very active area of research for developing methods of detection of individual trees.
 
 The framework described in this thesis focuses on fusion of two remote sensing data sources: UAV LiDAR point clouds and UAV RGB orthophotos.
@@ -35,6 +37,7 @@ Match or exceed the accuracy of the area-based approach.
 The proposed framework described in this thesis consist of a neural-network based tree segmentation in UAV LiDAR point clouds enhanced with RGB orthophoto-based features and processing the segments with a collection of specialized classic machine learning models that predict the parameters of interest for each detected tree.
 The tree segmentation model is trained on synthetic forest patches constructed from a dataset of point clouds of individual trees extracted manually from a large UAV LiDAR survey, heavily relying on augmentations to make the synthetic forest closer to real forest.
 The parameter prediction classification and regression models are trained on the same dataset of individual trees using a collection of widely used manual point cloud features.
+@fig-framework-apply is a schematic representation of the framework, showing the required inputs in red, processing steps in yellow, and artifacts in cyan.
 
 ::: {#fig-framework-apply}
 ![](../images/framework_application_schematic.jpg)
@@ -42,11 +45,14 @@ The parameter prediction classification and regression models are trained on the
 The schematic representation of the framework in the application stage.
 :::
 
+@fig-framework-prepare is a schematic of the preparation step for the framework.
+
 ::: {#fig-framework-prepare}
 ![](../images/framework_preparation_schematic.jpg)
 
 The schematic representation of the framework in the preparation stage.
 :::
+
 
 ## Thesis structure
 
