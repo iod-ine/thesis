@@ -7,5 +7,9 @@
 Briefly recap what was done.
 
 Potential further improvements:
+
 - more advanced architectures (point transformers maybe)
 - more advanced feature extraction techniques for orthophotos (based on CNNs)
+- more sophisticated sampling for trees to fill patches and more sophisticated placing algorithms that more closely mimic real dense forests
+
+The main contribution of this this thesis is the design and experimental verification of a novel framework for detecting and describing individual trees in dense mixed forests.
