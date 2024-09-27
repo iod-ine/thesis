@@ -110,19 +110,29 @@ They use Random Forest to separate the points that belong to vegetation after fi
 
 ### Image-only
 
-Many approaches rely only on images, mostly RGB and multispectral ones.
+Many approaches rely only on images, mostly high-resolution RGB and multispectral ones, but lately also hyperspectral.
 The main advantage of such approaches is a well-established and well-known toolbox in terms of both algorithmic processing and deep learning, as many of the most important deep learning milestones were achieved in the field of computer vision.
-The main disadvantages were briefly mentioned in the introduction.
-Passive sensors rely on the sun as the source, and thus greatly depend on lightning such as cloud and terrain shadows, time of day, season.
+They also can rely on consistent resolution, capture of fine details and textures, and continuous representation of sensed environments.
+The main disadvantages were mentioned in the introduction: passive sensors rely on the sun as the source, and thus greatly depend on lighting such as cloud and terrain shadows, time of day, season.
+They also offer no information on vertical structure.
+Still, they are very popular and achieve outstanding results in many environments.
 
-[@lassalleDeepLearningbasedIndividual2022] used high-resolution satellite imagery.
+@weinsteinDeepForestPythonPackage2020 introduces a Python package for training and inference of ecological object detection neural networks in airborne imagery.
+It uses a convolutional object detection network described in @weinsteinIndividualTreeCrownDetection2019 to predict bounding boxes for individual trees.
+The data the model is trained on is not as dense as the forests that are the target of this thesis.
+Moreover, the model requires fine-tuning to be applicable to new data, which greatly limits its applicability, since developing bounding box annotations for individual trees within dense forests is an extremely tedious and labor intensive task.
 
-[@weinsteinDeepForestPythonPackage2020] is a Python package for image-based tree detection.
+@lassalleDeepLearningbasedIndividual2022 use high-resolution satellite imagery to delineate individual tree crowns in mangrove forests by using DeepLabv3+-based Multi-Task Encoder-Decoder network (MT-EDv3) originally proposed by @larosaMultitaskFullyConvolutional2021 to predict for each pixel the distance to the tree crown border.
+This distance map is then enhanced by applying the Laplacian over Gaussian filter, and finally the watershed segmentation algorithm is applied to delineate individual crowns.
+The approach seems to rely on there being semi-clear separation between the tree crowns, which is rarely the case when the forests are dense and mixed.
 
-[@oscoConvolutionalNeuralNetwork2020] use a convolutional neural network on UAV multispectral images to count citrus trees in an orchard by predicting a confidence map that shows the likelihood of each pixel containing a tree.
-They report $F_1$-scores of up to 0.95
+The same network was also successfully used to map tree species in urban environments in @martinsDeepLearningbasedTree2021.
 
-[@venturaIndividualTreeDetection2024] built a network they call HR-SFAnet, consisting of a VGG-16 [@simonyanVeryDeepConvolutional2014] backbone feature extractor, a confidence head, and a parallel attention head, which is a deeper modification of the SFANet proposed in [@zhuDualPathMultiScale2019] for counting the amount of people in photos, for detecting individual trees in urban environments using high-resolution multispectral images.
+@oscoConvolutionalNeuralNetwork2020 use a convolutional neural network on UAV multispectral images to count citrus trees in an orchard by predicting a confidence map that shows the likelihood of each pixel containing a tree.
+They report $F_1$-scores of up to 0.95, which is impressive even for managed stands.
+
+@venturaIndividualTreeDetection2024 describe a network they call HR-SFAnet, consisting of a VGG-16 [@simonyanVeryDeepConvolutional2014] backbone feature extractor, a confidence head, and a parallel attention head, for detecting individual trees in urban environments using high-resolution multispectral images.
+The network is a deeper modification of the SFANet proposed in @zhuDualPathMultiScale2019 for counting the number of people in photos.
 They report $F_1$-scores of 0.75, with average positioning error of 2.2 meters.
 
 ### Fusion of data
