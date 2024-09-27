@@ -59,6 +59,8 @@ It introdcuces hierarchical feature learning by consecutive application of set a
 PointNet++ architecture. Figure from [@qiPointNetPlusPlus2017]
 :::
 
+[@ozdemirDeepLearningFramework2021] proposes a framework for semantic segmentation of photogrammetric point clouds in urban environments, the key components of which are voxel-grid filtering-based downsampling for equalizing the point density across the cloud, manual addition of geometric features in a fixed number of neighbors neighborhood, and processing the result with a convolutional network for assigning labels to each point, followed by a post-processing step to upscale the labels back to original point cloud size.
+
 ## Area-based approach {#sec-area-based-approach}
 
 The most common way to use LiDAR for mapping forest attributes is the area-based approach [@whiteABAGuide2013].
