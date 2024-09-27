@@ -102,7 +102,7 @@ It's aim it to make the work reproducible and to explain the methodological choi
 
 ## Data and code availability
 
-Original datasets described in the thesis are openly available on Kaggle at [sentinel3734/tree-detection-lidar-rgb](https://www.kaggle.com/datasets/sentinel3734/tree-detection-lidar-rgb) and [sentinel3734/uav-point-clouds-of-individual-trees](https://www.kaggle.com/datasets/sentinel3734/uav-point-clouds-of-individual-trees).
+Original datasets described in the thesis are openly available on Kaggle (Lysva field survey [here](https://www.kaggle.com/datasets/sentinel3734/tree-detection-lidar-rgb) and individual tree point clouds [here](https://www.kaggle.com/datasets/sentinel3734/uav-point-clouds-of-individual-trees)).
 All the code used for the project is available on GitHub at [iod-ine/phd](https://github.com/iod-ine/phd).
 The thesis document was developed using Quarto [@Allaire_Quarto_2024] using the literate programming approach [@knuth84], and a link to an HTML version hosted through GitHub Pages is available in the repository.
 The deep learning part is implemented using PyTorch [@Ansel_PyTorch_2_Faster_2024], PyTorch Geometric [@Fey_Fast_Graph_Representation_2019], and PyTorch Lightning [@Falcon_PyTorch_Lightning_2019], with experiment tracking using MLflow.
