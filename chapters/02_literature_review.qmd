@@ -194,11 +194,14 @@ Their approach consists of three steps.
 The first step is the classification of segments into correct, under-segmented, or over-segmented using a Random Forest classifier, the second step is the refinement of under-segmentation errors by re-segmenting them with adjusted parameters, and the last step is the refinement of over-segmentation errors by merging with the correct segments using an algorithmic approach based on a collection of intensity-derived features.
 The authors suggest that this approach is universal in terms of forest composition and complexity, unlike many other ad-hoc correction methods based on the study area and thus non-generalizable.
 
-@wangAutomaticDetectionIndividual2023
+@wangAutomaticDetectionIndividual2023 propose a two-stage network they call Tree Region-Based Convolutional Neural Network (RCNN) to detect trees in UAV LiDAR point clouds.
+The first step is generation of dense anchors across the point cloud that are then processed by the RCNN to generate proposals for individual tree locations.
+The second step involves multi-position feature extraction to refine the proposals.
+The approach is evaluated on the NewFor benchmark [@eysnAlpineITDBenchmark2015] and outperforms all benchmark methods that come with it.
 
-@qiMonitoringSpatiotemporalVariation2023
-
-@fuIndividualTreeSegmentationUAV2024
+@fuIndividualTreeSegmentationUAV2024 propose a method for segmenting individual trees in UAV LiDAR point clouds based on a multiscale adaptive local maximum filter applied to the smoothed canopy height map to detect tree tops, a region-growing method for crown delineation that are then refined a voxel-based clustering algorithm.
+The method is developed and tested on 21 synthetic plots and one actual survey and the authors report good accuracy for estimation of both tree locations and heights.
+Worth noting that both the synthetic and real forest have relatively well defined an unambiguous canopy structure.
 
 ### Fusion of data
 
@@ -226,4 +229,5 @@ The results show an improvement of 18.5% in accuracy when using fusion of LiDAR 
 
 ## Summary
 
-:)
+...
+
