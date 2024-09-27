@@ -29,8 +29,9 @@ LiDAR has been used for forestry applications for a long time, with publications
 
 The reader is assumed to be familiar with general concepts of machine learning and deep learning.
 For an introduction or a refresher, one of the best resources is @goodfellowDeepLearning2016.
-For a more detailed exploration, @wangRecentAdvancesDeep2020 offers a selection of papers on topics relevant to modern deep learning techniques.
-The section is focused on providing a short overview of machine learning and deep learning for point clouds, as LiDAR point clouds are the main source of data for the framework described in this thesis and point clouds are, in general, a less well-known modality in machine learning than images or text.
+For a more detailed exploration, @wangRecentAdvancesDeep2020 offer a selection of papers on topics relevant to modern deep learning techniques.
+As point clouds are a less well-known modality in machine learning and deep learning, the reader is also referred to @belloReviewDeepLearning2020 and @guoDeepLearning3D2021, offering detailed reviews of the deep learning approaches used in various problems related to processing point clouds.
+The section is focused on providing a very short overview of these topics as it relates to the framework that is the focus of the thesis.
 
 Classic machine learning approaches rely on manual feature preparation.
 Two main groups of tasks are per-point predictions, which is in many ways similar to the task of semantic segmentation of images, that requires per-point features, and per-cloud predictions that either process entire point clouds or individual segments, separated be some preprocessing routine.
@@ -39,29 +40,34 @@ They also provide definitions of some of the most used manual features that aim 
 The features are based on combinations of eigenvalues of a local covariance matrix of a set of points.
 They can be calculated on a per-point basis by using fixed-size or nearest-neighbor neighborhoods, or for whole segments of point clouds.
 The used features were originally introduced by @westContextdrivenAutomatedTarget2004, @paulyEfficientSimplificationPointsampled2002, and @malletRelevanceAssessmentFullwaveform2011, and include linearity, planarity, and scatter, aiming to indicate the presence of a linear, planar, or volumetric structures, and also omnivariance, anisotropy, eigentropy, the sum of eigenvalues, and curvature.
-The formulas for the features are provided in @sec-training-tree-processors where they are used for training parameter prediction models for segmented trees.
+The formulas for the features are provided in @sec-training-tree-processors, where they are used for training parameter prediction models for segmented trees.
+Simpler features include various statistics describing height and reflection intensity distributions of points, like percentages of points above mean height, deciles of height, cumulative percentages of points below height deciles, and others.
 
-@belloReviewDeepLearning2020 and @guoDeepLearning3D2021 offer detailed reviews of the deep learning approaches used in various problems related to processing point clouds.
-Below is a very short summary.
+@ozdemirDeepLearningFramework2021 proposes a framework for semantic segmentation of photogrammetric point clouds in urban environments, the key components of which are voxel-grid filtering-based downsampling for equalizing the point density across the cloud, manual addition of geometric features in a fixed number of neighbors neighborhood, and processing the result with a convolutional network for assigning labels to each point, followed by a post-processing step to upscale the labels back to original point cloud size.
 
-The first model to work directly work on point clouds is the PointNet [@qiPointNet2017].
+The first deep learning model to work directly work on point clouds without constructing any intermediate representation that can be processed by convolutional models is the PointNet introduced by @qiPointNet2017.
+@fig-pointnet-architecture shows it's architecture.
+A very important aspect of any model that aims to operate directly on point clouds is permutation invariance, as point clouds are unordered sets, and shuffling the points does not change it.
+PointNet achieves that invariance by using a combination of shared multilayer perceptrons (MLP) to process point coordinates and features and max pooling for construction of global feature vector.
+That feature vector can then be used directly for point cloud classification tasks, or concatenated with point features for and processed further by shared MLPs for per-point predictions.
 
 ::: {#fig-pointnet-architecture}
 ![](../images/pointnet_architecture.jpg)
 
-PointNet architecture. Figure from [@qiPointNet2017]
+PointNet architecture. Figure from @qiPointNet2017
 :::
 
-PointNet++ [@qiPointNetPlusPlus2017] addresses the drawbacks of the original PointNet model, namely only two scales for feature calculation.
-It introduces hierarchical feature learning by consecutive application of set abstraction modules
+@qiPointNetPlusPlus2017 introduces PointNet++, aimed to address the main drawbacks of the original PointNet model, namely the use of only two scales for context encoding – per-point and global, which limits the ability of the model to respond to local structures and fine patterns and thus work in complex scenes.
+To address this, PointNet++ uses a hierarchical architecture that applies PointNet recursively on nested subsets of the original point set, allowing to learn features on multiple of increasing scales.
+To achieve that, network uses stacked set abstraction layers, that first sample a subset of the point cloud using farthest point sampling – an algorithm aimed to create representative subsets even for point clouds with uneven point density that selects the next point by maximizing its distance to already selected set – then constructs a neighborhood around each selected point using either fixed distance or fixed number of neighbors, and finally applies PointNet to each neighborhood to reduce into a feature vector for the sampled point.
+Then, similar to the original PointNet, the subset can be further reduced to a final global feature vector used for point clouds classification, or passed to an upscaling branch with skipped connections and k-nearest neighbors interpolation to extrapolate features to the original point cloud coordinates.
+The architecture is visualized in @fig-pointnet2-architecture.
 
 ::: {#fig-pointnet2-architecture}
 ![](../images/pointnet2_architecture.jpg)
 
-PointNet++ architecture. Figure from [@qiPointNetPlusPlus2017]
+PointNet++ architecture. Figure from @qiPointNetPlusPlus2017
 :::
-
-@ozdemirDeepLearningFramework2021 proposes a framework for semantic segmentation of photogrammetric point clouds in urban environments, the key components of which are voxel-grid filtering-based downsampling for equalizing the point density across the cloud, manual addition of geometric features in a fixed number of neighbors neighborhood, and processing the result with a convolutional network for assigning labels to each point, followed by a post-processing step to upscale the labels back to original point cloud size.
 
 ## Area-based approach {#sec-area-based-approach}
 
