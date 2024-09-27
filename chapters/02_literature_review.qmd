@@ -176,7 +176,10 @@ They show that for a moderately dense forest in France, it is possible to find t
 It is, however, clear that it requires great deal of manual adjustment, and visual inspection of the results of detection makes it clear that they are only locally consistent.
 Any change in the canopy structure patterns noticeably affects the quality of the detection even for sophisticated window functions.
 
-@lisiewiczCorrectingResultsCHMBased2022 propose a way to improve the results of CHM-based individual tree detection algorithms.
+@lisiewiczCorrectingResultsCHMBased2022 propose a way to improve the results of canopy height map-based individual tree detection algorithms.
+Their approach consists of three steps.
+The first step is the classification of segments into correct, under-segmented, or over-segmented using a Random Forest classifier, the second step is the refinement of under-segmentation errors by re-segmenting them with adjusted parameters, and the last step is the refinement of over-segmentation errors by merging with the correct segments using an algorithmic approach based on a collection of intensity-derived features.
+The authors suggest that this approach is universal in terms of forest composition and complexity, unlike many other ad-hoc correction methods based on the study area and thus non-generalizable.
 
 @wangAutomaticDetectionIndividual2023
 
