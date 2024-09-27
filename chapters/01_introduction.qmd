@@ -53,11 +53,11 @@ Neither of these data sources on their own is enough to reliably and with suffic
 
 ## Research question and hypothesis
 
-The main research question ...
-The main hypothesis is ...
-Significantly reduce the required effort, especially in the form of the amount of field inventory data required.
-Ideally, a method that doesn't require any field data at all, only for validation and quality assessment.
-Match or exceed the accuracy of the area-based approach.
+The main research question could be formulated as follows: "How to minimize effort and cost required for detailed inventories of dense mixed forests without losing accuracy?"
+The main hypothesis is then: "An accurate and detailed inventory with minimal effort and cost can be achieved through fusion of UAV LiDAR and RGB data using machine learning".
+The cost reduction is self-explanatory and is addressed in the previous subsection during a discussion of the platform of choice.
+The effort reduction comes mainly from minimizing the amount of field inventory data required.
+An ideal method is a method that doesn't require any field inventory data at all except for validation and quality assessment.
 
 ## Overview of the framework
 
@@ -65,6 +65,7 @@ The proposed framework described in this thesis consist of a neural-network base
 The tree segmentation model is trained on synthetic forest patches constructed from a dataset of point clouds of individual trees extracted manually from a large UAV LiDAR survey, heavily relying on augmentations to make the synthetic forest closer to real forest.
 The parameter prediction classification and regression models are trained on the same dataset of individual trees using a collection of widely used manual point cloud features.
 @fig-framework-apply is a schematic representation of the framework, showing the required inputs in red, processing steps in yellow, and artifacts in cyan.
+The field inventory is phased out, but it is still required, as application of any framework requires quality assessment and validation.
 
 ::: {#fig-framework-apply}
 ![](../images/framework_application_schematic.jpg)
@@ -73,6 +74,7 @@ The schematic representation of the framework in the application stage.
 :::
 
 @fig-framework-prepare is a schematic of the preparation step for the framework.
+Each individual node is described in detail in @sec-materials-and-methods.
 
 ::: {#fig-framework-prepare}
 ![](../images/framework_preparation_schematic.jpg)
