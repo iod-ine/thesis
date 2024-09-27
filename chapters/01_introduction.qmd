@@ -20,7 +20,7 @@ Some such applications are mentioned in the next chapter dedicated to reviewing 
 
 Many national space agencies even provide open access to satellite data that can be used for mapping forests.
 European Space Agency offers free and open access[^1] to the Sentinel missions, including C-band SAR data from Sentinel-1 and medium-resolution multispectral data from Sentinel-2, both with global coverage.
-They also have an upcoming P-band SAR mission called Biomass, designed specifically to study global forest biomass and carbon cycles, which further indicated the growing importance and interest in the topic of forest mapping.
+They also have an upcoming P-band SAR mission called BIOMASS, designed specifically to study global forest biomass and carbon cycles [@queganEuropeanSpaceAgency2019], which further indicated the growing importance and interest in the topic of forest mapping.
 NASA provides free access to an abundance of satellite data through its Earthdata platform, Landsat mission with the Operation Land Imager (OLI) instrument and Terra mission with Moderate Resolution Imaging Spectroradiometer (MODIS) instrument being the most relevant for forest mapping applications.
 The Indian Space Research Organisation, Brazilian National Institute for Space Research, National Space Research and Development Agency of Nigeria all offer free satellite data that can be used for this purpose.
 
@@ -33,7 +33,7 @@ Aerial observations with sensors mounted on planes or helicopters are both more 
 A much more affordable and controllable alternative is UAV-based observation.
 It allows for fine-grained control over many important parameters such as flight height, flight path overlap, combination of used sensors, and so on.
 
-The most common way to use UAV remote sensing, be it LiDAR, multispectral, hyperspectral, or other data modalities for mapping forest attributes in industry is what is known in the LiDAR community as the area-based approach, described in detail in @sec-area-based-approach.
+The most common way to use UAV remote sensing, be it LiDAR, multispectral, hyperspectral, or other data modalities, for mapping forest attributes in industry is what is known in the LiDAR community as the area-based approach, described in detail in @sec-area-based-approach.
 It is based on extrapolating measurements from ground plots made in traditional inventories by aggregating remote sensing data to the grid with cell area of a ground plot, which results in coarse resolution maps.
 However, modern sensors and processing techniques allow not aggregating at all and instead working on the level of individual trees.
 This requires robust algorithms that allow detecting individual trees in dense multimodal data.
