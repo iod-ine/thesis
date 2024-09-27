@@ -28,20 +28,20 @@ LiDAR has been used for forestry applications for a long time, with publications
 ## Machine learning and deep learning on point clouds {#sec-ml-dl}
 
 The reader is assumed to be familiar with general concepts of machine learning and deep learning.
-For an introduction or a refresher, one of the best resources is [@goodfellowDeepLearning2016].
-For a more detailed exploration, [@wangRecentAdvancesDeep2020] offers a selection of papers on topics relevant to modern deep learning techniques.
-The section is focused on providing a short overview of machine learning and deep learning for point clouds, as LiDAR point clouds are the main source of data for the framework described in this thesis and point clouds are in general a less well-known modality in machine learning than images or text.
+For an introduction or a refresher, one of the best resources is @goodfellowDeepLearning2016.
+For a more detailed exploration, @wangRecentAdvancesDeep2020 offers a selection of papers on topics relevant to modern deep learning techniques.
+The section is focused on providing a short overview of machine learning and deep learning for point clouds, as LiDAR point clouds are the main source of data for the framework described in this thesis and point clouds are, in general, a less well-known modality in machine learning than images or text.
 
 Classic machine learning approaches rely on manual feature preparation.
 Two main groups of tasks are per-point predictions, which is in many ways similar to the task of semantic segmentation of images, that requires per-point features, and per-cloud predictions that either process entire point clouds or individual segments, separated be some preprocessing routine.
-[@weinmannFeatureRelevanceAssessment2013] show that careful selection of features is crucial for accurate and efficient interpretation of point cloud data.
+@weinmannFeatureRelevanceAssessment2013 show that careful selection of features is crucial for accurate and efficient interpretation of point cloud data.
 They also provide definitions of some of the most used manual features that aim to describe the 3D structure of point sets.
 The features are based on combinations of eigenvalues of a local covariance matrix of a set of points.
 They can be calculated on a per-point basis by using fixed-size or nearest-neighbor neighborhoods, or for whole segments of point clouds.
-The used features were originally introduced [@westContextdrivenAutomatedTarget2004], [@paulyEfficientSimplificationPointsampled2002], and [@malletRelevanceAssessmentFullwaveform2011], and include linearity, planarity, and scatter, aiming to indicate the presence of a linear, planar, or volumetric structures, and also omnivariance, anisotropy, eigentropy, the sum of eigenvalues, and curvature.
+The used features were originally introduced by @westContextdrivenAutomatedTarget2004, @paulyEfficientSimplificationPointsampled2002, and @malletRelevanceAssessmentFullwaveform2011, and include linearity, planarity, and scatter, aiming to indicate the presence of a linear, planar, or volumetric structures, and also omnivariance, anisotropy, eigentropy, the sum of eigenvalues, and curvature.
 The formulas for the features are provided in @sec-training-tree-processors where they are used for training parameter prediction models for segmented trees.
 
-[@belloReviewDeepLearning2020] and [@guoDeepLearning3D2021] offer detailed reviews of the deep learning approaches used in various problems related to processing point clouds.
+@belloReviewDeepLearning2020 and @guoDeepLearning3D2021 offer detailed reviews of the deep learning approaches used in various problems related to processing point clouds.
 Below is a very short summary.
 
 The first model to work directly work on point clouds is the PointNet [@qiPointNet2017].
@@ -143,37 +143,24 @@ They report $F_1$-scores of up to 0.95, which is impressive even for managed sta
 The network is a deeper modification of the SFANet proposed in @zhuDualPathMultiScale2019 for counting the number of people in photos.
 They report $F_1$-scores of 0.75, with average positioning error of 2.2 meters.
 
-### Fusion of data
-
-@liFusionApproachesIndividual2023 explore the contributions of multispectral images, very high resolution panchromatic images, and LiDAR data during fusion on feature and decision level for tree species classification using Support Vector Machine and Random Forest classifiers on manually delineated tree crowns from an urban environment.
-They report that fusion consistently improves the results over using each of the data sources on its own.
-They also report that fusion on decision level resulted in the highest overall accuracy metrics.
-
-@balestraLiDARDataFusion2024 offers a review of 151 publications concerning fusion of LiDAR data with other remote sensing data.
-The authors report that in most cases fusion improves the results.
-
-[@ferreiraImprovingUrbanTree2024] use a U-Net semantic segmentation model for fusion of VNIR images and UAV LiDAR-derived feature maps including surface normals of the canopies, reflection intensities, canopy heights, and leaf-area index for mapping tree species in urban tropical areas.
-Their results show that adding LiDAR-based features improves $F_1$-scores across all considered species, with average $F_1$-score 84.1.
-They also use the segment anything model [@Kirillov_2023_ICCV] to automatically segment tree crowns with outstanding 98% boundary $F_1$-score.
-
 ### Terrestrial LiDAR
 
 Terrestrial LiDAR surveys usually provide very dense and detailed point clouds.
 Most importantly for the task of localizing individual trees, terrestrial measurements always capture the trunks of the trees clearly.
 Tree trunks are very useful for tree detection and segmentation, and there are many algorithms that use bottom-to-top approaches that trace the trunks into the canopies.
 
-[@allenTreeSpeciesClassification2022] - classifying manually extracted terrestrial LiDAR point clouds of individual trees using multi-view representation based on [@goyalRevisitingPointCloud2021] and a convolutional network ResNet [@heDeepResidualLearning2016].
+@allenTreeSpeciesClassification2022 - classifying manually extracted terrestrial LiDAR point clouds of individual trees using multi-view representation based on [@goyalRevisitingPointCloud2021] and a convolutional network ResNet [@heDeepResidualLearning2016].
 
-[@lopezserranoArtificialIntelligencebasedSoftware2022] describes a framework for fully automatic processing of terrestrial LiDAR point clouds based on trunk detection.
+@lopezserranoArtificialIntelligencebasedSoftware2022 describes a framework for fully automatic processing of terrestrial LiDAR point clouds based on trunk detection.
 
-[@vianaTimberVolumeEstimation2022] use a small dataset to compare tree-level inventory metrics extracted from a terrestrial LiDAR survey and from a manual inventory.
+@vianaTimberVolumeEstimation2022 use a small dataset to compare tree-level inventory metrics extracted from a terrestrial LiDAR survey and from a manual inventory.
 
-[@nurunnabiDevelopmentPreciseTree2024] offers a compelling example of how such detailed data can be used to provide very detailed analyses on tree level.
+@wilkesTLS2treesScalableTree2023
+
+@nurunnabiDevelopmentPreciseTree2024 offers a compelling example of how such detailed data can be used to provide very detailed analyses on tree level.
 The authors report high accuracies on the task of segmenting the point clouds
 
 ### UAV LiDAR
-
-#### CHM-based methods
 
 A common approach to utilize LiDAR point cloud data for tree detection is by calculating canopy height maps – images where each pixel represents the height of vegetation – and applying the same techniques as for image-only approaches.
 
@@ -184,3 +171,34 @@ It is, however, clear that it requires great deal of manual adjustment, and visu
 Any change in the canopy structure patterns noticeably affects the quality of the detection even for sophisticated window functions.
 
 @lisiewiczCorrectingResultsCHMBased2022 propose a way to improve the results of CHM-based individual tree detection algorithms.
+
+@wangAutomaticDetectionIndividual2023
+
+@qiMonitoringSpatiotemporalVariation2023
+
+@fuIndividualTreeSegmentationUAV2024
+
+### Fusion of data
+
+@lianBiomassCalculationsIndividual2022
+
+@liFusionApproachesIndividual2023 explore the contributions of multispectral images, very high resolution panchromatic images, and LiDAR data during fusion on feature and decision level for tree species classification using Support Vector Machine and Random Forest classifiers on manually delineated tree crowns from an urban environment.
+They report that fusion consistently improves the results over using each of the data sources on its own.
+They also report that fusion on decision level resulted in the highest overall accuracy metrics.
+
+@balestraLiDARDataFusion2024 offers a review of 151 publications concerning fusion of LiDAR data with other remote sensing data.
+The authors report that in most cases fusion improves the results.
+Most relevant to this thesis, they report that for individual tree segmentation the results of fusion-based approaches compared to LiDAR-only ones are consistently better.
+@laExtractionIndividualTree2015 show an increase from 63% to 92% for low-density forests, and from 62% to 70% for high-density forests, @aubry-kientzMultisensorDataFusion2021 show and improvement by 5%, and @zhenImpactTreeOrientedGrowth2014 and @arenas-corralizaAutomaticMappingTree2020 improved their results by 2-4%.
+
+@ferreiraImprovingUrbanTree2024 use a U-Net semantic segmentation model for fusion of VNIR images and UAV LiDAR-derived feature maps including surface normals of the canopies, reflection intensities, canopy heights, and leaf-area index for mapping tree species in urban tropical areas.
+Their results show that adding LiDAR-based features improves $F_1$-scores across all considered species, with average $F_1$-score 84.1.
+They also use the segment anything model [@Kirillov_2023_ICCV] to automatically segment tree crowns with outstanding 98% boundary $F_1$-score.
+
+@wuFineClassificationUrban2024 use a combination of high-resolution RGB images and LiDAR to classify urban tree species by extracting seven different feature types and using a Random Forest for pixel-level classification.
+They report on seven experiments using different combinations of extracted features.
+The results show an improvement of 18.5% in accuracy when using fusion of LiDAR and RGB compared to RGB-only.
+
+## Summary
+
+:)
