@@ -140,7 +140,8 @@ Moreover, the model requires fine-tuning to be applicable to new data, which gre
 This distance map is then enhanced by applying the Laplacian over Gaussian filter, and finally the watershed segmentation algorithm is applied to delineate individual crowns.
 The approach seems to rely on there being semi-clear separation between the tree crowns, which is rarely the case when the forests are dense and mixed.
 
-The same network was also successfully used to map tree species in urban environments in @martinsDeepLearningbasedTree2021.
+The same network was also successfully used to map tree species in tropical urban environment in Rio de Janeiro, Brazil in @martinsDeepLearningbasedTree2021.
+They develop a post-processing approach to combine the semantic segmentation map and the distance map to classify tree species with an average $F_1$-score of 79.3% and resulting in a realistic tree species map.
 
 @oscoConvolutionalNeuralNetwork2020 use a convolutional neural network on UAV multispectral images to count citrus trees in an orchard by predicting a confidence map that shows the likelihood of each pixel containing a tree.
 They report $F_1$-scores of up to 0.95, which is impressive even for managed stands.
@@ -155,16 +156,28 @@ Terrestrial LiDAR surveys usually provide very dense and detailed point clouds.
 Most importantly for the task of localizing individual trees, terrestrial measurements always capture the trunks of the trees clearly.
 Tree trunks are very useful for tree detection and segmentation, and there are many algorithms that use bottom-to-top approaches that trace the trunks into the canopies.
 
-@allenTreeSpeciesClassification2022 - classifying manually extracted terrestrial LiDAR point clouds of individual trees using multi-view representation based on [@goyalRevisitingPointCloud2021] and a convolutional network ResNet [@heDeepResidualLearning2016].
+@burtExtractingIndividualTrees2018 introduce `treeseg`, a software package written in C++ for extracting individual trees from LiDAR point clouds.
+Even though it is designed and presented as platform-agnostic methods made to operate on both terrestrial and UAV LiDAR point clouds, it relies on trunk detection, which is common for many methods based on terrestrial LiDAR and often is not applicable to UAV LiDAR data.
 
-@lopezserranoArtificialIntelligencebasedSoftware2022 describes a framework for fully automatic processing of terrestrial LiDAR point clouds based on trunk detection.
+@lopezserranoArtificialIntelligencebasedSoftware2022 introduce another software package called `AID-FOREST` for fully automatic processing of terrestrial LiDAR point clouds based on trunk detection.
+The software takes in a raw point cloud, performs all required preprocessing steps, and runs an object detection neural network on a series of horizontal slices to find cross-sections of trunks, and then processes the detection results from each level to track individual trees.
+
+@allenTreeSpeciesClassification2022 describe an approach for classifying terrestrial LiDAR point clouds of individual trees extracted by `treeseg` using multi-view representation based on @goyalRevisitingPointCloud2021 and a convolutional ResNet network [@heDeepResidualLearning2016].
+They report high classification accuracies both overall and per-species on a dataset of almost 2500 individual trees.
+
+@wilkesTLS2treesScalableTree2023 introduce `TLS2trees`, another automated framework for segmentation of individual trees in terrestrial LiDAR point clouds consisting of a set of Python command line tools.
+The framework consist of three steps: preprocessing, semantic segmentation, and instance segmentation into a set of individual trees.
+After that, a set of attributes are computed for each tree.
+The software is designed to be horizontally scalable (meaning it's easy to speed up calculations by using more machines doing them in parallel, as opposed to vertically, meaning by increasing the computational resources available to a single machine) to address huge datasets produced during terrestrial laser scanning surveys.
+
+All these software packages are impressive, but non-applicable to the data described in this work.
 
 @vianaTimberVolumeEstimation2022 use a small dataset to compare tree-level inventory metrics extracted from a terrestrial LiDAR survey and from a manual inventory.
+They report very good results, showing that terrestrial LiDAR can serve as a replacement for manual inventories in diverse secondary forests (secondary forests are forests that regenerate naturally after significant disturbances like logging, storms, or fires).
 
-@wilkesTLS2treesScalableTree2023
-
-@nurunnabiDevelopmentPreciseTree2024 offers a compelling example of how such detailed data can be used to provide very detailed analyses on tree level.
-The authors report high accuracies on the task of segmenting the point clouds
+@nurunnabiDevelopmentPreciseTree2024 offer a compelling example of how detailed terrestrial LiDAR point clouds can be used to provide very detailed analyses on tree level.
+The authors report high accuracies on the task of segmenting the point clouds into wood and leaf points by utilizing geometric features mentioned earlier to locate linear and non-linear areas.
+They then apply an octree-based segmentation algorithm to develop a precise 3D structure of a tree.
 
 ### UAV LiDAR
 
