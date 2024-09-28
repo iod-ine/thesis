@@ -1,8 +1,10 @@
 ## Training segmented trees processing models {#sec-training-tree-processors}
 
-$\lambda_1 \ge \lambda_2 \ge \lambda_3$
-
-The features are defined as follows:
+To predict per-tree forest attributes from a segmented point cloud, a set of specialized regression and classification models is trained on the tree clouds.
+These specialized models are classic machine learning models that operate on most common metrics described in the literature overview chapter.
+As mentioned in the literature overview, common features used for machine learning on point clouds are based on the eigenvalues of the covariance matrix of the point coordinates, calculated either for an entire cloud, or per-point in a neighborhood around it.
+These features include linearity, planarity, scatter, that aim to indicate the presence of linear, planar, or volumetric structures, and also omnivariance, anisotropy, eigentropy, the sum of eigenvalues, and curvature.
+The features are defined as follows, with eigenvalues sorted in descending order such that $\lambda_1 \ge \lambda_2 \ge \lambda_3$:
 
 $$
 \begin{aligned}
@@ -17,11 +19,33 @@ $$
 \end{aligned}
 $$
 
+Another common set of features, especially popular in forestry applications, are various statistics that describe the height distribution of points within the neighborhood or the cloud.
+They include maximum and average height, standard deviation, kurtosis, skew, and entropy of the height distribution, percentage of points above the mean and each of the deciles of height and the deciles of height themselves.
+The features are calculated for the entire tree cloud, effectively reducing each tree to a collection of metrics, resulting in a tabular dataset.
+In this form, the dataset is used to train the models.
+
+In @dubrovinExplorationPropertiesPoint2024, we propose a way to help build intuition into the meaning of some of the less obvious features by visualizing individual trees on a different end of the range of the feature's values.
+@fig-feature-ranges shows is an example of such visualization, showing the effect of the shape of spruce on omnivariance and the effect of the shape of aspen on percent of points above mean height.
+Note the presence of ground points, which are filtered out before calculating features for the models.
+
 ::: {#fig-feature-ranges}
 ![](../images/fig-feature-ranges-output-1.png)
 
 ![](../images/fig-feature-ranges-output-2.png)
 
-Visualizations of how values of commonly used features map to the shapes of individual trees.
-Figure reused from [@dubrovinExplorationPropertiesPoint2024]
+Visualizations of how values of commonly used features calculated for the whole tree cloud map to the shapes of individual trees.
+**Top**: Effect of the shape of spruce on omnivariance.
+**Bottom**: Effect of on the shape of aspen on percent of points higher than mean height.
+Figure reused from @dubrovinExplorationPropertiesPoint2024.
+Note the presence of ground points, which are filtered out before calculating features for the models.
 :::
+
+The feature set is thinned by using sequential feature selection: a greedy approach that selects the best feature according to 5-fold cross-validation accuracy on every iteration until a set number of features is selected.
+The models are trained on 20 best features selected this way.
+
+To make the trees more closely resemble the trees standing in dense clusters, the same height-dependent dropout function that is used for augmenting synthetic forests is used.
+This dropout, together with a small amount of random jitter, is also used to create additional samples for training the models, as the original dataset size is very small.
+
+
+Two models are used as proof of concept for the proposed framework: a classifier that predicts the tree species, and a regressor that estimates a tree's diameter at breast height.
+Random Forest models are used in both cases.
