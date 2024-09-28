@@ -11,7 +11,6 @@ The code of the project on my GitHub might be a helpful addition for that.
 {{< include 03c_synthetic_forest_datasets.qmd >}}
 
 
-
 {{< embed 03c_synthetic_forest.ipynb#fig-synthetic-forest-patch-example-1 >}}
 
 
@@ -33,4 +32,3 @@ First, it constructs a distance matrix between the ground truth tree locations a
 It then iterates over the remaining pairs in the order of increasing distance, and marks the pairs with suitable heights in which both trees are not yet assigned a class as a true positive.
 The pairs in which one of the trees is already assigned a class are marked as either a false positive or a false negative, and the pairs in which both trees are assigned a class are skipped.
 Finally, it marks all unmatched ground truth trees as false negatives, and all unmatched candidate trees as false positives.
-

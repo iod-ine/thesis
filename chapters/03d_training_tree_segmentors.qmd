@@ -7,7 +7,7 @@ However, the main goal of this thesis was to develop and verify an overall frame
 The architecture of the used PointNet++ is similar to the segmentation architecture shown in @fig-pointnet2-architecture.
 The main differences are the use of one more stacked set abstraction layer to make the network deeper, and the use of a regression head that predicts a continuous value for each point instead of a classification head that predicts per-point class scores, since the model needs to assign a unique ID to every tree in the patch.
 The three stacked set abstraction layers have the proportions of points sampled set to 0.75, 0.5, and 0.5, and neighborhood radii for feature aggregation set to 0.1, 0.2, and 0.4.
-Note that the scale of the input is normalized (see next paragraph for details), so the radii are not in meters.
+Note that the scale of the input is normalized (see next section for details), so the radii are not in meters.
 The model has 30 million trainable parameters.
 
 ### Coordinate and feature normalization
@@ -105,13 +105,14 @@ The best model is saved using the accuracy as a metric.
 
 The learning rate schedule is set to follow a fast linear warm up and slow linear decay.
 
-Training was performed on a NVIDIA NVIDIA A100-SXM4-80GB GPU with X memory.
-Inference works even on a much smaller GPU Tesla T4 
+Training was performed on a NVIDIA A100 GPU with 80G of memory.
+Inference, depending on the point density of the input, might work even on a much smaller GPU like Tesla T4 with 16G of memory.
+GPUs of this size are available with limits on usage for free on services like Google Colab and Kaggle.
 
 ### On implementation of PointNet++
 
 As mentioned in the introduction, the PointNet++ is implemented using the PyTorch Geometric library designed for writing and training graph neural networks.
 This makes the implementation not exactly the same as described in the PointNet papers.
-Input transform and feature transfrom networks are not define explicitly, but local networks that process features learn to perform a similar function.
+Input transform and feature transform networks are not defined explicitly, but local networks that process features learn to perform a similar function.
 The main ideas, namely local feature learning and max pulling for permutation-invariant aggregation, are there.
 Sequential application of PointNetConv layers allows the network to learn hierarchical features.
