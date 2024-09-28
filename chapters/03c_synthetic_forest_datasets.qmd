@@ -1,15 +1,40 @@
 ## Synthetic forests generated from individual trees {#sec-synthetic-forest-dataset}
 
-To train tree segmentation models, training data where every point is assigned to an individual tree is required. Data like that is very labor-intensive to label. An alternative way to create such data is by generating it from patches of forest with every point assigned to a tree is by combining point clouds of individual trees  into synthetc
+To train tree segmentation models, training data where every point is assigned to an individual tree is required.
+Data like that are very labor-intensive to label.
+An alternative way to create such data is by generating it from a set of tree clouds, as the per point labels arise naturally in this case.
+I used the dataset of individual tree point clouds described in the previous section to generate a synthetic forest to train a tree segmentation PointNet++.
 
-A patch of fixed size, filled by randomly sampled trees and the ability to add overlap.
+Synthetic forest is generated in patches of set height and width by placing trees sampled from the full set from left to right, until the set width is extended, then from bottom to top, until the set height is extended.
+A height threshold is applied to each tree before placing it to remove ground points and non-tree reflections.
+This results in patches that are slightly bigger than the set size, but that can be cropped into the exact size.
+This has an added benefit of mimicking cutoff trees at the edges of the patch that are inevitable when the model is applied in a sliding window.
+The trees can be sampled with or without replacement, but since a set of augmentations described in @sec-augmentations is applied to each tree individually, exact same tree never occurs in the patch fed to the model even when sampling with replacement.
+When trees are placed, their planar bounding boxes are tracked to avoid overlap.
+However, since some overlap might, in fact, be desired to better represent actual forests, a parameter that controls the amount of overlap is added to the dataset generation process.
+Each tree is also assigned a label, which simply tracks its ordinal number in the patch.
+An example of a 20 by 20 meter synthetic forest patch with 0.75 meter overlap and 2 meter height threshold is shown in @fig-synthetic-forest-patch-example from two different perspectives and using two color schemes: the label, i.e. the ordinal ID of the tree within a patch, and RGB color sampled from the orthophoto.
 
-(show example patches of different size)
-(show example patches colored by RGB and different false color combinations)
+{{< embed 03c_synthetic_forest.ipynb#fig-synthetic-forest-patch-example >}}
 
-Each tree has features sampled from preprocessed orthophoto (multiscale basic features).
+For comparison, a patch of the same size from a real point cloud over one of the plots of the Lysva survey is shown in @fig-lysva-plot-window-example.
 
-Fixed size is better than fixed number because of the scale normalization.
+{{< embed 03c_synthetic_forest.ipynb#fig-lysva-plot-window-example >}}
 
-- Height threshold applied
+An alternative approach to creating patches of synthetic forest can be to use a fixed number of trees instead of fixed patch size.
+However, it poorly correlates with how the final model will be applied: in windows of fixed size, not windows with varying size but fixed number of trees.
+And size of the patch the model sees is important because the scale is normalized, and using a different patch sizes changes the scaled coordinates and confuses the model that learned to rely on them.
 
+Enriching point clouds using only color information from RGB orthophotos provides limited utility because it adds only local information to the points.
+As was mentioned in the introduction, one of the aspects of the complementary nature of the two data sources is that images provide continuous representations and capture textures.
+To enrich the image features with context, they can be preprocessed with feature extractors that encode context into pixel values and thus provide more information for the segmentation network.
+The feature extractors can be simple algorithms or specialized convolutional network feature extractors.
+For the same reason a simple PointNet++ is used as the architecture for the tree segmentation network, a simple collection of multi-scale features are used as orthophoto features, including intensity, edge, and texture features, extracted from the orthophotos using the `scikit-image` Python package.
+The features are calculated on different scales by applying Gaussian smoothing with varying parameters before calculation.
+@fig-basic-features-small shows example features from every mentioned group on a very fine scale.
+The top left image is the original orthophoto of plot 10 from the Lysva survey, the top right image is the intensity calculated from it, and bottom images are examples of an edge feature and a texture feature.
+The same features but on a coarser scale are shown in @fig-basic-features-large.
+
+{{< embed 03c_synthetic_forest.ipynb#fig-basic-features-small >}}
+
+{{< embed 03c_synthetic_forest.ipynb#fig-basic-features-large >}}

@@ -21,18 +21,15 @@ The transformations include scale and feature normalization – the coordinates 
 
 The primary objective of data augmentation is to enhance the quantity, quality, and variety of data used for training [@mumuniDataAugmentationComprehensive2022].
 This is especially important when the sizes of the available datasets are limited, like in the case of the individual trees data that is the base of the synthetic forest datasets.
-
 Carefully selected augmentations allow increasing the effective dataset size.
 However, it is important to pay attention that the chosen augmentations keep the transformed examples semantically equivalent to the original.
 A readily understandable example of a bad augmentation in the task of digit classification, which is often used as the "hello world" of deep learning with the MNIST dataset of handwritten digits [@deng2012mnist], is a vertical flip, as most digits lose meaning when upside down.
-A flip is also a bad augmentation example for a synthetic forest patch described in @sec-synthetic-forest-dataset, as it changes the order of the trees within a patch, thus breaking the labels.
+A flip is also a bad augmentation example for a synthetic forest patch described in @sec-synthetic-forest-dataset, as it changes the order of the trees within a patch, thus breaking the labels that are assumed to increase in a specific pattern.
 
 In the scenario when the data for is created by combining several smaller inputs, there is a possibility of applying augmentations on two different scales.
 The most simple approach is to treat a synthetic forest patch as a whole and apply augmentations directly to it.
 However, it is also possible to apply per-tree augmentations, effectively increasing the size of the underlying tree set from which synthetic forest patches constructed.
-Both types of augmentations are used in training tree segmentation networks, described in detail in the following sections.
-
-#### Per-tree augmentations
+Only the latter kind are used for training the tree segmentation network.
 
 The first transformation that changes the shape but doesn't affect any semantics for an individual tree is a random rotation around the vertical axis.
 A tree remains completely the same when rotated, but the coordinates of all points change.
@@ -88,9 +85,7 @@ Changing $\text{shift}$ controls the position of the climb: the larger, the lowe
 
 {{< embed 03d_augmentations.ipynb#fig-height-dropout-aggressive >}}
 
-#### Per-patch augmentations
-
-Random rotation within $[0; 45]$ degrees range.
+All the augmentation are applied on the fly right before the examples are loaded into GPU memory and passed through the network.
 
 ### Other training parameters
 
@@ -101,18 +96,21 @@ This slows down the training, but enables usage of larger batches when there is 
 Early stopping [@precheltAutomaticEarlyStopping1998] is set up to terminate training early if there is no improvement in average validation loss in a set number of epochs.
 This makes sure that valuable GPU time is not wasted on continuing training models that are likely to have started overfitting.
 
-The best model is saved using the accuracy as a metric.
+Model checkpointing is setup.
+After each training epoch, when the average validation loss and accuracy are calculated, the model state is saved to disk if it's current accuracy is better than the last saved one.
+This makes sure that the best performing model can always be recovered, even if the training process was run for too long and the latest model is not the best one.
 
 The learning rate schedule is set to follow a fast linear warm up and slow linear decay.
+Learning rate is set to ramp up from 0.001 to 0.01 in a span of 2 epochs, and then decay back to 0.001 in a span of 30 epochs.
+Adam optimizer is used [@kingmaAdamMethodStochastic2014].
 
-Training was performed on a NVIDIA A100 GPU with 80G of memory.
+Training was performed on an NVIDIA A100 GPU with 80G of memory.
 Inference, depending on the point density of the input, might work even on a much smaller GPU like Tesla T4 with 16G of memory.
 GPUs of this size are available with limits on usage for free on services like Google Colab and Kaggle.
 
 ### On implementation of PointNet++
 
-As mentioned in the introduction, the PointNet++ is implemented using the PyTorch Geometric library designed for writing and training graph neural networks.
+As mentioned in the introduction, the deep learning code, including the code for PointNet++, is implemented using the PyTorch Geometric library designed for writing and training graph neural networks.
 This makes the implementation not exactly the same as described in the PointNet papers.
-Input transform and feature transform networks are not defined explicitly, but local networks that process features learn to perform a similar function.
-The main ideas, namely local feature learning and max pulling for permutation-invariant aggregation, are there.
-Sequential application of PointNetConv layers allows the network to learn hierarchical features.
+The main ideas, namely local feature learning in a k-nearest neighbors neighborhood and max pulling for permutation-invariant aggregation, are there.
+Input transform and feature transform networks are not defined explicitly, but networks that process features learn to perform a similar function.

@@ -10,10 +10,6 @@ The code of the project on my GitHub might be a helpful addition for that.
 
 {{< include 03c_synthetic_forest_datasets.qmd >}}
 
-
-{{< embed 03c_synthetic_forest.ipynb#fig-synthetic-forest-patch-example-1 >}}
-
-
 {{< include 03d_training_tree_segmentors.qmd >}}
 
 {{< include 03e_training_segment_processors.qmd >}}
