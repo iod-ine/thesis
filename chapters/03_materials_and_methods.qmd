@@ -51,3 +51,12 @@ $$
 $$
 F_1\text{-score} = 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}
 $$
+
+## Application of the framework
+
+The framework is applied in two steps.
+First, the tree segmentation network is applied in a sliding window of the same size that was used for patch generation during its training, with overlap to be able to combine the results into a single prediction.
+The continuous prediction of the regression model are rounded to get the integer labels for every point.
+The results are merged to create a single point cloud, and a postprocessing routine aimed to transform per-window tree IDs to global tree IDs is run.
+It traces the overlapping points to find the labels that need to be updated in the later window, and adds a number larger than there could be trees within a patch of that size to predictions with remaining labels of the later window.
+Second, the segments identified by predicted integer labels are extracted, selected feature sets are calculated for each one, each one is passed through the collection of attribute prediction models to get per-tree predictions.
