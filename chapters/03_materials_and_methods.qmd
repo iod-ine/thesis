@@ -18,17 +18,40 @@ The code of the project on my GitHub might be a helpful addition for that.
 
 {{< include 03e_training_segment_processors.qmd >}}
 
-## Matching detected trees to the field inventory ground truth
+## Matching detections to field inventory ground truth
 
-TODO: Rephrase this. This is directly from the Scientific Reports paper.
-
-To evaluate the results, an automated and deterministic method for matching detected trees to the ground truth data is required.
+To evaluate the results of any tree detection system against field inventory data, an automated and deterministic method for matching detected tree candidates to the ground truth trees is needed.
 It should determine which ground truth trees, if any, the detected candidates correspond to.
-It should also classify all the trees from both sets as either a true positive, meaning that the ground truth tree was successfully detected, a false negative, meaning that a ground truth tree was not detected, or a false positive, meaning a tree was detected when there is none.
+It should also classify both the trees and the candidates as either a true positive, meaning that the ground truth tree was successfully detected, a false negative, meaning that a ground truth tree was not detected, or a false positive, meaning a tree was detected when there is none.
 
-We implemented a matching procedure that considers the locations and heights of the trees, and falls back to using only locations when the height information is not available for the ground truth tree.
+I use the same matching procedure that is described and implemented in @dubrovinOpenDatasetIndividual2024.
+It considers the locations and heights of the trees, and falls back to using only locations when the height is not available for the ground truth tree.
 It is parametrized by the maximum allowed 2D distance and the maximum height difference between a detected and a ground truth tree to consider them a match.
 First, it constructs a distance matrix between the ground truth tree locations and the detected candidates and filters out the pairs for which the distance is larger than the allowed maximum.
 It then iterates over the remaining pairs in the order of increasing distance, and marks the pairs with suitable heights in which both trees are not yet assigned a class as a true positive.
 The pairs in which one of the trees is already assigned a class are marked as either a false positive or a false negative, and the pairs in which both trees are assigned a class are skipped.
 Finally, it marks all unmatched ground truth trees as false negatives, and all unmatched candidate trees as false positives.
+
+Based on the results of the matching algorithm, a set of metrics that are often used to evaluate the results of tree detection can be calculated.
+The same metrics are usually used for evaluation in classification problems and thus are well-known.
+The first commonly used metric is recall, which is the proportion of the ground truth trees that were detected.
+The second metric is precision, which is the proportion of candidates that are correct.
+Both are important, and describe a detection system from different perspectives.
+To combine them into a single metric, $F_1$-score is often used, which is the harmonic mean of precision and recall that provide a balanced measure of the system performance.
+The formulas for the metrics are as follows:
+
+$$
+\text{recall} =
+\frac{N_{\text{true positives}}}{N_\text{trees}} =
+\frac{N_{\text{true positives}}}{N_{\text{true positives}} + N_{\text{false negatives}}}
+$$
+
+$$
+\text{precision} =
+\frac{N_{\text{true positives}}}{N_\text{candidates}} =
+\frac{N_{\text{true positives}}}{N_{\text{true positives}} + N_{\text{false positive}}}
+$$
+
+$$
+F_1\text{-score} = 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}
+$$
