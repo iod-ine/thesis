@@ -1,45 +1,70 @@
 \chapter{Introduction}\label{cap:introduction}
 
-\todo[inline]{TODO: Expand and refine the Introduction chapter.}
+This chapter aims to give a general introduction to the research project and put it into wide scientific and societal context.
+It defines the main research question and the hypothesis, and gives a high-level overview of the proposed framework.
+It also provides the links to the original datasets and the code.
+
+\section{Context}
 
 Forests are a crucial part of the global ecosystem, both environmentally and economically.
-They cover a third of the land area, contain over 80\% of terrestrial biodiversity, and somewhere around one-third of humanity depends on forests and forest products for their livelihoods \cite{aertsForestRestorationBiodiversity2011, StateWorldsForests2020}.
+They cover a third of the land area, contain over 80\% of terrestrial biodiversity, and somewhere around one-third of humanity depends on forests and forest products for their livelihoods \citep{aertsForestRestorationBiodiversity2011, StateWorldsForests2020}.
 Forests are an essential renewable natural resource and a huge, dynamic part of the global carbon cycle.
-Responsible management of forests allows using the resources efficiently and sustainably, preserving the biodiversity, and regulating atmospheric $CO_2$, which is becoming especially important as the anthropogenic climate change is ongoing and accelerating \cite{faheyForestCarbonStorage2010, forsterIndicatorsGlobalClimate2024}.
+Responsible management of forests allows using the resources efficiently and sustainably, preserving the biodiversity, and regulating atmospheric $CO_2$, which is becoming especially important as the anthropogenic climate change is ongoing and accelerating \citep{faheyForestCarbonStorage2010, forsterIndicatorsGlobalClimate2024}.
 This drives the need for accurate, detailed, up-to-date information about various forest attributes such as distributions of tree species, average heights and ages of trees, estimates of trunk diameter, timber volume, and above ground biomass, and others.
 
-The traditional manual forest inventories are extremely labor-intensive and time-consuming, which makes them infeasible to cover extensive areas with sufficient detail, speed, and frequency \cite{burleyEncyclopediaForestSciences2004}.
-Various remote sensing techniques are widely used to extend and extrapolate manual inventories.
+The traditional manual forest inventories that rely on people going out into the forest to count and measure trees are extremely labor-intensive and time-consuming, which makes them infeasible to cover extensive areas with sufficient detail, speed, and frequency \citep{burleyEncyclopediaForestSciences2004}.
+This is especially relevant in countries where massive areas are covered by forests, such as Russia, Brazil, Canada, USA, and China, which are the top five countries for forest area according to \citet{GlobalForestResources2020}.
+For that reason, various remote sensing techniques are widely used to extend and extrapolate the traditional forest inventories.
 All sorts of data, from satellite and aerial imagery to very detailed terrestrial LiDAR surveys, are used in all sorts of applications that require mapping forest attributes.
+Some such applications are mentioned in the next chapter dedicated to reviewing the literature.
 
+Many national space agencies even provide open access to satellite data that can be used for mapping forests.
+European Space Agency offers free and open access\footnote{Although the access is not open for everyone equally, as I have observed silent bans of the accounts connecting from Russian IP-addresses without any response to support inquires.} to the Sentinel missions, including C-band SAR data from Sentinel-1 and medium-resolution multispectral data from Sentinel-2, both with global coverage.
+They also have an upcoming P-band SAR mission called BIOMASS, designed specifically to study global forest biomass and carbon cycles \citep{queganEuropeanSpaceAgency2019}, which further indicated the growing importance and interest in the topic of forest mapping.
+NASA provides free access to an abundance of satellite data through its Earthdata platform, Landsat mission with the Operation Land Imager (OLI) instrument and Terra mission with Moderate Resolution Imaging Spectroradiometer (MODIS) instrument being the most relevant for forest mapping applications.
+The Indian Space Research Organisation, Brazilian National Institute for Space Research, National Space Research and Development Agency of Nigeria all offer free satellite data that can be used for this purpose.
 
-There are even many free data sources such as Sentinels (some studies of using S1 and S2, maybe even GEDI).
-Higher resolution data is however only available for money, and it isn't cheap.
+The open satellite data is an essential tool for wide-area studies, but it usually has coarse resolution, which limits the achievable accuracy and level of detail.
+It also offers no ability to control the observation parameters, as they are fixed by the instrument configuration and orbit parameters, both of which are outside the data consumer control.
+Higher resolution data with a limited ability to control the acquisition parameters is available commercially, but the prices are steep.
+Aerial observations with sensors mounted on planes or helicopters are both more controllable and cheaper alternatives, although still expensive and sill limited in the flexibility of the control of acquisition parameters.
+A much more affordable and controllable alternative is UAV-based observation.
+It allows for fine-grained control over many important parameters such as flight height, flight path overlap, combination of used sensors, and so on.
 
-The most common way to use LiDAR surveys for mapping forest attributes in industry is the area-based approach described in detail in Section~\ref{sec-area-based-approach}.
-
+The most common way to use UAV remote sensing, be it LiDAR, multispectral, hyperspectral, or other data modalities, for mapping forest attributes in industry is what is known in the LiDAR community as the area-based approach, described in detail in Section~\ref{sec-area-based-approach}.
+It is based on extrapolating measurements from ground plots made in traditional inventories by aggregating remote sensing data to the grid with cell area of a ground plot, which results in coarse resolution maps.
 However, modern sensors and processing techniques allow not aggregating at all and instead working on the level of individual trees.
 This requires robust algorithms that allow detecting individual trees in dense multimodal data.
 This is relatively easy in urban environments, manually planted and managed forest stands, or forests that are either sparse or predominantly coniferous, where the structure of the canopy is easy to interpret.
-Forest that are mixed and dense are much harder to work with and are a very active area of research for developing methods of detection of individual trees.
+Forest that are mixed and dense, which are a huge part of forests in countries mentioned earlier, are much harder to work with and are a very active area of research for developing methods of detection of individual trees.
+The canopies in such forests are very complex, especially because the top of the crowns of deciduous tree species often don't have a single pronounced height maximum, and crowns of nearby trees often overlap.
 
-The framework described in this thesis focuses on fusion of two remote sensing data sources: UAV LiDAR point clouds and UAV RGB orthophotos.
-The choice is explained mostly by practicality.
-
+The framework described in this thesis focuses on fusion of two remote sensing data sources, UAV LiDAR point clouds and UAV RGB orthophotos, to detect individual trees in dense mixed forests and predict required attributes for each tree individually, producing the most detailed maps possible.
+The choice of data sources is driven by their complementary nature, which I believe is key for semantically parsing such complex environments.
 LiDAR is an active sensor, which means it does not depend on external conditions such as lightning.
+Cloud and terrain shadows, incidence angles, and weather conditions do not affect LiDAR surveys.
+Moreover, LiDAR provides 3D vertical structural information about the forest, as laser pulses penetrate the canopy and reach both the undergrowth and the ground.
+This structural information is essential for understanding complex environments like dense forests.
+High-resolution RGB imagery does depend on the lighting, but is still an invaluable tool, as it offers detailed data with fixed resolution, continuous coverage of surfaces, unlike the discrete representation of laser scanning, and captures many fine details and textures.
+It can also benefit from a huge variety of well-established tools and processing techniques from the field of computer vision.
+Neither of these data sources on their own is enough to reliably and with sufficient robustness separate individual trees in dense mixed forests, and the key to success lies in their fusion.
 
-UAV measurements offer a good balance between the affordability, required effort, and quality of the data.
+\section{Research question and hypothesis}
 
-The main research question ...
-The main hypothesis is ...
-Significantly reduce the required effort, especially in the form of the amount of field inventory data required.
-Ideally, a method that doesn't require any field data at all, only for validation and quality assessment.
-Match or exceed the accuracy of the area-based approach.
+The main research question could be formulated as follows: "How to minimize effort and cost required for detailed inventories of dense mixed forests without losing accuracy?"
+The main hypothesis is then: "An accurate and detailed inventory with minimal effort and cost can be achieved through fusion of UAV LiDAR and RGB data using machine learning".
+The cost reduction is self-explanatory and is addressed in the previous subsection during a discussion of the platform of choice.
+The effort reduction comes mainly from minimizing the amount of field inventory data required.
+An ideal method is a method that doesn't require any field inventory data at all except for validation and quality assessment.
+
+\section{Overview of the framework}
 
 The proposed framework described in this thesis consist of a neural-network based tree segmentation in UAV LiDAR point clouds enhanced with RGB orthophoto-based features and processing the segments with a collection of specialized classic machine learning models that predict the parameters of interest for each detected tree.
 The tree segmentation model is trained on synthetic forest patches constructed from a dataset of point clouds of individual trees extracted manually from a large UAV LiDAR survey, heavily relying on augmentations to make the synthetic forest closer to real forest.
 The parameter prediction classification and regression models are trained on the same dataset of individual trees using a collection of widely used manual point cloud features.
 Figure~\ref{fig-framework-apply} is a schematic representation of the framework, showing the required inputs in red, processing steps in yellow, and artifacts in cyan.
+The field inventory is phased out, but it is still required, as application of any framework requires quality assessment and validation.
+
 
 \begin{figure}
 \centering{
@@ -49,8 +74,9 @@ Figure~\ref{fig-framework-apply} is a schematic representation of the framework,
 framework in the application stage.}
 \end{figure}
 
-Figure~\ref{fig-framework-prepare} is a schematic of the preparation
-step for the framework.
+Figure~\ref{fig-framework-prepare} is a schematic of the preparation step for the framework.
+Each individual node is described in detail in Section~\ref{sec-materials-and-methods}.
+
 
 \begin{figure}
 \centering{
@@ -74,7 +100,7 @@ Its main goals are to provide the reader with context for the research described
 
 	\item[\Autoref{cap:materials} - Materials and methods]
 The Materials and Methods chapter describes in detail the datasets, methods and methodological choices used in the proposed framework.
-It's aim is to make the work reproducible and to explain the methodological choices made.
+Its aim is to make the work reproducible and to explain the methodological choices made.
 
 	\item[\Autoref{cap:results} - Results]
 The Results chapter describes the results of each stage of the framework preparation and the validation approach used to verify its applicability and effectiveness on realistic data.
