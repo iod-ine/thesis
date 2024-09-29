@@ -87,7 +87,11 @@ Changing $\text{shift}$ controls the position of the climb: the larger, the lowe
 
 All the augmentation are applied on the fly right before the examples are loaded into GPU memory and passed through the network.
 
-### Other training parameters
+### Other training parameters {#sec-other-training-params}
+
+Mean absolute error is used as a loss function.
+Some experiments have shown improvements when using a custom loss function that modifies the mean absolute error loss by weighting it reversely proportional to the distance of the tree centroid.
+The idea of the modification is to make the network focus more on points closer to the center of each tree, as these points are much less likely to be overlapping with the crowns of adjacent trees.
 
 The batch size is limited by the available GPU device memory, and in the described setup competes for memory space with the synthetic forest patch dimensions used in the training dataset.
 The preference is given to the size of the patch, so the batch size is set to 1, but is compensated for by using gradient accumulation steps – updates to the model parameters are made after the gradient is accumulated for a set number of iterations.
@@ -96,8 +100,8 @@ This slows down the training, but enables usage of larger batches when there is 
 Early stopping [@precheltAutomaticEarlyStopping1998] is set up to terminate training early if there is no improvement in average validation loss in a set number of epochs.
 This makes sure that valuable GPU time is not wasted on continuing training models that are likely to have started overfitting.
 
-Model checkpointing is setup.
-After each training epoch, when the average validation loss and accuracy are calculated, the model state is saved to disk if it's current accuracy is better than the last saved one.
+Model checkpointing is set up as well.
+After each training epoch, when the average validation loss and accuracy are calculated, the model state is saved to disk if it's current accuracy is better than the last saved one, where accuracy is the proportion of points for which the rounded integer label is correct.
 This makes sure that the best performing model can always be recovered, even if the training process was run for too long and the latest model is not the best one.
 
 The learning rate schedule is set to follow a fast linear warm up and slow linear decay.

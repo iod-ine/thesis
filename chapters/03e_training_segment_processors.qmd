@@ -46,6 +46,9 @@ The models are trained on 20 best features selected this way.
 To make the trees more closely resemble the trees standing in dense clusters, the same height-dependent dropout function that is used for augmenting synthetic forests is used.
 This dropout, together with a small amount of random jitter, is also used to create additional samples for training the models, as the original dataset size is very small.
 Great care is taken to only create additional samples within the training set, to avoid any data leakage.
+Every training set sample is repeated 3 times with random jitter with maximum amplitude of 20 cm and a dropout applied.
 
 Two models are used as proof of concept for the proposed framework: a classifier that predicts the tree species, and a regressor that estimates a tree's diameter at breast height.
 Random Forest models are used in both cases.
+The number of trees is set to 200.
+For the classification model, class weights are assigned to every example that are inversely proportional to the class frequency in the data during model fitting.
