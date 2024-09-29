@@ -91,13 +91,17 @@ The same lack of extreme can be observed.
 ## Validation on the Lysva field inventory data
 
 To validate the framework, the results were evaluated on the Lysva field inventory dataset, described in @sec-lysva-dataset.
-The mean X and Y coordinates of the segmented trees were used to convert the cloud into a set of points, where each point represents a candidate detected tree.
-Then the algorithm described in @sec-matching-algorithm is applied to match the detected trees to the ground truth trees.
-Then precision, recall, and $F_1$-score were calculated for the detection results, and for the true positive matches the species classification accuracy and diameter at breast height regression error are calculated.
+The mean X and Y coordinates of each segmented tree were calculated to convert the cloud into a set of points, where each point represents a candidate detected tree.
+The maximum height of the points in the cluster was used as the height of the detected tree.
+Then the algorithm described in @sec-matching-algorithm was applied to match the detected trees their corresponding the ground truth trees, if any.
+The matching algorithm was run with max distance of 5 meter and max height difference of 3 meters (ignored for ground truth trees that don't have measured height).
+Then, precision, recall, and $F_1$-score were calculated for the detection results, and for the true positive matches the average distance between the detected tree and the actual tree, species classification accuracy and macro $F_1$-score, and diameter at breast height errors are calculated.
 
-@tbl-results shows the tree detection metrics
+@tbl-detection-results shows the tree detection metrics.
+When interpreting the metrics, the reader is advised to keep in mind the limitations of the distance metric mentioned in @sec-matching-algorithm, and instead focus on the $F_1$-score as the most informative metric.
+The overall average $F_1$-score for tree detection by the described system is 0.63.
 
-::: {#tbl-results}
+::: {#tbl-detection-results}
 | Plot | Tree count | Dominant type | Point density | Recall | Precision | F1-score | Distance |
 |------|------------|---------------|---------------|--------|-----------|----------|----------|
 | 1    | 420        | Deciduous     | 31.7          | 0.83   | 0.63      | 0.72     | 0.77     |
@@ -113,4 +117,32 @@ Then precision, recall, and $F_1$-score were calculated for the detection result
 |      |            |               | Average:      | 0.69   | 0.62      | 0.63     | 0.90     |
 
 Results of the tree detection across all plots in the Lysva field survey.
+:::
+
+@fig-lysva-confusion-matrix shows the confusion matrix for species prediction calculated for true positive matches.
+Note that willow trees are not included, as the model has not seen any in the training data, and all pine predictions are counted as spruce instead.
+The pattern of the confusion matrix is similar to the evaluation on the holdout set.
+The overall accuracy is 66.1%.
+The overall macro $F_1$-score is 55.4%.
+
+::: {#fig-lysva-confusion-matrix}
+![](../images/lysva-confusion-matrix.png)
+
+Confusion matrix for the tree species classification on true positive detected trees in the Lysva field inventory plots.
+:::
+
+@fig-lysva-regression-metrics show the quality assessment plots for the results of diameter at breast height regression.
+It's obvious from the plots that the individual tree dataset is not representative of the entire Lysva dataset in terms of dbh, as the range of dbh in there is not wide enough.
+The distributions show that the individual trees dataset has higher mean dbh values than the overall distribution, which makes the model eager to overestimate a lot.
+This effect is no doubt connected to the sampling bias mentioned in the description of the individual trees dataset: trees were selected by humans based on how easy they are to extract from a large point cloud.
+As the result, the predictions outside the range seen by the Random Forest are constant.
+Within the covered range, however, the behavior is similar to what was observed on the holdout set: a trend in the residual plot indicating over- and underestimation of low and high values, and errors close to zero near the middle of the range.
+The overall root mean squared error is 5.37 centimeters.
+The overall mean absolute error is 4.21 centimeters.
+The overall coefficient of determination $R^2$ is 0.65.
+
+::: {#fig-lysva-regression-metrics}
+![](../images/lysva-regression-metrics.png)
+
+Regression quality assessment plots plots for the diameter at breast height regression on true positive detected trees in the Lysva field inventory plots.
 :::
