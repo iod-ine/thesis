@@ -3,3 +3,9 @@
 This is a Quarto book.
 
 To learn more about Quarto books visit <https://quarto.org/docs/books>.
+
+## Acknowledgments
+
+My supervisor, professor Clement Fortin.
+My previous supervisor, professor Anton Ivanov.
+Alexander Kedrov and Albert Vasiliev from Space Technologies and Services Center, Ltd.
