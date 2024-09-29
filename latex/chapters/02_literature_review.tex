@@ -31,7 +31,18 @@ The reader is assumed to be familiar with general concepts of machine learning a
 For an introduction or a refresher, one of the best resources is \citet{goodfellowDeepLearning2016}.
 For a more detailed exploration, \citet{wangRecentAdvancesDeep2020} offer a selection of papers on topics relevant to modern deep learning techniques.
 As point clouds are a less well-known modality in machine learning and deep learning, the reader is also referred to \citet{belloReviewDeepLearning2020} and \citet{guoDeepLearning3D2021}, offering detailed reviews of the deep learning approaches used in various problems related to processing point clouds.
-The section is focused on providing a very short overview of these topics as it relates to the framework that is the focus of the thesis.
+Figure~\ref{fig-deep-learnin-on-point-clouds} is a high-level taxonomy of these approaches.
+The section is focused on providing a very short overview of these topics as it relates to the framework that is
+the focus of the thesis.
+
+\begin{figure}
+\centering{
+\includegraphics[width=\textwidth]{../images/deep_learning_on_point_clouds.png}
+}
+\caption{\label{fig-deep-learnin-on-point-clouds}A high-level taxonomy
+of deep learning approaches for point clouds. Figure from Bello et al.
+(2020)}
+\end{figure}
 
 Classic machine learning approaches rely on manual feature preparation.
 Two main groups of tasks are per-point predictions, which is in many ways similar to the task of semantic segmentation of images, that requires per-point features, and per-cloud predictions that either process entire point clouds or individual segments, separated be some preprocessing routine.
@@ -235,4 +246,7 @@ The results show an improvement of 18.5\% in accuracy when using fusion of LiDAR
 
 \subsection{Summary}
 
-That's how it is.
+There is a lot of research going on at the moment on individual tree-level inventories in UAV remote sensing data.
+Most results that can be considered successful are either in more mild environments, such as urban or managed forests, or use a much more detailed, but at the same time much more labor-intensive data – terrestrial LiDAR.
+A gap persists in solutions that would consistently work in dense mixed forests.
+At the same time, results that show how fusion of LiDAR with other data sources consistently improves the results.
