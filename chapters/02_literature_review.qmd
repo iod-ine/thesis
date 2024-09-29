@@ -31,7 +31,14 @@ The reader is assumed to be familiar with general concepts of machine learning a
 For an introduction or a refresher, one of the best resources is @goodfellowDeepLearning2016.
 For a more detailed exploration, @wangRecentAdvancesDeep2020 offer a selection of papers on topics relevant to modern deep learning techniques.
 As point clouds are a less well-known modality in machine learning and deep learning, the reader is also referred to @belloReviewDeepLearning2020 and @guoDeepLearning3D2021, offering detailed reviews of the deep learning approaches used in various problems related to processing point clouds.
+@fig-deep-learnin-on-point-clouds is a high-level taxonomy of these approaches.
 The section is focused on providing a very short overview of these topics as it relates to the framework that is the focus of the thesis.
+
+::: {#fig-deep-learnin-on-point-clouds}
+![](../images/deep_learning_on_point_clouds.png)
+
+A high-level taxonomy of deep learning approaches for point clouds. Figure from @belloReviewDeepLearning2020
+:::
 
 Classic machine learning approaches rely on manual feature preparation.
 Two main groups of tasks are per-point predictions, which is in many ways similar to the task of semantic segmentation of images, that requires per-point features, and per-cloud predictions that either process entire point clouds or individual segments, separated be some preprocessing routine.
@@ -46,7 +53,7 @@ Simpler features include various statistics describing height and reflection int
 @ozdemirDeepLearningFramework2021 proposes a framework for semantic segmentation of photogrammetric point clouds in urban environments, the key components of which are voxel-grid filtering-based downsampling for equalizing the point density across the cloud, manual addition of geometric features in a fixed number of neighbors neighborhood, and processing the result with a convolutional network for assigning labels to each point, followed by a post-processing step to upscale the labels back to original point cloud size.
 
 The first deep learning model to work directly work on point clouds without constructing any intermediate representation that can be processed by convolutional models is the PointNet introduced by @qiPointNet2017.
-@fig-pointnet-architecture shows it's architecture.
+@fig-pointnet-architecture shows its architecture.
 A very important aspect of any model that aims to operate directly on point clouds is permutation invariance, as point clouds are unordered sets, and shuffling the points does not change it.
 PointNet achieves that invariance by using a combination of shared multilayer perceptrons (MLP) to process point coordinates and features and max pooling for construction of global feature vector.
 That feature vector can then be used directly for point cloud classification tasks, or concatenated with point features for and processed further by shared MLPs for per-point predictions.
@@ -134,7 +141,7 @@ Still, they are very popular and achieve outstanding results in many environment
 @weinsteinDeepForestPythonPackage2020 introduces a Python package for training and inference of ecological object detection neural networks in airborne imagery.
 It uses a convolutional object detection network described in @weinsteinIndividualTreeCrownDetection2019 to predict bounding boxes for individual trees.
 The data the model is trained on is not as dense as the forests that are the target of this thesis.
-Moreover, the model requires fine-tuning to be applicable to new data, which greatly limits its applicability, since developing bounding box annotations for individual trees within dense forests is an extremely tedious and labor intensive task.
+Moreover, the model requires fine-tuning to be applicable to new data, which greatly limits its applicability, since developing bounding box annotations for individual trees within dense forests is an extremely tedious and labor-intensive task.
 
 @lassalleDeepLearningbasedIndividual2022 use high-resolution satellite imagery to delineate individual tree crowns in mangrove forests by using DeepLabv3+-based Multi-Task Encoder-Decoder network (MT-EDv3) originally proposed by @larosaMultitaskFullyConvolutional2021 to predict for each pixel the distance to the tree crown border.
 This distance map is then enhanced by applying the Laplacian over Gaussian filter, and finally the watershed segmentation algorithm is applied to delineate individual crowns.
@@ -165,8 +172,8 @@ The software takes in a raw point cloud, performs all required preprocessing ste
 @allenTreeSpeciesClassification2022 describe an approach for classifying terrestrial LiDAR point clouds of individual trees extracted by `treeseg` using multi-view representation based on @goyalRevisitingPointCloud2021 and a convolutional ResNet network [@heDeepResidualLearning2016].
 They report high classification accuracies both overall and per-species on a dataset of almost 2500 individual trees.
 
-@wilkesTLS2treesScalableTree2023 introduce `TLS2trees`, another automated framework for segmentation of individual trees in terrestrial LiDAR point clouds consisting of a set of Python command line tools.
-The framework consist of three steps: preprocessing, semantic segmentation, and instance segmentation into a set of individual trees.
+@wilkesTLS2treesScalableTree2023 introduce `TLS2trees`, another automated framework for segmentation of individual trees in terrestrial LiDAR point clouds, consisting of a set of Python command line tools.
+The framework consists of three steps: preprocessing, semantic segmentation, and instance segmentation into a set of individual trees.
 After that, a set of attributes are computed for each tree.
 The software is designed to be horizontally scalable (meaning it's easy to speed up calculations by using more machines doing them in parallel, as opposed to vertically, meaning by increasing the computational resources available to a single machine) to address huge datasets produced during terrestrial laser scanning surveys.
 
@@ -229,5 +236,7 @@ The results show an improvement of 18.5% in accuracy when using fusion of LiDAR 
 
 ## Summary
 
-...
-
+There is a lot of research going on at the moment on individual tree-level inventories in UAV remote sensing data.
+Most results that can be considered successful are either in more mild environments, such as urban or managed forests, or use a much more detailed, but at the same time much more labor-intensive data – terrestrial LiDAR.
+A gap persists in solutions that would consistently work in dense mixed forests.
+At the same time, results that show how fusion of LiDAR with other data sources consistently improves the results.
