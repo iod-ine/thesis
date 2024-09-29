@@ -1,17 +1,48 @@
 \chapter{Conclusion}\label{cap:conclusion}
 
 \epigraphhead[50]{%
-    \epigraph{"A PhD research project is an academic exercise of given effort and length." }{Dr. Ron Anderson, PhD adviser of my PhD adviser, prof. Clement Fortin}
+    \epigraph{"A PhD research project is an academic exercise of given effort and length." }{Dr. Ron Anderson, PhD adviser of prof. Clement Fortin}
 }
 
-This is a rough draft, and the Conclusion chapter is not ready yet. I sincerely apologize for the state of the document and promise to send you an updated version by start of day Monday, October 30.
+This thesis is dedicated to designing, implementing, and testing of a framework for estimating forest parameters at the scale of individual trees.
+The proposed framework relies on fusion of UAV LiDAR point clouds and RGB orthophotos data, deep neural networks designed for processing 3D points clouds to segment the data into individual trees, and a collection of parameter-specific classic machine learning models to process the segmented trees and predict forest parameters of interest.
+An end-to-end implementation is described in detail, with parts of the system evaluated separately, and the overall system validated on a detailed manual field inventory dataset.
+The main contributions of this thesis are thus the design, implementation, and experimental verification of said framework.
+Moreover, during the work on the thesis, both original datasets used for training the models were published into open access, to hopefully be useful to the research community with a rapidly growing interest in detailed digital forest inventories \citep{dubrovinExplorationPropertiesPoint2024, dubrovinOpenDatasetIndividual2024}.
 
-Briefly recap what was done.
+The reported experimental results achieved by the implemented system are by no means state of the art, but they do serve as a proof of concept.
+The current state of the system, described in the previous chapter, can be seen as a baseline, since it prioritizes simple components to show that the overall system has potential.
+And I believe the resulting framework has potential, with specific steps I would try if I had unlimited time, listed in the next section.
 
-Potential further improvements:
+\section{Potential further improvements}
 
-- more advanced architectures (point transformers maybe)
-- more advanced feature extraction techniques for orthophotos (based on CNNs)
-- more sophisticated sampling for trees to fill patches and more sophisticated placing algorithms that more closely mimic real dense forests
+I see numerous ways to potentially improve the results of the proposed system.
+Some of the most important are as follows:
 
-The main contribution of  this thesis is the design and experimental verification of a novel framework for detecting and describing individual trees in dense mixed forests.
+\begin{itemize}
+\item Use of more advanced tree segmentation network architectures.
+  As mentioned, the PointNet++ is a pioneering model in the field of deep learning on 3D point clouds that was chosen because it is relatively easy to implement and work with.
+  It is still competitive in many tasks, but the field of deep learning is evolving rapidly, and many more powerful architectures were suggested and proven since its release.
+  The framework will definitely benefit from a better, more efficient tree segmentation network.
+\item Use of more advanced feature extraction for RGB orthophoto-based features.
+  For the same reason the PointNet++ was chosen as a baseline for tree segmentation, a very basic approach was used to extract features from RGB orthophotos.
+  Despite being better than just RGB colors, these features still offer very limited representation power.
+  Instead, convolutional neural networks specialized in creating good representations for downstream tasks can be used.
+\item Use of open-access datasets for pretraining.
+  At its current state, the tree segmentation network learns to perform a very hard task from scratch on a dataset of a very limited size.
+  I believe it can benefit from first training on similar, but larger dataset, for example, the NeonTreeEvaluation Benchmark [@weinsteinDataNeonTreeEvaluationBenchmark2022].
+  It is briefly described in the comparison subsection of the Lysva field inventory section.
+  The bounding boxes from the orthophoto can be used to label the point cloud for tree segmentation.
+  The labels will be noisy, but pretraining on a large amount of noisy data often shows good results.
+\item Use of more sophisticated techniques for creating synthetic forest patches.
+  Both the sampling of the trees and the placement onto the patch can be improved.
+  For example, sampling can take into consideration the species of the trees, to make the patches more realistic: some fully coniferous, some fully deciduous, some mixed.
+  Placing of the trees can use packing algorithms, or try to mimic the spatial distribution of trees in the inventory.
+\item Use of more sophisticated augmentations to make the synthetic forest patches look as close as possible to real forest patches.
+  For example, the height-depended dropout can be improved to take into account canopy density and overlap.
+  A shorter tree almost completely covered from above by a larger tree should have fewer points overall, not just at low heights relative to its highest point.
+\end{itemize}
+
+\section{Concluding thoughts}
+
+Work in progress
