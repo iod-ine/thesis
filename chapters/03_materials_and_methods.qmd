@@ -52,11 +52,23 @@ $$
 F_1\text{-score} = 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}
 $$
 
+Another commonly used metric to evaluate the results of tree detection approaches is the average distance between a detected and a ground truth tree.
+This metric, however, has limitations that are important to keep in mind when analyzing the results.
+The first important limitation is that its value is limited in how low it can get by the difference in nature of the compared detections and ground truth field inventory.
+During the inventory, the trees' coordinates are recorded at their trunks, approximately at breast height, which is almost at the ground level compared to the height of the trees.
+The detections, on the other hand, happen with the perspective from above, and correspond to tree tops.
+Planar distance between the bottom of the trunk and the top of the canopy can be significant, especially if trees are even slightly tilted, or for broadleaf species with wide and irregular canopies, or both.
+So the average distance between predicted trees and their ground truth counterparts will rarely be zero, even for a perfect detection system.
+The other limitation it that that distance is also limited from above by the parameters used for the matching algorithm.
+As mentioned, one of the parameters is the maximum distance allowed between a candidate and an actual tree to consider them a match.
+Thus, the average distance metric is limited from both directions, but in ways that are not immediately obvious.
+I do calculate and report it in the results section, but the reader is advised to keep the limitations in mind.
+
 ## Application of the framework
 
 The framework is applied in two steps.
 First, the tree segmentation network is applied in a sliding window of the same size that was used for patch generation during its training, with overlap to be able to combine the results into a single prediction.
 The continuous prediction of the regression model are rounded to get the integer labels for every point.
 The results are merged to create a single point cloud, and a postprocessing routine aimed to transform per-window tree IDs to global tree IDs is run.
-It traces the overlapping points to find the labels that need to be updated in the later window, and adds a number larger than there could be trees within a patch of that size to predictions with remaining labels of the later window.
-Second, the segments identified by predicted integer labels are extracted, selected feature sets are calculated for each one, each one is passed through the collection of attribute prediction models to get per-tree predictions.
+It traces the overlapping points to find the labels that need to be updated in the later window, and adds a large number to predictions with remaining labels in the later window.
+Second, the segments identified by predicted integer labels are extracted, selected feature sets are calculated for each one, and each one is passed through the collection of attribute prediction models to get per-tree predictions.
