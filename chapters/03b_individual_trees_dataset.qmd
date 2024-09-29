@@ -1,6 +1,6 @@
 ## Individual tree point clouds dataset {#sec-individual-trees-dataset}
 
-The main dataset used for training the models is a collection of point clouds of individual trees, referred to in this text as tree clouds, extracted manually from larger UAV LiDAR point clouds.
+The main dataset used for training the models is a collection of point clouds of individual trees, sometimes referred to in this text as tree clouds, extracted manually from larger UAV LiDAR point clouds.
 The dataset is released into open access, and was originally presented in [@dubrovinExplorationPropertiesPoint2024], although it has been expanded since and now contains twice as many individual trees.
 It consists of 394 trees, 192 of which are extracted from the previously described Lysva survey, and 202 from other surveys in Perm Krai.
 The distinction between the parts is important because the Lysva dataset has RGB orthophoto coverage, making it possible to infuse the tree clouds with orthophoto-based features.

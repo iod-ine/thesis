@@ -82,7 +82,6 @@ Each individual node is described in detail in @sec-materials-and-methods.
 The schematic representation of the framework in the preparation stage.
 :::
 
-
 ## Thesis structure
 
 The thesis consists of 5 chapters.
@@ -96,7 +95,7 @@ It also provides the links to the original datasets and the code.
 Its main goals are to provide the reader with context for the research described in the thesis, provide references for in-depth materials on topics that are out of scope of this work, and to highlight the research gap that the work tries to address.
 
 @sec-materials-and-methods describes in detail the datasets, methods and methodological choices used in the proposed framework.
-It's aim it to make the work reproducible and to explain the methodological choices made.
+Its aim it to make the work reproducible and to explain the methodological choices made.
 
 @sec-results describes the results of each stage of the framework preparation and the validation approach used to verify its applicability and effectiveness on realistic data.
 

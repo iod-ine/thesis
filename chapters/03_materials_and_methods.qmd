@@ -14,7 +14,7 @@ The code of the project on my GitHub might be a helpful addition for that.
 
 {{< include 03e_training_segment_processors.qmd >}}
 
-## Matching detections to field inventory ground truth
+## Matching detections to field inventory ground truth {#sec-matching-algorithm}
 
 To evaluate the results of any tree detection system against field inventory data, an automated and deterministic method for matching detected tree candidates to the ground truth trees is needed.
 It should determine which ground truth trees, if any, the detected candidates correspond to.
