@@ -15,7 +15,7 @@ The model has 30 million trainable parameters.
 It's a well established practice to scale the inputs to neural networks that is known to improve the speed and accuracy of gradient descent convergence [@bishop2006pattern].
 Before going through the network, a set of augmentations and transformations is applied to each synthetic forest patch.
 The augmentations are described in detail with visualized examples in @sec-augmentations.
-The transformations include scale and feature normalization – the coordinates are centered and normalized to the interval $(-1, 1)$ and the features are normalized to sum up to 1.
+The transformations include scale and feature normalization – the coordinates are centered and normalized to the interval $(-1, 1)$ and the features are normalized to the interval $(-1, 1)$.
 
 ### Data augmentation {#sec-augmentations}
 
