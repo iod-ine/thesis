@@ -12,7 +12,8 @@ The study area is located in Perm Krai, Russia, 86 kilometers to the east of Per
 The dataset consists of a field inventory of 3600 trees across 10 rectangular ground plots 100 meters in lengths and 50 meters in width fully covered by a UAV LiDAR and RGB orthophoto surveys.
 Figure~\ref{fig-lysva-roi} shows the locations of the ground plots over the full size RGB orthophoto and a visualization of the field inventory for a single plot on top of the LiDAR point cloud.
 Colored points represent trees, with different colors mapping to different species.
-The point cloud is visualized as a 2D scatter plot with points colored by height (darker points are lower, brighter points are higher).
+The point cloud is visualized as a 2D scatter plot with points colored by height (darker points are lower, brighter points are higher, and points are unsorted – some lower points end up over higher ones).
+The baseline is a simple one-pass local maxima filter applied directly on the point cloud with a fixed window size.
 
 \begin{figure}
 \centering{
@@ -26,8 +27,9 @@ cutouts of the orthophoto come with the dataset, along with LiDAR point
 clouds. \textbf{Right}: A close up of plot number 4. Each colored point
 represents a single tree of a different species, on top of a point cloud
 colored by the value of the height of each point (lower points are dark,
-higher points are bright) and the same orthophoto. Figure reused from
-(Dubrovin and Fortin 2024).}
+higher points are bright) and the same orthophoto.
+Note that the points of the point cloud are unsorted, and some lower points overlap higher points.
+Figure reused from \citet{dubrovinOpenDatasetIndividual2024}}.
 \end{figure}
 
 
@@ -41,27 +43,22 @@ Approximately 20\% of the trees have height data measured during the inventory, 
 \begin{longtable}[]{@{}lllllllllll@{}}
 
 \caption{\label{tbl-inventory-example}Example of data in the field
-inventory table. Each row is a recorded tree.}
+inventory table. Each row is a recorded tree and is represented by a point un UTM 40N coordinate reference system (EPSG:32640). Coordinates are not shown.}
 
 \tabularnewline
 
 \toprule\noalign{}
-plot & tree\_no & species & d1 & d2 & dbh & age & height & angle &
-comment & geometry \\
+Plot & Tree ID & Species & $d_1$ & $d_2$ & dbh & Age & Height & Angle &
+Comment \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-7.0 & 111.0 & Birch & 23.0 & 23.0 & 23.00 & NaN & NaN & 0.0 & None &
-POINT (545784.419 6449359.132) \\
-5.0 & 136.0 & Fir & 23.5 & 23.0 & 23.25 & 90.0 & 17.5 & 0.0 & Rotten &
-POINT (545721.242 6449901.051) \\
-3.0 & 119.0 & Aspen & 36.1 & 42.1 & 39.10 & 89.0 & 25.5 & 0.0 & None &
-POINT (546630.326 6450158.241) \\
-9.0 & 345.0 & Spruce & 19.7 & 22.0 & 20.85 & NaN & 15.9 & 0.0 & None &
-POINT (546201.645 6449118.199) \\
-6.0 & 267.0 & Spruce & 12.9 & 12.9 & 12.90 & NaN & NaN & 0.0 & None &
-POINT (545568.842 6449407.13) \\
+7.0 & 111.0 & Birch & 23.0 & 23.0 & 23.00 & NaN & NaN & 0.0 & None \\
+5.0 & 136.0 & Fir & 23.5 & 23.0 & 23.25 & 90.0 & 17.5 & 0.0 & Rotten \\
+3.0 & 119.0 & Aspen & 36.1 & 42.1 & 39.10 & 89.0 & 25.5 & 0.0 & None \\
+9.0 & 345.0 & Spruce & 19.7 & 22.0 & 20.85 & NaN & 15.9 & 0.0 & None \\
+6.0 & 267.0 & Spruce & 12.9 & 12.9 & 12.90 & NaN & NaN & 0.0 & None \\
 
 \end{longtable}
 
@@ -72,8 +69,8 @@ POINT (545568.842 6449407.13) \\
 \caption{\label{fig-lysva-species-distribution}Distribution of species
 in the Lysva field inventory dataset. The dominant species is spruce,
 but overall the split between coniferous and decidious species is even:
-there are 1807 coniferous and 1793 deciduous trees. Figure reused from
-(Dubrovin and Fortin 2024).}
+there are 1807 coniferous and 1793 deciduous trees.
+Figure reused from \citet{dubrovinOpenDatasetIndividual2024}}.
 \end{figure}
 
 The LiDAR sensor used for the survey is AGM-MS3 produced by AGM Systems.
@@ -119,9 +116,9 @@ plot 10.}
 \end{figure}
 
 Table~\ref{tbl-lysva-plot-stats} shows some descriptive statistics for each plot in the field inventory: the number of trees in the plot, average LiDAR point density in points per square meter, and dominant species type.
-The overall average point density is 37 points per square meters.
+The overall average point density is 37 points per square meter¡.
 Exactly half of the plots are predominantly coniferous and half are predominantly deciduous.
-Figure~\ref{fig-lysva-canopy-structure} shows two of point clouds clipped by plot bounds in 3D, highlighting the differences in canopy structure complexity between predominantly deciduous and coniferous plots.
+Figure~\ref{fig-lysva-canopy-structure} shows two point clouds clipped by plot bounds in 3D, highlighting the differences in canopy structure complexity between predominantly deciduous and coniferous plots.
 The figure highlights that the forest is indeed dense and mixed, with non-uniform, complex canopy structure.
 
 \begin{table}
@@ -358,12 +355,12 @@ left}: Edges feature. \textbf{Bottom right}: Texture feature.}
 
 \section{Training tree segmentation neural networks}
 
-The architecture chosen to serve as the tree segmentation network is the PointNet++ \cite{qiPointNetPlusPlus2017}, described in detail in Section~\ref{sec-ml-dl}.
+The architecture chosen to serve as the tree segmentation network is the PointNet++ \citep{qiPointNetPlusPlus2017}, described in detail in Section~\ref{sec-ml-dl}.
 It is a relatively simple architecture, and further potential quality improvements might be achieved by using more modern and advanced architectures instead.
 However, the main goal of this thesis was to develop and verify an overall framework, and thus the choice was set on a model that is simple to implement and work with to allow easy experimentation with other parts of the proposed system.
 
-The architecture of the used PointNet++ is similar to the segmentation architecture shown in @fig-pointnet2-architecture.
-The main differences are the use of one more stacked set abstraction layer to make the network deeper, and the use of a regression head that predicts a continuous value for each point instead of a classification head that predicts per-point class scores, since the model needs to assign a unique ID to every tree in the patch.
+The architecture of the used PointNet++ is similar to the segmentation architecture shown in Figure~\ref{fig-pointnet2-architecture}.
+The main differences from the shown architecture are the use of one more stacked set abstraction layer to make the network deeper, and the use of a regression head that predicts a continuous value for each point instead of a classification head that predicts per-point class scores, since the model needs to assign a unique ID to every tree in the patch.
 The three stacked set abstraction layers have the proportions of points sampled set to 0.75, 0.5, and 0.5, and neighborhood radii for feature aggregation set to 0.1, 0.2, and 0.4.
 Note that the scale of the input is normalized (see next subsection for details), so the radii are not in meters.
 The model has 30 million trainable parameters.
@@ -372,8 +369,8 @@ The model has 30 million trainable parameters.
 
 It's a well established practice to scale the inputs to neural networks that is known to improve the speed and accuracy of gradient descent convergence \cite{bishop2006pattern}.
 Before going through the network, a set of augmentations and transformations is applied to each synthetic forest patch.
-The augmentations are described in detail with visualized examples in @sec-augmentations.
-The transformations include scale and feature normalization – the coordinates are centered and normalized to the interval $(-1, 1)$ and the features are normalized to the interval $(-1, 1)$.j
+The augmentations are described in detail with visualized examples in Section~\ref{sec-augmentations}.
+The transformations include scale and feature normalization – the coordinates are centered and normalized to the interval $(-1, 1)$ and the features are normalized to the interval $(-1, 1)$.
 
 \subsection{Data augmentation}\label{sec-augmentations}
 
