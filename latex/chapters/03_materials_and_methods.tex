@@ -19,7 +19,7 @@ The baseline is a simple one-pass local maxima filter applied directly on the po
 \centering{
 \includegraphics[width=\textwidth]{../images/lysva_roi.jpg}
 }
-\caption{\label{fig-lysva-roi}The study region for the Lysva field
+\caption[The study region for the Lysva field inventory.]{\label{fig-lysva-roi}The study region for the Lysva field
 inventory dataset. \textbf{Left}: The locations of field survey plot
 boundaries on a full-size RGB orthophoto. Each plot is a 50 by 100 meter
 rectangle, with every tree within measured and recorded. Buffered
@@ -42,7 +42,7 @@ Approximately 20\% of the trees have height data measured during the inventory, 
 
 \begin{longtable}[]{@{}lllllllllll@{}}
 
-\caption{\label{tbl-inventory-example}Example of data in the field
+\caption[Example of data in the field inventory table.]{\label{tbl-inventory-example}Example of data in the field
 inventory table. Each row is a recorded tree and is represented by a point un UTM 40N coordinate reference system (EPSG:32640). Coordinates are not shown.}
 
 \tabularnewline
@@ -66,7 +66,7 @@ Comment \\
 \centering{
 \includegraphics[width=\textwidth]{../images/03a_lysva_dataset-fig-lysva-species-distribution-output-1.png}
 }
-\caption{\label{fig-lysva-species-distribution}Distribution of species
+\caption[Distribution of species in the Lysva field inventory dataset]{\label{fig-lysva-species-distribution}Distribution of species
 in the Lysva field inventory dataset. The dominant species is spruce,
 but overall the split between coniferous and decidious species is even:
 there are 1807 coniferous and 1793 deciduous trees.
@@ -147,7 +147,7 @@ Plot & Tree count & Point density & Dominant type \\
 \centering{
 \includegraphics[width=\textwidth]{../images/03a_lysva_dataset-fig-lysva-canopy-structure-output-1.png}
 }
-\caption{\label{fig-lysva-canopy-structure}3D visualizations of point
+\caption[Comparison of canopy structure in 3D point clouds.]{\label{fig-lysva-canopy-structure}3D visualizations of point
 clouds from plot 1 (predominantly deciduous) and plot 6 (predominantly
 coniferous). Note the difference in the canopy structure: it is
 relatively easy to tell confifiers apart visually, while deciduous
@@ -229,7 +229,7 @@ Willows are skipped intentionally, since they are of little interest in terms of
 \centering{
 \includegraphics[width=\textwidth]{../images/03b_individual_trees-fig-individual-trees-species-distribution-output-1.png}
 }
-\caption{\label{fig-individual-trees-species-distribution}Distribution
+\caption[Distribution of tree species in the individual trees dataset]{\label{fig-individual-trees-species-distribution}Distribution
 of tree species in the individual trees dataset. It contains 394 point
 clouds of individual trees: 201 coniferous and 193 deciduous. Note the
 presence of pine trees, as there are no pine trees in the Lysva field
@@ -256,7 +256,7 @@ of random trees of every species (ignoring the Y dimension).}
 }
 \subcaption{\label{fig-individual-trees-visualization-2}A spruce in 3D.}
 \end{minipage}
-\caption{\label{fig-individual-trees-visualization}Visualizations of the
+\caption[Visualizations of the individual tree point clouds in the dataset.]{\label{fig-individual-trees-visualization}Visualizations of the
 individual tree point clouds in the dataset. Most of the tree clouds are
 top-heavy because of the observation from above, and some are
 artificially tilted because of slight terrain slopes and height
@@ -307,8 +307,7 @@ For comparison, a patch of the same size from a real point cloud over one of the
 \centering{
 \includegraphics[width=\textwidth]{../images/03c_synthetic_forest-fig-lysva-plot-window-example-output-1.png}
 }
-\caption[Visualisation of a synthetic forest patch used for
-training]{\label{fig-lysva-plot-window-example}A piece of the Lysva
+\caption[Visualisation of a patch of a real forest.]{\label{fig-lysva-plot-window-example}A piece of the Lysva
 LiDAR point cloud over plot 10 in within a 20 by 20 meter window.
 \textbf{Top:} Top-down view. \textbf{Bottom:} The same patch in 3D view.
 \textbf{Left:} Points colored by height. \textbf{Right:} Points colored
@@ -397,7 +396,7 @@ For the final tree segmentation model, the range is set to $[-180, 180]$ degrees
 \centering{
 \includegraphics[width=\textwidth]{../images/03d_augmentations-fig-random-rotate-effect-output-1.png}
 }
-\caption{\label{fig-random-rotate-effect}Visualization of the random
+\caption[Visualization of the random rotation around Z axis augmentation on a single aspen tree.]{\label{fig-random-rotate-effect}Visualization of the random
 rotation around Z axis augmentation on a single aspen tree. The effect
 is forced to happen with full amplitude for visualization purposes,
 during training a rotation angle is uniformly sampled from a set range.}
@@ -415,7 +414,7 @@ For the final tree segmentation model, the range is set to $[0.8, 1.2]$.
 \centering{
 \includegraphics[width=\textwidth]{../images/03d_augmentations-fig-random-scale-effect-output-1.png}
 }
-\caption{\label{fig-random-scale-effect}Visualization of the random
+\caption[Visualization of the random scale augmentation on a single aspen tree.]{\label{fig-random-scale-effect}Visualization of the random
 scale augmentation on a single aspen tree. The effect is forced to
 happen with full amplitude for visualization purposes, during training a
 scale factor is uniformly sampled from a set range.}
@@ -437,7 +436,7 @@ For the final tree segmentation model, the maximum translation is set to 30 cent
 \centering{
 \includegraphics[width=\textwidth]{../images/03d_augmentations-fig-random-jitter-effect-output-1.png}
 }
-\caption{\label{fig-random-jitter-effect}Visualization of the random
+\caption[Visualization of the random jitter augmentation on a single aspen tree.]{\label{fig-random-jitter-effect}Visualization of the random
 jitter augmentation on a single aspen tree. The translation magnitude is
 uniformly sampled from a set range for every point.}
 \end{figure}
@@ -463,7 +462,7 @@ Figure~\ref{fig-height-dropout} shows an example of applying such dropout functi
 \centering{
 \includegraphics[width=\textwidth]{../images/03d_augmentations-fig-height-dropout-output-1.png}
 }
-\caption{\label{fig-height-dropout}Effect of the height-dependent
+\caption[Effect of the height-dependent modified sigmoid dropout on a single aspen tree.]{\label{fig-height-dropout}Effect of the height-dependent
 modified sigmoid dropout on a single aspen tree. Scale is set to 8,
 shift is set to 3. \textbf{a)} A single aspen tree with points colored
 by height. \textbf{b)} Height-dependent probability of dropout (a
@@ -477,7 +476,7 @@ appleid with point colored by height.}
 \centering{
 \includegraphics[width=\textwidth]{../images/03d_augmentations-fig-height-dropout-aggressive-output-1.png}
 }
-\caption{\label{fig-height-dropout-aggressive}Same as
+\caption[Effect of a stronger height-dependent modified sigmoid dropout on a single aspen tree.]{\label{fig-height-dropout-aggressive}Same as
 Figure~\ref{fig-height-dropout}, but with a more aggressive dropout
 threshold function. Scale is set to 18, shift is set to 2.5.}
 \end{figure}
@@ -551,7 +550,7 @@ Note the presence of ground points, which are filtered out before calculating fe
 \includegraphics[width=\textwidth]{../images/fig-feature-ranges-output-1.png}
 \includegraphics[width=\textwidth]{../images/fig-feature-ranges-output-2.png}
 }
-\caption{\label{fig-feature-ranges}Visualizations of how values of
+\caption[Visualizations of tree shapes at different ends of feature value ranges.]{\label{fig-feature-ranges}Visualizations of how values of
 commonly used features calculated for the whole tree cloud map to the
 shapes of individual trees. \textbf{Top}: Effect of the shape of spruce
 on omnivariance. \textbf{Bottom}: Effect of on the shape of aspen on
