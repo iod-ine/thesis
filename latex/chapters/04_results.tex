@@ -14,7 +14,7 @@ The accuracy of the model on the figures is 33.6\%, and it is around the best ac
 \centering{
 \includegraphics[width=\textwidth]{../images/example_prediction_2d.png}
 }
-\caption{\label{fig-example-prediction-2d}A top-down view of an example
+\caption[A top-down view of an example prediction of the tree segmentation PointNet++.]{\label{fig-example-prediction-2d}A top-down view of an example
 prediction of the tree segmentation PointNet++ on a sample from the
 validation dataset. \textbf{Left:} Points colored by label -- tree ID
 within the patch. \textbf{Middle:} Points colored by the raw prediction
@@ -27,7 +27,7 @@ every point). \textbf{Right:} Points colored by the rounded prediction
 \centering{
 \includegraphics[width=\textwidth]{../images/example_prediction_3d.png}
 }
-\caption{\label{fig-example-prediction-3d}A 3D view of an example
+\caption[A 3D view of an example prediction of the tree segmentation PointNet++.]{\label{fig-example-prediction-3d}A 3D view of an example
 prediction of the tree segmentation PointNet++ on a sample from the
 validation dataset. \textbf{Left:} Points colored by label -- tree ID
 within the patch. \textbf{Middle:} Points colored by the raw prediction
@@ -56,7 +56,7 @@ The model is overall relatively consistent across all ten folds, showing that th
 \centering{
 \includegraphics[width=\textwidth]{../images/train-tree-models-fig-cv-clf-output-1.png}
 }
-\caption{\label{fig-cv-clf}10-fold cross-validation results of the
+\caption[Cross-validation results of the species classification Random Forest model]{\label{fig-cv-clf}10-fold cross-validation results of the
 species classification Random Forest model. The average accuracy is 0.71
 with a standard deviation of 0.06. The average macro F-score is 0.70
 with a standard deviation of 0.07. The model is overall stable across
@@ -75,7 +75,7 @@ The overall accuracy in the holdout set is 61\%.
 \centering{
 \includegraphics[width=\textwidth]{../images/train-tree-models-fig-clf-confusion-matrix-output-1.png}
 }
-\caption{\label{fig-clf-confusion-matrix}Confusion matrix for the tree
+\caption[Confusion matrix for the tree species classification Random Forest.]{\label{fig-clf-confusion-matrix}Confusion matrix for the tree
 species classification Random Forest. Calulated on the 40\% holdout set
 of 158 examples. Values normalized by row. The model confuses deciduous
 species a lot more than coniferous ones.}
@@ -95,7 +95,7 @@ This drops the average $R^2$ to 0.53 with a standard deviation of 0.24.
 \centering{
 \includegraphics[width=\textwidth]{../images/train-tree-models-fig-cv-reg-output-1.png}
 }
-\caption{\label{fig-cv-reg}10-fold cross-validation results of the dbh
+\caption[Cross-validation results of the dbh regression Random Forest model.]{\label{fig-cv-reg}10-fold cross-validation results of the dbh
 regression Random Forest model. The average RMSE is 4.55 centimeters
 with a standard deviation of 0.19. The average MAE is 3.49 centimeters
 with a standard deviation of 0.38. The average coefficient of
@@ -124,7 +124,7 @@ The same lack of extreme can be observed.
 \centering{
 \includegraphics[width=\textwidth]{../images/train-tree-models-fig-reg-residuals-output-1.png}
 }
-\caption{\label{fig-reg-residuals}Quality assessment plots for the
+\caption[Quality assessment plots for the dbh regression Random Forest.]{\label{fig-reg-residuals}Quality assessment plots for the
 diameter at breast height regression Random Forest. Calculated on a 40\%
 holdout set of 68 examples. \textbf{Top Left:} Residual scatter plot:
 difference between the prediction and the true value vs.~the true value.
@@ -183,7 +183,7 @@ The overall macro $F_1$-score is 55.4\%.
 \centering{
 \includegraphics[width=\textwidth]{../images/lysva-confusion-matrix.png}
 }
-\caption{\label{fig-lysva-confusion-matrix}Confusion matrix for the tree
+\caption[Confusion matrix for the tree species classification on true positive detected trees]{\label{fig-lysva-confusion-matrix}Confusion matrix for the tree
 species classification on true positive detected trees in the Lysva
 field inventory plots.}
 \end{figure}
@@ -202,7 +202,7 @@ The overall coefficient of determination $R^2$ is 0.65.
 \centering{
 \includegraphics[width=\textwidth]{../images/lysva-regression-metrics.png}
 }
-\caption{\label{fig-lysva-regression-metrics}Regression quality
+\caption[Regression quality assessment plots plots for the dbh regression on true positive detected trees.]{\label{fig-lysva-regression-metrics}Regression quality
 assessment plots plots for the diameter at breast height regression on
 true positive detected trees in the Lysva field inventory plots.}
 \end{figure}
