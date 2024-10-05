@@ -6,7 +6,8 @@ The study area is located in Perm Krai, Russia, 86 kilometers to the east of Per
 The dataset consists of a field inventory of 3600 trees across 10 rectangular ground plots 100 meters in lengths and 50 meters in width fully covered by a UAV LiDAR and RGB orthophoto surveys.
 @fig-lysva-roi shows the locations of the ground plots over the full size RGB orthophoto and a visualization of the field inventory for a single plot on top of the LiDAR point cloud.
 Colored points represent trees, with different colors mapping to different species.
-The point cloud is visualized as a 2D scatter plot with points colored by height (darker points are lower, brighter points are higher).
+The point cloud is visualized as a 2D scatter plot with points colored by height (darker points are lower, brighter points are higher, and points are unsorted – some lower points end up over higher ones).
+The baseline is a simple one-pass local maxima filter applied directly on the point cloud with a fixed window size.
 
 ::: {#fig-lysva-roi}
 ![](../images/lysva_roi.jpg)
@@ -17,7 +18,8 @@ Each plot is a 50 by 100 meter rectangle, with every tree within measured and re
 Buffered cutouts of the orthophoto come with the dataset, along with LiDAR point clouds.
 **Right**: A close up of plot number 4.
 Each colored point represents a single tree of a different species, on top of a point cloud colored by the value of the height of each point (lower points are dark, higher points are bright) and the same orthophoto.
-Figure reused from [@dubrovinExplorationPropertiesPoint2024].
+Note that the points of the point cloud are unsorted, and some lower points overlap higher points.
+Figure reused from @dubrovinExplorationPropertiesPoint2024.
 :::
 
 The field inventory is a tabular dataset where every row represents a single tree.
@@ -51,9 +53,9 @@ The carrier UAV was configured to follow the terrain at 150 meter height using t
 {{< embed 03a_lysva_dataset.ipynb#fig-example-ortho >}}
 
 @tbl-lysva-plot-stats shows some descriptive statistics for each plot in the field inventory: the number of trees in the plot, average LiDAR point density in points per square meter, and dominant species type.
-The overall average point density is 37 points per square meters.
+The overall average point density is 37 points per square meter.
 Exactly half of the plots are predominantly coniferous and half are predominantly deciduous.
-@fig-lysva-canopy-structure shows two of point clouds clipped by plot bounds in 3D, highlighting the differences in canopy structure complexity between predominantly deciduous and coniferous plots.
+@fig-lysva-canopy-structure shows two point clouds clipped by plot bounds in 3D, highlighting the differences in canopy structure complexity between predominantly deciduous and coniferous plots.
 The figure highlights that the forest is indeed dense and mixed, with non-uniform, complex canopy structure.
 
 {{< embed 03a_lysva_dataset.ipynb#tbl-lysva-plot-stats >}}
