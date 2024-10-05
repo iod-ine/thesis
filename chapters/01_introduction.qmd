@@ -20,7 +20,7 @@ Some such applications are mentioned in the next chapter dedicated to reviewing 
 
 Many national space agencies even provide open access to satellite data that can be used for mapping forests.
 European Space Agency offers free and open access[^1] to the Sentinel missions, including C-band SAR data from Sentinel-1 and medium-resolution multispectral data from Sentinel-2, both with global coverage.
-They also have an upcoming P-band SAR mission called BIOMASS, designed specifically to study global forest biomass and carbon cycles [@queganEuropeanSpaceAgency2019], which further indicated the growing importance and interest in the topic of forest mapping.
+They also have an upcoming P-band SAR mission called BIOMASS, designed specifically to study global forest biomass and carbon cycles [@queganEuropeanSpaceAgency2019], which further indicates the growing importance and interest in the topic of forest mapping.
 NASA provides free access to an abundance of satellite data through its Earthdata platform, Landsat mission with the Operation Land Imager (OLI) instrument and Terra mission with Moderate Resolution Imaging Spectroradiometer (MODIS) instrument being the most relevant for forest mapping applications.
 The Indian Space Research Organisation, Brazilian National Institute for Space Research, National Space Research and Development Agency of Nigeria all offer free satellite data that can be used for this purpose.
 
@@ -31,15 +31,19 @@ It also offers no ability to control the observation parameters, as they are fix
 Higher resolution data with a limited ability to control the acquisition parameters is available commercially, but the prices are steep.
 Aerial observations with sensors mounted on planes or helicopters are both more controllable and cheaper alternatives, although still expensive and sill limited in the flexibility of the control of acquisition parameters.
 A much more affordable and controllable alternative is UAV-based observation.
-It allows for fine-grained control over many important parameters such as flight height, flight path overlap, combination of used sensors, and so on.
+It allows for fine-grained control and on the fly adjustment of many important parameters such as flight height, flight path overlap, combination of used sensors, and so on.
 
 The most common way to use UAV remote sensing, be it LiDAR, multispectral, hyperspectral, or other data modalities, for mapping forest attributes in industry is what is known in the LiDAR community as the area-based approach, described in detail in @sec-area-based-approach.
 It is based on extrapolating measurements from ground plots made in traditional inventories by aggregating remote sensing data to the grid with cell area of a ground plot, which results in coarse resolution maps.
-However, modern sensors and processing techniques allow not aggregating at all and instead working on the level of individual trees.
+It is easy to use, but its results are often not detailed enough when working on smaller scales.
+However, modern sensors and processing techniques allow not aggregating at all and instead working on the level of individual trees, which is as detailed as it can possibly get, allowing for any level of aggregation for downstream tasks.
 This requires robust algorithms that allow detecting individual trees in dense multimodal data.
-This is relatively easy in urban environments, manually planted and managed forest stands, or forests that are either sparse or predominantly coniferous, where the structure of the canopy is easy to interpret.
+This is relatively[^2] easy in urban environments, manually planted and managed forest stands, or forests that are either sparse or predominantly coniferous, where the structure of the canopy is easy to interpret.
+In some such environments state-of-the-art results can be achieved by simple local maxima detection algorithms, that rely on the assumption that a tree can be detected by finding peaks on of canopies because they correspond to tree tops.
 Forest that are mixed and dense, which are a huge part of forests in countries mentioned earlier, are much harder to work with and are a very active area of research for developing methods of detection of individual trees.
 The canopies in such forests are very complex, especially because the top of the crowns of deciduous tree species often don't have a single pronounced height maximum, and crowns of nearby trees often overlap.
+
+[^2]: The word relatively does a lot of heavy lifting here, as the problem is by no means easy on its own and takes a lot of effort from many researchers to continue to make progress on.
 
 The framework described in this thesis focuses on fusion of two remote sensing data sources, UAV LiDAR point clouds and UAV RGB orthophotos, to detect individual trees in dense mixed forests and predict required attributes for each tree individually, producing the most detailed maps possible.
 The choice of data sources is driven by their complementary nature, which I believe is key for semantically parsing such complex environments.
