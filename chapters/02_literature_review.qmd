@@ -9,7 +9,7 @@ Where appropriate, references for in-depth materials on topics that are out of s
 As was mentioned in the introduction, remote sensing is widely used for extending labor-intensive and time-consuming manual forest inventories.
 This section provides examples of various remote sensing techniques used in various forestry applications, before going in more detail into specifically UAV LiDAR and RGB, which are the focus of the described framework.
 
-@hansenAssessingForestNonForest2020 explore the usage of C-band SAR data from the Sentinel-1 mission for binary land use classification into fores/non-forest using a collection of classic machine learning classifiers.
+@hansenAssessingForestNonForest2020 explore the usage of C-band SAR data from the Sentinel-1 mission for binary land use classification into forest/non-forest using a collection of classic machine learning classifiers.
 They report accuracies from 80% in the worst case to the 93% in the best case, depending on the area of application.
 
 @ferrariFusingSentinel1Sentinel22023 use Fully Convolutional Networks [@longFullyConvolutionalNetworks2015] for fusion of multispectral Sentinel-2 and C-band SAR Sentinel-1 data for clear-cut logging detection in the presence of clouds, which limit the use of optical-only approaches and are very common in tropical areas.
@@ -32,6 +32,7 @@ For an introduction or a refresher, one of the best resources is @goodfellowDeep
 For a more detailed exploration, @wangRecentAdvancesDeep2020 offer a selection of papers on topics relevant to modern deep learning techniques.
 As point clouds are a less well-known modality in machine learning and deep learning, the reader is also referred to @belloReviewDeepLearning2020 and @guoDeepLearning3D2021, offering detailed reviews of the deep learning approaches used in various problems related to processing point clouds.
 @fig-deep-learnin-on-point-clouds is a high-level taxonomy of these approaches.
+Two main groups are structured grid-based, which rely on transformation of point clouds into regular structures that are then processed by 2D or 3D convolutional neural networks, and row point cloud based, which consume point clouds directly.
 The section is focused on providing a very short overview of these topics as it relates to the framework that is the focus of the thesis.
 
 ::: {#fig-deep-learnin-on-point-clouds}
@@ -40,23 +41,24 @@ The section is focused on providing a very short overview of these topics as it 
 A high-level taxonomy of deep learning approaches for point clouds. Figure from @belloReviewDeepLearning2020
 :::
 
-Classic machine learning approaches rely on manual feature preparation.
+Classic machine learning approaches rely on feature engineering: manual preparation of features used as inputs for models based on domain expertise and various feature selection techniques.
 Two main groups of tasks are per-point predictions, which is in many ways similar to the task of semantic segmentation of images, that requires per-point features, and per-cloud predictions that either process entire point clouds or individual segments, separated be some preprocessing routine.
-@weinmannFeatureRelevanceAssessment2013 show that careful selection of features is crucial for accurate and efficient interpretation of point cloud data.
+@weinmannFeatureRelevanceAssessment2013 show that careful selection of features is crucial for accurate and efficient semantic interpretation of point cloud data: a shotgun approach of using many simple features without much consideration results in worse performance than a surgical approach of using a few carefully selected ones.
 They also provide definitions of some of the most used manual features that aim to describe the 3D structure of point sets.
-The features are based on combinations of eigenvalues of a local covariance matrix of a set of points.
+The features are based on combinations of eigenvalues of local covariance matrices of coordinate vectors of a set of points.
 They can be calculated on a per-point basis by using fixed-size or nearest-neighbor neighborhoods, or for whole segments of point clouds.
 The used features were originally introduced by @westContextdrivenAutomatedTarget2004, @paulyEfficientSimplificationPointsampled2002, and @malletRelevanceAssessmentFullwaveform2011, and include linearity, planarity, and scatter, aiming to indicate the presence of a linear, planar, or volumetric structures, and also omnivariance, anisotropy, eigentropy, the sum of eigenvalues, and curvature.
 The formulas for the features are provided in @sec-training-tree-processors, where they are used for training parameter prediction models for segmented trees.
-Simpler features include various statistics describing height and reflection intensity distributions of points, like percentages of points above mean height, deciles of height, cumulative percentages of points below height deciles, and others.
+Simpler features, that are especially often used in area-based approach, include various statistics describing height and reflection intensity distributions of points, like percentages of points above mean height, deciles of height, cumulative percentages of points below height deciles, and others.
 
-@ozdemirDeepLearningFramework2021 proposes a framework for semantic segmentation of photogrammetric point clouds in urban environments, the key components of which are voxel-grid filtering-based downsampling for equalizing the point density across the cloud, manual addition of geometric features in a fixed number of neighbors neighborhood, and processing the result with a convolutional network for assigning labels to each point, followed by a post-processing step to upscale the labels back to original point cloud size.
+Non-uniform point densities often become a problem for both manual feature creation and representation learning as part of a deep learning model.
+@ozdemirDeepLearningFramework2021 proposes a framework for semantic segmentation of photogrammetric point clouds in urban environments, the key components of which are voxel-grid filtering-based downsampling for equalizing the point density across the cloud, manual addition of geometric features in a nearest-neighbor neighborhood, and processing the result with a convolutional network for assigning labels to each point, followed by a post-processing step to upscale the labels back to original point cloud size.
 
-The first deep learning model to work directly work on point clouds without constructing any intermediate representation that can be processed by convolutional models is the PointNet introduced by @qiPointNet2017.
+The first deep learning model to work directly on point clouds without constructing any intermediate representation that can be processed by convolutional models is the PointNet introduced by @qiPointNet2017.
 @fig-pointnet-architecture shows its architecture.
-A very important aspect of any model that aims to operate directly on point clouds is permutation invariance, as point clouds are unordered sets, and shuffling the points does not change it.
+A critical aspect of any model that aims to operate directly on point clouds is permutation invariance, as point clouds are unordered sets, and shuffling the points does not change the point cloud semantically.
 PointNet achieves that invariance by using a combination of shared multilayer perceptrons (MLP) to process point coordinates and features and max pooling for construction of global feature vector.
-That feature vector can then be used directly for point cloud classification tasks, or concatenated with point features for and processed further by shared MLPs for per-point predictions.
+That feature vector can then be used directly for point cloud classification tasks, or concatenated with point features and processed further by shared MLPs for per-point predictions.
 
 ::: {#fig-pointnet-architecture}
 ![](../images/pointnet_architecture.jpg)
@@ -65,9 +67,9 @@ PointNet architecture. Figure from @qiPointNet2017
 :::
 
 @qiPointNetPlusPlus2017 introduces PointNet++, aimed to address the main drawbacks of the original PointNet model, namely the use of only two scales for context encoding – per-point and global, which limits the ability of the model to respond to local structures and fine patterns and thus work in complex scenes.
-To address this, PointNet++ uses a hierarchical architecture that applies PointNet recursively on nested subsets of the original point set, allowing to learn features on multiple of increasing scales.
+To address this, PointNet++ uses a hierarchical architecture that applies PointNet recursively on nested subsets of the original point set, allowing to learn features on multiple increasing scales.
 To achieve that, network uses stacked set abstraction layers, that first sample a subset of the point cloud using farthest point sampling – an algorithm aimed to create representative subsets even for point clouds with uneven point density that selects the next point by maximizing its distance to already selected set – then constructs a neighborhood around each selected point using either fixed distance or fixed number of neighbors, and finally applies PointNet to each neighborhood to reduce into a feature vector for the sampled point.
-Then, similar to the original PointNet, the subset can be further reduced to a final global feature vector used for point clouds classification, or passed to an upscaling branch with skipped connections and k-nearest neighbors interpolation to extrapolate features to the original point cloud coordinates.
+Then, similar to the original PointNet, the subset can be further reduced to a final global feature vector used for point clouds classification, or passed to an upscaling branch with skip-connections and k-nearest neighbors interpolation to upscale the features to the original point cloud coordinates.
 The architecture is visualized in @fig-pointnet2-architecture.
 
 ::: {#fig-pointnet2-architecture}
@@ -107,11 +109,15 @@ This is why they are usually further aggregated to stand level.
 
 ### Examples of studies using ABA
 
+As mentioned, area-based approach is used widely both throughout industry and research.
+I have personally taken part in a couple of projects where it was used for mapping forest attributes on large scales.
+This subsection offers some examples of its continuing use in research.
+
 @bouvierGeneralizingPredictiveModels2015 suggest a set of 4 metrics they use to fit models for predicting timber volume, above ground biomass, and basal-area on stand level, instead of most commonly used metrics based on the distribution of height.
 Their metrics are aimed to capture different aspects of the canopy geometry.
 The authors argue that usage of a very limited set of carefully engineered diverse metrics results in improvement of model generalization ability without loss of accuracy.
 
-@zhangImprovedAreabasedApproach2023 use a modification of the area-based approach to predict plot-level diameter at breast height (dbh) by utilizing known allometric dependencies between tree height and dbh to limit size of the hypothesis set for fitting regression models.
+@zhangImprovedAreabasedApproach2023 use a modification of the area-based approach to predict plot-level diameter at breast height (dbh) by utilizing known allometric dependencies between tree height and dbh to limit the size of the hypothesis set for fitting regression models.
 They use airborne LiDAR measurements with an average density of 9.6 points per square meter and report a relative error of 11%.
 
 @vermeerLidarbasedNorwegianTree2023 use a U-Net [@ronnebergerUNetConvolutionalNetworks2015] image semantic segmentation model on LiDAR-derived 1-meter resolution digital terrain models and canopy height maps to predict the distribution of three main tree species in a Norwegian forest.
@@ -122,6 +128,9 @@ They use a set of 32 metrics derived from height distribution of points, an auto
 They report coefficients of determination of 0.85 and average errors around 83 tons per hectare.
 
 ## Individual tree-based approach {#sec-individual-tree-approach}
+
+With the constant improvement of accessibility and quality of high-resolution remote sensing data, there is a growing interest in the development of methods that operate on the scale of individual trees.
+This subsection gives an overview of some of the research in this area, split by the main data source.
 
 @liNewMethodSegmenting2012 developed a well performing algorithmic method for segmentation of individual tree crowns in LiDAR point clouds for coniferous forests that relies on the pointy shape characteristic of many coniferous species and segments the trees from top to bottom.
 
@@ -143,7 +152,7 @@ It uses a convolutional object detection network described in @weinsteinIndividu
 The data the model is trained on is not as dense as the forests that are the target of this thesis.
 Moreover, the model requires fine-tuning to be applicable to new data, which greatly limits its applicability, since developing bounding box annotations for individual trees within dense forests is an extremely tedious and labor-intensive task.
 
-@lassalleDeepLearningbasedIndividual2022 use high-resolution satellite imagery to delineate individual tree crowns in mangrove forests by using DeepLabv3+-based Multi-Task Encoder-Decoder network (MT-EDv3) originally proposed by @larosaMultitaskFullyConvolutional2021 to predict for each pixel the distance to the tree crown border.
+@lassalleDeepLearningbasedIndividual2022 use high-resolution satellite imagery to delineate individual tree crowns in mangrove forests by using DeepLabv3+-based Multi-Task Encoder-Decoder network (MT-EDv3), originally proposed by @larosaMultitaskFullyConvolutional2021, to predict for each pixel the distance to the tree crown border.
 This distance map is then enhanced by applying the Laplacian over Gaussian filter, and finally the watershed segmentation algorithm is applied to delineate individual crowns.
 The approach seems to rely on there being semi-clear separation between the tree crowns, which is rarely the case when the forests are dense and mixed.
 
@@ -164,7 +173,7 @@ Most importantly for the task of localizing individual trees, terrestrial measur
 Tree trunks are very useful for tree detection and segmentation, and there are many algorithms that use bottom-to-top approaches that trace the trunks into the canopies.
 
 @burtExtractingIndividualTrees2018 introduce `treeseg`, a software package written in C++ for extracting individual trees from LiDAR point clouds.
-Even though it is designed and presented as platform-agnostic methods made to operate on both terrestrial and UAV LiDAR point clouds, it relies on trunk detection, which is common for many methods based on terrestrial LiDAR and often is not applicable to UAV LiDAR data.
+Even though it is designed and presented as a platform-agnostic method made to operate on both terrestrial and UAV LiDAR point clouds, it relies on trunk detection, which is common for many methods based on terrestrial LiDAR and often is not applicable to UAV LiDAR data.
 
 @lopezserranoArtificialIntelligencebasedSoftware2022 introduce another software package called `AID-FOREST` for fully automatic processing of terrestrial LiDAR point clouds based on trunk detection.
 The software takes in a raw point cloud, performs all required preprocessing steps, and runs an object detection neural network on a series of horizontal slices to find cross-sections of trunks, and then processes the detection results from each level to track individual trees.
@@ -196,7 +205,7 @@ They show that for a moderately dense forest in France, it is possible to find t
 It is, however, clear that it requires great deal of manual adjustment, and visual inspection of the results of detection makes it clear that they are only locally consistent.
 Any change in the canopy structure patterns noticeably affects the quality of the detection even for sophisticated window functions.
 
-@lisiewiczCorrectingResultsCHMBased2022 propose a way to improve the results of canopy height map-based individual tree detection algorithms.
+@lisiewiczCorrectingResultsCHMBased2022 propose a way to improve the results of canopy height map-based individual tree segmentation algorithms.
 Their approach consists of three steps.
 The first step is the classification of segments into correct, under-segmented, or over-segmented using a Random Forest classifier, the second step is the refinement of under-segmentation errors by re-segmenting them with adjusted parameters, and the last step is the refinement of over-segmentation errors by merging with the correct segments using an algorithmic approach based on a collection of intensity-derived features.
 The authors suggest that this approach is universal in terms of forest composition and complexity, unlike many other ad-hoc correction methods based on the study area and thus non-generalizable.
@@ -206,14 +215,17 @@ The first step is generation of dense anchors across the point cloud that are th
 The second step involves multi-position feature extraction to refine the proposals.
 The approach is evaluated on the NewFor benchmark [@eysnAlpineITDBenchmark2015] and outperforms all benchmark methods that come with it.
 
-@fuIndividualTreeSegmentationUAV2024 propose a method for segmenting individual trees in UAV LiDAR point clouds based on a multiscale adaptive local maximum filter applied to the smoothed canopy height map to detect tree tops, a region-growing method for crown delineation that are then refined a voxel-based clustering algorithm.
-The method is developed and tested on 21 synthetic plots and one actual survey and the authors report good accuracy for estimation of both tree locations and heights.
-Worth noting that both the synthetic and real forest have relatively well defined an unambiguous canopy structure.
+@fuIndividualTreeSegmentationUAV2024 propose a method for segmenting individual trees in UAV LiDAR point clouds based on a multiscale adaptive local maximum filter applied to the smoothed canopy height map to detect tree tops, a region-growing method for crown delineation that are then refined by a voxel-based clustering algorithm.
+The method is developed and tested on 21 synthetic plots and one actual survey, and the authors report good accuracy for estimation of both tree locations and heights.
+Worth noting that both the synthetic and real forest have relatively well-defined an unambiguous canopy structure.
 
 ### Fusion of data
 
+A lot of works don't just use one data source and instead combine multiple complimentary ones for better representation.
+This subsections gives an overview of data fusion approaches for forestry applications on individual tree scale.
+
 @lianBiomassCalculationsIndividual2022 describe an approach for calculating individual tree biomass by combining UAV multispectral, UAV LiDAR and terrestrial LiDAR data.
-Terrestrial and UAV LiDAR a merged to get a more representative point cloud, showing the trees equally well both from above and from the ground.
+Terrestrial and UAV LiDAR are merged to get a more representative point cloud, showing the trees equally well both from above and from the ground.
 The multispectral image is used to generate a species classification map, which is then used to segment the point cloud.
 The segmented cloud is then used to estimate diameter at breast height and height and calculate above ground biomass.
 
