@@ -332,7 +332,7 @@ The same features but on a coarser scale are shown in Figure~\ref{fig-basic-feat
 \centering{
 \includegraphics[width=\textwidth]{../images/03c_synthetic_forest-fig-basic-features-small-output-1.png}
 }
-\caption[Visualisation of a basic orthophoto-based features (small
+\caption[Visualisation of basic orthophoto-based features (small
 scale)]{\label{fig-basic-features-small}Basic orthophoto-based features
 used (on a single scale with sigma=1, actual features are across
 multiple increasing scales). \textbf{Top left}: The original orthophoto
@@ -344,7 +344,7 @@ left}: Edges feature. \textbf{Bottom right}: Texture feature.}
 \centering{
 \includegraphics[width=\textwidth]{../images/03c_synthetic_forest-fig-basic-features-large-output-1.png}
 }
-\caption[Visualisation of a basic orthophoto-based features (large
+\caption[Visualisation of basic orthophoto-based features (large
 scale)]{\label{fig-basic-features-large}Basic orthophoto-based features
 used (on a single scale with sigma=16, actual features are across
 multiple increasing scales). \textbf{Top left}: The original orthophoto
@@ -617,7 +617,7 @@ During the inventory, the trees' coordinates are recorded at their trunks, appro
 The detections, on the other hand, happen with the perspective from above, and correspond to tree tops.
 Planar distance between the bottom of the trunk and the top of the canopy can be significant, especially if trees are even slightly tilted, or for broadleaf species with wide and irregular canopies, or both.
 So the average distance between predicted trees and their ground truth counterparts will rarely be zero, even for a perfect detection system.
-The other limitation it that that distance is also limited from above by the parameters used for the matching algorithm.
+The other limitation is that that distance is also limited from above by the parameters used for the matching algorithm.
 As mentioned, one of the parameters is the maximum distance allowed between a candidate and an actual tree to consider them a match.
 Thus, the average distance metric is limited from both directions, but in ways that are not immediately obvious.
 I do calculate and report it in the results section, but the reader is advised to keep the limitations in mind.
