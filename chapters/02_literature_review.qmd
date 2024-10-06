@@ -221,8 +221,8 @@ Worth noting that both the synthetic and real forest have relatively well-define
 
 ### Fusion of data
 
-A lot of works don't just use one data source and instead combine multiple complimentary ones for better representation.
-This subsections gives an overview of data fusion approaches for forestry applications on individual tree scale.
+Many works don't just use one data source and instead combine multiple complimentary ones for better representation.
+This subsection gives an overview of data fusion approaches for forestry applications on individual tree scale.
 
 @lianBiomassCalculationsIndividual2022 describe an approach for calculating individual tree biomass by combining UAV multispectral, UAV LiDAR and terrestrial LiDAR data.
 Terrestrial and UAV LiDAR are merged to get a more representative point cloud, showing the trees equally well both from above and from the ground.
@@ -248,7 +248,7 @@ The results show an improvement of 18.5% in accuracy when using fusion of LiDAR 
 
 ## Summary
 
-There is a lot of research going on at the moment on individual tree-level inventories in UAV remote sensing data.
+There is a lot of research going on currently on individual tree-level inventories using UAV remote sensing data.
 Most results that can be considered successful are either in more mild environments, such as urban or managed forests, or use a much more detailed, but at the same time much more labor-intensive data – terrestrial LiDAR.
 A gap persists in solutions that would consistently work in dense mixed forests.
 At the same time, results that show how fusion of LiDAR with other data sources consistently improves the results.

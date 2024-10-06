@@ -25,7 +25,7 @@ Buffered cutouts of the orthophoto come with the dataset, along with LiDAR point
 **Right**: A close up of plot number 4.
 Each colored point represents a single tree of a different species, on top of a point cloud colored by the value of the height of each point (lower points are dark, higher points are bright) and the same orthophoto.
 Note that the points of the point cloud are unsorted, and some lower points overlap higher points.
-Figure reused from @dubrovinExplorationPropertiesPoint2024.
+Figure reused from @dubrovinOpenDatasetIndividual2024.
 :::
 
 The field inventory is a tabular dataset where every row represents a single tree.
@@ -185,7 +185,7 @@ It is a relatively simple architecture, and further potential quality improvemen
 However, the main goal of this thesis was to develop and verify an overall framework, and thus the choice was set on a model that is simple to implement and work with to allow easy experimentation with other parts of the proposed system.
 
 The architecture of the used PointNet++ is similar to the segmentation architecture shown in @fig-pointnet2-architecture.
-The main differences are the use of one more stacked set abstraction layer to make the network deeper, and the use of a regression head that predicts a continuous value for each point instead of a classification head that predicts per-point class scores, since the model needs to assign a unique ID to every tree in the patch.
+The main differences from the shown architecture are the use of one more stacked set abstraction layer to make the network deeper, and the use of a regression head that predicts a continuous value for each point instead of a classification head that predicts per-point class scores, since the model needs to assign a unique ID to every tree in the patch.
 The three stacked set abstraction layers have the proportions of points sampled set to 0.75, 0.5, and 0.5, and neighborhood radii for feature aggregation set to 0.1, 0.2, and 0.4.
 Note that the scale of the input is normalized (see next section for details), so the radii are not in meters.
 The model has 30 million trainable parameters.
