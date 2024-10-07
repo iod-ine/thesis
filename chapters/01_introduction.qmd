@@ -91,7 +91,7 @@ The schematic representation of the framework in the preparation stage.
 The thesis consists of 5 chapters.
 This section briefly describes the contents and aims of each one.
 
-@sec-introduction aims to give a general introduction to the research project and put it into wide scientific and societal context.
+@sec-introduction aims to give a general introduction to the research project and put it into a wide scientific and societal context.
 It defines the main research question and the hypothesis, and gives a high-level overview of the proposed framework.
 It also provides the links to the original datasets and the code.
 
