@@ -249,6 +249,13 @@ The results show an improvement of 18.5% in accuracy when using fusion of LiDAR 
 ## Summary
 
 There is a lot of research going on currently on individual tree-level inventories using UAV remote sensing data.
-Most results that can be considered successful are either in more mild environments, such as urban or managed forests, or use a much more detailed, but at the same time much more labor-intensive data – terrestrial LiDAR.
-A gap persists in solutions that would consistently work in dense mixed forests.
-At the same time, results that show how fusion of LiDAR with other data sources consistently improves the results.
+Most results that can be considered successful are either in more mild environments, such as urban or managed forests, in predominantly coniferous forests, or use a much more detailed, but at the same time much more labor-intensive data source – terrestrial LiDAR.
+Mild forest types usually have canopy structures that are a lot easier to interpret, since the trees often stand far enough apart to be separable.
+At the same time, they allow for much more signal penetration, resulting in a good representation of tree trunks in the data, which is tremendously useful for the task of detecting trees.
+Predominantly coniferous forests, even dense ones, also have a canopy structure that is easy to interpret because conifer trees have a characteristic triangle shape that results in spikes in canopy height even when trees are standing close to each other.
+Terrestrial LiDAR data is different from UAV LiDAR in the amount of detail and, most importantly, the perspective.
+It surveys the trees from below, virtually guaranteeing the presence of trunks in the point clouds.
+Several fully automated approaches to detailed forest inventories using terrestrial LiDAR data exist that rely on the detection of trunks.
+A gap persists in solutions that would consistently work on UAV remote sensing data over dense mixed forests, with complex overlapping canopies.
+The active nature and the vertical structure information provided by LiDAR is essential in such complex environments.
+At the same time, many results indicate that fusion of LiDAR point clouds with other data sources consistently improves the results in forestry applications, which is why the proposed framework relies on fusion of LiDAR with RGB imagery.
