@@ -28,7 +28,7 @@ book:
   cover-image: cover.png
   downloads: [pdf]
   repo-url: https://github.com/iod-ine/thesis
-  repo-actions: [edit, issue, source]
+  repo-actions: [issue, source]
   sidebar:
     search: true
     title: "Tree-scale parameter estimation with deep learning"
