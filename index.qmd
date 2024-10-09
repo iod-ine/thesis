@@ -1,10 +1,4 @@
-# Preface {.unnumbered}
-
-This is a Quarto book.
-
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
-
-## Acknowledgments
+## Acknowledgments {.unnumbered}
 
 My supervisor, professor Clement Fortin.
 My previous supervisor, professor Anton Ivanov.
