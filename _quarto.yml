@@ -25,7 +25,6 @@ book:
     - chapters/04_results.qmd
     - chapters/05_conclusion.qmd
     - chapters/99_references.qmd
-  cover-image: cover.png
   downloads: [pdf]
   repo-url: https://github.com/iod-ine/thesis
   repo-actions: [issue, source]
