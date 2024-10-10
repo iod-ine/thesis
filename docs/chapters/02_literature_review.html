@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; Literature review – A deep learning framework for mixed dense forests parameter estimation at individual tree scale</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/03_materials_and_methods.html" rel="next">
+<link href="../chapters/01_introduction.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/02_literature_review.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Literature review</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Tree-scale parameter estimation with deep learning</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/iod-ine/thesis" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="../ivan-dubrovin-phd-thesis.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acknowledgments <span style="visibility: hidden">🌹</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_literature_review.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Literature review</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_materials_and_methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Materials and methods</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04_results.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Results</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05_conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/99_references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#remote-sensing-for-forestry-applications" id="toc-remote-sensing-for-forestry-applications" class="nav-link active" data-scroll-target="#remote-sensing-for-forestry-applications"><span class="header-section-number">2.1</span> Remote sensing for forestry applications</a></li>
+  <li><a href="#sec-ml-dl" id="toc-sec-ml-dl" class="nav-link" data-scroll-target="#sec-ml-dl"><span class="header-section-number">2.2</span> Machine learning and deep learning on point clouds</a></li>
+  <li><a href="#sec-area-based-approach" id="toc-sec-area-based-approach" class="nav-link" data-scroll-target="#sec-area-based-approach"><span class="header-section-number">2.3</span> Area-based approach</a>
+  <ul class="collapse">
+  <li><a href="#examples-of-studies-using-aba" id="toc-examples-of-studies-using-aba" class="nav-link" data-scroll-target="#examples-of-studies-using-aba"><span class="header-section-number">2.3.1</span> Examples of studies using ABA</a></li>
+  </ul></li>
+  <li><a href="#sec-individual-tree-approach" id="toc-sec-individual-tree-approach" class="nav-link" data-scroll-target="#sec-individual-tree-approach"><span class="header-section-number">2.4</span> Individual tree-based approach</a>
+  <ul class="collapse">
+  <li><a href="#image-only" id="toc-image-only" class="nav-link" data-scroll-target="#image-only"><span class="header-section-number">2.4.1</span> Image-only</a></li>
+  <li><a href="#terrestrial-lidar" id="toc-terrestrial-lidar" class="nav-link" data-scroll-target="#terrestrial-lidar"><span class="header-section-number">2.4.2</span> Terrestrial LiDAR</a></li>
+  <li><a href="#uav-lidar" id="toc-uav-lidar" class="nav-link" data-scroll-target="#uav-lidar"><span class="header-section-number">2.4.3</span> UAV LiDAR</a></li>
+  <li><a href="#fusion-of-data" id="toc-fusion-of-data" class="nav-link" data-scroll-target="#fusion-of-data"><span class="header-section-number">2.4.4</span> Fusion of data</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">2.5</span> Summary</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/iod-ine/thesis/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/iod-ine/thesis/blob/main/chapters/02_literature_review.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-literature-review" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Literature review</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This chapter provides an overview of the current state of literature on a variety of subjects related to the thesis. Its main goals are to provide the reader with context for the research described here and to highlight the research gap that the work tries to address. Where appropriate, references for in-depth materials on topics that are out of scope of this work are provided.</p>
+<section id="remote-sensing-for-forestry-applications" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="remote-sensing-for-forestry-applications"><span class="header-section-number">2.1</span> Remote sensing for forestry applications</h2>
+<p>As was mentioned in the introduction, remote sensing is widely used for extending labor-intensive and time-consuming manual forest inventories. This section provides examples of various remote sensing techniques used in various forestry applications, before going in more detail into specifically UAV LiDAR and RGB, which are the focus of the described framework.</p>
+<p><span class="citation" data-cites="hansenAssessingForestNonForest2020">Hansen, Mitchard, and King (<a href="99_references.html#ref-hansenAssessingForestNonForest2020" role="doc-biblioref">2020</a>)</span> explore the usage of C-band SAR data from the Sentinel-1 mission for binary land use classification into forest/non-forest using a collection of classic machine learning classifiers. They report accuracies from 80% in the worst case to the 93% in the best case, depending on the area of application.</p>
+<p><span class="citation" data-cites="ferrariFusingSentinel1Sentinel22023">Ferrari et al. (<a href="99_references.html#ref-ferrariFusingSentinel1Sentinel22023" role="doc-biblioref">2023</a>)</span> use Fully Convolutional Networks <span class="citation" data-cites="longFullyConvolutionalNetworks2015">(<a href="99_references.html#ref-longFullyConvolutionalNetworks2015" role="doc-biblioref">Long, Shelhamer, and Darrell 2015</a>)</span> for fusion of multispectral Sentinel-2 and C-band SAR Sentinel-1 data for clear-cut logging detection in the presence of clouds, which limit the use of optical-only approaches and are very common in tropical areas. They show that fusion performs better than single-modality variant for pixels obscured by clouds.</p>
+<p><span class="citation" data-cites="sinica-sinavskisForestStandVolume2022">Sinica-Sinavskis and Grube (<a href="99_references.html#ref-sinica-sinavskisForestStandVolume2022" role="doc-biblioref">2022</a>)</span> combine LiDAR point clouds with Sentinel-2 images to predict timber volume on a stand level. They use an unusual approach, using Sentinel-2 images for species detection by clustering, LiDAR point clouds for estimating tree counts and average tree heights, and combining them into two variables used to fit the final regression models. The reported relative RMSE values are 14-22%, with errors larger for deciduous tree species.</p>
+<p>LiDAR has been used for forestry applications for a long time, with publications on the topic dating back 40 years. <span class="citation" data-cites="nelsonDeterminingForestCanopy1984">Nelson, Krabill, and MacLean (<a href="99_references.html#ref-nelsonDeterminingForestCanopy1984" role="doc-biblioref">1984</a>)</span> is one of the earliest studies that explores usage of airborne LiDAR for measuring forest canopy profiles and estimating tree heights and canopy closure (a measure of forest canopy coverage that indicates what proportion of the sky is obscured by the tree crowns when viewed from the ground). <span class="citation" data-cites="nilssonEstimationTreeHeights1996">Nilsson (<a href="99_references.html#ref-nilssonEstimationTreeHeights1996" role="doc-biblioref">1996</a>)</span> is a study looking into tree height and timber volume estimation using airborne LiDAR across a range of point densities and seasons on a coniferous forest stand. <span class="citation" data-cites="naessetDeterminationMeanTree1997">Næsset (<a href="99_references.html#ref-naessetDeterminationMeanTree1997" role="doc-biblioref">1997a</a>)</span> and <span class="citation" data-cites="naessetEstimatingTimberVolume1997">Næsset (<a href="99_references.html#ref-naessetEstimatingTimberVolume1997" role="doc-biblioref">1997b</a>)</span> are studies exploring the use of airborne LiDAR for estimating mean tree height and timber volume, suggesting the ways to correct the systematic underestimation of height and showing how regression on LiDAR-derived metrics can predict volume. <span class="citation" data-cites="carson2004lidar">Carson et al. (<a href="99_references.html#ref-carson2004lidar" role="doc-biblioref">2004</a>)</span> offers an overview of some of the applications and approaches and a summary of contemporary state-of-the-art.</p>
+</section>
+<section id="sec-ml-dl" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-ml-dl"><span class="header-section-number">2.2</span> Machine learning and deep learning on point clouds</h2>
+<p>The reader is assumed to be familiar with general concepts of machine learning and deep learning. For an introduction or a refresher, one of the best resources is <span class="citation" data-cites="goodfellowDeepLearning2016">Goodfellow, Bengio, and Courville (<a href="99_references.html#ref-goodfellowDeepLearning2016" role="doc-biblioref">2016</a>)</span>. For a more detailed exploration, <span class="citation" data-cites="wangRecentAdvancesDeep2020">X. Wang, Zhao, and Pourpanah (<a href="99_references.html#ref-wangRecentAdvancesDeep2020" role="doc-biblioref">2020</a>)</span> offer a selection of papers on topics relevant to modern deep learning techniques. As point clouds are a less well-known modality in machine learning and deep learning, the reader is also referred to <span class="citation" data-cites="belloReviewDeepLearning2020">Bello et al. (<a href="99_references.html#ref-belloReviewDeepLearning2020" role="doc-biblioref">2020</a>)</span> and <span class="citation" data-cites="guoDeepLearning3D2021">Y. Guo et al. (<a href="99_references.html#ref-guoDeepLearning3D2021" role="doc-biblioref">2021</a>)</span>, offering detailed reviews of the deep learning approaches used in various problems related to processing point clouds. <a href="#fig-deep-learnin-on-point-clouds" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> is a high-level taxonomy of these approaches. Two main groups are structured grid-based, which rely on transformation of point clouds into regular structures that are then processed by 2D or 3D convolutional neural networks, and row point cloud based, which consume point clouds directly. The section is focused on providing a very short overview of these topics as it relates to the framework that is the focus of the thesis.</p>
+<div id="fig-deep-learnin-on-point-clouds" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-deep-learnin-on-point-clouds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../images/deep_learning_on_point_clouds.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;2.1: A high-level taxonomy of deep learning approaches for point clouds. Figure from @belloReviewDeepLearning2020"><img src="../images/deep_learning_on_point_clouds.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-deep-learnin-on-point-clouds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: A high-level taxonomy of deep learning approaches for point clouds. Figure from <span class="citation" data-cites="belloReviewDeepLearning2020">Bello et al. (<a href="99_references.html#ref-belloReviewDeepLearning2020" role="doc-biblioref">2020</a>)</span>
+</figcaption>
+</figure>
+</div>
+<p>Classic machine learning approaches rely on feature engineering: manual preparation of features used as inputs for models based on domain expertise and various feature selection techniques. Two main groups of tasks are per-point predictions, which is in many ways similar to the task of semantic segmentation of images, that requires per-point features, and per-cloud predictions that either process entire point clouds or individual segments, separated be some preprocessing routine. <span class="citation" data-cites="weinmannFeatureRelevanceAssessment2013">Weinmann, Jutzi, and Mallet (<a href="99_references.html#ref-weinmannFeatureRelevanceAssessment2013" role="doc-biblioref">2013</a>)</span> show that careful selection of features is crucial for accurate and efficient semantic interpretation of point cloud data: a shotgun approach of using many simple features without much consideration results in worse performance than a surgical approach of using a few carefully selected ones. They also provide definitions of some of the most used manual features that aim to describe the 3D structure of point sets. The features are based on combinations of eigenvalues of local covariance matrices of coordinate vectors of a set of points. They can be calculated on a per-point basis by using fixed-size or nearest-neighbor neighborhoods, or for whole segments of point clouds. The used features were originally introduced by <span class="citation" data-cites="westContextdrivenAutomatedTarget2004">West et al. (<a href="99_references.html#ref-westContextdrivenAutomatedTarget2004" role="doc-biblioref">2004</a>)</span>, <span class="citation" data-cites="paulyEfficientSimplificationPointsampled2002">Pauly, Gross, and Kobbelt (<a href="99_references.html#ref-paulyEfficientSimplificationPointsampled2002" role="doc-biblioref">2002</a>)</span>, and <span class="citation" data-cites="malletRelevanceAssessmentFullwaveform2011">Mallet et al. (<a href="99_references.html#ref-malletRelevanceAssessmentFullwaveform2011" role="doc-biblioref">2011</a>)</span>, and include linearity, planarity, and scatter, aiming to indicate the presence of a linear, planar, or volumetric structures, and also omnivariance, anisotropy, eigentropy, the sum of eigenvalues, and curvature. The formulas for the features are provided in <a href="03_materials_and_methods.html#sec-training-tree-processors" class="quarto-xref"><span>Section 3.5</span></a>, where they are used for training parameter prediction models for segmented trees. Simpler features, that are especially often used in area-based approach, include various statistics describing height and reflection intensity distributions of points, like percentages of points above mean height, deciles of height, cumulative percentages of points below height deciles, and others.</p>
+<p>Non-uniform point densities often become a problem for both manual feature creation and representation learning as part of a deep learning model. <span class="citation" data-cites="ozdemirDeepLearningFramework2021">Özdemi̇r (<a href="99_references.html#ref-ozdemirDeepLearningFramework2021" role="doc-biblioref">2021</a>)</span> proposes a framework for semantic segmentation of photogrammetric point clouds in urban environments, the key components of which are voxel-grid filtering-based downsampling for equalizing the point density across the cloud, manual addition of geometric features in a nearest-neighbor neighborhood, and processing the result with a convolutional network for assigning labels to each point, followed by a post-processing step to upscale the labels back to original point cloud size.</p>
+<p>The first deep learning model to work directly on point clouds without constructing any intermediate representation that can be processed by convolutional models is the PointNet introduced by <span class="citation" data-cites="qiPointNet2017">Qi, Su, et al. (<a href="99_references.html#ref-qiPointNet2017" role="doc-biblioref">2017</a>)</span>. <a href="#fig-pointnet-architecture" class="quarto-xref">Figure&nbsp;<span>2.2</span></a> shows its architecture. A critical aspect of any model that aims to operate directly on point clouds is permutation invariance, as point clouds are unordered sets, and shuffling the points does not change the point cloud semantically. PointNet achieves that invariance by using a combination of shared multilayer perceptrons (MLP) to process point coordinates and features and max pooling for construction of global feature vector. That feature vector can then be used directly for point cloud classification tasks, or concatenated with point features and processed further by shared MLPs for per-point predictions.</p>
+<div id="fig-pointnet-architecture" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pointnet-architecture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../images/pointnet_architecture.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2.2: PointNet architecture. Figure from @qiPointNet2017"><img src="../images/pointnet_architecture.jpg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pointnet-architecture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: PointNet architecture. Figure from <span class="citation" data-cites="qiPointNet2017">Qi, Su, et al. (<a href="99_references.html#ref-qiPointNet2017" role="doc-biblioref">2017</a>)</span>
+</figcaption>
+</figure>
+</div>
+<p><span class="citation" data-cites="qiPointNetPlusPlus2017">Qi, Yi, et al. (<a href="99_references.html#ref-qiPointNetPlusPlus2017" role="doc-biblioref">2017</a>)</span> introduces PointNet++, aimed to address the main drawbacks of the original PointNet model, namely the use of only two scales for context encoding – per-point and global, which limits the ability of the model to respond to local structures and fine patterns and thus work in complex scenes. To address this, PointNet++ uses a hierarchical architecture that applies PointNet recursively on nested subsets of the original point set, allowing to learn features on multiple increasing scales. To achieve that, network uses stacked set abstraction layers, that first sample a subset of the point cloud using farthest point sampling – an algorithm aimed to create representative subsets even for point clouds with uneven point density that selects the next point by maximizing its distance to already selected set – then constructs a neighborhood around each selected point using either fixed distance or fixed number of neighbors, and finally applies PointNet to each neighborhood to reduce into a feature vector for the sampled point. Then, similar to the original PointNet, the subset can be further reduced to a final global feature vector used for point clouds classification, or passed to an upscaling branch with skip-connections and k-nearest neighbors interpolation to upscale the features to the original point cloud coordinates. The architecture is visualized in <a href="#fig-pointnet2-architecture" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>.</p>
+<div id="fig-pointnet2-architecture" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pointnet2-architecture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../images/pointnet2_architecture.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;2.3: PointNet++ architecture. Figure from @qiPointNetPlusPlus2017"><img src="../images/pointnet2_architecture.jpg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pointnet2-architecture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.3: PointNet++ architecture. Figure from <span class="citation" data-cites="qiPointNetPlusPlus2017">Qi, Yi, et al. (<a href="99_references.html#ref-qiPointNetPlusPlus2017" role="doc-biblioref">2017</a>)</span>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-area-based-approach" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sec-area-based-approach"><span class="header-section-number">2.3</span> Area-based approach</h2>
+<p>The most common way to use LiDAR for mapping forest attributes is the area-based approach <span class="citation" data-cites="whiteABAGuide2013">(<a href="99_references.html#ref-whiteABAGuide2013" role="doc-biblioref">White et al. 2013</a>)</span>. <a href="#fig-aba-schema" class="quarto-xref">Figure&nbsp;<span>2.4</span></a> shows its schematic representation. It consists of a LiDAR survey covering the whole area of interest and a manual forest inventory providing ground truth data for fitting statistical models and validating the results. The inventory usually consists of many circular ground plots with every tree within counted and attributes of interest either directly measured or calculated and averaged. The point cloud is clipped by the extents of the ground plots, and for each plot it is reduced to a collection of manually selected metrics. The metrics usually include descriptions of the height distribution of the points, but often reflection intensities and other sensor-provided information is used as well, such as the return number, the number of returns, etc. (a brief discussion on the use of intensity-based features can be found in <a href="03_materials_and_methods.html#sec-intensity-based-features" class="quarto-xref"><span>Section 3.1.1</span></a>). In general, any summary statistic that can be derived from a collection of points can be used, including features mentioned in <a href="#sec-ml-dl" class="quarto-xref"><span>Section 2.2</span></a>. These metrics are then used as input features for fitting regression and classification models to predict the forest attributes measured on the corresponding plots. The same metrics are calculated for the entire area of interest, using a grid with a cell size similar in area to the area of a single ground plot. The models are then applied to the grid, generating an extrapolation of the required attributes.</p>
+<div id="fig-aba-schema" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-aba-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../images/aba_schematic.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;2.4: Area-based approach schematic. Figure from @whiteABAGuide2013"><img src="../images/aba_schematic.jpg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-aba-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.4: Area-based approach schematic. Figure from <span class="citation" data-cites="whiteABAGuide2013">White et al. (<a href="99_references.html#ref-whiteABAGuide2013" role="doc-biblioref">2013</a>)</span>
+</figcaption>
+</figure>
+</div>
+<p>Area-based approach is extensively used both in research and in industry because it provides many advantages. It is relatively easy to implement. In fact, basic familiarity with the R programming language is enough to create your own area-based approach pipelines since a full, scalable implementation exists in the <code>lidR</code> package <span class="citation" data-cites="rousselLidRPackage2020">(<a href="99_references.html#ref-rousselLidRPackage2020" role="doc-biblioref">Roussel et al. 2020</a>)</span>. It is also straightforward to extend with other data sources such as satellite or aerial images, and it works even with sparse data: for successful plot and stand level modeling point densities as low as 0.5 points per square meter have been reported to be enough <span class="citation" data-cites="treitzLiDARSamplingDensity2012 jakubowskiTradeoffsLidarPulse2013">(<a href="99_references.html#ref-treitzLiDARSamplingDensity2012" role="doc-biblioref">Treitz et al. 2012</a>; <a href="99_references.html#ref-jakubowskiTradeoffsLidarPulse2013" role="doc-biblioref">Jakubowski, Guo, and Kelly 2013</a>)</span>. Still, it requires a lot of field inventory data to work, since every ground plot becomes a single example for the models. The models that can be used are also relatively simple, because of how expensive the data collection is. Data-hungry approaches like neural networks usually don’t have enough data to train. The results are also very coarse – predicted on a grid with the size defined by the area of a plot (a common plot shape is a circle with 9-meter radius, which is approximately equivalent to a square grid cell with 16-meter side). This is why they are usually further aggregated to stand level.</p>
+<section id="examples-of-studies-using-aba" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="examples-of-studies-using-aba"><span class="header-section-number">2.3.1</span> Examples of studies using ABA</h3>
+<p>As mentioned, area-based approach is used widely both throughout industry and research. I have personally taken part in a couple of projects where it was used for mapping forest attributes on large scales. This subsection offers some examples of its continuing use in research.</p>
+<p><span class="citation" data-cites="bouvierGeneralizingPredictiveModels2015">Bouvier et al. (<a href="99_references.html#ref-bouvierGeneralizingPredictiveModels2015" role="doc-biblioref">2015</a>)</span> suggest a set of 4 metrics they use to fit models for predicting timber volume, above ground biomass, and basal-area on stand level, instead of most commonly used metrics based on the distribution of height. Their metrics are aimed to capture different aspects of the canopy geometry. The authors argue that usage of a very limited set of carefully engineered diverse metrics results in improvement of model generalization ability without loss of accuracy.</p>
+<p><span class="citation" data-cites="zhangImprovedAreabasedApproach2023">Zhang et al. (<a href="99_references.html#ref-zhangImprovedAreabasedApproach2023" role="doc-biblioref">2023</a>)</span> use a modification of the area-based approach to predict plot-level diameter at breast height (dbh) by utilizing known allometric dependencies between tree height and dbh to limit the size of the hypothesis set for fitting regression models. They use airborne LiDAR measurements with an average density of 9.6 points per square meter and report a relative error of 11%.</p>
+<p><span class="citation" data-cites="vermeerLidarbasedNorwegianTree2023">Vermeer et al. (<a href="99_references.html#ref-vermeerLidarbasedNorwegianTree2023" role="doc-biblioref">2023</a>)</span> use a U-Net <span class="citation" data-cites="ronnebergerUNetConvolutionalNetworks2015">(<a href="99_references.html#ref-ronnebergerUNetConvolutionalNetworks2015" role="doc-biblioref">Ronneberger, Fischer, and Brox 2015</a>)</span> image semantic segmentation model on LiDAR-derived 1-meter resolution digital terrain models and canopy height maps to predict the distribution of three main tree species in a Norwegian forest. They achieve a macro <span class="math inline">\(F_1\)</span> of 0.70 when including the background class, and 0.63 when including only the target species classes, as evaluated on independent field inventory plots.</p>
+<p><span class="citation" data-cites="kcEstimationAboveGroundForest2024">Kc et al. (<a href="99_references.html#ref-kcEstimationAboveGroundForest2024" role="doc-biblioref">2024</a>)</span> is a classic example of an area-based approach study utilizing airborne LiDAR survey to predict forest above ground biomass. They use a set of 32 metrics derived from height distribution of points, an automatic feature selection procedure, and two regression models: linear regression and Random Forest to compare the results. They report coefficients of determination of 0.85 and average errors around 83 tons per hectare.</p>
+</section>
+</section>
+<section id="sec-individual-tree-approach" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="sec-individual-tree-approach"><span class="header-section-number">2.4</span> Individual tree-based approach</h2>
+<p>With the constant improvement of accessibility and quality of high-resolution remote sensing data, there is a growing interest in the development of methods that operate on the scale of individual trees. This subsection gives an overview of some of the research in this area, split by the main data source.</p>
+<p><span class="citation" data-cites="liNewMethodSegmenting2012">W. Li et al. (<a href="99_references.html#ref-liNewMethodSegmenting2012" role="doc-biblioref">2012</a>)</span> developed a well performing algorithmic method for segmentation of individual tree crowns in LiDAR point clouds for coniferous forests that relies on the pointy shape characteristic of many coniferous species and segments the trees from top to bottom.</p>
+<p><span class="citation" data-cites="lucasIdentificationLinearVegetation2019">Lucas et al. (<a href="99_references.html#ref-lucasIdentificationLinearVegetation2019" role="doc-biblioref">2019</a>)</span> use the set of eigenvalue-based features calculated for each point in a fixed-radius neighborhood, with other geometrical features including maximum local height difference and height standard deviation, local radius and local point density, to identify linear vegetation elements in segmented point clouds. They also use two point-based features that don’t rely on a neighborhood: the number of returns and the normalized return number, proposed in <span class="citation" data-cites="guoRelevanceAirborneLidar2011">L. Guo et al. (<a href="99_references.html#ref-guoRelevanceAirborneLidar2011" role="doc-biblioref">2011</a>)</span>, and use Random Forest classifier to separate the points that belong to vegetation after first removing the planar features corresponding to grass, soil, and water surfaces. The approach is somewhere in the middle between the area-based and individual tree-based, but still is a useful example of application of classic machine learning to segment out vegetation from larger point clouds.</p>
+<section id="image-only" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="image-only"><span class="header-section-number">2.4.1</span> Image-only</h3>
+<p>Many approaches rely only on images, mostly high-resolution RGB and multispectral ones, but lately also hyperspectral. The main advantage of such approaches is a well-established and well-known toolbox in terms of both algorithmic processing and deep learning, as many of the most important deep learning milestones were achieved in the field of computer vision. They also can rely on consistent resolution, capture of fine details and textures, and continuous representation of sensed environments. The main disadvantages were mentioned in the introduction: passive sensors rely on the sun as the source, and thus greatly depend on lighting such as cloud and terrain shadows, time of day, season. They also offer no information on vertical structure. Still, they are very popular and achieve outstanding results in many environments.</p>
+<p><span class="citation" data-cites="weinsteinDeepForestPythonPackage2020">Weinstein et al. (<a href="99_references.html#ref-weinsteinDeepForestPythonPackage2020" role="doc-biblioref">2020</a>)</span> introduces a Python package for training and inference of ecological object detection neural networks in airborne imagery. It uses a convolutional object detection network described in <span class="citation" data-cites="weinsteinIndividualTreeCrownDetection2019">Weinstein et al. (<a href="99_references.html#ref-weinsteinIndividualTreeCrownDetection2019" role="doc-biblioref">2019</a>)</span> to predict bounding boxes for individual trees. The data the model is trained on is not as dense as the forests that are the target of this thesis. Moreover, the model requires fine-tuning to be applicable to new data, which greatly limits its applicability, since developing bounding box annotations for individual trees within dense forests is an extremely tedious and labor-intensive task.</p>
+<p><span class="citation" data-cites="lassalleDeepLearningbasedIndividual2022">Lassalle et al. (<a href="99_references.html#ref-lassalleDeepLearningbasedIndividual2022" role="doc-biblioref">2022</a>)</span> use high-resolution satellite imagery to delineate individual tree crowns in mangrove forests by using DeepLabv3+-based Multi-Task Encoder-Decoder network (MT-EDv3), originally proposed by <span class="citation" data-cites="larosaMultitaskFullyConvolutional2021">La Rosa et al. (<a href="99_references.html#ref-larosaMultitaskFullyConvolutional2021" role="doc-biblioref">2021</a>)</span>, to predict for each pixel the distance to the tree crown border. This distance map is then enhanced by applying the Laplacian over Gaussian filter, and finally the watershed segmentation algorithm is applied to delineate individual crowns. The approach seems to rely on there being semi-clear separation between the tree crowns, which is rarely the case when the forests are dense and mixed.</p>
+<p>The same network was also successfully used to map tree species in tropical urban environment in Rio de Janeiro, Brazil in <span class="citation" data-cites="martinsDeepLearningbasedTree2021">Martins et al. (<a href="99_references.html#ref-martinsDeepLearningbasedTree2021" role="doc-biblioref">2021</a>)</span>. They develop a post-processing approach to combine the semantic segmentation map and the distance map to classify tree species with an average <span class="math inline">\(F_1\)</span>-score of 79.3% and resulting in a realistic tree species map.</p>
+<p><span class="citation" data-cites="oscoConvolutionalNeuralNetwork2020">Osco et al. (<a href="99_references.html#ref-oscoConvolutionalNeuralNetwork2020" role="doc-biblioref">2020</a>)</span> use a convolutional neural network on UAV multispectral images to count citrus trees in an orchard by predicting a confidence map that shows the likelihood of each pixel containing a tree. They report <span class="math inline">\(F_1\)</span>-scores of up to 0.95, which is impressive even for managed stands.</p>
+<p><span class="citation" data-cites="venturaIndividualTreeDetection2024">Ventura et al. (<a href="99_references.html#ref-venturaIndividualTreeDetection2024" role="doc-biblioref">2024</a>)</span> describe a network they call HR-SFAnet, consisting of a VGG-16 <span class="citation" data-cites="simonyanVeryDeepConvolutional2014">(<a href="99_references.html#ref-simonyanVeryDeepConvolutional2014" role="doc-biblioref">Simonyan and Zisserman 2014</a>)</span> backbone feature extractor, a confidence head, and a parallel attention head, for detecting individual trees in urban environments using high-resolution multispectral images. The network is a deeper modification of the SFANet proposed in <span class="citation" data-cites="zhuDualPathMultiScale2019">Zhu et al. (<a href="99_references.html#ref-zhuDualPathMultiScale2019" role="doc-biblioref">2019</a>)</span> for counting the number of people in photos. They report <span class="math inline">\(F_1\)</span>-scores of 0.75, with average positioning error of 2.2 meters.</p>
+</section>
+<section id="terrestrial-lidar" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="terrestrial-lidar"><span class="header-section-number">2.4.2</span> Terrestrial LiDAR</h3>
+<p>Terrestrial LiDAR surveys usually provide very dense and detailed point clouds. Most importantly for the task of localizing individual trees, terrestrial measurements always capture the trunks of the trees clearly. Tree trunks are very useful for tree detection and segmentation, and there are many algorithms that use bottom-to-top approaches that trace the trunks into the canopies.</p>
+<p><span class="citation" data-cites="burtExtractingIndividualTrees2018">Burt, Disney, and Calders (<a href="99_references.html#ref-burtExtractingIndividualTrees2018" role="doc-biblioref">2018</a>)</span> introduce <code>treeseg</code>, a software package written in C++ for extracting individual trees from LiDAR point clouds. Even though it is designed and presented as a platform-agnostic method made to operate on both terrestrial and UAV LiDAR point clouds, it relies on trunk detection, which is common for many methods based on terrestrial LiDAR and often is not applicable to UAV LiDAR data.</p>
+<p><span class="citation" data-cites="lopezserranoArtificialIntelligencebasedSoftware2022">López Serrano et al. (<a href="99_references.html#ref-lopezserranoArtificialIntelligencebasedSoftware2022" role="doc-biblioref">2022</a>)</span> introduce another software package called <code>AID-FOREST</code> for fully automatic processing of terrestrial LiDAR point clouds based on trunk detection. The software takes in a raw point cloud, performs all required preprocessing steps, and runs an object detection neural network on a series of horizontal slices to find cross-sections of trunks, and then processes the detection results from each level to track individual trees.</p>
+<p><span class="citation" data-cites="allenTreeSpeciesClassification2022">Allen et al. (<a href="99_references.html#ref-allenTreeSpeciesClassification2022" role="doc-biblioref">2022</a>)</span> describe an approach for classifying terrestrial LiDAR point clouds of individual trees extracted by <code>treeseg</code> using multi-view representation based on <span class="citation" data-cites="goyalRevisitingPointCloud2021">Goyal et al. (<a href="99_references.html#ref-goyalRevisitingPointCloud2021" role="doc-biblioref">2021</a>)</span> and a convolutional ResNet network <span class="citation" data-cites="heDeepResidualLearning2016">(<a href="99_references.html#ref-heDeepResidualLearning2016" role="doc-biblioref">He et al. 2016</a>)</span>. They report high classification accuracies both overall and per-species on a dataset of almost 2500 individual trees.</p>
+<p><span class="citation" data-cites="wilkesTLS2treesScalableTree2023">Wilkes et al. (<a href="99_references.html#ref-wilkesTLS2treesScalableTree2023" role="doc-biblioref">2023</a>)</span> introduce <code>TLS2trees</code>, another automated framework for segmentation of individual trees in terrestrial LiDAR point clouds, consisting of a set of Python command line tools. The framework consists of three steps: preprocessing, semantic segmentation, and instance segmentation into a set of individual trees. After that, a set of attributes are computed for each tree. The software is designed to be horizontally scalable (meaning it’s easy to speed up calculations by using more machines doing them in parallel, as opposed to vertically, meaning by increasing the computational resources available to a single machine) to address huge datasets produced during terrestrial laser scanning surveys.</p>
+<p>All these software packages are impressive, but non-applicable to the data described in this work.</p>
+<p><span class="citation" data-cites="vianaTimberVolumeEstimation2022">Viana et al. (<a href="99_references.html#ref-vianaTimberVolumeEstimation2022" role="doc-biblioref">2022</a>)</span> use a small dataset to compare tree-level inventory metrics extracted from a terrestrial LiDAR survey and from a manual inventory. They report very good results, showing that terrestrial LiDAR can serve as a replacement for manual inventories in diverse secondary forests (secondary forests are forests that regenerate naturally after significant disturbances like logging, storms, or fires).</p>
+<p><span class="citation" data-cites="nurunnabiDevelopmentPreciseTree2024">Nurunnabi et al. (<a href="99_references.html#ref-nurunnabiDevelopmentPreciseTree2024" role="doc-biblioref">2024</a>)</span> offer a compelling example of how detailed terrestrial LiDAR point clouds can be used to provide very detailed analyses on tree level. The authors report high accuracies on the task of segmenting the point clouds into wood and leaf points by utilizing geometric features mentioned earlier to locate linear and non-linear areas. They then apply an octree-based segmentation algorithm to develop a precise 3D structure of a tree.</p>
+</section>
+<section id="uav-lidar" class="level3" data-number="2.4.3">
+<h3 data-number="2.4.3" class="anchored" data-anchor-id="uav-lidar"><span class="header-section-number">2.4.3</span> UAV LiDAR</h3>
+<p>A common approach to utilize LiDAR point cloud data for tree detection is by calculating canopy height maps – images where each pixel represents the height of vegetation – and applying the same techniques as for image-only approaches.</p>
+<p>A substantial number of different tree detection algorithms are variations of the local maxima filter, differing in what the filter is applied to, how many times, with what windows, and how the results are combined or preprocessed. For example, <span class="citation" data-cites="doussExtractionIndividualTrees2022">Douss and Farah (<a href="99_references.html#ref-doussExtractionIndividualTrees2022" role="doc-biblioref">2022</a>)</span> offers an exploration of how different window size functions for the local maxima filtering applied to LiDAR-derived canopy height maps affect the quality of individual tree detection. They show that for a moderately dense forest in France, it is possible to find the parameters for the local maxima filter window that produce satisfactory results. It is, however, clear that it requires great deal of manual adjustment, and visual inspection of the results of detection makes it clear that they are only locally consistent. Any change in the canopy structure patterns noticeably affects the quality of the detection even for sophisticated window functions.</p>
+<p><span class="citation" data-cites="lisiewiczCorrectingResultsCHMBased2022">Lisiewicz et al. (<a href="99_references.html#ref-lisiewiczCorrectingResultsCHMBased2022" role="doc-biblioref">2022</a>)</span> propose a way to improve the results of canopy height map-based individual tree segmentation algorithms. Their approach consists of three steps. The first step is the classification of segments into correct, under-segmented, or over-segmented using a Random Forest classifier, the second step is the refinement of under-segmentation errors by re-segmenting them with adjusted parameters, and the last step is the refinement of over-segmentation errors by merging with the correct segments using an algorithmic approach based on a collection of intensity-derived features. The authors suggest that this approach is universal in terms of forest composition and complexity, unlike many other ad-hoc correction methods based on the study area and thus non-generalizable.</p>
+<p><span class="citation" data-cites="wangAutomaticDetectionIndividual2023">Z. Wang et al. (<a href="99_references.html#ref-wangAutomaticDetectionIndividual2023" role="doc-biblioref">2023</a>)</span> propose a two-stage network they call Tree Region-Based Convolutional Neural Network (RCNN) to detect trees in UAV LiDAR point clouds. The first step is generation of dense anchors across the point cloud that are then processed by the RCNN to generate proposals for individual tree locations. The second step involves multi-position feature extraction to refine the proposals. The approach is evaluated on the NewFor benchmark <span class="citation" data-cites="eysnAlpineITDBenchmark2015">(<a href="99_references.html#ref-eysnAlpineITDBenchmark2015" role="doc-biblioref">Eysn et al. 2015</a>)</span> and outperforms all benchmark methods that come with it.</p>
+<p><span class="citation" data-cites="fuIndividualTreeSegmentationUAV2024">Fu et al. (<a href="99_references.html#ref-fuIndividualTreeSegmentationUAV2024" role="doc-biblioref">2024</a>)</span> propose a method for segmenting individual trees in UAV LiDAR point clouds based on a multiscale adaptive local maximum filter applied to the smoothed canopy height map to detect tree tops, a region-growing method for crown delineation that are then refined by a voxel-based clustering algorithm. The method is developed and tested on 21 synthetic plots and one actual survey, and the authors report good accuracy for estimation of both tree locations and heights. Worth noting that both the synthetic and real forest have relatively well-defined an unambiguous canopy structure.</p>
+</section>
+<section id="fusion-of-data" class="level3" data-number="2.4.4">
+<h3 data-number="2.4.4" class="anchored" data-anchor-id="fusion-of-data"><span class="header-section-number">2.4.4</span> Fusion of data</h3>
+<p>Many works don’t just use one data source and instead combine multiple complimentary ones for better representation. This subsection gives an overview of data fusion approaches for forestry applications on individual tree scale.</p>
+<p><span class="citation" data-cites="lianBiomassCalculationsIndividual2022">Lian et al. (<a href="99_references.html#ref-lianBiomassCalculationsIndividual2022" role="doc-biblioref">2022</a>)</span> describe an approach for calculating individual tree biomass by combining UAV multispectral, UAV LiDAR and terrestrial LiDAR data. Terrestrial and UAV LiDAR are merged to get a more representative point cloud, showing the trees equally well both from above and from the ground. The multispectral image is used to generate a species classification map, which is then used to segment the point cloud. The segmented cloud is then used to estimate diameter at breast height and height and calculate above ground biomass.</p>
+<p><span class="citation" data-cites="liFusionApproachesIndividual2023">Q. Li et al. (<a href="99_references.html#ref-liFusionApproachesIndividual2023" role="doc-biblioref">2023</a>)</span> explore the contributions of multispectral images, very high resolution panchromatic images, and LiDAR data during fusion on feature and decision level for tree species classification using Support Vector Machine and Random Forest classifiers on manually delineated tree crowns from an urban environment. They report that fusion consistently improves the results over using each of the data sources on its own. They also report that fusion on decision level resulted in the highest overall accuracy metrics.</p>
+<p><span class="citation" data-cites="balestraLiDARDataFusion2024">Balestra et al. (<a href="99_references.html#ref-balestraLiDARDataFusion2024" role="doc-biblioref">2024</a>)</span> offers a review of 151 publications concerning fusion of LiDAR data with other remote sensing data. The authors report that in most cases fusion improves the results. Most relevant to this thesis, they report that for individual tree segmentation the results of fusion-based approaches compared to LiDAR-only ones are consistently better. <span class="citation" data-cites="laExtractionIndividualTree2015">La et al. (<a href="99_references.html#ref-laExtractionIndividualTree2015" role="doc-biblioref">2015</a>)</span> show an increase from 63% to 92% for low-density forests, and from 62% to 70% for high-density forests, <span class="citation" data-cites="aubry-kientzMultisensorDataFusion2021">Aubry-Kientz et al. (<a href="99_references.html#ref-aubry-kientzMultisensorDataFusion2021" role="doc-biblioref">2021</a>)</span> show and improvement by 5%, and <span class="citation" data-cites="zhenImpactTreeOrientedGrowth2014">Zhen, Quackenbush, and Zhang (<a href="99_references.html#ref-zhenImpactTreeOrientedGrowth2014" role="doc-biblioref">2014</a>)</span> and <span class="citation" data-cites="arenas-corralizaAutomaticMappingTree2020">Arenas-Corraliza, Nieto, and Moreno (<a href="99_references.html#ref-arenas-corralizaAutomaticMappingTree2020" role="doc-biblioref">2020</a>)</span> improved their results by 2-4%.</p>
+<p><span class="citation" data-cites="ferreiraImprovingUrbanTree2024">Ferreira et al. (<a href="99_references.html#ref-ferreiraImprovingUrbanTree2024" role="doc-biblioref">2024</a>)</span> use a U-Net semantic segmentation model for fusion of VNIR images and UAV LiDAR-derived feature maps including surface normals of the canopies, reflection intensities, canopy heights, and leaf-area index for mapping tree species in urban tropical areas. Their results show that adding LiDAR-based features improves <span class="math inline">\(F_1\)</span>-scores across all considered species, with average <span class="math inline">\(F_1\)</span>-score 84.1. They also use the segment anything model <span class="citation" data-cites="Kirillov_2023_ICCV">(<a href="99_references.html#ref-Kirillov_2023_ICCV" role="doc-biblioref">Kirillov et al. 2023</a>)</span> to automatically segment tree crowns with outstanding 98% boundary <span class="math inline">\(F_1\)</span>-score.</p>
+<p><span class="citation" data-cites="wuFineClassificationUrban2024">Wu et al. (<a href="99_references.html#ref-wuFineClassificationUrban2024" role="doc-biblioref">2024</a>)</span> use a combination of high-resolution RGB images and LiDAR to classify urban tree species by extracting seven different feature types and using a Random Forest for pixel-level classification. They report on seven experiments using different combinations of extracted features. The results show an improvement of 18.5% in accuracy when using fusion of LiDAR and RGB compared to RGB-only.</p>
+</section>
+</section>
+<section id="summary" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">2.5</span> Summary</h2>
+<p>There is a lot of research going on currently on individual tree-level inventories using UAV remote sensing data. Most results that can be considered successful are either in more mild environments, such as urban or managed forests, in predominantly coniferous forests, or use a much more detailed, but at the same time much more labor-intensive data source – terrestrial LiDAR. Mild forest types usually have canopy structures that are a lot easier to interpret, since the trees often stand far enough apart to be separable. At the same time, they allow for much more signal penetration, resulting in a good representation of tree trunks in the data, which is tremendously useful for the task of detecting trees. Predominantly coniferous forests, even dense ones, also have a canopy structure that is easy to interpret because conifer trees have a characteristic triangle shape that results in spikes in canopy height even when trees are standing close to each other. Terrestrial LiDAR data is different from UAV LiDAR in the amount of detail and, most importantly, the perspective. It surveys the trees from below, virtually guaranteeing the presence of trunks in the point clouds. Several fully automated approaches to detailed forest inventories using terrestrial LiDAR data exist that rely on the detection of trunks. A gap persists in solutions that would consistently work on UAV remote sensing data over dense mixed forests, with complex overlapping canopies. The active nature and the vertical structure information provided by LiDAR is essential in such complex environments. At the same time, many results indicate that fusion of LiDAR point clouds with other data sources consistently improves the results in forestry applications, which is why the proposed framework relies on fusion of LiDAR with RGB imagery.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-allenTreeSpeciesClassification2022" class="csl-entry" role="listitem">
+Allen, Matthew J., Stuart W. D. Grieve, Harry J. F. Owen, and Emily R. Lines. 2022. <span>“Tree Species Classification from Complex Laser Scanning Data in <span>Mediterranean</span> Forests Using Deep Learning.”</span> <em>Methods in Ecology and Evolution</em>, September. <a href="https://doi.org/10.1111/2041-210X.13981">https://doi.org/10.1111/2041-210X.13981</a>.
+</div>
+<div id="ref-arenas-corralizaAutomaticMappingTree2020" class="csl-entry" role="listitem">
+Arenas-Corraliza, Isabel, Ana Nieto, and Gerardo Moreno. 2020. <span>“Automatic Mapping of Tree Crowns in Scattered-Tree Woodlands Using Low-Density <span>LiDAR</span> Data and Infrared Imagery.”</span> <em>Agroforestry Systems</em> 94 (5): 1989–2002. <a href="https://doi.org/10.1007/s10457-020-00517-2">https://doi.org/10.1007/s10457-020-00517-2</a>.
+</div>
+<div id="ref-aubry-kientzMultisensorDataFusion2021" class="csl-entry" role="listitem">
+Aubry-Kientz, Mélaine, Anthony Laybros, Ben Weinstein, James G. C. Ball, Toby Jackson, David Coomes, and Grégoire Vincent. 2021. <span>“Multisensor <span>Data Fusion</span> for <span>Improved Segmentation</span> of <span>Individual Tree Crowns</span> in <span>Dense Tropical Forests</span>.”</span> <em>IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing</em> 14: 3927–36. <a href="https://doi.org/10.1109/JSTARS.2021.3069159">https://doi.org/10.1109/JSTARS.2021.3069159</a>.
+</div>
+<div id="ref-balestraLiDARDataFusion2024" class="csl-entry" role="listitem">
+Balestra, Mattia, Suzanne Marselis, Temuulen Tsagaan Sankey, Carlos Cabo, Xinlian Liang, Martin Mokroš, Xi Peng, et al. 2024. <span>“<span>LiDAR Data Fusion</span> to <span>Improve Forest Attribute Estimates</span>: <span>A Review</span>.”</span> <em>Current Forestry Reports</em> 10 (4): 281–97. <a href="https://doi.org/10.1007/s40725-024-00223-7">https://doi.org/10.1007/s40725-024-00223-7</a>.
+</div>
+<div id="ref-belloReviewDeepLearning2020" class="csl-entry" role="listitem">
+Bello, Saifullahi Aminu, Shangshu Yu, Cheng Wang, Jibril Muhmmad Adam, and Jonathan Li. 2020. <span>“Review: <span>Deep Learning</span> on <span>3D Point Clouds</span>.”</span> <em>Remote Sensing</em> 12 (11): 1729. <a href="https://doi.org/10.3390/rs12111729">https://doi.org/10.3390/rs12111729</a>.
+</div>
+<div id="ref-bouvierGeneralizingPredictiveModels2015" class="csl-entry" role="listitem">
+Bouvier, Marc, Sylvie Durrieu, Richard A. Fournier, and Jean-Pierre Renaud. 2015. <span>“Generalizing Predictive Models of Forest Inventory Attributes Using an Area-Based Approach with Airborne <span>LiDAR</span> Data.”</span> <em>Remote Sensing of Environment</em> 156 (January): 322–34. <a href="https://doi.org/10.1016/j.rse.2014.10.004">https://doi.org/10.1016/j.rse.2014.10.004</a>.
+</div>
+<div id="ref-burtExtractingIndividualTrees2018" class="csl-entry" role="listitem">
+Burt, Andrew, Mathias Disney, and Kim Calders. 2018. <span>“Extracting Individual Trees from Lidar Point Clouds Using <span><em>Treeseg</em></span>.”</span> Edited by Sarah Goslee. <em>Methods in Ecology and Evolution</em>, December, 2041–210X.13121. <a href="https://doi.org/10.1111/2041-210X.13121">https://doi.org/10.1111/2041-210X.13121</a>.
+</div>
+<div id="ref-carson2004lidar" class="csl-entry" role="listitem">
+Carson, Ward W, Hans-Erik Andersen, Stephen E Reutebuch, and Robert J McGaughey. 2004. <span>“<span>LiDAR</span> Applications in Forestry—<span>An</span> Overview.”</span> In <em><span>ASPRS Annual Conference Proceedings</span></em>, 4.
+</div>
+<div id="ref-doussExtractionIndividualTrees2022" class="csl-entry" role="listitem">
+Douss, Rim, and Imed Riadh Farah. 2022. <span>“Extraction of Individual Trees Based on <span>Canopy Height Model</span> to Monitor the State of the Forest.”</span> <em>Trees, Forests and People</em> 8 (June): 100257. <a href="https://doi.org/10.1016/j.tfp.2022.100257">https://doi.org/10.1016/j.tfp.2022.100257</a>.
+</div>
+<div id="ref-eysnAlpineITDBenchmark2015" class="csl-entry" role="listitem">
+Eysn, Lothar, Markus Hollaus, Eva Lindberg, Frédéric Berger, Jean-Matthieu Monnet, Michele Dalponte, Milan Kobal, et al. 2015. <span>“A <span>Benchmark</span> of <span>Lidar-Based Single Tree Detection Methods Using Heterogeneous Forest Data</span> from the <span>Alpine Space</span>.”</span> <em>Forests</em> 6 (5): 1721–47. <a href="https://doi.org/10.3390/f6051721">https://doi.org/10.3390/f6051721</a>.
+</div>
+<div id="ref-ferrariFusingSentinel1Sentinel22023" class="csl-entry" role="listitem">
+Ferrari, Felipe, Matheus Pinheiro Ferreira, Cláudio Aparecido Almeida, and Raul Queiroz Feitosa. 2023. <span>“Fusing <span>Sentinel-1</span> and <span>Sentinel-2 Images</span> for <span>Deforestation Detection</span> in the <span>Brazilian Amazon Under Diverse Cloud Conditions</span>.”</span> <em>IEEE Geoscience and Remote Sensing Letters</em> 20: 1–5. <a href="https://doi.org/10.1109/LGRS.2023.3242430">https://doi.org/10.1109/LGRS.2023.3242430</a>.
+</div>
+<div id="ref-ferreiraImprovingUrbanTree2024" class="csl-entry" role="listitem">
+Ferreira, Matheus Pinheiro, Daniel Rodrigues Dos Santos, Felipe Ferrari, Luiz Carlos Teixeira Coelho Filho, Gabriela Barbosa Martins, and Raul Queiroz Feitosa. 2024. <span>“Improving Urban Tree Species Classification by Deep-Learning Based Fusion of Digital Aerial Images and <span>LiDAR</span>.”</span> <em>Urban Forestry &amp; Urban Greening</em> 94 (April): 128240. <a href="https://doi.org/10.1016/j.ufug.2024.128240">https://doi.org/10.1016/j.ufug.2024.128240</a>.
+</div>
+<div id="ref-fuIndividualTreeSegmentationUAV2024" class="csl-entry" role="listitem">
+Fu, Yuwen, Yifang Niu, Li Wang, and Wang Li. 2024. <span>“Individual-<span>Tree Segmentation</span> from <span>UAV</span>–<span>LiDAR Data Using</span> a <span>Region-Growing Segmentation</span> and <span>Supervoxel-Weighted Fuzzy Clustering Approach</span>.”</span> <em>Remote Sensing</em> 16 (4): 608. <a href="https://doi.org/10.3390/rs16040608">https://doi.org/10.3390/rs16040608</a>.
+</div>
+<div id="ref-goodfellowDeepLearning2016" class="csl-entry" role="listitem">
+Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. 2016. <em>Deep Learning</em>. Adaptive Computation and Machine Learning. Cambridge, Massachusetts: The MIT Press.
+</div>
+<div id="ref-goyalRevisitingPointCloud2021" class="csl-entry" role="listitem">
+Goyal, Ankit, Hei Law, Bowei Liu, Alejandro Newell, and Jia Deng. 2021. <span>“Revisiting <span>Point Cloud Shape Classification</span> with a <span>Simple</span> and <span>Effective Baseline</span>.”</span> In <em>Proceedings of the 38th <span>International Conference</span> on <span>Machine Learning</span></em>, 3809–20. PMLR. <a href="https://proceedings.mlr.press/v139/goyal21a.html">https://proceedings.mlr.press/v139/goyal21a.html</a>.
+</div>
+<div id="ref-guoRelevanceAirborneLidar2011" class="csl-entry" role="listitem">
+Guo, Li, Nesrine Chehata, Clément Mallet, and Samia Boukir. 2011. <span>“Relevance of Airborne Lidar and Multispectral Image Data for Urban Scene Classification Using <span>Random Forests</span>.”</span> <em>ISPRS Journal of Photogrammetry and Remote Sensing</em> 66 (1): 56–66. <a href="https://doi.org/10.1016/j.isprsjprs.2010.08.007">https://doi.org/10.1016/j.isprsjprs.2010.08.007</a>.
+</div>
+<div id="ref-guoDeepLearning3D2021" class="csl-entry" role="listitem">
+Guo, Yulan, Hanyun Wang, Qingyong Hu, Hao Liu, Li Liu, and Mohammed Bennamoun. 2021. <span>“Deep <span>Learning</span> for <span>3D Point Clouds</span>: <span>A Survey</span>.”</span> <em>IEEE Transactions on Pattern Analysis and Machine Intelligence</em> 43 (12): 4338–64. <a href="https://doi.org/10.1109/TPAMI.2020.3005434">https://doi.org/10.1109/TPAMI.2020.3005434</a>.
+</div>
+<div id="ref-hansenAssessingForestNonForest2020" class="csl-entry" role="listitem">
+Hansen, Johannes N., Edward T. A. Mitchard, and Stuart King. 2020. <span>“Assessing <span>Forest</span>/<span>Non-Forest Separability Using Sentinel-1 C-Band Synthetic Aperture Radar</span>.”</span> <em>Remote Sensing</em> 12 (11): 1899. <a href="https://doi.org/10.3390/rs12111899">https://doi.org/10.3390/rs12111899</a>.
+</div>
+<div id="ref-heDeepResidualLearning2016" class="csl-entry" role="listitem">
+He, Kaiming, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. 2016. <span>“Deep <span>Residual Learning</span> for <span>Image Recognition</span>.”</span> In <em>Proceedings of the <span>IEEE Conference</span> on <span>Computer Vision</span> and <span>Pattern Recognition</span></em>, 770–78. <a href="https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html">https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html</a>.
+</div>
+<div id="ref-jakubowskiTradeoffsLidarPulse2013" class="csl-entry" role="listitem">
+Jakubowski, Marek K., Qinghua Guo, and Maggi Kelly. 2013. <span>“Tradeoffs Between Lidar Pulse Density and Forest Measurement Accuracy.”</span> <em>Remote Sensing of Environment</em> 130 (March): 245–53. <a href="https://doi.org/10.1016/j.rse.2012.11.024">https://doi.org/10.1016/j.rse.2012.11.024</a>.
+</div>
+<div id="ref-kcEstimationAboveGroundForest2024" class="csl-entry" role="listitem">
+Kc, Yam Bahadur, Qijing Liu, Pradip Saud, Damodar Gaire, and Hari Adhikari. 2024. <span>“Estimation of <span>Above-Ground Forest Biomass</span> in <span>Nepal</span> by the <span>Use</span> of <span>Airborne LiDAR</span>, and <span>Forest Inventory Data</span>.”</span> <em>Land</em> 13 (2): 213. <a href="https://doi.org/10.3390/land13020213">https://doi.org/10.3390/land13020213</a>.
+</div>
+<div id="ref-Kirillov_2023_ICCV" class="csl-entry" role="listitem">
+Kirillov, Alexander, Eric Mintun, Nikhila Ravi, Hanzi Mao, Chloe Rolland, Laura Gustafson, Tete Xiao, et al. 2023. <span>“Segment <span>Anything</span>.”</span> In <em>Proceedings of the <span>IEEE</span>/<span>CVF International Conference</span> on <span>Computer Vision</span> (<span>ICCV</span>)</em>, 4015–26.
+</div>
+<div id="ref-laExtractionIndividualTree2015" class="csl-entry" role="listitem">
+La, Hien Phu, Yang Dam Eo, Anjin Chang, and Changjae Kim. 2015. <span>“Extraction of Individual Tree Crown Using Hyperspectral Image and <span>LiDAR</span> Data.”</span> <em>KSCE Journal of Civil Engineering</em> 19 (4): 1078–87. <a href="https://doi.org/10.1007/s12205-013-1178-z">https://doi.org/10.1007/s12205-013-1178-z</a>.
+</div>
+<div id="ref-larosaMultitaskFullyConvolutional2021" class="csl-entry" role="listitem">
+La Rosa, Laura Elena Cué, Camile Sothe, Raul Queiroz Feitosa, Cláudia Maria De Almeida, Marcos Benedito Schimalski, and Dário Augusto Borges Oliveira. 2021. <span>“Multi-Task Fully Convolutional Network for Tree Species Mapping in Dense Forests Using Small Training Hyperspectral Data.”</span> <em>ISPRS Journal of Photogrammetry and Remote Sensing</em> 179 (September): 35–49. <a href="https://doi.org/10.1016/j.isprsjprs.2021.07.001">https://doi.org/10.1016/j.isprsjprs.2021.07.001</a>.
+</div>
+<div id="ref-lassalleDeepLearningbasedIndividual2022" class="csl-entry" role="listitem">
+Lassalle, Guillaume, Matheus Pinheiro Ferreira, Laura Elena Cué La Rosa, and Carlos Roberto de Souza Filho. 2022. <span>“Deep Learning-Based Individual Tree Crown Delineation in Mangrove Forests Using Very-High-Resolution Satellite Imagery.”</span> <em>ISPRS Journal of Photogrammetry and Remote Sensing</em> 189 (July): 220–35. <a href="https://doi.org/10.1016/j.isprsjprs.2022.05.002">https://doi.org/10.1016/j.isprsjprs.2022.05.002</a>.
+</div>
+<div id="ref-liFusionApproachesIndividual2023" class="csl-entry" role="listitem">
+Li, Qian, Baoxin Hu, Jiali Shang, and Hui Li. 2023. <span>“Fusion <span>Approaches</span> to <span>Individual Tree Species Classification Using Multisource Remote Sensing Data</span>.”</span> <em>Forests</em> 14 (7): 1392. <a href="https://doi.org/10.3390/f14071392">https://doi.org/10.3390/f14071392</a>.
+</div>
+<div id="ref-liNewMethodSegmenting2012" class="csl-entry" role="listitem">
+Li, Wenkai, Qinghua Guo, Marek K. Jakubowski, and Maggi Kelly. 2012. <span>“A <span>New Method</span> for <span>Segmenting Individual Trees</span> from the <span>Lidar Point Cloud</span>.”</span> <em>Photogrammetric Engineering &amp; Remote Sensing</em> 78 (1): 75–84. <a href="https://doi.org/10.14358/PERS.78.1.75">https://doi.org/10.14358/PERS.78.1.75</a>.
+</div>
+<div id="ref-lianBiomassCalculationsIndividual2022" class="csl-entry" role="listitem">
+Lian, Xugang, Hailang Zhang, Wu Xiao, Yunping Lei, Linlin Ge, Kai Qin, Yuanwen He, et al. 2022. <span>“Biomass <span>Calculations</span> of <span>Individual Trees Based</span> on <span>Unmanned Aerial Vehicle Multispectral Imagery</span> and <span>Laser Scanning Combined</span> with <span>Terrestrial Laser Scanning</span> in <span>Complex Stands</span>.”</span> <em>Remote Sensing</em> 14 (19): 4715. <a href="https://doi.org/10.3390/rs14194715">https://doi.org/10.3390/rs14194715</a>.
+</div>
+<div id="ref-lisiewiczCorrectingResultsCHMBased2022" class="csl-entry" role="listitem">
+Lisiewicz, Maciej, Agnieszka Kamińska, Bartłomiej Kraszewski, and Krzysztof Stereńczak. 2022. <span>“Correcting the <span>Results</span> of <span>CHM-Based Individual Tree Detection Algorithms</span> to <span>Improve Their Accuracy</span> and <span>Reliability</span>.”</span> <em>Remote Sensing</em> 14 (8): 1822. <a href="https://doi.org/10.3390/rs14081822">https://doi.org/10.3390/rs14081822</a>.
+</div>
+<div id="ref-longFullyConvolutionalNetworks2015" class="csl-entry" role="listitem">
+Long, Jonathan, Evan Shelhamer, and Trevor Darrell. 2015. <span>“Fully <span>Convolutional Networks</span> for <span>Semantic Segmentation</span>.”</span> In <em>Proceedings of the <span>IEEE Conference</span> on <span>Computer Vision</span> and <span>Pattern Recognition</span></em>, 3431–40. <a href="https://openaccess.thecvf.com/content_cvpr_2015/html/Long_Fully_Convolutional_Networks_2015_CVPR_paper.html">https://openaccess.thecvf.com/content_cvpr_2015/html/Long_Fully_Convolutional_Networks_2015_CVPR_paper.html</a>.
+</div>
+<div id="ref-lopezserranoArtificialIntelligencebasedSoftware2022" class="csl-entry" role="listitem">
+López Serrano, F. R., E. Rubio, F. A. García Morote, M. Andrés Abellán, M. I. Picazo Córdoba, F. García Saucedo, E. Martínez García, et al. 2022. <span>“Artificial Intelligence-Based Software (<span>AID-FOREST</span>) for Tree Detection: <span>A</span> New Framework for Fast and Accurate Forest Inventorying Using <span>LiDAR</span> Point Clouds.”</span> <em>International Journal of Applied Earth Observation and Geoinformation</em> 113 (September): 103014. <a href="https://doi.org/10.1016/j.jag.2022.103014">https://doi.org/10.1016/j.jag.2022.103014</a>.
+</div>
+<div id="ref-lucasIdentificationLinearVegetation2019" class="csl-entry" role="listitem">
+Lucas, Chris, Willem Bouten, Zsófia Koma, W. Daniel Kissling, and Arie C. Seijmonsbergen. 2019. <span>“Identification of <span>Linear Vegetation Elements</span> in a <span>Rural Landscape Using LiDAR Point Clouds</span>.”</span> <em>Remote Sensing</em> 11 (3): 292. <a href="https://doi.org/10.3390/rs11030292">https://doi.org/10.3390/rs11030292</a>.
+</div>
+<div id="ref-malletRelevanceAssessmentFullwaveform2011" class="csl-entry" role="listitem">
+Mallet, Clément, Frédéric Bretar, Michel Roux, Uwe Soergel, and Christian Heipke. 2011. <span>“Relevance Assessment of Full-Waveform Lidar Data for Urban Area Classification.”</span> <em>ISPRS Journal of Photogrammetry and Remote Sensing</em> 66 (6): S71–84. <a href="https://doi.org/10.1016/j.isprsjprs.2011.09.008">https://doi.org/10.1016/j.isprsjprs.2011.09.008</a>.
+</div>
+<div id="ref-martinsDeepLearningbasedTree2021" class="csl-entry" role="listitem">
+Martins, Gabriela Barbosa, Laura Elena Cué La Rosa, Patrick Nigri Happ, Luiz Carlos Teixeira Coelho Filho, Celso Junius F. Santos, Raul Queiroz Feitosa, and Matheus Pinheiro Ferreira. 2021. <span>“Deep Learning-Based Tree Species Mapping in a Highly Diverse Tropical Urban Setting.”</span> <em>Urban Forestry &amp; Urban Greening</em> 64 (September): 127241. <a href="https://doi.org/10.1016/j.ufug.2021.127241">https://doi.org/10.1016/j.ufug.2021.127241</a>.
+</div>
+<div id="ref-naessetDeterminationMeanTree1997" class="csl-entry" role="listitem">
+Næsset, Erik. 1997a. <span>“Determination of Mean Tree Height of Forest Stands Using Airborne Laser Scanner Data.”</span> <em>ISPRS Journal of Photogrammetry and Remote Sensing</em> 52 (2): 49–56. <a href="https://doi.org/10.1016/S0924-2716(97)83000-6">https://doi.org/10.1016/S0924-2716(97)83000-6</a>.
+</div>
+<div id="ref-naessetEstimatingTimberVolume1997" class="csl-entry" role="listitem">
+———. 1997b. <span>“Estimating Timber Volume of Forest Stands Using Airborne Laser Scanner Data.”</span> <em>Remote Sensing of Environment</em> 61 (2): 246–53. <a href="https://doi.org/10.1016/S0034-4257(97)00041-2">https://doi.org/10.1016/S0034-4257(97)00041-2</a>.
+</div>
+<div id="ref-nelsonDeterminingForestCanopy1984" class="csl-entry" role="listitem">
+Nelson, Ross, William Krabill, and Gordon MacLean. 1984. <span>“Determining Forest Canopy Characteristics Using Airborne Laser Data.”</span> <em>Remote Sensing of Environment</em> 15 (3): 201–12. <a href="https://doi.org/10.1016/0034-4257(84)90031-2">https://doi.org/10.1016/0034-4257(84)90031-2</a>.
+</div>
+<div id="ref-nilssonEstimationTreeHeights1996" class="csl-entry" role="listitem">
+Nilsson, Mats. 1996. <span>“Estimation of Tree Heights and Stand Volume Using an Airborne Lidar System.”</span> <em>Remote Sensing of Environment</em> 56 (1): 1–7. <a href="https://doi.org/10.1016/0034-4257(95)00224-3">https://doi.org/10.1016/0034-4257(95)00224-3</a>.
+</div>
+<div id="ref-nurunnabiDevelopmentPreciseTree2024" class="csl-entry" role="listitem">
+Nurunnabi, Abdul, Felicia Teferle, Debra F. Laefer, Meida Chen, and Mir Masoom Ali. 2024. <span>“Development of a <span>Precise Tree Structure</span> from <span>LiDAR Point Clouds</span>.”</span> <em>The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences</em> XLVIII-2-2024 (June): 301–8. <a href="https://doi.org/10.5194/isprs-archives-XLVIII-2-2024-301-2024">https://doi.org/10.5194/isprs-archives-XLVIII-2-2024-301-2024</a>.
+</div>
+<div id="ref-oscoConvolutionalNeuralNetwork2020" class="csl-entry" role="listitem">
+Osco, Lucas Prado, Mauro Dos Santos De Arruda, José Marcato Junior, Neemias Buceli Da Silva, Ana Paula Marques Ramos, Érika Akemi Saito Moryia, Nilton Nobuhiro Imai, et al. 2020. <span>“A Convolutional Neural Network Approach for Counting and Geolocating Citrus-Trees in <span>UAV</span> Multispectral Imagery.”</span> <em>ISPRS Journal of Photogrammetry and Remote Sensing</em> 160 (February): 97–106. <a href="https://doi.org/10.1016/j.isprsjprs.2019.12.010">https://doi.org/10.1016/j.isprsjprs.2019.12.010</a>.
+</div>
+<div id="ref-ozdemirDeepLearningFramework2021" class="csl-entry" role="listitem">
+Özdemi̇r, Emre. 2021. <span>“A <span>Deep Learning Framework</span> for <span>Geospatial Point Cloud Classification</span>.”</span> PhD thesis, Moscow: Skolkovo Institute of Science; Technology. <a href="https://www.skoltech.ru/app/data/uploads/2021/12/thesis-2.pdf">https://www.skoltech.ru/app/data/uploads/2021/12/thesis-2.pdf</a>.
+</div>
+<div id="ref-paulyEfficientSimplificationPointsampled2002" class="csl-entry" role="listitem">
+Pauly, M., M. Gross, and L. P. Kobbelt. 2002. <span>“Efficient Simplification of Point-Sampled Surfaces.”</span> In <em><span>IEEE Visualization</span>, 2002. <span>VIS</span> 2002.</em>, 163–70. Boston, MA, USA: IEEE. <a href="https://doi.org/10.1109/VISUAL.2002.1183771">https://doi.org/10.1109/VISUAL.2002.1183771</a>.
+</div>
+<div id="ref-qiPointNet2017" class="csl-entry" role="listitem">
+Qi, Charles R., Hao Su, Kaichun Mo, and Leonidas J. Guibas. 2017. <span>“<span>PointNet</span>: <span>Deep Learning</span> on <span>Point Sets</span> for <span>3D Classification</span> and <span>Segmentation</span>.”</span> In <em>Proceedings of the <span>IEEE Conference</span> on <span>Computer Vision</span> and <span>Pattern Recognition</span></em>, 652–60.
+</div>
+<div id="ref-qiPointNetPlusPlus2017" class="csl-entry" role="listitem">
+Qi, Charles R., Li Yi, Hao Su, and Leonidas J. Guibas. 2017. <span>“<span>PointNet</span>++: <span>Deep Hierarchical Feature Learning</span> on <span>Point Sets</span> in a <span>Metric Space</span>.”</span> In <em>Advances in <span>Neural Information Processing Systems</span></em>. Vol. 30. Curran Associates, Inc.
+</div>
+<div id="ref-ronnebergerUNetConvolutionalNetworks2015" class="csl-entry" role="listitem">
+Ronneberger, Olaf, Philipp Fischer, and Thomas Brox. 2015. <span>“U-<span>Net</span>: <span>Convolutional Networks</span> for <span>Biomedical Image Segmentation</span>.”</span> In <em>Medical <span>Image Computing</span> and <span>Computer-Assisted Intervention</span> – <span>MICCAI</span> 2015</em>, edited by Nassir Navab, Joachim Hornegger, William M. Wells, and Alejandro F. Frangi, 234–41. Lecture <span>Notes</span> in <span>Computer Science</span>. Cham: Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-24574-4_28">https://doi.org/10.1007/978-3-319-24574-4_28</a>.
+</div>
+<div id="ref-rousselLidRPackage2020" class="csl-entry" role="listitem">
+Roussel, Jean-Romain, David Auty, Nicholas C. Coops, Piotr Tompalski, Tristan R. H. Goodbody, Andrew Sánchez Meador, Jean-François Bourdon, Florian de Boissieu, and Alexis Achim. 2020. <span>“<span class="nocase">lidR</span>: <span>An R</span> Package for Analysis of <span>Airborne Laser Scanning</span> (<span>ALS</span>) Data.”</span> <em>Remote Sensing of Environment</em> 251: 112061. <a href="https://doi.org/10.1016/j.rse.2020.112061">https://doi.org/10.1016/j.rse.2020.112061</a>.
+</div>
+<div id="ref-simonyanVeryDeepConvolutional2014" class="csl-entry" role="listitem">
+Simonyan, Karen, and Andrew Zisserman. 2014. <span>“Very <span>Deep Convolutional Networks</span> for <span>Large-Scale Image Recognition</span>.”</span> arXiv. <a href="https://doi.org/10.48550/ARXIV.1409.1556">https://doi.org/10.48550/ARXIV.1409.1556</a>.
+</div>
+<div id="ref-sinica-sinavskisForestStandVolume2022" class="csl-entry" role="listitem">
+Sinica-Sinavskis, Juris, and Gunta Grube. 2022. <span>“Forest <span>Stand Volume Estimation</span> by <span>Species</span> from <span>Sentinel-2</span> and <span>LiDAR Data Using Regression Models</span>.”</span> In <em>2022 18th <span>Biennial Baltic Electronics Conference</span> (<span>BEC</span>)</em>, 1–5. <a href="https://doi.org/10.1109/BEC56180.2022.9935590">https://doi.org/10.1109/BEC56180.2022.9935590</a>.
+</div>
+<div id="ref-treitzLiDARSamplingDensity2012" class="csl-entry" role="listitem">
+Treitz, Paul, Kevin Lim, Murray Woods, Doug Pitt, Dave Nesbitt, and Dave Etheridge. 2012. <span>“<span>LiDAR Sampling Density</span> for <span>Forest Resource Inventories</span> in <span>Ontario</span>, <span>Canada</span>.”</span> <em>Remote Sensing</em> 4 (4): 830–48. <a href="https://doi.org/10.3390/rs4040830">https://doi.org/10.3390/rs4040830</a>.
+</div>
+<div id="ref-venturaIndividualTreeDetection2024" class="csl-entry" role="listitem">
+Ventura, Jonathan, Camille Pawlak, Milo Honsberger, Cameron Gonsalves, Julian Rice, Natalie L. R. Love, Skyler Han, et al. 2024. <span>“Individual Tree Detection in Large-Scale Urban Environments Using High-Resolution Multispectral Imagery.”</span> <em>International Journal of Applied Earth Observation and Geoinformation</em> 130 (June): 103848. <a href="https://doi.org/10.1016/j.jag.2024.103848">https://doi.org/10.1016/j.jag.2024.103848</a>.
+</div>
+<div id="ref-vermeerLidarbasedNorwegianTree2023" class="csl-entry" role="listitem">
+Vermeer, Martijn, Jacob Alexander Hay, David Völgyes, Zsófia Koma, Johannes Breidenbach, and Daniele Stefano Maria Fantin. 2023. <span>“Lidar-Based <span>Norwegian</span> Tree Species Detection Using Deep Learning.”</span> arXiv. <a href="https://doi.org/10.48550/arXiv.2311.06066">https://doi.org/10.48550/arXiv.2311.06066</a>.
+</div>
+<div id="ref-vianaTimberVolumeEstimation2022" class="csl-entry" role="listitem">
+Viana, Aguida Beatriz Travaglia, Carlos Moreira Miquelino Eleto Torres, Cibele Humel do Amaral, Elpídio Inácio Fernandes Filho, Carlos Pedro Boechat Soares, Felipe Carvalho Santana, Lucas Brandão Timo, and Samuel José Silva Soares da Rocha. 2022. <span>“Timber <span>Volume Estimation By Using Terrestrial Laser Scanning</span>: <span>Method In Hyperdiverse Secondary Forests</span>.”</span> <em>Revista <span>Á</span>rvore</em> 46 (August). <a href="https://doi.org/10.1590/1806-908820220000021">https://doi.org/10.1590/1806-908820220000021</a>.
+</div>
+<div id="ref-wangRecentAdvancesDeep2020" class="csl-entry" role="listitem">
+Wang, Xizhao, Yanxia Zhao, and Farhad Pourpanah. 2020. <span>“Recent Advances in Deep Learning.”</span> <em>International Journal of Machine Learning and Cybernetics</em> 11 (4): 747–50. <a href="https://doi.org/10.1007/s13042-020-01096-5">https://doi.org/10.1007/s13042-020-01096-5</a>.
+</div>
+<div id="ref-wangAutomaticDetectionIndividual2023" class="csl-entry" role="listitem">
+Wang, Zhen, Pu Li, Yuancheng Cui, Shuowen Lei, and Zhizhong Kang. 2023. <span>“Automatic <span>Detection</span> of <span>Individual Trees</span> in <span>Forests Based</span> on <span>Airborne LiDAR Data</span> with a <span>Tree Region-Based Convolutional Neural Network</span> (<span>RCNN</span>).”</span> <em>Remote Sensing</em> 15 (4): 1024. <a href="https://doi.org/10.3390/rs15041024">https://doi.org/10.3390/rs15041024</a>.
+</div>
+<div id="ref-weinmannFeatureRelevanceAssessment2013" class="csl-entry" role="listitem">
+Weinmann, M., B. Jutzi, and C. Mallet. 2013. <span>“Feature Relevance Assessment for the Semantic Interpretation of <span>3D</span> Point Cloud Data.”</span> <em>ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences</em> II-5-W2 (October): 313–18. <a href="https://doi.org/10.5194/isprsannals-II-5-W2-313-2013">https://doi.org/10.5194/isprsannals-II-5-W2-313-2013</a>.
+</div>
+<div id="ref-weinsteinDeepForestPythonPackage2020" class="csl-entry" role="listitem">
+Weinstein, Ben G., Sergio Marconi, Mélaine Aubry-Kientz, Gregoire Vincent, Henry Senyondo, and Ethan P. White. 2020. <span>“<span>DeepForest</span>: <span>A</span> <span><span class="smallcaps">Python</span></span> Package for <span>RGB</span> Deep Learning Tree Crown Delineation.”</span> Edited by Sydne Record. <em>Methods in Ecology and Evolution</em> 11 (12): 1743–51. <a href="https://doi.org/10.1111/2041-210X.13472">https://doi.org/10.1111/2041-210X.13472</a>.
+</div>
+<div id="ref-weinsteinIndividualTreeCrownDetection2019" class="csl-entry" role="listitem">
+Weinstein, Ben G., Sergio Marconi, Stephanie Bohlman, Alina Zare, and Ethan White. 2019. <span>“Individual <span>Tree-Crown Detection</span> in <span>RGB Imagery Using Semi-Supervised Deep Learning Neural Networks</span>.”</span> <em>Remote Sensing</em> 11 (11): 1309. <a href="https://doi.org/10.3390/rs11111309">https://doi.org/10.3390/rs11111309</a>.
+</div>
+<div id="ref-westContextdrivenAutomatedTarget2004" class="csl-entry" role="listitem">
+West, Karen F., Brian N. Webb, James R. Lersch, Steven Pothier, Joseph M. Triscari, and A. E. Iverson. 2004. <span>“Context-Driven Automated Target Detection in <span>3D</span> Data.”</span> In <em>Defense and <span>Security</span></em>, edited by Firooz A. Sadjadi, 133–43. Orlando, FL. <a href="https://doi.org/10.1117/12.542536">https://doi.org/10.1117/12.542536</a>.
+</div>
+<div id="ref-whiteABAGuide2013" class="csl-entry" role="listitem">
+White, Joanne C., Michael A. Wulder, Andrés Varhola, Mikko Vastaranta, Nicholas C. Coops, Bruce D. Cook, Doug Pitt, and Murray Woods. 2013. <em>A Best Practices Guide for Generating Forest Inventory Attributes from Airborne Laser Scanning Data Using the Area-Based Approach</em>. Victoria, British Columbia: Canadian Forest Service.
+</div>
+<div id="ref-wilkesTLS2treesScalableTree2023" class="csl-entry" role="listitem">
+Wilkes, Phil, Mathias Disney, John Armston, Harm Bartholomeus, Lisa Bentley, Benjamin Brede, Andrew Burt, et al. 2023. <span>“<span><em>TLS2trees</em></span> : <span>A</span> Scalable Tree Segmentation Pipeline for <span><span class="smallcaps">TLS</span></span> Data.”</span> <em>Methods in Ecology and Evolution</em> 14 (12): 3083–99. <a href="https://doi.org/10.1111/2041-210X.14233">https://doi.org/10.1111/2041-210X.14233</a>.
+</div>
+<div id="ref-wuFineClassificationUrban2024" class="csl-entry" role="listitem">
+Wu, Jingru, Qixia Man, Xinming Yang, Pinliang Dong, Xiaotong Ma, Chunhui Liu, and Changyin Han. 2024. <span>“Fine <span>Classification</span> of <span>Urban Tree Species Based</span> on <span>UAV-Based RGB Imagery</span> and <span>LiDAR Data</span>.”</span> <em>Forests</em> 15 (2): 390. <a href="https://doi.org/10.3390/f15020390">https://doi.org/10.3390/f15020390</a>.
+</div>
+<div id="ref-zhangImprovedAreabasedApproach2023" class="csl-entry" role="listitem">
+Zhang, Zhengnan, Tiejun Wang, Andrew K. Skidmore, Fuliang Cao, Guanghui She, and Lin Cao. 2023. <span>“An Improved Area-Based Approach for Estimating Plot-Level Tree <span>DBH</span> from Airborne <span>LiDAR</span> Data.”</span> <em>Forest Ecosystems</em> 10 (January): 100089. <a href="https://doi.org/10.1016/j.fecs.2023.100089">https://doi.org/10.1016/j.fecs.2023.100089</a>.
+</div>
+<div id="ref-zhenImpactTreeOrientedGrowth2014" class="csl-entry" role="listitem">
+Zhen, Zhen, Lindi Quackenbush, and Lianjun Zhang. 2014. <span>“Impact of <span>Tree-Oriented Growth Order</span> in <span>Marker-Controlled Region Growing</span> for <span>Individual Tree Crown Delineation Using Airborne Laser Scanner</span> (<span>ALS</span>) <span>Data</span>.”</span> <em>Remote Sensing</em> 6 (1): 555–79. <a href="https://doi.org/10.3390/rs6010555">https://doi.org/10.3390/rs6010555</a>.
+</div>
+<div id="ref-zhuDualPathMultiScale2019" class="csl-entry" role="listitem">
+Zhu, Liang, Zhijian Zhao, Chao Lu, Yining Lin, Yao Peng, and Tangren Yao. 2019. <span>“Dual <span>Path Multi-Scale Fusion Networks</span> with <span>Attention</span> for <span>Crowd Counting</span>.”</span> arXiv. <a href="https://doi.org/10.48550/ARXIV.1902.01115">https://doi.org/10.48550/ARXIV.1902.01115</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/01_introduction.html" class="pagination-link" aria-label="Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/03_materials_and_methods.html" class="pagination-link" aria-label="Materials and methods">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Materials and methods</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/iod-ine/thesis/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/iod-ine/thesis/blob/main/chapters/02_literature_review.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":false});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>
