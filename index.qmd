@@ -1,5 +1,9 @@
 ## Acknowledgments {.unnumbered}
 
-My supervisor, professor Clement Fortin.
-My previous supervisor, professor Anton Ivanov.
-Alexander Kedrov and Albert Vasiliev from Space Technologies and Services Center, Ltd.
+As any large research project, finishing this thesis wouldn't be possible without the support of many people.
+I would like to thank some of them, whose help played the biggest roles in my successfully finishing this.
+First, my supervisor, professor Clement Fortin, who picked up the lead when the project was in a disarray and guided me through to the end, helping to prioritize and focus on what was significant.
+Second, my previous supervisor, professor Anton Ivanov, under whose supervision the project started and gradually evolved into what it finally became.
+Third, Alexander Kedrov and Albert Vasiliev from Space Technologies and Services Center, Ltd, who allowed me to work with their data and taught me about the inventories in the field and current approaches of extending them with remote sensing data in industry.
+And last, but also the most important, is my beautiful patient wife, who was supportive and forgiving from the very first moments of my PhD studies, and without whose help I would have given up many times over.
+Thank you all, sincerely, for the guidance, the wisdom, the knowledge, the help, the support.
