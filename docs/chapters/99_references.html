@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>References – A deep learning framework for mixed dense forests parameter estimation at individual tree scale</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/05_conclusion.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/99_references.html">References</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Tree-scale parameter estimation with deep learning</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/iod-ine/thesis" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="../ivan-dubrovin-phd-thesis.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acknowledgments <span style="visibility: hidden">🌹</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02_literature_review.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Literature review</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03_materials_and_methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Materials and methods</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04_results.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Results</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05_conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/99_references.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">References</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-aertsForestRestorationBiodiversity2011" class="csl-entry" role="listitem">
+Aerts, Raf, and Olivier Honnay. 2011. <span>“Forest Restoration,
+Biodiversity and Ecosystem Functioning.”</span> <em>BMC Ecology</em> 11
+(1): 29. <a href="https://doi.org/10.1186/1472-6785-11-29">https://doi.org/10.1186/1472-6785-11-29</a>.
+</div>
+<div id="ref-Allaire_Quarto_2024" class="csl-entry" role="listitem">
+Allaire, J. J., Charles Teague, Carlos Scheidegger, Yihui Xie, and
+Christophe Dervieux. 2024. <span>“Quarto.”</span> <a href="https://doi.org/10.5281/zenodo.5960048">https://doi.org/10.5281/zenodo.5960048</a>.
+</div>
+<div id="ref-allenTreeSpeciesClassification2022" class="csl-entry" role="listitem">
+Allen, Matthew J., Stuart W. D. Grieve, Harry J. F. Owen, and Emily R.
+Lines. 2022. <span>“Tree Species Classification from Complex Laser
+Scanning Data in <span>Mediterranean</span> Forests Using Deep
+Learning.”</span> <em>Methods in Ecology and Evolution</em>, September.
+<a href="https://doi.org/10.1111/2041-210X.13981">https://doi.org/10.1111/2041-210X.13981</a>.
+</div>
+<div id="ref-Ansel_PyTorch_2_Faster_2024" class="csl-entry" role="listitem">
+Ansel, Jason, Edward Yang, Horace He, Natalia Gimelshein, Animesh Jain,
+Michael Voznesensky, Bin Bao, et al. 2024. <span>“<span class="nocase">PyTorch 2: Faster Machine Learning Through Dynamic Python
+Bytecode Transformation and Graph Compilation</span>.”</span> In
+<em>29th ACM International Conference on Architectural Support for
+Programming Languages and Operating Systems, Volume 2 (ASPLOS ’24)</em>.
+ACM. <a href="https://doi.org/10.1145/3620665.3640366">https://doi.org/10.1145/3620665.3640366</a>.
+</div>
+<div id="ref-arenas-corralizaAutomaticMappingTree2020" class="csl-entry" role="listitem">
+Arenas-Corraliza, Isabel, Ana Nieto, and Gerardo Moreno. 2020.
+<span>“Automatic Mapping of Tree Crowns in Scattered-Tree Woodlands
+Using Low-Density <span>LiDAR</span> Data and Infrared Imagery.”</span>
+<em>Agroforestry Systems</em> 94 (5): 1989–2002. <a href="https://doi.org/10.1007/s10457-020-00517-2">https://doi.org/10.1007/s10457-020-00517-2</a>.
+</div>
+<div id="ref-aubry-kientzMultisensorDataFusion2021" class="csl-entry" role="listitem">
+Aubry-Kientz, Mélaine, Anthony Laybros, Ben Weinstein, James G. C. Ball,
+Toby Jackson, David Coomes, and Grégoire Vincent. 2021.
+<span>“Multisensor <span>Data Fusion</span> for <span>Improved
+Segmentation</span> of <span>Individual Tree Crowns</span> in
+<span>Dense Tropical Forests</span>.”</span> <em>IEEE Journal of
+Selected Topics in Applied Earth Observations and Remote Sensing</em>
+14: 3927–36. <a href="https://doi.org/10.1109/JSTARS.2021.3069159">https://doi.org/10.1109/JSTARS.2021.3069159</a>.
+</div>
+<div id="ref-balestraLiDARDataFusion2024" class="csl-entry" role="listitem">
+Balestra, Mattia, Suzanne Marselis, Temuulen Tsagaan Sankey, Carlos
+Cabo, Xinlian Liang, Martin Mokroš, Xi Peng, et al. 2024.
+<span>“<span>LiDAR Data Fusion</span> to <span>Improve Forest Attribute
+Estimates</span>: <span>A Review</span>.”</span> <em>Current Forestry
+Reports</em> 10 (4): 281–97. <a href="https://doi.org/10.1007/s40725-024-00223-7">https://doi.org/10.1007/s40725-024-00223-7</a>.
+</div>
+<div id="ref-belloReviewDeepLearning2020" class="csl-entry" role="listitem">
+Bello, Saifullahi Aminu, Shangshu Yu, Cheng Wang, Jibril Muhmmad Adam,
+and Jonathan Li. 2020. <span>“Review: <span>Deep Learning</span> on
+<span>3D Point Clouds</span>.”</span> <em>Remote Sensing</em> 12 (11):
+1729. <a href="https://doi.org/10.3390/rs12111729">https://doi.org/10.3390/rs12111729</a>.
+</div>
+<div id="ref-bishop2006pattern" class="csl-entry" role="listitem">
+Bishop, Christopher. 2006. <em>Pattern <span>Recognition</span> and
+<span>Machine Learning</span></em>. Springer. <a href="https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/">https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/</a>.
+</div>
+<div id="ref-bouvierGeneralizingPredictiveModels2015" class="csl-entry" role="listitem">
+Bouvier, Marc, Sylvie Durrieu, Richard A. Fournier, and Jean-Pierre
+Renaud. 2015. <span>“Generalizing Predictive Models of Forest Inventory
+Attributes Using an Area-Based Approach with Airborne <span>LiDAR</span>
+Data.”</span> <em>Remote Sensing of Environment</em> 156 (January):
+322–34. <a href="https://doi.org/10.1016/j.rse.2014.10.004">https://doi.org/10.1016/j.rse.2014.10.004</a>.
+</div>
+<div id="ref-burleyEncyclopediaForestSciences2004" class="csl-entry" role="listitem">
+Burley, Jeffery, John Youngquist, and Julian Evans, eds. 2004.
+<em>Encyclopedia of Forest Sciences</em>. 1st ed. Oxford: Elsevier.
+</div>
+<div id="ref-burtExtractingIndividualTrees2018" class="csl-entry" role="listitem">
+Burt, Andrew, Mathias Disney, and Kim Calders. 2018. <span>“Extracting
+Individual Trees from Lidar Point Clouds Using
+<span><em>Treeseg</em></span>.”</span> Edited by Sarah Goslee.
+<em>Methods in Ecology and Evolution</em>, December, 2041–210X.13121. <a href="https://doi.org/10.1111/2041-210X.13121">https://doi.org/10.1111/2041-210X.13121</a>.
+</div>
+<div id="ref-carson2004lidar" class="csl-entry" role="listitem">
+Carson, Ward W, Hans-Erik Andersen, Stephen E Reutebuch, and Robert J
+McGaughey. 2004. <span>“<span>LiDAR</span> Applications in
+Forestry—<span>An</span> Overview.”</span> In <em><span>ASPRS Annual
+Conference Proceedings</span></em>, 4.
+</div>
+<div id="ref-deng2012mnist" class="csl-entry" role="listitem">
+Deng, Li. 2012. <span>“The Mnist Database of Handwritten Digit Images
+for Machine Learning Research.”</span> <em>IEEE Signal Processing
+Magazine</em> 29 (6): 141–42.
+</div>
+<div id="ref-doussExtractionIndividualTrees2022" class="csl-entry" role="listitem">
+Douss, Rim, and Imed Riadh Farah. 2022. <span>“Extraction of Individual
+Trees Based on <span>Canopy Height Model</span> to Monitor the State of
+the Forest.”</span> <em>Trees, Forests and People</em> 8 (June): 100257.
+<a href="https://doi.org/10.1016/j.tfp.2022.100257">https://doi.org/10.1016/j.tfp.2022.100257</a>.
+</div>
+<div id="ref-dubrovinExplorationPropertiesPoint2024" class="csl-entry" role="listitem">
+Dubrovin, Ivan, and Clement Fortin. 2024. <span>“An
+<span>Exploration</span> of <span>Properties</span> of <span>Point
+Clouds</span> of <span>Individual Trees Extracted From</span> a
+<span>Larger UAV Lidar Survey</span>.”</span> In <em><span>IGARSS</span>
+2024 - 2024 <span>IEEE International Geoscience</span> and <span>Remote
+Sensing Symposium</span></em>, 4503–6. Athens, Greece: IEEE. <a href="https://doi.org/10.1109/IGARSS53475.2024.10641061">https://doi.org/10.1109/IGARSS53475.2024.10641061</a>.
+</div>
+<div id="ref-dubrovinOpenDatasetIndividual2024" class="csl-entry" role="listitem">
+Dubrovin, Ivan, Clement Fortin, and Alexander Kedrov. 2024. <span>“An
+Open Dataset for Individual Tree Detection in <span>UAV LiDAR</span>
+Point Clouds and <span>RGB</span> Orthophotos in Dense Mixed
+Forests.”</span> <em>Scientific Reports</em> 14 (1): 21938. <a href="https://doi.org/10.1038/s41598-024-72669-5">https://doi.org/10.1038/s41598-024-72669-5</a>.
+</div>
+<div id="ref-eysnAlpineITDBenchmark2015" class="csl-entry" role="listitem">
+Eysn, Lothar, Markus Hollaus, Eva Lindberg, Frédéric Berger,
+Jean-Matthieu Monnet, Michele Dalponte, Milan Kobal, et al. 2015.
+<span>“A <span>Benchmark</span> of <span>Lidar-Based Single Tree
+Detection Methods Using Heterogeneous Forest Data</span> from the
+<span>Alpine Space</span>.”</span> <em>Forests</em> 6 (5): 1721–47. <a href="https://doi.org/10.3390/f6051721">https://doi.org/10.3390/f6051721</a>.
+</div>
+<div id="ref-faheyForestCarbonStorage2010" class="csl-entry" role="listitem">
+Fahey, Timothy J, Peter B Woodbury, John J Battles, Christine L Goodale,
+Steven P Hamburg, Scott V Ollinger, and Christopher W Woodall. 2010.
+<span>“Forest Carbon Storage: Ecology, Management, and Policy.”</span>
+<em>Frontiers in Ecology and the Environment</em> 8 (5): 245–52. <a href="https://doi.org/10.1890/080169">https://doi.org/10.1890/080169</a>.
+</div>
+<div id="ref-Falcon_PyTorch_Lightning_2019" class="csl-entry" role="listitem">
+Falcon, William, and The PyTorch Lightning team. 2019.
+<span>“<span>PyTorch Lightning</span>.”</span> <a href="https://doi.org/10.5281/zenodo.3828935">https://doi.org/10.5281/zenodo.3828935</a>.
+</div>
+<div id="ref-farrShuttleRadarTopography2000" class="csl-entry" role="listitem">
+Farr, Tom G., and Mike Kobrick. 2000. <span>“Shuttle Radar Topography
+Mission Produces a Wealth of Data.”</span> <em>Eos, Transactions
+American Geophysical Union</em> 81 (48): 583–85. <a href="https://doi.org/10.1029/EO081i048p00583">https://doi.org/10.1029/EO081i048p00583</a>.
+</div>
+<div id="ref-ferrariFusingSentinel1Sentinel22023" class="csl-entry" role="listitem">
+Ferrari, Felipe, Matheus Pinheiro Ferreira, Cláudio Aparecido Almeida,
+and Raul Queiroz Feitosa. 2023. <span>“Fusing <span>Sentinel-1</span>
+and <span>Sentinel-2 Images</span> for <span>Deforestation
+Detection</span> in the <span>Brazilian Amazon Under Diverse Cloud
+Conditions</span>.”</span> <em>IEEE Geoscience and Remote Sensing
+Letters</em> 20: 1–5. <a href="https://doi.org/10.1109/LGRS.2023.3242430">https://doi.org/10.1109/LGRS.2023.3242430</a>.
+</div>
+<div id="ref-ferreiraImprovingUrbanTree2024" class="csl-entry" role="listitem">
+Ferreira, Matheus Pinheiro, Daniel Rodrigues Dos Santos, Felipe Ferrari,
+Luiz Carlos Teixeira Coelho Filho, Gabriela Barbosa Martins, and Raul
+Queiroz Feitosa. 2024. <span>“Improving Urban Tree Species
+Classification by Deep-Learning Based Fusion of Digital Aerial Images
+and <span>LiDAR</span>.”</span> <em>Urban Forestry &amp; Urban
+Greening</em> 94 (April): 128240. <a href="https://doi.org/10.1016/j.ufug.2024.128240">https://doi.org/10.1016/j.ufug.2024.128240</a>.
+</div>
+<div id="ref-Fey_Fast_Graph_Representation_2019" class="csl-entry" role="listitem">
+Fey, Matthias, and Jan Eric Lenssen. 2019. <span>“<span class="nocase">Fast Graph Representation Learning with PyTorch
+Geometric</span>.”</span> <a href="https://github.com/pyg-team/pytorch_geometric">https://github.com/pyg-team/pytorch_geometric</a>.
+</div>
+<div id="ref-forsterIndicatorsGlobalClimate2024" class="csl-entry" role="listitem">
+Forster, Piers M., Chris Smith, Tristram Walsh, William F. Lamb, Robin
+Lamboll, Bradley Hall, Mathias Hauser, et al. 2024. <span>“Indicators of
+<span>Global Climate Change</span> 2023: Annual Update of Key Indicators
+of the State of the Climate System and Human Influence.”</span>
+<em>Earth System Science Data</em> 16 (6): 2625–58. <a href="https://doi.org/10.5194/essd-16-2625-2024">https://doi.org/10.5194/essd-16-2625-2024</a>.
+</div>
+<div id="ref-fuIndividualTreeSegmentationUAV2024" class="csl-entry" role="listitem">
+Fu, Yuwen, Yifang Niu, Li Wang, and Wang Li. 2024.
+<span>“Individual-<span>Tree Segmentation</span> from
+<span>UAV</span>–<span>LiDAR Data Using</span> a <span>Region-Growing
+Segmentation</span> and <span>Supervoxel-Weighted Fuzzy Clustering
+Approach</span>.”</span> <em>Remote Sensing</em> 16 (4): 608. <a href="https://doi.org/10.3390/rs16040608">https://doi.org/10.3390/rs16040608</a>.
+</div>
+<div id="ref-gillies_2019" class="csl-entry" role="listitem">
+Gillies, Sean et al. 2013/. <span>“Rasterio: Geospatial Raster
+<span>I</span>/<span>O</span> for <span>Python</span>
+Programmers.”</span> Mapbox. <a href="https://github.com/rasterio/rasterio">https://github.com/rasterio/rasterio</a>.
+</div>
+<div id="ref-GlobalForestResources2020" class="csl-entry" role="listitem">
+<em>Global <span>Forest Resources Assessment</span></em>. 2020. FAO. <a href="https://doi.org/10.4060/ca9825en">https://doi.org/10.4060/ca9825en</a>.
+</div>
+<div id="ref-goodfellowDeepLearning2016" class="csl-entry" role="listitem">
+Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. 2016. <em>Deep
+Learning</em>. Adaptive Computation and Machine Learning. Cambridge,
+Massachusetts: The MIT Press.
+</div>
+<div id="ref-goyalRevisitingPointCloud2021" class="csl-entry" role="listitem">
+Goyal, Ankit, Hei Law, Bowei Liu, Alejandro Newell, and Jia Deng. 2021.
+<span>“Revisiting <span>Point Cloud Shape Classification</span> with a
+<span>Simple</span> and <span>Effective Baseline</span>.”</span> In
+<em>Proceedings of the 38th <span>International Conference</span> on
+<span>Machine Learning</span></em>, 3809–20. PMLR. <a href="https://proceedings.mlr.press/v139/goyal21a.html">https://proceedings.mlr.press/v139/goyal21a.html</a>.
+</div>
+<div id="ref-gravesIDTReeS2020Competition2020" class="csl-entry" role="listitem">
+Graves, Sarah, and Sergio Marconi. 2020. <span>“<span>IDTReeS</span>
+2020 <span>Competition Data</span>.”</span> Zenodo. <a href="https://doi.org/10.5281/ZENODO.3934932">https://doi.org/10.5281/ZENODO.3934932</a>.
+</div>
+<div id="ref-guoRelevanceAirborneLidar2011" class="csl-entry" role="listitem">
+Guo, Li, Nesrine Chehata, Clément Mallet, and Samia Boukir. 2011.
+<span>“Relevance of Airborne Lidar and Multispectral Image Data for
+Urban Scene Classification Using <span>Random Forests</span>.”</span>
+<em>ISPRS Journal of Photogrammetry and Remote Sensing</em> 66 (1):
+56–66. <a href="https://doi.org/10.1016/j.isprsjprs.2010.08.007">https://doi.org/10.1016/j.isprsjprs.2010.08.007</a>.
+</div>
+<div id="ref-guoDeepLearning3D2021" class="csl-entry" role="listitem">
+Guo, Yulan, Hanyun Wang, Qingyong Hu, Hao Liu, Li Liu, and Mohammed
+Bennamoun. 2021. <span>“Deep <span>Learning</span> for <span>3D Point
+Clouds</span>: <span>A Survey</span>.”</span> <em>IEEE Transactions on
+Pattern Analysis and Machine Intelligence</em> 43 (12): 4338–64. <a href="https://doi.org/10.1109/TPAMI.2020.3005434">https://doi.org/10.1109/TPAMI.2020.3005434</a>.
+</div>
+<div id="ref-hansenAssessingForestNonForest2020" class="csl-entry" role="listitem">
+Hansen, Johannes N., Edward T. A. Mitchard, and Stuart King. 2020.
+<span>“Assessing <span>Forest</span>/<span>Non-Forest Separability Using
+Sentinel-1 C-Band Synthetic Aperture Radar</span>.”</span> <em>Remote
+Sensing</em> 12 (11): 1899. <a href="https://doi.org/10.3390/rs12111899">https://doi.org/10.3390/rs12111899</a>.
+</div>
+<div id="ref-2020NumPy-Array" class="csl-entry" role="listitem">
+Harris, Charles R., K. Jarrod Millman, Stéfan J van der Walt, Ralf
+Gommers, Pauli Virtanen, David Cournapeau, Eric Wieser, et al. 2020.
+<span>“Array Programming with <span>NumPy</span>.”</span>
+<em>Nature</em> 585: 357–62. <a href="https://doi.org/10.1038/s41586-020-2649-2">https://doi.org/10.1038/s41586-020-2649-2</a>.
+</div>
+<div id="ref-heDeepResidualLearning2016" class="csl-entry" role="listitem">
+He, Kaiming, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. 2016.
+<span>“Deep <span>Residual Learning</span> for <span>Image
+Recognition</span>.”</span> In <em>Proceedings of the <span>IEEE
+Conference</span> on <span>Computer Vision</span> and <span>Pattern
+Recognition</span></em>, 770–78. <a href="https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html">https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html</a>.
+</div>
+<div id="ref-Hunter_Matplotlib_A_2D_2007" class="csl-entry" role="listitem">
+Hunter, John D. 2007. <span>“Matplotlib: <span>A 2D</span> Graphics
+Environment.”</span> <em>Computing in Science &amp; Engineering</em> 9
+(3): 90–95. <a href="https://doi.org/10.1109/MCSE.2007.55">https://doi.org/10.1109/MCSE.2007.55</a>.
+</div>
+<div id="ref-jakubowskiTradeoffsLidarPulse2013" class="csl-entry" role="listitem">
+Jakubowski, Marek K., Qinghua Guo, and Maggi Kelly. 2013.
+<span>“Tradeoffs Between Lidar Pulse Density and Forest Measurement
+Accuracy.”</span> <em>Remote Sensing of Environment</em> 130 (March):
+245–53. <a href="https://doi.org/10.1016/j.rse.2012.11.024">https://doi.org/10.1016/j.rse.2012.11.024</a>.
+</div>
+<div id="ref-kcEstimationAboveGroundForest2024" class="csl-entry" role="listitem">
+Kc, Yam Bahadur, Qijing Liu, Pradip Saud, Damodar Gaire, and Hari
+Adhikari. 2024. <span>“Estimation of <span>Above-Ground Forest
+Biomass</span> in <span>Nepal</span> by the <span>Use</span> of
+<span>Airborne LiDAR</span>, and <span>Forest Inventory
+Data</span>.”</span> <em>Land</em> 13 (2): 213. <a href="https://doi.org/10.3390/land13020213">https://doi.org/10.3390/land13020213</a>.
+</div>
+<div id="ref-kingmaAdamMethodStochastic2014" class="csl-entry" role="listitem">
+Kingma, Diederik P., and Jimmy Ba. 2014. <span>“Adam: <span>A
+Method</span> for <span>Stochastic Optimization</span>.”</span> arXiv.
+<a href="https://doi.org/10.48550/ARXIV.1412.6980">https://doi.org/10.48550/ARXIV.1412.6980</a>.
+</div>
+<div id="ref-Kirillov_2023_ICCV" class="csl-entry" role="listitem">
+Kirillov, Alexander, Eric Mintun, Nikhila Ravi, Hanzi Mao, Chloe
+Rolland, Laura Gustafson, Tete Xiao, et al. 2023. <span>“Segment
+<span>Anything</span>.”</span> In <em>Proceedings of the
+<span>IEEE</span>/<span>CVF International Conference</span> on
+<span>Computer Vision</span> (<span>ICCV</span>)</em>, 4015–26.
+</div>
+<div id="ref-knuth84" class="csl-entry" role="listitem">
+Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput.
+J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
+</div>
+<div id="ref-laExtractionIndividualTree2015" class="csl-entry" role="listitem">
+La, Hien Phu, Yang Dam Eo, Anjin Chang, and Changjae Kim. 2015.
+<span>“Extraction of Individual Tree Crown Using Hyperspectral Image and
+<span>LiDAR</span> Data.”</span> <em>KSCE Journal of Civil
+Engineering</em> 19 (4): 1078–87. <a href="https://doi.org/10.1007/s12205-013-1178-z">https://doi.org/10.1007/s12205-013-1178-z</a>.
+</div>
+<div id="ref-larosaMultitaskFullyConvolutional2021" class="csl-entry" role="listitem">
+La Rosa, Laura Elena Cué, Camile Sothe, Raul Queiroz Feitosa, Cláudia
+Maria De Almeida, Marcos Benedito Schimalski, and Dário Augusto Borges
+Oliveira. 2021. <span>“Multi-Task Fully Convolutional Network for Tree
+Species Mapping in Dense Forests Using Small Training Hyperspectral
+Data.”</span> <em>ISPRS Journal of Photogrammetry and Remote
+Sensing</em> 179 (September): 35–49. <a href="https://doi.org/10.1016/j.isprsjprs.2021.07.001">https://doi.org/10.1016/j.isprsjprs.2021.07.001</a>.
+</div>
+<div id="ref-lassalleDeepLearningbasedIndividual2022" class="csl-entry" role="listitem">
+Lassalle, Guillaume, Matheus Pinheiro Ferreira, Laura Elena Cué La Rosa,
+and Carlos Roberto de Souza Filho. 2022. <span>“Deep Learning-Based
+Individual Tree Crown Delineation in Mangrove Forests Using
+Very-High-Resolution Satellite Imagery.”</span> <em>ISPRS Journal of
+Photogrammetry and Remote Sensing</em> 189 (July): 220–35. <a href="https://doi.org/10.1016/j.isprsjprs.2022.05.002">https://doi.org/10.1016/j.isprsjprs.2022.05.002</a>.
+</div>
+<div id="ref-liFusionApproachesIndividual2023" class="csl-entry" role="listitem">
+Li, Qian, Baoxin Hu, Jiali Shang, and Hui Li. 2023. <span>“Fusion
+<span>Approaches</span> to <span>Individual Tree Species Classification
+Using Multisource Remote Sensing Data</span>.”</span> <em>Forests</em>
+14 (7): 1392. <a href="https://doi.org/10.3390/f14071392">https://doi.org/10.3390/f14071392</a>.
+</div>
+<div id="ref-liNewMethodSegmenting2012" class="csl-entry" role="listitem">
+Li, Wenkai, Qinghua Guo, Marek K. Jakubowski, and Maggi Kelly. 2012.
+<span>“A <span>New Method</span> for <span>Segmenting Individual
+Trees</span> from the <span>Lidar Point Cloud</span>.”</span>
+<em>Photogrammetric Engineering &amp; Remote Sensing</em> 78 (1): 75–84.
+<a href="https://doi.org/10.14358/PERS.78.1.75">https://doi.org/10.14358/PERS.78.1.75</a>.
+</div>
+<div id="ref-lianBiomassCalculationsIndividual2022" class="csl-entry" role="listitem">
+Lian, Xugang, Hailang Zhang, Wu Xiao, Yunping Lei, Linlin Ge, Kai Qin,
+Yuanwen He, et al. 2022. <span>“Biomass <span>Calculations</span> of
+<span>Individual Trees Based</span> on <span>Unmanned Aerial Vehicle
+Multispectral Imagery</span> and <span>Laser Scanning Combined</span>
+with <span>Terrestrial Laser Scanning</span> in <span>Complex
+Stands</span>.”</span> <em>Remote Sensing</em> 14 (19): 4715. <a href="https://doi.org/10.3390/rs14194715">https://doi.org/10.3390/rs14194715</a>.
+</div>
+<div id="ref-lisiewiczCorrectingResultsCHMBased2022" class="csl-entry" role="listitem">
+Lisiewicz, Maciej, Agnieszka Kamińska, Bartłomiej Kraszewski, and
+Krzysztof Stereńczak. 2022. <span>“Correcting the <span>Results</span>
+of <span>CHM-Based Individual Tree Detection Algorithms</span> to
+<span>Improve Their Accuracy</span> and
+<span>Reliability</span>.”</span> <em>Remote Sensing</em> 14 (8): 1822.
+<a href="https://doi.org/10.3390/rs14081822">https://doi.org/10.3390/rs14081822</a>.
+</div>
+<div id="ref-longFullyConvolutionalNetworks2015" class="csl-entry" role="listitem">
+Long, Jonathan, Evan Shelhamer, and Trevor Darrell. 2015. <span>“Fully
+<span>Convolutional Networks</span> for <span>Semantic
+Segmentation</span>.”</span> In <em>Proceedings of the <span>IEEE
+Conference</span> on <span>Computer Vision</span> and <span>Pattern
+Recognition</span></em>, 3431–40. <a href="https://openaccess.thecvf.com/content_cvpr_2015/html/Long_Fully_Convolutional_Networks_2015_CVPR_paper.html">https://openaccess.thecvf.com/content_cvpr_2015/html/Long_Fully_Convolutional_Networks_2015_CVPR_paper.html</a>.
+</div>
+<div id="ref-lopezserranoArtificialIntelligencebasedSoftware2022" class="csl-entry" role="listitem">
+López Serrano, F. R., E. Rubio, F. A. García Morote, M. Andrés Abellán,
+M. I. Picazo Córdoba, F. García Saucedo, E. Martínez García, et al.
+2022. <span>“Artificial Intelligence-Based Software
+(<span>AID-FOREST</span>) for Tree Detection: <span>A</span> New
+Framework for Fast and Accurate Forest Inventorying Using
+<span>LiDAR</span> Point Clouds.”</span> <em>International Journal of
+Applied Earth Observation and Geoinformation</em> 113 (September):
+103014. <a href="https://doi.org/10.1016/j.jag.2022.103014">https://doi.org/10.1016/j.jag.2022.103014</a>.
+</div>
+<div id="ref-lucasIdentificationLinearVegetation2019" class="csl-entry" role="listitem">
+Lucas, Chris, Willem Bouten, Zsófia Koma, W. Daniel Kissling, and Arie
+C. Seijmonsbergen. 2019. <span>“Identification of <span>Linear
+Vegetation Elements</span> in a <span>Rural Landscape Using LiDAR Point
+Clouds</span>.”</span> <em>Remote Sensing</em> 11 (3): 292. <a href="https://doi.org/10.3390/rs11030292">https://doi.org/10.3390/rs11030292</a>.
+</div>
+<div id="ref-malletRelevanceAssessmentFullwaveform2011" class="csl-entry" role="listitem">
+Mallet, Clément, Frédéric Bretar, Michel Roux, Uwe Soergel, and
+Christian Heipke. 2011. <span>“Relevance Assessment of Full-Waveform
+Lidar Data for Urban Area Classification.”</span> <em>ISPRS Journal of
+Photogrammetry and Remote Sensing</em> 66 (6): S71–84. <a href="https://doi.org/10.1016/j.isprsjprs.2011.09.008">https://doi.org/10.1016/j.isprsjprs.2011.09.008</a>.
+</div>
+<div id="ref-martinsDeepLearningbasedTree2021" class="csl-entry" role="listitem">
+Martins, Gabriela Barbosa, Laura Elena Cué La Rosa, Patrick Nigri Happ,
+Luiz Carlos Teixeira Coelho Filho, Celso Junius F. Santos, Raul Queiroz
+Feitosa, and Matheus Pinheiro Ferreira. 2021. <span>“Deep Learning-Based
+Tree Species Mapping in a Highly Diverse Tropical Urban Setting.”</span>
+<em>Urban Forestry &amp; Urban Greening</em> 64 (September): 127241. <a href="https://doi.org/10.1016/j.ufug.2021.127241">https://doi.org/10.1016/j.ufug.2021.127241</a>.
+</div>
+<div id="ref-mumuniDataAugmentationComprehensive2022" class="csl-entry" role="listitem">
+Mumuni, Alhassan, and Fuseini Mumuni. 2022. <span>“Data Augmentation:
+<span>A</span> Comprehensive Survey of Modern Approaches.”</span>
+<em>Array</em> 16 (December): 100258. <a href="https://doi.org/10.1016/j.array.2022.100258">https://doi.org/10.1016/j.array.2022.100258</a>.
+</div>
+<div id="ref-naessetDeterminationMeanTree1997" class="csl-entry" role="listitem">
+Næsset, Erik. 1997a. <span>“Determination of Mean Tree Height of Forest
+Stands Using Airborne Laser Scanner Data.”</span> <em>ISPRS Journal of
+Photogrammetry and Remote Sensing</em> 52 (2): 49–56. <a href="https://doi.org/10.1016/S0924-2716(97)83000-6">https://doi.org/10.1016/S0924-2716(97)83000-6</a>.
+</div>
+<div id="ref-naessetEstimatingTimberVolume1997" class="csl-entry" role="listitem">
+———. 1997b. <span>“Estimating Timber Volume of Forest Stands Using
+Airborne Laser Scanner Data.”</span> <em>Remote Sensing of
+Environment</em> 61 (2): 246–53. <a href="https://doi.org/10.1016/S0034-4257(97)00041-2">https://doi.org/10.1016/S0034-4257(97)00041-2</a>.
+</div>
+<div id="ref-nelsonDeterminingForestCanopy1984" class="csl-entry" role="listitem">
+Nelson, Ross, William Krabill, and Gordon MacLean. 1984.
+<span>“Determining Forest Canopy Characteristics Using Airborne Laser
+Data.”</span> <em>Remote Sensing of Environment</em> 15 (3): 201–12. <a href="https://doi.org/10.1016/0034-4257(84)90031-2">https://doi.org/10.1016/0034-4257(84)90031-2</a>.
+</div>
+<div id="ref-nilssonEstimationTreeHeights1996" class="csl-entry" role="listitem">
+Nilsson, Mats. 1996. <span>“Estimation of Tree Heights and Stand Volume
+Using an Airborne Lidar System.”</span> <em>Remote Sensing of
+Environment</em> 56 (1): 1–7. <a href="https://doi.org/10.1016/0034-4257(95)00224-3">https://doi.org/10.1016/0034-4257(95)00224-3</a>.
+</div>
+<div id="ref-nurunnabiDevelopmentPreciseTree2024" class="csl-entry" role="listitem">
+Nurunnabi, Abdul, Felicia Teferle, Debra F. Laefer, Meida Chen, and Mir
+Masoom Ali. 2024. <span>“Development of a <span>Precise Tree
+Structure</span> from <span>LiDAR Point Clouds</span>.”</span> <em>The
+International Archives of the Photogrammetry, Remote Sensing and Spatial
+Information Sciences</em> XLVIII-2-2024 (June): 301–8. <a href="https://doi.org/10.5194/isprs-archives-XLVIII-2-2024-301-2024">https://doi.org/10.5194/isprs-archives-XLVIII-2-2024-301-2024</a>.
+</div>
+<div id="ref-oscoConvolutionalNeuralNetwork2020" class="csl-entry" role="listitem">
+Osco, Lucas Prado, Mauro Dos Santos De Arruda, José Marcato Junior,
+Neemias Buceli Da Silva, Ana Paula Marques Ramos, Érika Akemi Saito
+Moryia, Nilton Nobuhiro Imai, et al. 2020. <span>“A Convolutional Neural
+Network Approach for Counting and Geolocating Citrus-Trees in
+<span>UAV</span> Multispectral Imagery.”</span> <em>ISPRS Journal of
+Photogrammetry and Remote Sensing</em> 160 (February): 97–106. <a href="https://doi.org/10.1016/j.isprsjprs.2019.12.010">https://doi.org/10.1016/j.isprsjprs.2019.12.010</a>.
+</div>
+<div id="ref-ozdemirDeepLearningFramework2021" class="csl-entry" role="listitem">
+Özdemi̇r, Emre. 2021. <span>“A <span>Deep Learning Framework</span> for
+<span>Geospatial Point Cloud Classification</span>.”</span> PhD thesis,
+Moscow: Skolkovo Institute of Science; Technology. <a href="https://www.skoltech.ru/app/data/uploads/2021/12/thesis-2.pdf">https://www.skoltech.ru/app/data/uploads/2021/12/thesis-2.pdf</a>.
+</div>
+<div id="ref-paulyEfficientSimplificationPointsampled2002" class="csl-entry" role="listitem">
+Pauly, M., M. Gross, and L. P. Kobbelt. 2002. <span>“Efficient
+Simplification of Point-Sampled Surfaces.”</span> In <em><span>IEEE
+Visualization</span>, 2002. <span>VIS</span> 2002.</em>, 163–70. Boston,
+MA, USA: IEEE. <a href="https://doi.org/10.1109/VISUAL.2002.1183771">https://doi.org/10.1109/VISUAL.2002.1183771</a>.
+</div>
+<div id="ref-scikit-learn" class="csl-entry" role="listitem">
+Pedregosa, F., G. Varoquaux, A. Gramfort, V. Michel, B. Thirion, O.
+Grisel, M. Blondel, et al. 2011. <span>“Scikit-Learn: Machine Learning
+in <span>P</span>ython.”</span> <em>Journal of Machine Learning
+Research</em> 12: 2825–30.
+</div>
+<div id="ref-precheltAutomaticEarlyStopping1998" class="csl-entry" role="listitem">
+Prechelt, Lutz. 1998. <span>“Automatic Early Stopping Using Cross
+Validation: Quantifying the Criteria.”</span> <em>Neural Networks</em>
+11 (4): 761–67. <a href="https://doi.org/10.1016/S0893-6080(98)00010-0">https://doi.org/10.1016/S0893-6080(98)00010-0</a>.
+</div>
+<div id="ref-qiPointNet2017" class="csl-entry" role="listitem">
+Qi, Charles R., Hao Su, Kaichun Mo, and Leonidas J. Guibas. 2017.
+<span>“<span>PointNet</span>: <span>Deep Learning</span> on <span>Point
+Sets</span> for <span>3D Classification</span> and
+<span>Segmentation</span>.”</span> In <em>Proceedings of the <span>IEEE
+Conference</span> on <span>Computer Vision</span> and <span>Pattern
+Recognition</span></em>, 652–60.
+</div>
+<div id="ref-qiPointNetPlusPlus2017" class="csl-entry" role="listitem">
+Qi, Charles R., Li Yi, Hao Su, and Leonidas J. Guibas. 2017.
+<span>“<span>PointNet</span>++: <span>Deep Hierarchical Feature
+Learning</span> on <span>Point Sets</span> in a <span>Metric
+Space</span>.”</span> In <em>Advances in <span>Neural Information
+Processing Systems</span></em>. Vol. 30. Curran Associates, Inc.
+</div>
+<div id="ref-queganEuropeanSpaceAgency2019" class="csl-entry" role="listitem">
+Quegan, Shaun, Thuy Le Toan, Jerome Chave, Jorgen Dall, Jean-François
+Exbrayat, Dinh Ho Tong Minh, Mark Lomas, et al. 2019. <span>“The
+<span>European Space Agency BIOMASS</span> Mission:
+<span>Measuring</span> Forest Above-Ground Biomass from Space.”</span>
+<em>Remote Sensing of Environment</em> 227 (June): 44–60. <a href="https://doi.org/10.1016/j.rse.2019.03.032">https://doi.org/10.1016/j.rse.2019.03.032</a>.
+</div>
+<div id="ref-ronnebergerUNetConvolutionalNetworks2015" class="csl-entry" role="listitem">
+Ronneberger, Olaf, Philipp Fischer, and Thomas Brox. 2015.
+<span>“U-<span>Net</span>: <span>Convolutional Networks</span> for
+<span>Biomedical Image Segmentation</span>.”</span> In <em>Medical
+<span>Image Computing</span> and <span>Computer-Assisted
+Intervention</span> – <span>MICCAI</span> 2015</em>, edited by Nassir
+Navab, Joachim Hornegger, William M. Wells, and Alejandro F. Frangi,
+234–41. Lecture <span>Notes</span> in <span>Computer Science</span>.
+Cham: Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-24574-4_28">https://doi.org/10.1007/978-3-319-24574-4_28</a>.
+</div>
+<div id="ref-rousselLidRPackage2020" class="csl-entry" role="listitem">
+Roussel, Jean-Romain, David Auty, Nicholas C. Coops, Piotr Tompalski,
+Tristan R. H. Goodbody, Andrew Sánchez Meador, Jean-François Bourdon,
+Florian de Boissieu, and Alexis Achim. 2020. <span>“<span class="nocase">lidR</span>: <span>An R</span> Package for Analysis of
+<span>Airborne Laser Scanning</span> (<span>ALS</span>) Data.”</span>
+<em>Remote Sensing of Environment</em> 251: 112061. <a href="https://doi.org/10.1016/j.rse.2020.112061">https://doi.org/10.1016/j.rse.2020.112061</a>.
+</div>
+<div id="ref-shiImportantLiDARMetrics2018" class="csl-entry" role="listitem">
+Shi, Yifang, Tiejun Wang, Andrew K. Skidmore, and Marco Heurich. 2018.
+<span>“Important <span>LiDAR</span> Metrics for Discriminating Forest
+Tree Species in <span>Central Europe</span>.”</span> <em>ISPRS Journal
+of Photogrammetry and Remote Sensing</em> 137 (March): 163–74. <a href="https://doi.org/10.1016/j.isprsjprs.2018.02.002">https://doi.org/10.1016/j.isprsjprs.2018.02.002</a>.
+</div>
+<div id="ref-simonyanVeryDeepConvolutional2014" class="csl-entry" role="listitem">
+Simonyan, Karen, and Andrew Zisserman. 2014. <span>“Very <span>Deep
+Convolutional Networks</span> for <span>Large-Scale Image
+Recognition</span>.”</span> arXiv. <a href="https://doi.org/10.48550/ARXIV.1409.1556">https://doi.org/10.48550/ARXIV.1409.1556</a>.
+</div>
+<div id="ref-sinica-sinavskisForestStandVolume2022" class="csl-entry" role="listitem">
+Sinica-Sinavskis, Juris, and Gunta Grube. 2022. <span>“Forest
+<span>Stand Volume Estimation</span> by <span>Species</span> from
+<span>Sentinel-2</span> and <span>LiDAR Data Using Regression
+Models</span>.”</span> In <em>2022 18th <span>Biennial Baltic
+Electronics Conference</span> (<span>BEC</span>)</em>, 1–5. <a href="https://doi.org/10.1109/BEC56180.2022.9935590">https://doi.org/10.1109/BEC56180.2022.9935590</a>.
+</div>
+<div id="ref-The_pandas_development_team_pandas-dev_pandas_Pandas" class="csl-entry" role="listitem">
+The pandas development team. n.d. <span>“Pandas-Dev/Pandas:
+<span>Pandas</span>.”</span> <a href="https://doi.org/10.5281/zenodo.3509134">https://doi.org/10.5281/zenodo.3509134</a>.
+</div>
+<div id="ref-StateWorldsForests2020" class="csl-entry" role="listitem">
+<em>The <span>State</span> of the <span>World</span>’s
+<span>Forests</span></em>. 2020. <span>FAO and UNEP</span>. <a href="https://doi.org/10.4060/ca8642en">https://doi.org/10.4060/ca8642en</a>.
+</div>
+<div id="ref-treitzLiDARSamplingDensity2012" class="csl-entry" role="listitem">
+Treitz, Paul, Kevin Lim, Murray Woods, Doug Pitt, Dave Nesbitt, and Dave
+Etheridge. 2012. <span>“<span>LiDAR Sampling Density</span> for
+<span>Forest Resource Inventories</span> in <span>Ontario</span>,
+<span>Canada</span>.”</span> <em>Remote Sensing</em> 4 (4): 830–48. <a href="https://doi.org/10.3390/rs4040830">https://doi.org/10.3390/rs4040830</a>.
+</div>
+<div id="ref-van_der_Walt_scikit-image_image_processing_2014" class="csl-entry" role="listitem">
+van der Walt, Stéfan J., Johannes L. Schönberger, Juan Nunez-Iglesias,
+François Boulogne, Joshua D. Warner, Neil Yager, Emmanuelle Gouillart,
+Tony Yu, and the scikit-image contributors. 2014. <span>“Scikit-Image:
+Image Processing in <span>Python</span>.”</span> <em>PeerJ</em> 2
+(June): e453. <a href="https://doi.org/10.7717/peerj.453">https://doi.org/10.7717/peerj.453</a>.
+</div>
+<div id="ref-venturaIndividualTreeDetection2024" class="csl-entry" role="listitem">
+Ventura, Jonathan, Camille Pawlak, Milo Honsberger, Cameron Gonsalves,
+Julian Rice, Natalie L. R. Love, Skyler Han, et al. 2024.
+<span>“Individual Tree Detection in Large-Scale Urban Environments Using
+High-Resolution Multispectral Imagery.”</span> <em>International Journal
+of Applied Earth Observation and Geoinformation</em> 130 (June): 103848.
+<a href="https://doi.org/10.1016/j.jag.2024.103848">https://doi.org/10.1016/j.jag.2024.103848</a>.
+</div>
+<div id="ref-vermeerLidarbasedNorwegianTree2023" class="csl-entry" role="listitem">
+Vermeer, Martijn, Jacob Alexander Hay, David Völgyes, Zsófia Koma,
+Johannes Breidenbach, and Daniele Stefano Maria Fantin. 2023.
+<span>“Lidar-Based <span>Norwegian</span> Tree Species Detection Using
+Deep Learning.”</span> arXiv. <a href="https://doi.org/10.48550/arXiv.2311.06066">https://doi.org/10.48550/arXiv.2311.06066</a>.
+</div>
+<div id="ref-vianaTimberVolumeEstimation2022" class="csl-entry" role="listitem">
+Viana, Aguida Beatriz Travaglia, Carlos Moreira Miquelino Eleto Torres,
+Cibele Humel do Amaral, Elpídio Inácio Fernandes Filho, Carlos Pedro
+Boechat Soares, Felipe Carvalho Santana, Lucas Brandão Timo, and Samuel
+José Silva Soares da Rocha. 2022. <span>“Timber <span>Volume Estimation
+By Using Terrestrial Laser Scanning</span>: <span>Method In Hyperdiverse
+Secondary Forests</span>.”</span> <em>Revista <span>Á</span>rvore</em>
+46 (August). <a href="https://doi.org/10.1590/1806-908820220000021">https://doi.org/10.1590/1806-908820220000021</a>.
+</div>
+<div id="ref-2020SciPy-NMeth" class="csl-entry" role="listitem">
+Virtanen, Pauli, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler
+Reddy, David Cournapeau, Evgeni Burovski, et al. 2020.
+<span>“<span>SciPy</span> 1.0: <span>Fundamental Algorithms</span> for
+<span>Scientific Computing</span> in <span>Python</span>.”</span>
+<em>Nature Methods</em> 17: 261–72. <a href="https://doi.org/10.1038/s41592-019-0686-2">https://doi.org/10.1038/s41592-019-0686-2</a>.
+</div>
+<div id="ref-wangRecentAdvancesDeep2020" class="csl-entry" role="listitem">
+Wang, Xizhao, Yanxia Zhao, and Farhad Pourpanah. 2020. <span>“Recent
+Advances in Deep Learning.”</span> <em>International Journal of Machine
+Learning and Cybernetics</em> 11 (4): 747–50. <a href="https://doi.org/10.1007/s13042-020-01096-5">https://doi.org/10.1007/s13042-020-01096-5</a>.
+</div>
+<div id="ref-wangAutomaticDetectionIndividual2023" class="csl-entry" role="listitem">
+Wang, Zhen, Pu Li, Yuancheng Cui, Shuowen Lei, and Zhizhong Kang. 2023.
+<span>“Automatic <span>Detection</span> of <span>Individual Trees</span>
+in <span>Forests Based</span> on <span>Airborne LiDAR Data</span> with a
+<span>Tree Region-Based Convolutional Neural Network</span>
+(<span>RCNN</span>).”</span> <em>Remote Sensing</em> 15 (4): 1024. <a href="https://doi.org/10.3390/rs15041024">https://doi.org/10.3390/rs15041024</a>.
+</div>
+<div id="ref-waskomSeabornStatisticalData2021" class="csl-entry" role="listitem">
+Waskom, Michael. 2021. <span>“Seaborn: Statistical Data
+Visualization.”</span> <em>Journal of Open Source Software</em> 6 (60):
+3021. <a href="https://doi.org/10.21105/joss.03021">https://doi.org/10.21105/joss.03021</a>.
+</div>
+<div id="ref-weinmannFeatureRelevanceAssessment2013" class="csl-entry" role="listitem">
+Weinmann, M., B. Jutzi, and C. Mallet. 2013. <span>“Feature Relevance
+Assessment for the Semantic Interpretation of <span>3D</span> Point
+Cloud Data.”</span> <em>ISPRS Annals of the Photogrammetry, Remote
+Sensing and Spatial Information Sciences</em> II-5-W2 (October): 313–18.
+<a href="https://doi.org/10.5194/isprsannals-II-5-W2-313-2013">https://doi.org/10.5194/isprsannals-II-5-W2-313-2013</a>.
+</div>
+<div id="ref-weinsteinDeepForestPythonPackage2020" class="csl-entry" role="listitem">
+Weinstein, Ben G., Sergio Marconi, Mélaine Aubry-Kientz, Gregoire
+Vincent, Henry Senyondo, and Ethan P. White. 2020.
+<span>“<span>DeepForest</span>: <span>A</span> <span><span class="smallcaps">Python</span></span> Package for <span>RGB</span> Deep
+Learning Tree Crown Delineation.”</span> Edited by Sydne Record.
+<em>Methods in Ecology and Evolution</em> 11 (12): 1743–51. <a href="https://doi.org/10.1111/2041-210X.13472">https://doi.org/10.1111/2041-210X.13472</a>.
+</div>
+<div id="ref-weinsteinIndividualTreeCrownDetection2019" class="csl-entry" role="listitem">
+Weinstein, Ben G., Sergio Marconi, Stephanie Bohlman, Alina Zare, and
+Ethan White. 2019. <span>“Individual <span>Tree-Crown Detection</span>
+in <span>RGB Imagery Using Semi-Supervised Deep Learning Neural
+Networks</span>.”</span> <em>Remote Sensing</em> 11 (11): 1309. <a href="https://doi.org/10.3390/rs11111309">https://doi.org/10.3390/rs11111309</a>.
+</div>
+<div id="ref-weinsteinDataNeonTreeEvaluationBenchmark2022" class="csl-entry" role="listitem">
+Weinstein, Ben, Sergio Marconi, and Ethan White. 2022. <span>“Data for
+the <span>NeonTreeEvaluation Benchmark</span>.”</span> Zenodo. <a href="https://doi.org/10.5281/ZENODO.5914554">https://doi.org/10.5281/ZENODO.5914554</a>.
+</div>
+<div id="ref-westContextdrivenAutomatedTarget2004" class="csl-entry" role="listitem">
+West, Karen F., Brian N. Webb, James R. Lersch, Steven Pothier, Joseph
+M. Triscari, and A. E. Iverson. 2004. <span>“Context-Driven Automated
+Target Detection in <span>3D</span> Data.”</span> In <em>Defense and
+<span>Security</span></em>, edited by Firooz A. Sadjadi, 133–43.
+Orlando, FL. <a href="https://doi.org/10.1117/12.542536">https://doi.org/10.1117/12.542536</a>.
+</div>
+<div id="ref-whiteABAGuide2013" class="csl-entry" role="listitem">
+White, Joanne C., Michael A. Wulder, Andrés Varhola, Mikko Vastaranta,
+Nicholas C. Coops, Bruce D. Cook, Doug Pitt, and Murray Woods. 2013.
+<em>A Best Practices Guide for Generating Forest Inventory Attributes
+from Airborne Laser Scanning Data Using the Area-Based Approach</em>.
+Victoria, British Columbia: Canadian Forest Service.
+</div>
+<div id="ref-wilkesTLS2treesScalableTree2023" class="csl-entry" role="listitem">
+Wilkes, Phil, Mathias Disney, John Armston, Harm Bartholomeus, Lisa
+Bentley, Benjamin Brede, Andrew Burt, et al. 2023.
+<span>“<span><em>TLS2trees</em></span> : <span>A</span> Scalable Tree
+Segmentation Pipeline for <span><span class="smallcaps">TLS</span></span> Data.”</span> <em>Methods in Ecology
+and Evolution</em> 14 (12): 3083–99. <a href="https://doi.org/10.1111/2041-210X.14233">https://doi.org/10.1111/2041-210X.14233</a>.
+</div>
+<div id="ref-wuFineClassificationUrban2024" class="csl-entry" role="listitem">
+Wu, Jingru, Qixia Man, Xinming Yang, Pinliang Dong, Xiaotong Ma, Chunhui
+Liu, and Changyin Han. 2024. <span>“Fine <span>Classification</span> of
+<span>Urban Tree Species Based</span> on <span>UAV-Based RGB
+Imagery</span> and <span>LiDAR Data</span>.”</span> <em>Forests</em> 15
+(2): 390. <a href="https://doi.org/10.3390/f15020390">https://doi.org/10.3390/f15020390</a>.
+</div>
+<div id="ref-zhangImprovedAreabasedApproach2023" class="csl-entry" role="listitem">
+Zhang, Zhengnan, Tiejun Wang, Andrew K. Skidmore, Fuliang Cao, Guanghui
+She, and Lin Cao. 2023. <span>“An Improved Area-Based Approach for
+Estimating Plot-Level Tree <span>DBH</span> from Airborne
+<span>LiDAR</span> Data.”</span> <em>Forest Ecosystems</em> 10
+(January): 100089. <a href="https://doi.org/10.1016/j.fecs.2023.100089">https://doi.org/10.1016/j.fecs.2023.100089</a>.
+</div>
+<div id="ref-zhenImpactTreeOrientedGrowth2014" class="csl-entry" role="listitem">
+Zhen, Zhen, Lindi Quackenbush, and Lianjun Zhang. 2014. <span>“Impact of
+<span>Tree-Oriented Growth Order</span> in <span>Marker-Controlled
+Region Growing</span> for <span>Individual Tree Crown Delineation Using
+Airborne Laser Scanner</span> (<span>ALS</span>)
+<span>Data</span>.”</span> <em>Remote Sensing</em> 6 (1): 555–79. <a href="https://doi.org/10.3390/rs6010555">https://doi.org/10.3390/rs6010555</a>.
+</div>
+<div id="ref-zhuDualPathMultiScale2019" class="csl-entry" role="listitem">
+Zhu, Liang, Zhijian Zhao, Chao Lu, Yining Lin, Yao Peng, and Tangren
+Yao. 2019. <span>“Dual <span>Path Multi-Scale Fusion Networks</span>
+with <span>Attention</span> for <span>Crowd Counting</span>.”</span>
+arXiv. <a href="https://doi.org/10.48550/ARXIV.1902.01115">https://doi.org/10.48550/ARXIV.1902.01115</a>.
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/05_conclusion.html" class="pagination-link" aria-label="Conclusion">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conclusion</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/iod-ine/thesis/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/iod-ine/thesis/blob/main/chapters/99_references.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer></body></html>
