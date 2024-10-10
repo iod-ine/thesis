@@ -1,9 +1,10 @@
 project:
   type: book
+  output-dir: docs
 
 book:
   title: "A deep learning framework for mixed dense forests parameter estimation at individual tree scale"
-  output-file: "my-book"
+  output-file: "ivan-dubrovin-phd-thesis"
   author: "Ivan Dubrovin"
   date: today
   abstract: |
