@@ -1,6 +1,6 @@
 # Conclusion {#sec-conclusion}
 
-> "A PhD research project is an academic exercise of given effort and length." 
+> "A PhD research project is an academic exercise of given effort and length."
 >
 > – <cite>Dr. Ron Anderson, PhD adviser of prof. Clement Fortin</cite>
 
@@ -29,7 +29,7 @@ Some of the most important are as follows:
   Instead, convolutional neural networks specialized in creating good representations for downstream tasks can be used.
 - Use of open-access datasets for pretraining.
   At its current state, the tree segmentation network learns to perform a very hard task from scratch on a dataset of a very limited size.
-  I believe it can benefit from first training on similar, but larger dataset, for example, the NeonTreeEvaluation Benchmark [@weinsteinDataNeonTreeEvaluationBenchmark2022].
+  I believe it can benefit from first training on a similar, but larger dataset, for example, the NeonTreeEvaluation Benchmark [@weinsteinDataNeonTreeEvaluationBenchmark2022].
   It is briefly described in the comparison subsection of the Lysva field inventory section.
   The bounding boxes from the orthophoto can be used to label the point cloud for tree segmentation.
   The labels will be noisy, but pretraining on a large amount of noisy data often shows good results.
@@ -40,7 +40,10 @@ Some of the most important are as follows:
 - Use of more sophisticated augmentations to make the synthetic forest patches look as close as possible to real forest patches.
   For example, the height-depended dropout can be improved to take into account canopy density and overlap.
   A shorter tree almost completely covered from above by a larger tree should have fewer points overall, not just at low heights relative to its highest point.
+- Use of a more careful approach to training attribute prediction models.
+  The results of the second step can be further improved by adopting a more careful approach to modeling, including a more careful approach to feature engineering and model selection.
 
 ## Concluding thoughts
 
-idk
+This thesis evolved with the developing understanding and the need of the industrial partners.
+It started as an exploration of use of synthetic aperture radar for augmentation of multispectral-based pipelines for mapping forests.
