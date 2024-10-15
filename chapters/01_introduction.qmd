@@ -9,6 +9,7 @@ It also provides the links to the original datasets and the code.
 Forests are a crucial part of the global ecosystem, both environmentally and economically.
 They cover a third of the land area, contain over 80% of terrestrial biodiversity, and somewhere around one-third of humanity depends on forests and forest products for their livelihoods [@aertsForestRestorationBiodiversity2011; @StateWorldsForests2020].
 Forests are an essential renewable natural resource and a huge, dynamic part of the global carbon cycle.
+@fig-forest-coverage offers a map of the global tree coverage based on data from @hansenHighResolutionGlobalMaps2013.
 Responsible management of forests allows using the resources efficiently and sustainably, preserving the biodiversity, and regulating atmospheric $CO_2$, which is becoming especially important as the anthropogenic climate change is ongoing and accelerating [@faheyForestCarbonStorage2010; @forsterIndicatorsGlobalClimate2024].
 This drives the need for accurate, detailed, up-to-date information about various forest attributes such as distributions of tree species, average heights and ages of trees, estimates of trunk diameter, timber volume, and above ground biomass, and others.
 
@@ -17,6 +18,13 @@ This is especially relevant in countries where massive areas are covered by fore
 For that reason, various remote sensing techniques are widely used to extend and extrapolate the traditional forest inventories.
 All sorts of data, from satellite and aerial imagery to very detailed terrestrial LiDAR surveys, are used in all sorts of applications that require mapping forest attributes.
 Some such applications are mentioned in the next chapter dedicated to reviewing the literature.
+
+::: {#fig-forest-coverage}
+![](../images/global-forest-cover.jpg)
+
+Global tree cover for 2010.
+Data from @hansenHighResolutionGlobalMaps2013
+:::
 
 Many national space agencies even provide open access to satellite data that can be used for mapping forests.
 European Space Agency offers free and open access[^1] to the Sentinel missions, including C-band SAR data from Sentinel-1 and medium-resolution multispectral data from Sentinel-2, both with global coverage.
