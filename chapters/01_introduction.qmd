@@ -9,7 +9,7 @@ It also provides the links to the original datasets and the code.
 Forests are a crucial part of the global ecosystem, both environmentally and economically.
 They cover a third of the land area, contain over 80% of terrestrial biodiversity, and somewhere around one-third of humanity depends on forests and forest products for their livelihoods [@aertsForestRestorationBiodiversity2011; @StateWorldsForests2020].
 Forests are an essential renewable natural resource and a huge, dynamic part of the global carbon cycle.
-@fig-forest-coverage offers a map of the global tree coverage based on data from @hansenHighResolutionGlobalMaps2013.
+@fig-forest-coverage offers a map of the global tree coverage based on data from @hansenHighResolutionGlobalMaps2013 to highlight the extent of forests on the planet.
 Responsible management of forests allows using the resources efficiently and sustainably, preserving the biodiversity, and regulating atmospheric $CO_2$, which is becoming especially important as the anthropogenic climate change is ongoing and accelerating [@faheyForestCarbonStorage2010; @forsterIndicatorsGlobalClimate2024].
 This drives the need for accurate, detailed, up-to-date information about various forest attributes such as distributions of tree species, average heights and ages of trees, estimates of trunk diameter, timber volume, and above ground biomass, and others.
 
@@ -26,11 +26,12 @@ Global tree cover for 2010.
 Data from @hansenHighResolutionGlobalMaps2013
 :::
 
-Many national space agencies even provide open access to satellite data that can be used for mapping forests.
+Many national space agencies provide open access to satellite data that can be used for mapping forests.
 European Space Agency offers free and open access[^1] to the Sentinel missions, including C-band SAR data from Sentinel-1 and medium-resolution multispectral data from Sentinel-2, both with global coverage.
 They also have an upcoming P-band SAR mission called BIOMASS, designed specifically to study global forest biomass and carbon cycles [@queganEuropeanSpaceAgency2019], which further indicates the growing importance and interest in the topic of forest mapping.
 NASA provides free access to an abundance of satellite data through its Earthdata platform, Landsat mission with the Operation Land Imager (OLI) instrument and Terra mission with Moderate Resolution Imaging Spectroradiometer (MODIS) instrument being the most relevant for forest mapping applications.
-The Indian Space Research Organisation, Brazilian National Institute for Space Research, National Space Research and Development Agency of Nigeria all offer free satellite data that can be used for this purpose.
+The Indian Space Research Organisation (ISRO), Brazilian National Institute for Space Research, National Space Research and Development Agency of Nigeria all offer free satellite data that can be used for this purpose.
+NASA and the ISRO also have a joint upcoming mission called NISAR with two fully-polarimetric SAR sensors at L-band and S-band [@kelloggNASAISROSyntheticAperture2020], which will benefit forestry applications greatly.
 
 [^1]: Although the access is not open for everyone equally, as I have observed silent bans of the accounts connecting from Russian IP-addresses without any response to support inquires.
 
@@ -43,11 +44,11 @@ It allows for fine-grained control and on the fly adjustment of many important p
 
 The most common way to use UAV remote sensing, be it LiDAR, multispectral, hyperspectral, or other data modalities, for mapping forest attributes in industry is what is known in the LiDAR community as the area-based approach, described in detail in @sec-area-based-approach.
 It is based on extrapolating measurements from ground plots made in traditional inventories by aggregating remote sensing data to the grid with cell area of a ground plot, which results in coarse resolution maps.
-It is easy to use, but its results are often not detailed enough when working on smaller scales.
+It is easy to use, but its results are often not detailed enough when working on finer scales.
 However, modern sensors and processing techniques allow not aggregating at all and instead working on the level of individual trees, which is as detailed as it can possibly get, allowing for any level of aggregation for downstream tasks.
 This requires robust algorithms that allow detecting individual trees in dense multimodal data.
 This is relatively[^2] easy in urban environments, manually planted and managed forest stands, or forests that are either sparse or predominantly coniferous, where the structure of the canopy is easy to interpret.
-In some such environments state-of-the-art results can be achieved by simple local maxima detection algorithms, that rely on the assumption that a tree can be detected by finding peaks on of canopies because they correspond to tree tops.
+In some such environments state-of-the-art results can be achieved by simple local maxima detection algorithms, that rely on the assumption that a tree can be detected by finding peaks of canopies because they correspond to tree tops.
 Forest that are mixed and dense, which are a huge part of forests in countries mentioned earlier, are much harder to work with and are a very active area of research for developing methods of detection of individual trees.
 The canopies in such forests are very complex, especially because the top of the crowns of deciduous tree species often don't have a single pronounced height maximum, and crowns of nearby trees often overlap.
 
@@ -65,8 +66,8 @@ Neither of these data sources on their own is enough to reliably and with suffic
 
 ## Research question and hypothesis
 
-The main research question could be formulated as follows: "How to minimize effort and cost required for detailed inventories of dense mixed forests without losing accuracy?"
-The main hypothesis is then: "An accurate and detailed inventory with minimal effort and cost can be achieved through fusion of UAV LiDAR and RGB data using machine learning".
+The main research question could be formulated as follows: "How to reduce effort and cost required for detailed inventories of dense mixed forests without losing accuracy?"
+The main hypothesis is then: "An accurate and detailed inventory with reduced effort and cost can be achieved through fusion of UAV LiDAR and RGB data using machine learning".
 The cost reduction is self-explanatory and is addressed in the previous subsection during a discussion of the platform of choice.
 The effort reduction comes mainly from minimizing the amount of field inventory data required.
 An ideal method is a method that doesn't require any field inventory data at all except for validation and quality assessment.
@@ -111,13 +112,14 @@ Its aim it to make the work reproducible and to explain the methodological choic
 
 @sec-results describes the results of each stage of the framework preparation and the validation approach used to verify its applicability and effectiveness on realistic data.
 
-@sec-conclusion offers a brief summary of the thesis as a whole, potential perspectives for further improvement of the proposed framework, and some concluding thoughts.
+@sec-conclusion offers a brief summary of the thesis as a whole, potential approaches for further improvement of the proposed framework, and some concluding thoughts.
 
 ## Data and code availability
 
 Original datasets described in the thesis are openly available on Kaggle (Lysva field survey [here](https://www.kaggle.com/datasets/sentinel3734/tree-detection-lidar-rgb) and individual tree point clouds [here](https://www.kaggle.com/datasets/sentinel3734/uav-point-clouds-of-individual-trees)).
 All the code used for the project is available on GitHub at [iod-ine/phd](https://github.com/iod-ine/phd).
-The thesis document was developed using Quarto [@Allaire_Quarto_2024] using the literate programming approach [@knuth84], and a link to an HTML version hosted through GitHub Pages is available in the repository.
+An HTML version of this thesis is hosted through GitHub Pages and is available [here](https://iod-ine.github.io/thesis).
+The thesis document was developed using Quarto [@Allaire_Quarto_2024] using the literate programming approach [@knuth84].
 The deep learning part is implemented using PyTorch [@Ansel_PyTorch_2_Faster_2024], PyTorch Geometric [@Fey_Fast_Graph_Representation_2019], and PyTorch Lightning [@Falcon_PyTorch_Lightning_2019], with experiment tracking using MLflow.
 Classic machine learning models implementations are from scikit-learn [@scikit-learn].
 NumPy [@2020NumPy-Array], SciPy [@2020SciPy-NMeth], pandas [@The_pandas_development_team_pandas-dev_pandas_Pandas], scikit-image [@van_der_Walt_scikit-image_image_processing_2014] libraries are used for processing the data.

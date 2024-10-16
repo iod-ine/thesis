@@ -10,10 +10,12 @@ As was mentioned in the introduction, remote sensing is widely used for extendin
 This section provides examples of various remote sensing techniques used in various forestry applications, before going in more detail into specifically UAV LiDAR and RGB, which are the focus of the described framework.
 
 @hansenAssessingForestNonForest2020 explore the usage of C-band SAR data from the Sentinel-1 mission for binary land use classification into forest/non-forest using a collection of classic machine learning classifiers.
+SAR is an active sensor, making it independent on external conditions and observation time, and it penetrates cloud cover, making it very reliable during almost any weather.
 They report accuracies from 80% in the worst case to the 93% in the best case, depending on the area of application.
 
 @ferrariFusingSentinel1Sentinel22023 use Fully Convolutional Networks [@longFullyConvolutionalNetworks2015] for fusion of multispectral Sentinel-2 and C-band SAR Sentinel-1 data for clear-cut logging detection in the presence of clouds, which limit the use of optical-only approaches and are very common in tropical areas.
 They show that fusion performs better than single-modality variant for pixels obscured by clouds.
+This combination of active SAR and passive multispectral data is very common, as the sensors compliment each other nicely, similarly to laser scanning and orthophotos.
 
 @sinica-sinavskisForestStandVolume2022 combine LiDAR point clouds with Sentinel-2 images to predict timber volume on a stand level.
 They use an unusual approach, using Sentinel-2 images for species detection by clustering, LiDAR point clouds for estimating tree counts and average tree heights, and combining them into two variables used to fit the final regression models.
@@ -50,9 +52,11 @@ They can be calculated on a per-point basis by using fixed-size or nearest-neigh
 The used features were originally introduced by @westContextdrivenAutomatedTarget2004, @paulyEfficientSimplificationPointsampled2002, and @malletRelevanceAssessmentFullwaveform2011, and include linearity, planarity, and scatter, aiming to indicate the presence of a linear, planar, or volumetric structures, and also omnivariance, anisotropy, eigentropy, the sum of eigenvalues, and curvature.
 The formulas for the features are provided in @sec-training-tree-processors, where they are used for training parameter prediction models for segmented trees.
 Simpler features, that are especially often used in area-based approach, include various statistics describing height and reflection intensity distributions of points, like percentages of points above mean height, deciles of height, cumulative percentages of points below height deciles, and others.
+Since many LiDAR sensors can record multiple reflections from a single pulse, features that use the reflection numbers are also often used, i.e., relative return number and total number of returns.
 
-Non-uniform point densities often become a problem for both manual feature creation and representation learning as part of a deep learning model.
-@ozdemirDeepLearningFramework2021 proposes a framework for semantic segmentation of photogrammetric point clouds in urban environments, the key components of which are voxel-grid filtering-based downsampling for equalizing the point density across the cloud, manual addition of geometric features in a nearest-neighbor neighborhood, and processing the result with a convolutional network for assigning labels to each point, followed by a post-processing step to upscale the labels back to original point cloud size.
+Point clouds are by their nature irregular, and non-uniform point densities across the cloud often become a problem for both manual feature creation and representation learning as part of a deep learning model.
+Many researches explore ways to handle this non-uniformity.
+For example, @ozdemirDeepLearningFramework2021 proposes a framework for semantic segmentation of photogrammetric point clouds in urban environments, the key components of which are voxel-grid filtering-based downsampling for equalizing the point density across the cloud, manual addition of geometric features in a nearest-neighbor neighborhood, and processing the result with a convolutional network for assigning labels to each point, followed by a post-processing step to upscale the labels back to original point cloud size.
 
 The first deep learning model to work directly on point clouds without constructing any intermediate representation that can be processed by convolutional models is the PointNet introduced by @qiPointNet2017.
 @fig-pointnet-architecture shows its architecture.
