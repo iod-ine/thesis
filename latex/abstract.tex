@@ -1,2 +1,10 @@
-This is a rough draft, and the abstract is not ready yet.
-I sincerely apologize for the state of the document and promise to send you an updated version by start of day Monday, October 30.
+Detailed forest inventories are necessary for almost all modern activity related to managing forests, from responsible harvest planning to modeling and regulating atmospheric $CO_2$.
+Remote sensing data is extensively used to facilitate conducting such inventories over extensive areas, which are unfeasible for traditional manual forest inventories.
+The current state of commercially available sensors allows for very detailed observations, unlocking the possibility of working on the scale of individual trees but requiring robust algorithms for detection and segmentation of individual trees in multimodal data.
+Such algorithms already exist for forests that are either sparse or predominantly coniferous, but robustly segmenting dense mixed forests with complex canopy structures remains an open problem.
+Targeting UAV-based LiDAR point clouds augmented with RGB orthophoto data as the main input source, I present my work on a framework that uses deep learning to segment point clouds over dense mixed forests into individual trees and post-process the segments with a collection of specialized classic machine learning models to predict the required forest attributes for each individual tree.
+I use original datasets of a detailed forest inventory covered by UAV LiDAR and RGB orthophoto surveys and a collection of manually extracted point  clouds of individual trees collected in Perm Krai, Russia, to train the segmentation network and the attribute prediction models for classifying and regressing individual trees into the required parameters.
+The segmentation network is trained on patches of synthetic forest constructed from point clouds of individual trees, heavily relying on data augmentations to mitigate the drawbacks of a having a small dataset and make the synthetic forest look more realistic.
+The thesis contains a description of the design, implementation, and experimental verification of the proposed framework, as well as recommendations for further improvements.
+Both datasets were released into open access during the work on this thesis.
+The code is also open-access.
