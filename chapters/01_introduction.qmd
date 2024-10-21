@@ -68,9 +68,12 @@ Neither of these data sources on their own is enough to reliably and with suffic
 
 The main research question could be formulated as follows: "How to reduce effort and cost required for detailed inventories of dense mixed forests without losing accuracy?"
 The main hypothesis is then: "An accurate and detailed inventory with reduced effort and cost can be achieved through fusion of UAV LiDAR and RGB data using machine learning".
-The cost reduction is self-explanatory and is addressed in the previous subsection during a discussion of the platform of choice.
-The effort reduction comes mainly from minimizing the amount of field inventory data required.
-An ideal method is a method that doesn't require any field inventory data at all except for validation and quality assessment.
+The benchmarks to measure against are both the traditional manual forest inventory and the widely used area-based approach.
+
+Cost and effort are closely connected, as any effort is in the end converted to cost.
+Still, it often makes sense to separate the two to highlight the nature of the effects the proposed system should have.
+The cost reduction was partly addressed in the previous section during the discussion of the platform of choice: UAV-based remote sensing offers a great balance of upfront cost, effort to operate, and versatility in observation parameters.
+The effort reduction comes from greatly decreasing the amount of field inventory data required when using the proposed system, from the relative ease of collection of remote sensing data compared to alternatives, and from relative ease of tuning the system to operate in new areas.
 
 ## Overview of the framework
 
