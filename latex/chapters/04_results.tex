@@ -84,7 +84,18 @@ species a lot more than coniferous ones.}
 \subsubsection{Diameter at breast height regression}
 
 Diameter at breast height regression model was evaluated using root mean squared error (RMSE), mean absolute error (MAE), and coefficient of determination $R^2$.
-The dataset here is smaller because diameter at breast height is only available for trees from the Lysva field inventory, while species are available for all trees in the individual tree point cloud dataset, some of which are from other surveys in the region.
+Formulas for the metrics are provided below, with $y_i$ representing the true dbh value, $\hat y_i$ – the corresponding prediction, and $\overline y$ – the average dbh.
+The dataset here is smaller than the one for tree species classification because diameter at breast height is only available for trees from the Lysva field inventory, while species are available for all trees in the individual tree point cloud dataset, some of which are from other surveys in the region.
+
+$$
+\begin{aligned}
+\text{RMSE} &= \sqrt{\frac{1}{N} \sum_{i=1}^N (y_i - \hat y_i)^2} \\
+\text{MAE} &= \frac{1}{N} \sum_{i=1}^N | y_i - \hat y_i | \\
+R^2 &= 1 - \frac{\sum_{i=1}^N (y_i - \hat y_i)^2}{\sum_{i=1}^N (y_i - \overline y)^2}
+\end{aligned}
+$$
+
+
 Figure~\ref{fig-cv-reg} shows out-of-fold metrics across all ten folds of cross-validation.
 Both the mean squared error and the mean absolute error are stable across the folds, with average RMSE 4.55 centimeters with a standard deviation of 0.19 and average MAE 3.49 centimeters with a standard deviation of 0.38.
 Coefficient of determination $R^2$ is less stable.
@@ -119,6 +130,7 @@ Because of the underestimation on the high end and overestimation in the low end
 Although most points are in the middle, where the line is followed a lot more closely.
 And, finally, a related plot on the bottom right, comparing distributions of the actual dbh and predicted dbh in the holdout set.
 The same lack of extreme can be observed.
+The final holdout set RMSE is 5.76 cm, MAE is 4.11, $R^2$ is 0.52.
 
 \begin{figure}
 \centering{
@@ -141,12 +153,13 @@ To validate the framework, the results were evaluated on the Lysva field invento
 The mean X and Y coordinates of each segmented tree were calculated to convert the cloud into a set of points, where each point represents a candidate detected tree.
 The maximum height of the points in the cluster was used as the height of the detected tree.
 Then the algorithm described in Section~\ref{sec-matching-algorithm} was applied to match the detected trees their corresponding the ground truth trees, if any.
-The matching algorithm was run with max distance of 5 meter and max height difference of 3 meters (ignored for ground truth trees that don't have measured height).
+The matching algorithm was run with maximum distance between a detected tree candidate and a ground truth tree of 5 meters and maximum height difference of 3 meters (ignored for ground truth trees that don't have measured height).
 Then, precision, recall, and $F_1$-score were calculated for the detection results, and for the true positive matches the average distance between the detected tree and the actual tree, species classification accuracy and macro $F_1$-score, and diameter at breast height errors are calculated.
 
 Table~\ref{tbl-detection-results} shows the tree detection metrics.
 When interpreting the metrics, the reader is advised to keep in mind the limitations of the distance metric mentioned in @sec-matching-algorithm, and instead focus on the $F_1$-score as the most informative metric.
 The overall average $F_1$-score for tree detection by the described system is 0.63.
+This approach thus outperforms the basic individual local maximum filter in tree detection in the Lysva region as reported in \citet{dubrovinOpenDatasetIndividual2024} by 0.13.
 
 \begin{table}
     \centering
