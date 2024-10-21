@@ -89,6 +89,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -213,7 +242,8 @@ div.csl-indent {
 <p>“A PhD research project is an academic exercise of given effort and length.”</p>
 <p>– <cite>Dr.&nbsp;Ron Anderson, PhD adviser of prof. Clement Fortin</cite></p>
 </blockquote>
-<p>This thesis is dedicated to designing, implementing, and testing of a framework for estimating forest parameters at the scale of individual trees. The proposed framework relies on fusion of UAV LiDAR point clouds and RGB orthophotos data, deep neural networks designed for processing 3D points clouds to segment the data into individual trees, and a collection of parameter-specific classic machine learning models to process the segmented trees and predict forest parameters of interest. An end-to-end implementation is described in detail, with parts of the system evaluated separately, and the overall system validated on a detailed manual field inventory dataset. The main contributions of this thesis are thus the design, implementation, and experimental verification of said framework. Moreover, during the work on the thesis, both original datasets used for training the models were published into open access, to hopefully be useful to the research community with a rapidly growing interest in detailed digital forest inventories <span class="citation" data-cites="dubrovinExplorationPropertiesPoint2024 dubrovinOpenDatasetIndividual2024">(<a href="99_references.html#ref-dubrovinExplorationPropertiesPoint2024" role="doc-biblioref">Dubrovin and Fortin 2024</a>; <a href="99_references.html#ref-dubrovinOpenDatasetIndividual2024" role="doc-biblioref">Dubrovin, Fortin, and Kedrov 2024</a>)</span>.</p>
+<p>This thesis is dedicated to designing, implementing, and testing of a framework for estimating forest parameters at the scale of individual trees. The proposed framework relies on fusion of UAV LiDAR point clouds and RGB orthophotos data, deep neural networks designed for processing 3D points clouds to segment the data into individual trees, and a collection of parameter-specific classic machine learning models to process the segmented trees and predict forest parameters of interest. An end-to-end implementation is described in detail, with parts of the system evaluated separately, and the overall system validated on a detailed manual field inventory dataset. The main contributions of this thesis are thus the design, implementation, and experimental verification of said framework. Moreover, during the work on the thesis, both original datasets used for training the models were published into open access, to hopefully be useful to the research community with a rapidly growing interest in detailed digital forest inventories <span class="citation" data-cites="dubrovinExplorationPropertiesPoint2024 dubrovinOpenDatasetIndividual2024">(<a href="99_references.html#ref-dubrovinExplorationPropertiesPoint2024" role="doc-biblioref">Dubrovin and Fortin 2024</a>; <a href="99_references.html#ref-dubrovinOpenDatasetIndividual2024" role="doc-biblioref">Dubrovin, Fortin, and Kedrov 2024</a>)</span>. I believe the release of data into open access is worthy of including as a contribution, especially in the current era of commercial machine learning<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. When having good data is an advantage, less people are willing to make their data public, which makes it harder for researchers to explore, develop, and compare novel approaches.</p>
+<p>Coming back to the research question and the hypothesis stated in <a href="01_introduction.html#sec-research-question" class="quarto-xref"><span>Section 1.2</span></a>, I want to address the ways I believe the proposed framework answers it. As already mentioned there, the baselines are the manual forest inventory and the widely used area-based approach described in <a href="02_literature_review.html#sec-area-based-approach" class="quarto-xref"><span>Section 2.3</span></a>. The cost reduction mainly comes from the choice of the platform for remote sensing observations. Using UAVs is cheaper than purchasing high resolution data from satellites or planes, and it offers a lot more control over the acquisition parameters, although it requires trained operators. The effort reduction mainly comes from dramatic decrease in the amount of required field inventory data, which is very labor-intensive to collect. UAVs are also allow to cover huge areas easily by a few people, unlike fully manual inventories or those based on terrestrial LiDAR measurements, where a forester or an operator needs to cover the entire area of interest by foot.</p>
 <p>The reported experimental results achieved by the implemented system are by no means state of the art, but they do serve as a proof of concept. The current state of the system, described in the previous chapter, can be seen as a baseline, since it prioritizes simple components to show that the overall system has potential. And I believe the resulting framework has potential, with specific steps I would try if I had unlimited time, listed in the next section.</p>
 <section id="potential-further-improvements" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="potential-further-improvements"><span class="header-section-number">5.1</span> Potential further improvements</h2>
@@ -229,7 +259,10 @@ div.csl-indent {
 </section>
 <section id="concluding-thoughts" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="concluding-thoughts"><span class="header-section-number">5.2</span> Concluding thoughts</h2>
-<p>This thesis evolved with the developing understanding and the need of the industrial partners. It started as an exploration of use of synthetic aperture radar for augmentation of multispectral-based pipelines for mapping forests.</p>
+<p>The quote at the beginning of a chapter is relevant for a few reasons, most important of which is that there are so many things I still would like to try and improve. But I don’t have any more time. I wish I spent the time I had more wisely, but it is a well established fact that hindsight is 20/20, and what I see as wise now probably wasn’t so obviously wise in the process.</p>
+<p>The thesis evolved with both my understanding of current problems and the needs and point of view of the industrial partners, with whose collaboration the work was conducted. I wanted the work to be practical, which explains many choices made – most notably, the data sources.</p>
+<p>This was a journey. Thank you for reading. Hope you are safe.</p>
+<p><span style="visibility: hidden">I would also love to include a rant about the awful state of so many things in the world including science and scientific publishing and high-tech industry and overwhelming widespread hypocrisy and how capitalism must die for us as humanity to have a chance of survival. I won’t though because it’s not the place.</span></p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -243,6 +276,12 @@ Dubrovin, Ivan, Clement Fortin, and Alexander Kedrov. 2024. <span>“An Open Dat
 Weinstein, Ben, Sergio Marconi, and Ethan White. 2022. <span>“Data for the <span>NeonTreeEvaluation Benchmark</span>.”</span> Zenodo. <a href="https://doi.org/10.5281/ZENODO.5914554">https://doi.org/10.5281/ZENODO.5914554</a>.
 </div>
 </div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>I am purposefully avoiding the term “artificial intelligence” as it seems to have been abused so much as to become practically meaningless, and thus not useful in technical context.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

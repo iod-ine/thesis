@@ -87,6 +87,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -404,6 +433,12 @@ Hansen, Johannes N., Edward T. A. Mitchard, and Stuart King. 2020.
 Sentinel-1 C-Band Synthetic Aperture Radar</span>.”</span> <em>Remote
 Sensing</em> 12 (11): 1899. <a href="https://doi.org/10.3390/rs12111899">https://doi.org/10.3390/rs12111899</a>.
 </div>
+<div id="ref-hansenHighResolutionGlobalMaps2013" class="csl-entry" role="listitem">
+Hansen, M. C., P. V. Potapov, R. Moore, M. Hancher, S. A. Turubanova, A.
+Tyukavina, D. Thau, et al. 2013. <span>“High-<span>Resolution Global
+Maps</span> of 21st-<span>Century Forest Cover Change</span>.”</span>
+<em>Science</em> 342 (6160): 850–53. <a href="https://doi.org/10.1126/science.1244693">https://doi.org/10.1126/science.1244693</a>.
+</div>
 <div id="ref-2020NumPy-Array" class="csl-entry" role="listitem">
 Harris, Charles R., K. Jarrod Millman, Stéfan J van der Walt, Ralf
 Gommers, Pauli Virtanen, David Cournapeau, Eric Wieser, et al. 2020.
@@ -434,6 +469,14 @@ Adhikari. 2024. <span>“Estimation of <span>Above-Ground Forest
 Biomass</span> in <span>Nepal</span> by the <span>Use</span> of
 <span>Airborne LiDAR</span>, and <span>Forest Inventory
 Data</span>.”</span> <em>Land</em> 13 (2): 213. <a href="https://doi.org/10.3390/land13020213">https://doi.org/10.3390/land13020213</a>.
+</div>
+<div id="ref-kelloggNASAISROSyntheticAperture2020" class="csl-entry" role="listitem">
+Kellogg, Kent, Pamela Hoffman, Shaun Standley, Scott Shaffer, Paul
+Rosen, Wendy Edelstein, Charles Dunn, et al. 2020.
+<span>“<span>NASA-ISRO Synthetic Aperture Radar</span>
+(<span>NISAR</span>) <span>Mission</span>.”</span> In <em>2020
+<span>IEEE Aerospace Conference</span></em>, 1–21. Big Sky, MT, USA:
+IEEE. <a href="https://doi.org/10.1109/AERO47225.2020.9172638">https://doi.org/10.1109/AERO47225.2020.9172638</a>.
 </div>
 <div id="ref-kingmaAdamMethodStochastic2014" class="csl-entry" role="listitem">
 Kingma, Diederik P., and Jimmy Ba. 2014. <span>“Adam: <span>A

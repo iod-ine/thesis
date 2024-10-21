@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ivan Dubrovin">
-<meta name="dcterms.date" content="2024-10-10">
+<meta name="dcterms.date" content="2024-10-21">
 
 <title>A deep learning framework for mixed dense forests parameter estimation at individual tree scale</title>
 <style>
@@ -70,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -189,7 +218,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 10, 2024</p>
+      <p class="date">October 21, 2024</p>
     </div>
   </div>
   
@@ -199,7 +228,7 @@ ul.task-list li input[type="checkbox"] {
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    <p>Detailed forest inventories are necessary for almost all modern activity related to managing forests, from responsible harvest planning to modeling and regulating atmospheric CO2. Remote sensing data is extensively used to facilitate conducting such inventories over extensive areas, which are unfeasible for traditional manual forest inventories. The current state of commercially available sensors allows for very detailed observations, unlocking the possibility of working on the scale of individual trees but requiring robust algorithms for detection and segmentation of individual trees in multimodal data. Such algorithms already exist for forests that are either sparse or predominantly coniferous, but robustly segmenting dense mixed forests with complex canopy structures remains an open problem. Targeting UAV-based LiDAR point clouds augmented with RGB orthophoto data as the main input source, I present my work on a framework that uses deep learning models to segment point clouds over dense mixed forests into individual trees and post-process the segments with a collection of specialized classic machine learning models to predict the required forest attributes for each individual tree. I use original datasets of a detailed forest inventory covered by UAV LiDAR and RGB orthophoto surveys and a collection of manually extracted point clouds of individual trees collected in Perm Krai, Russia, to train the segmentation network and the smaller models for classifying and regressing individual trees into the required parameters. The segmentation network is trained on patches of synthetic forest constructed from point clouds of individual trees, heavily relying on data augmentation to make the synthetic forest look realistic. The thesis contains a description of the design, implementation, and experimental verification of the proposed framework, as well as recommendations for further improvements. Both datasets were released into open access during the work on this thesis. The code is also open-access.</p>
+    <p>Detailed forest inventories are necessary for almost all modern activity related to managing forests, from responsible harvest planning to modeling and regulating atmospheric <span class="math inline">\(CO_2\)</span>. Remote sensing data is extensively used to facilitate conducting such inventories over extensive areas, which are unfeasible for traditional manual forest inventories. The current state of commercially available sensors allows for very detailed observations, unlocking the possibility of working on the scale of individual trees but requiring robust algorithms for detection and segmentation of individual trees in multimodal data. Such algorithms already exist for forests that are either sparse or predominantly coniferous, but robustly segmenting dense mixed forests with complex canopy structures remains an open problem. Targeting UAV-based LiDAR point clouds augmented with RGB orthophoto data as the main input source, I present my work on a framework that uses deep learning to segment point clouds over dense mixed forests into individual trees and post-process the segments with a collection of specialized classic machine learning models to predict the required forest attributes for each individual tree. I use original datasets of a detailed forest inventory covered by UAV LiDAR and RGB orthophoto surveys and a collection of manually extracted point clouds of individual trees collected in Perm Krai, Russia, to train the segmentation network and the attribute prediction models for classifying and regressing individual trees into the required parameters. The segmentation network is trained on patches of synthetic forest constructed from point clouds of individual trees, heavily relying on data augmentations to mitigate the drawbacks of a having a small dataset and make the synthetic forest look more realistic. The thesis contains a description of the design, implementation, and experimental verification of the proposed framework, as well as recommendations for further improvements. Both datasets were released into open access during the work on this thesis. The code is also open-access.</p>
   </div>
 </div>
 
@@ -209,7 +238,7 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="acknowledgments" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="acknowledgments">Acknowledgments <span style="visibility: hidden">🌹</span></h2>
-<p>As any large research project, finishing this thesis wouldn’t be possible without the support of many people. I would like to thank some of them, whose help played the biggest roles in my successfully finishing this. First, my supervisor, professor Clement Fortin, who picked up the lead when the project was in a disarray and guided me through to the end, helping to prioritize and focus on what was significant. Second, my previous supervisor, professor Anton Ivanov, under whose supervision the project started and gradually evolved into what it finally became. Third, Alexander Kedrov and Albert Vasiliev from Space Technologies and Services Center, Ltd, who allowed me to work with their data and taught me about the inventories in the field and current approaches of extending them with remote sensing data in industry. And last, but also the most important, is my beautiful patient wife, who was supportive and forgiving from the very first moments of my PhD studies, and without whose help I would have given up many times over. Thank you all, sincerely, for the guidance, the wisdom, the knowledge, the help, the support. <span style="visibility: hidden"><img src="https://cdn.betterttv.net/emote/60a090a667644f1d67e86fd0/1x.webp" alt="hasRaid, 1x"></span></p>
+<p>As any large research project, finishing this thesis wouldn’t be possible without the support of many people. I would like to thank some of them, whose help played the biggest roles in my successfully finishing this. First, my supervisor, professor Clement Fortin, who picked up the lead when the project was in a disarray and guided me through to the end, helping to prioritize and focus on what was significant. Second, my previous supervisor, professor Anton Ivanov, under whose supervision the project started and gradually evolved into what it finally became. Third, Alexander Kedrov and Albert Vasiliev from Space Technologies and Services Center, Ltd, who allowed me to work with their data and taught me about the inventories in the field and current approaches of extending them with remote sensing data used in industry. And last, but also the most important, is my beautiful patient wife, who was supportive and forgiving from the very first moments of my PhD studies, and without whose help I would have given up many times over. Thank you all, sincerely, for the guidance, the wisdom, the knowledge, the help, the support. <span style="visibility: hidden"><img src="https://cdn.betterttv.net/emote/60a090a667644f1d67e86fd0/1x.webp" alt="hasRaid, 1x"></span></p>
 
 
 </section>
