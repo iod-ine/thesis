@@ -1,6 +1,6 @@
 # Materials and methods {#sec-materials-and-methods}
 
-This chapter describes in detail used datasets, processing techniques and the methods used, and comments on the reasoning behind the choices.
+This chapter describes in detail used datasets, processing techniques and the methods, and comments on the reasoning behind the choices.
 Hopefully, by the end of this chapter the reader will be confident in their ability to recreate the framework from scratch.
 The code of the project on my GitHub might be a helpful addition for that.
 
@@ -188,14 +188,14 @@ The architecture of the used PointNet++ is similar to the segmentation architect
 The main differences from the shown architecture are the use of one more stacked set abstraction layer to make the network deeper, and the use of a regression head that predicts a continuous value for each point instead of a classification head that predicts per-point class scores, since the model needs to assign a unique ID to every tree in the patch.
 The three stacked set abstraction layers have the proportions of points sampled set to 0.75, 0.5, and 0.5, and neighborhood radii for feature aggregation set to 0.1, 0.2, and 0.4.
 Note that the scale of the input is normalized (see next section for details), so the radii are not in meters.
-The model has 30 million trainable parameters.
+The final model has 30 million trainable parameters.
 
 ### Coordinate and feature normalization
 
 It's a well established practice to scale the inputs to neural networks that is known to improve the speed and accuracy of gradient descent convergence [@bishop2006pattern].
 Before going through the network, a set of augmentations and transformations is applied to each synthetic forest patch.
 The augmentations are described in detail with visualized examples in @sec-augmentations.
-The transformations include scale and feature normalization – the coordinates are centered and normalized to the interval $(-1, 1)$ and the features are normalized to the interval $(-1, 1)$.
+The transformations include scale and feature normalization – the coordinates are centered and normalized to the interval $(-1, 1)$ and the features are normalized to the interval $(-1, 1)$ without centering.
 
 ### Data augmentation {#sec-augmentations}
 
