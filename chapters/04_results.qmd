@@ -111,6 +111,7 @@ Then, precision, recall, and $F_1$-score were calculated for the detection resul
 @tbl-detection-results shows the tree detection metrics.
 When interpreting the metrics, the reader is advised to keep in mind the limitations of the distance metric mentioned in @sec-matching-algorithm, and instead focus on the $F_1$-score as the most informative metric.
 The overall average $F_1$-score for tree detection by the described system is 0.63.
+This approach thus outperforms the basic individual local maximum filter in tree detection in the Lysva region as reported in @dubrovinOpenDatasetIndividual2024 by 0.13.
 
 ::: {#tbl-detection-results}
 | Plot | Tree count | Dominant type | Point density | Recall | Precision | F1-score | Distance |
