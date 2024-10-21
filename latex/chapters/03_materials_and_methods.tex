@@ -1,13 +1,14 @@
 \chapter{Materials and methods}\label{cap:materials}
 
-This chapter describes in detail used datasets, processing techniques and the methods used, and comments on the reasoning behind the choices.
+This chapter describes in detail used datasets, processing techniques and the methods, and comments on the reasoning behind the choices.
 Hopefully, by the end of this chapter the reader will be confident in their ability to recreate the framework from scratch.
 The code of the project on my GitHub might be a helpful addition for that.
+
 
 \section{Lysva field inventory dataset}\label{sec-lysva-dataset}
 
 The main original dataset used in the study is the Lysva field inventory dataset, named by the closest town to its location.
-The dataset is released into open access with an accompanying paper that describes the data in detail and provides a basic baseline for individual tree detection \cite{dubrovinExplorationPropertiesPoint2024}.
+The dataset is released into open access with an accompanying paper that describes the data in detail and provides a basic baseline for individual tree detection \citep{dubrovinExplorationPropertiesPoint2024}.
 The study area is located in Perm Krai, Russia, 86 kilometers to the east of Perm.
 The dataset consists of a field inventory of 3600 trees across 10 rectangular ground plots 100 meters in lengths and 50 meters in width fully covered by a UAV LiDAR and RGB orthophoto surveys.
 Figure~\ref{fig-lysva-roi} shows the locations of the ground plots over the full size RGB orthophoto and a visualization of the field inventory for a single plot on top of the LiDAR point cloud.
@@ -34,11 +35,12 @@ Figure reused from \citet{dubrovinOpenDatasetIndividual2024}}.
 
 
 The field inventory is a tabular dataset where every row represents a single tree.
-Table~\ref{tbl-inventory-example} shows a random sample of entries from the field inventory table.
+\citet{tbl-inventory-example} shows a random sample of entries from the field inventory table.
 Every tree is represented by a point in UTM 40N coordinate reference system (EPSG:32640).
 Every tree has a species label and diameter at breast height (dbh), measured with calipers at 1.3 m from the ground at two perpendicular directions and averaged.
 Figure~\ref{fig-lysva-species-distribution} shows the distribution of species in the data: the dominant species is spruce, but overall the trees are evenly split between deciduous and coniferous, 1793 and 1807 respectively, with seven species in total: spruce, birch, fir, aspen, tilia, alder, and willow.
 Approximately 20\% of the trees have height data measured during the inventory, and 10\% have ages measured on core samples, shown in the table in meters and years respectively.
+
 
 \begin{longtable}[]{@{}lllllllllll@{}}
 
@@ -82,11 +84,11 @@ Noise was removed by visually inspecting the point cloud and manually selecting 
 Ground point classification was performed and ground points were used to normalize height by subtracting the ground level from the Z coordinate of every point.
 Height normalization allows treating the Z coordinate as height above ground rather than the absolute elevation, which simplifies many subsequent steps.
 The camera used for the orthophoto survey is Sony A6000.
-The resolution of the orthophoto is 7 cm per pixel.
+The resolution of the orthophoto is 7 centimeters per pixel.
 Figure~\ref{fig-example-3d-point-cloud} is a 3D visualization of the point cloud over plot number 10.
 It shows the unmodified point cloud on the left, with points colored by height above ground, and a point cloud enriched with color information by sampling the orthophoto at the planar coordinates of the points.
 Figure~\ref{fig-example-ortho} shows the orthophoto for the same plot.
-The carrier UAV was configured to follow the terrain at 150 meter height using the SRTM elevation map as a reference \cite{farrShuttleRadarTopography2000}.
+The carrier UAV was configured to follow the terrain at 150 meter height using the SRTM elevation map as a reference \citep{farrShuttleRadarTopography2000}.
 
 \begin{figure}
 \begin{minipage}{0.50\linewidth}
@@ -211,8 +213,8 @@ We do not mention them here because we specifically focus on UAV LiDAR.
 
 \section{Individual tree point clouds dataset}\label{sec-individual-trees-dataset}
 
-The main dataset used for training the models is a collection of point clouds of individual trees, referred to in this text as tree clouds, extracted manually from larger UAV LiDAR point clouds.
-The dataset is released into open access, and was originally presented in \cite{dubrovinExplorationPropertiesPoint2024}, although it has been expanded since and now contains twice as many individual trees.
+The main dataset used for training the models is a collection of point clouds of individual trees, sometimes referred to in this text as tree clouds, extracted manually from larger UAV LiDAR point clouds.
+The dataset is released into open access, and was originally presented in \citep{dubrovinExplorationPropertiesPoint2024}, although it has been expanded since and now contains twice as many individual trees.
 It consists of 394 trees, 192 of which are extracted from the previously described Lysva survey, and 202 from other surveys in Perm Krai.
 The distinction between the parts is important because the Lysva dataset has RGB orthophoto coverage, making it possible to infuse the tree clouds with orthophoto-based features.
 Thus, for training the tree segmentation networks that rely on these features, the effective size of the dataset is 192 tree clouds, as only the former part is used.
@@ -366,10 +368,10 @@ The model has 30 million trainable parameters.
 
 \subsection{Coordinate and feature normalization}
 
-It's a well established practice to scale the inputs to neural networks that is known to improve the speed and accuracy of gradient descent convergence \cite{bishop2006pattern}.
+It's a well established practice to scale the inputs to neural networks that is known to improve the speed and accuracy of gradient descent convergence \citep{bishop2006pattern}.
 Before going through the network, a set of augmentations and transformations is applied to each synthetic forest patch.
-The augmentations are described in detail with visualized examples in Section~\ref{sec-augmentations}.
-The transformations include scale and feature normalization – the coordinates are centered and normalized to the interval $(-1, 1)$ and the features are normalized to the interval $(-1, 1)$.
+The augmentations are described in detail with visualized examples in @sec-augmentations.
+The transformations include scale and feature normalization – the coordinates are centered and normalized to the interval $(-1, 1)$ and the features are normalized to the interval $(-1, 1)$ without centering.
 
 \subsection{Data augmentation}\label{sec-augmentations}
 
