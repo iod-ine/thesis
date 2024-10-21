@@ -9,6 +9,15 @@ The proposed framework relies on fusion of UAV LiDAR point clouds and RGB orthop
 An end-to-end implementation is described in detail, with parts of the system evaluated separately, and the overall system validated on a detailed manual field inventory dataset.
 The main contributions of this thesis are thus the design, implementation, and experimental verification of said framework.
 Moreover, during the work on the thesis, both original datasets used for training the models were published into open access, to hopefully be useful to the research community with a rapidly growing interest in detailed digital forest inventories \citep{dubrovinExplorationPropertiesPoint2024, dubrovinOpenDatasetIndividual2024}.
+I believe the release of data into open access is worthy of including as a contribution, especially in the current era of commercial machine learning\footnote{I am purposefully avoiding the term "artificial intelligence" as it seems to have been abused so much as to become practically meaningless, and thus not useful in technical context.}.
+When having good data is an advantage, less people are willing to make their data public, which makes it harder for researchers to explore, develop, and compare novel approaches.
+
+Coming back to the research question and the hypothesis stated in Section~\ref{sec-research-question}, I want to address the ways I believe the proposed framework answers it.
+As already mentioned there, the baselines are the manual forest inventory and the widely used area-based approach described in @sec-area-based-approach.
+The cost reduction mainly comes from the choice of the platform for remote sensing observations.
+Using UAVs is cheaper than purchasing high resolution data from satellites or planes, and it offers a lot more control over the acquisition parameters, although it requires trained operators.
+The effort reduction mainly comes from dramatic decrease in the amount of required field inventory data, which is very labor-intensive to collect.
+UAVs are also allow to cover huge areas easily by a few people, unlike fully manual inventories or those based on terrestrial LiDAR measurements, where a forester or an operator needs to cover the entire area of interest by foot.
 
 The reported experimental results achieved by the implemented system are by no means state of the art, but they do serve as a proof of concept.
 The current state of the system, described in the previous chapter, can be seen as a baseline, since it prioritizes simple components to show that the overall system has potential.
@@ -41,8 +50,20 @@ Some of the most important are as follows:
 \item Use of more sophisticated augmentations to make the synthetic forest patches look as close as possible to real forest patches.
   For example, the height-depended dropout can be improved to take into account canopy density and overlap.
   A shorter tree almost completely covered from above by a larger tree should have fewer points overall, not just at low heights relative to its highest point.
+\item Use of a more careful approach to training attribute prediction models.
+The results of the second step can be further improved by adopting a more careful approach to modeling, including a more careful approach to feature engineering and model selection.
+
 \end{itemize}
 
 \section{Concluding thoughts}
 
-Work in progress
+The quote at the beginning of a chapter is relevant for a few reasons, most important of which is that there are so many things I still would like to try and improve.
+But I don't have any more time.
+I wish I spent the time I had more wisely, but it is a well established fact that hindsight is 20/20, and what I see as wise now probably wasn't so obviously wise in the process.
+
+The thesis evolved with both my understanding of current problems and the needs and point of view of the industrial partners, with whose collaboration the work was conducted.
+I wanted the work to be practical, which explains many choices made – most notably, the data sources.
+
+This was a journey.
+Thank you for reading.
+Hope you are safe.
