@@ -23,6 +23,7 @@ Some such applications are mentioned in the next chapter dedicated to reviewing 
 ![](../images/global-forest-cover.jpg)
 
 Global tree cover for 2010.
+Area occupied by tree canopies relative to the total area of the pixel.
 Data from @hansenHighResolutionGlobalMaps2013
 :::
 
