@@ -15,7 +15,7 @@ This drives the need for accurate, detailed, up-to-date information about variou
 The traditional manual forest inventories that rely on people going out into the forest to count and measure trees are extremely labor-intensive and time-consuming, which makes them infeasible to cover extensive areas with sufficient detail, speed, and frequency \citep{burleyEncyclopediaForestSciences2004}.
 This is especially relevant in countries where massive areas are covered by forests, such as Russia, Brazil, Canada, USA, and China, which are the top five countries for forest area according to \citet{GlobalForestResources2020}.
 For that reason, various remote sensing techniques are widely used to extend and extrapolate the traditional forest inventories.
-All sorts of data, from satellite and aerial imagery to very detailed terrestrial LiDAR surveys, are used in all sorts of applications that require mapping forest attributes.
+All sorts of data, from satellite and aerial imagery to very detailed terrestrial LiDAR (light detection and ranging) surveys, are used in all sorts of applications that require mapping forest attributes.
 Some such applications are mentioned in the next chapter dedicated to reviewing the literature.
 
 \begin{figure}
@@ -33,7 +33,7 @@ NASA provides free access to an abundance of satellite data through its Earthdat
 The Indian Space Research Organisation, Brazilian National Institute for Space Research, National Space Research and Development Agency of Nigeria all offer free satellite data that can be used for this purpose.
 NASA and the ISRO also have a joint upcoming mission called NISAR with two fully-polarimetric SAR sensors at L-band and S-band \citep{kelloggNASAISROSyntheticAperture2020}, which will benefit forestry applications greatly.
 
-The open satellite data is an essential tool for wide-area studies, but it usually has coarse resolution, which limits the achievable accuracy and level of detail.
+The open satellite data is an essential tool for wide-area studies, but it usually has coarse resolution (tens to hundreds of meters per pixel), which limits the achievable accuracy and level of detail.
 It also offers no ability to control the observation parameters, as they are fixed by the instrument configuration and orbit parameters, both of which are outside the data consumer control.
 Higher resolution data with a limited ability to control the acquisition parameters is available commercially, but the prices are steep.
 Aerial observations with sensors mounted on planes or helicopters are both more controllable and cheaper alternatives, although still expensive and sill limited in the flexibility of the control of acquisition parameters.
@@ -53,11 +53,11 @@ The canopies in such forests are very complex, especially because the top of the
 
 The framework described in this thesis focuses on fusion of two remote sensing data sources, UAV LiDAR point clouds and UAV RGB orthophotos, to detect individual trees in dense mixed forests and predict required attributes for each tree individually, producing the most detailed maps possible.
 The choice of data sources is driven by their complementary nature, which I believe is key for semantically parsing such complex environments.
-LiDAR is an active sensor, which means it does not depend on external conditions such as lightning.
+LiDAR is an active sensor, which means it does not depend on external conditions such as lighting.
 Cloud and terrain shadows, incidence angles, and weather conditions do not affect LiDAR surveys.
 Moreover, LiDAR provides 3D vertical structural information about the forest, as laser pulses penetrate the canopy and reach both the undergrowth and the ground.
 This structural information is essential for understanding complex environments like dense forests.
-High-resolution RGB imagery does depend on the lighting, but is still an invaluable tool, as it offers detailed data with fixed resolution, continuous coverage of surfaces, unlike the discrete representation of laser scanning, and captures many fine details and textures.
+High-resolution RGB imagery does depend on the illumination conditions, but is still an invaluable tool, as it offers detailed data with fixed resolution, continuous coverage of surfaces, unlike the discrete representation of laser scanning, and captures many fine details and textures.
 It can also benefit from a huge variety of well-established tools and processing techniques from the field of computer vision.
 Neither of these data sources on their own is enough to reliably and with sufficient robustness separate individual trees in dense mixed forests, and the key to success lies in their fusion.
 
