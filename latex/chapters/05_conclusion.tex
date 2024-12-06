@@ -1,0 +1,69 @@
+\chapter{Conclusion}\label{cap:conclusion}
+
+\epigraphhead[50]{%
+    \epigraph{"A PhD research project is an academic exercise of given effort and length." }{Dr. Ron Anderson, PhD adviser of prof. Clement Fortin}
+}
+
+This thesis is dedicated to designing, implementing, and testing of a framework for estimating forest parameters at the scale of individual trees.
+The proposed framework relies on fusion of UAV LiDAR point clouds and RGB orthophotos data, deep neural networks designed for processing 3D points clouds to segment the data into individual trees, and a collection of parameter-specific classic machine learning models to process the segmented trees and predict forest parameters of interest.
+An end-to-end implementation is described in detail, with parts of the system evaluated separately, and the overall system validated on a detailed manual field inventory dataset.
+The main contributions of this thesis are thus the design, implementation, and experimental verification of said framework.
+Moreover, during the work on the thesis, both original datasets used for training the models were published into open access, to hopefully be useful to the research community with a rapidly growing interest in detailed digital forest inventories \citep{dubrovinExplorationPropertiesPoint2024, dubrovinOpenDatasetIndividual2024}.
+I believe the release of data into open access is worthy of including as a contribution, especially in the current era of commercial machine learning\footnote{I am purposefully avoiding the term "artificial intelligence" as it seems to have been abused so much as to become practically meaningless, and thus not useful in technical context.}.
+When having good data is an advantage, less people are willing to make their data public, which makes it harder for researchers to explore, develop, and compare novel approaches.
+
+Coming back to the research question and the hypothesis stated in Section~\ref{sec-research-question}, I want to address the ways I believe the proposed framework answers it.
+As already mentioned there, the baselines are the manual forest inventory and the widely used area-based approach described in Section~\ref{sec-area-based-approach}.
+The cost reduction mainly comes from the choice of the platform for remote sensing observations.
+Using UAVs is cheaper than purchasing high resolution data from satellites or planes, and it offers a lot more control over the acquisition parameters, although it requires trained operators.
+The effort reduction mainly comes from dramatic decrease in the amount of required field inventory data, which is very labor-intensive to collect.
+UAVs are also allow to cover huge areas easily by a few people, unlike fully manual inventories or those based on terrestrial LiDAR measurements, where a forester or an operator needs to cover the entire area of interest by foot.
+
+The reported experimental results achieved by the implemented system are by no means state of the art, but they do serve as a proof of concept.
+The current state of the system, described in the previous chapter, can be seen as a baseline, since it prioritizes simple components to show that the overall system has potential.
+And I believe the resulting framework has potential, with specific steps I would try if I had unlimited time, listed in the next section.
+
+\section{Potential further improvements}
+
+I see numerous ways to potentially improve the results of the proposed system.
+Some of the most important are as follows:
+
+\begin{itemize}
+\item Use of more advanced tree segmentation network architectures.
+  As mentioned, the PointNet++ is a pioneering model in the field of deep learning on 3D point clouds that was chosen because it is relatively easy to implement and work with.
+  It is still competitive in many tasks, but the field of deep learning is evolving rapidly, and many more powerful architectures were suggested and proven since its release.
+  The framework will definitely benefit from a better, more efficient tree segmentation network.
+\item Use of more advanced feature extraction for RGB orthophoto-based features.
+  For the same reason the PointNet++ was chosen as a baseline for tree segmentation, a very basic approach was used to extract features from RGB orthophotos.
+  Despite being better than just RGB colors, these features still offer very limited representation power.
+  Instead, convolutional neural networks specialized in creating good representations for downstream tasks can be used.
+\item Use of open-access datasets for pretraining.
+  At its current state, the tree segmentation network learns to perform a very hard task from scratch on a dataset of a very limited size.
+  I believe it can benefit from first training on similar, but larger dataset, for example, the NeonTreeEvaluation Benchmark \citep{weinsteinDataNeonTreeEvaluationBenchmark2022}.
+  It is briefly described in the comparison subsection of the Lysva field inventory section.
+  The bounding boxes from the orthophoto can be used to label the point cloud for tree segmentation.
+  The labels will be noisy, but pretraining on a large amount of noisy data often shows good results.
+\item Use of more sophisticated techniques for creating synthetic forest patches.
+  Both the sampling of the trees and the placement onto the patch can be improved.
+  For example, sampling can take into consideration the species of the trees, to make the patches more realistic: some fully coniferous, some fully deciduous, some mixed.
+  Placing of the trees can use packing algorithms, or try to mimic the spatial distribution of trees in the inventory.
+\item Use of more sophisticated augmentations to make the synthetic forest patches look as close as possible to real forest patches.
+  For example, the height-depended dropout can be improved to take into account canopy density and overlap.
+  A shorter tree almost completely covered from above by a larger tree should have fewer points overall, not just at low heights relative to its highest point.
+\item Use of a more careful approach to training attribute prediction models.
+The results of the second step can be further improved by adopting a more careful approach to modeling, including a more careful approach to feature engineering and model selection.
+
+\end{itemize}
+
+\section{Concluding thoughts}
+
+The quote at the beginning of a chapter is relevant for a few reasons, most important of which is that there are so many things I still would like to try and improve.
+But I don't have any more time.
+I wish I spent the time I had more wisely, but it is a well established fact that hindsight is 20/20, and what I see as wise now probably wasn't so obviously wise in the process.
+
+The thesis evolved with both my understanding of current problems and the needs and point of view of the industrial partners, with whose collaboration the work was conducted.
+I wanted the work to be practical, which explains many choices made – most notably, the data sources.
+
+This was a journey.
+Thank you for reading.
+Hope you are safe.
