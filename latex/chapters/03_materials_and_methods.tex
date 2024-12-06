@@ -324,7 +324,7 @@ Enriching point clouds using only color information from RGB orthophotos provide
 As was mentioned in the introduction, one of the aspects of the complementary nature of the two data sources is that images provide continuous representations and capture textures.
 To enrich the image features with context, they can be preprocessed with feature extractors that encode context into pixel values and thus provide more information for the segmentation network.
 The feature extractors can be simple algorithms or specialized convolutional network feature extractors.
-For the same reason a simple PointNet++ is used as the architecture for the tree segmentation network, a simple collection of multi-scale features are used as orthophoto features, including intensity, edge, and texture features, extracted from the orthophotos using the `scikit-image` Python package.
+For the same reason a simple PointNet++ is used as the architecture for the tree segmentation network, a simple collection of multi-scale features are used as orthophoto features, including intensity, edge, and texture features, extracted from the orthophotos using the \texttt{scikit-image} Python package.
 The features are calculated on different scales by applying Gaussian smoothing with varying parameters before calculation.
 Figure~\ref{fig-basic-features-small} shows example features from every mentioned group on a very fine scale.
 The top left image is the original orthophoto of plot 10 from the Lysva survey, the top right image is the intensity calculated from it, and bottom images are examples of an edge feature and a texture feature.
