@@ -34,7 +34,7 @@ For an introduction or a refresher, one of the best resources is @goodfellowDeep
 For a more detailed exploration, @wangRecentAdvancesDeep2020 offer a selection of papers on topics relevant to modern deep learning techniques.
 As point clouds are a less well-known modality in machine learning and deep learning, the reader is also referred to @belloReviewDeepLearning2020 and @guoDeepLearning3D2021, offering detailed reviews of the deep learning approaches used in various problems related to processing point clouds.
 @fig-deep-learnin-on-point-clouds is a high-level taxonomy of these approaches.
-Two main groups are structured grid-based, which rely on transformation of point clouds into regular structures that are then processed by 2D or 3D convolutional neural networks, and row point cloud based, which consume point clouds directly.
+Two main groups are structured grid-based, which rely on transformation of point clouds into regular structures that are then processed by 2D or 3D convolutional neural networks, and raw point cloud based, which consume point clouds directly.
 The section is focused on providing a very short overview of these topics as it relates to the framework that is the focus of the thesis.
 
 ::: {#fig-deep-learnin-on-point-clouds}
@@ -84,7 +84,7 @@ PointNet++ architecture. Figure from @qiPointNetPlusPlus2017
 
 ## Area-based approach {#sec-area-based-approach}
 
-The most common way to use LiDAR for mapping forest attributes is the area-based approach [@whiteABAGuide2013].
+The most common way to use LiDAR for mapping forest attributes is the area-based approach (ABA) [@whiteABAGuide2013].
 @fig-aba-schema shows its schematic representation.
 It consists of a LiDAR survey covering the whole area of interest and a manual forest inventory providing ground truth data for fitting statistical models and validating the results.
 The inventory usually consists of many circular ground plots with every tree within counted and attributes of interest either directly measured or calculated and averaged.
