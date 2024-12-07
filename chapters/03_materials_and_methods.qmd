@@ -1,7 +1,6 @@
 # Materials and methods {#sec-materials-and-methods}
 
 This chapter describes in detail used datasets, processing techniques and the methods, and comments on the reasoning behind the choices.
-Hopefully, by the end of this chapter the reader will be confident in their ability to recreate the framework from scratch.
 The code of the project on my GitHub might be a helpful addition for that.
 
 ## Lysva field inventory dataset {#sec-lysva-dataset}

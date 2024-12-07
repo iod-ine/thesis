@@ -53,18 +53,3 @@ Some of the most important are as follows:
   A shorter tree almost completely covered from above by a larger tree should have fewer points overall, not just at low heights relative to its highest point.
 - Use of a more careful approach to training attribute prediction models.
   The results of the second step can be further improved by adopting a more careful approach to modeling, including a more careful approach to feature engineering and model selection.
-
-## Concluding thoughts
-
-The quote at the beginning of a chapter is relevant for a few reasons, most important of which is that there are so many things I still would like to try and improve.
-But I don't have any more time.
-I wish I spent the time I had more wisely, but it is a well established fact that hindsight is 20/20, and what I see as wise now probably wasn't so obviously wise in the process.
-
-The thesis evolved with both my understanding of current problems and the needs and point of view of the industrial partners, with whose collaboration the work was conducted.
-I wanted the work to be practical, which explains many choices made – most notably, the data sources.
-
-This was a journey.
-Thank you for reading.
-Hope you are safe.
-
-<span style="visibility: hidden">I would also love to include a rant about the awful state of so many things in the world including science and scientific publishing and high-tech industry and overwhelming widespread hypocrisy and how capitalism must die for us as humanity to have a chance of survival. I won't though because it's not the place.</span>
