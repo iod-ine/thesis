@@ -47,7 +47,7 @@ of deep learning approaches for point clouds. Figure from Bello et al.
 \end{figure}
 
 Classic machine learning approaches rely on feature engineering: manual preparation of features used as inputs for models based on domain expertise and various feature selection techniques.
-Two main groups of tasks are per-point predictions, which is in many ways similar to the task of semantic segmentation of images, that requires per-point features, and per-cloud predictions that either process entire point clouds or individual segments, separated be some preprocessing routine.
+Two main groups of tasks are per-point predictions, which is in many ways similar to the task of semantic segmentation of images, that requires per-point features, and per-cloud predictions that either process entire point clouds or individual segments, separated by some preprocessing routine.
 \citet{weinmannFeatureRelevanceAssessment2013} show that careful selection of features is crucial for accurate and efficient semantic interpretation of point cloud data: a shotgun approach of using many simple features without much consideration results in worse performance than a surgical approach of using a few carefully selected ones.
 They also provide definitions of some of the most used manual features that aim to describe the 3D structure of point sets.
 The features are based on combinations of eigenvalues of local covariance matrices of coordinate vectors of a set of points.
@@ -146,7 +146,7 @@ They report coefficients of determination of 0.85 and average errors around 83 t
 With the constant improvement of accessibility and quality of high-resolution remote sensing data, there is a growing interest in the development of methods that operate on the scale of individual trees.
 This subsection gives an overview of some of the research in this area, split by the main data source.
 
-\citet{liNewMethodSegmenting2012} developed a well performing algorithmic method for segmentation of individual tree crowns in LiDAR point clouds for coniferous forests that relies on the pointy shape characteristic of many coniferous species and segments the trees from top to bottom.
+\citet{liNewMethodSegmenting2012} developed a well performing algorithmic method for segmentation of individual tree crowns in LiDAR point clouds for coniferous forests that relies on the point shape characteristic of many coniferous species and segments the trees from top to bottom.
 
 \citet{lucasIdentificationLinearVegetation2019} use the set of eigenvalue-based features calculated for each point in a fixed-radius neighborhood, with other geometrical features including maximum local height difference and height standard deviation, local radius and local point density, to identify linear vegetation elements in segmented point clouds.
 They also use two point-based features that don't rely on a neighborhood: the number of returns and the normalized return number, proposed in \citet{guoRelevanceAirborneLidar2011}, and use Random Forest classifier to separate the points that belong to vegetation after first removing the planar features corresponding to grass, soil, and water surfaces.
@@ -253,7 +253,7 @@ The authors report that in most cases fusion improves the results.
 Most relevant to this thesis, they report that for individual tree segmentation the results of fusion-based approaches compared to LiDAR-only ones are consistently better.
 \citet{laExtractionIndividualTree2015} show an increase from 63\% to 92\% for low-density forests, and from 62\% to 70\% for high-density forests, \citet{aubry-kientzMultisensorDataFusion2021} show and improvement by 5\%, and \citet{zhenImpactTreeOrientedGrowth2014} and \citet{arenas-corralizaAutomaticMappingTree2020} improved their results by 2-4\%.
 
-\citet{ferreiraImprovingUrbanTree2024} use a U-Net semantic segmentation model for fusion of VNIR images and UAV LiDAR-derived feature maps including surface normals of the canopies, reflection intensities, canopy heights, and leaf-area index for mapping tree species in urban tropical areas.
+\citet{ferreiraImprovingUrbanTree2024} use a U-Net semantic segmentation model for fusion of VNIR images and airborne LiDAR-derived feature maps including surface normals of the canopies, reflection intensities, canopy heights, and leaf-area index for mapping tree species in urban tropical areas.
 Their results show that adding LiDAR-based features improves $F_1$-scores across all considered species, with average $F_1$-score 84.1.
 They also use the segment anything model \citep{Kirillov_2023_ICCV} to automatically segment tree crowns with outstanding 98\% boundary $F_1$-score.
 
