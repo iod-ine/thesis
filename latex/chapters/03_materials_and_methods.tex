@@ -208,7 +208,7 @@ Another dataset is the IDTReeS 2020 Competition Data \cite{gravesIDTReeS2020Comp
 It offers bounding box annotations for 1200 individual trees covered by RGB, LiDAR, and hyperspectral images in 3 national forests in the USA.
 Similarly, the source of the data is annotation of images, not a field inventory.
 
-There are also datasets available that don't have LiDAR point cloud coverage, or use terrestrial LiDAR instead of UAV LiDAR, or use photogrammetric point clouds instead of LiDAR  point clouds.
+There are also datasets available that do not have LiDAR point cloud coverage, or use terrestrial LiDAR instead of UAV LiDAR, or use photogrammetric point clouds instead of LiDAR  point clouds.
 We do not mention them here because we specifically focus on UAV LiDAR.
 
 \section{Individual tree point clouds dataset}\label{sec-individual-trees-dataset}
@@ -267,7 +267,7 @@ normalization. The ground points are present.}
 
 An important note is that the extracted trees were not chosen for extraction randomly but were selected by humans based on whether it was possible and relatively easy to separate from the surrounding trees.
 So there is a selection bias in there favoring the trees that are easily separable, standing outside of large dense clusters.
-Because of that the trees don't exactly represent what a tree closely surrounded by other trees is like in a point cloud.
+Because of that the trees do not exactly represent what a tree closely surrounded by other trees is like in a point cloud.
 It is especially apparent in very pronounced trunks of all the visualized trees.
 In a dense forest, such as the one visualized in Figure~\ref{fig-lysva-canopy-structure}, there is hardly ever enough penetration for such detailed trunk coverage.
 In fact, as mentioned in the literature review, good coverage of trunks is an immensely useful feature of terrestrial LiDAR surveys, which consistently show very good results using algorithm that segment trees from the trunk up.
@@ -387,7 +387,7 @@ The most simple approach is to treat a synthetic forest patch as a whole and app
 However, it is also possible to apply per-tree augmentations, effectively increasing the size of the underlying tree set from which synthetic forest patches constructed.
 Only the latter kind are used for training the tree segmentation network.
 
-The first transformation that changes the shape but doesn't affect any semantics for an individual tree is a random rotation around the vertical axis.
+The first transformation that changes the shape but does not affect any semantics for an individual tree is a random rotation around the vertical axis.
 A tree remains completely the same when rotated, but the coordinates of all points change.
 Figure~\ref{fig-random-rotate-effect} shows the effect of applying random rotation transformation of different magnitudes to a single aspen tree.
 For visualization purposes, the rotation is forced to apply with full magnitude for every parameter.
@@ -431,7 +431,7 @@ The amount of translation is uniformly sampled independently for each point from
 Note that the random jitter augmentation is applied before the scale normalization.
 It matters because the augmentation's only parameter is the translation range, which depends on the scale.
 The parameters on the figure are thus in the original coordinate units – meters.
-Note how the shape of the tree almost doesn't change when the maximum range is set to 20 centimeters, and starts to become fuzzy and loose shape at 1 meter and higher.
+Note how the shape of the tree almost does not change when the maximum range is set to 20 centimeters, and starts to become fuzzy and loose shape at 1 meter and higher.
 For the final tree segmentation model, the maximum translation is set to 30 centimeters.
 
 \begin{figure}

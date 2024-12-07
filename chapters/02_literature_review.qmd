@@ -107,7 +107,7 @@ In fact, basic familiarity with the R programming language is enough to create y
 It is also straightforward to extend with other data sources such as satellite or aerial images, and it works even with sparse data: for successful plot and stand level modeling point densities as low as 0.5 points per square meter have been reported to be enough [@treitzLiDARSamplingDensity2012; @jakubowskiTradeoffsLidarPulse2013].
 Still, it requires a lot of field inventory data to work, since every ground plot becomes a single example for the models.
 The models that can be used are also relatively simple, because of how expensive the data collection is.
-Data-hungry approaches like neural networks usually don't have enough data to train.
+Data-hungry approaches like neural networks usually do not have enough data to train.
 The results are also very coarse – predicted on a grid with the size defined by the area of a plot (a common plot shape is a circle with 9-meter radius, which is approximately equivalent to a square grid cell with 16-meter side).
 This is why they are usually further aggregated to stand level.
 
@@ -139,7 +139,7 @@ This subsection gives an overview of some of the research in this area, split by
 @liNewMethodSegmenting2012 developed a well performing algorithmic method for segmentation of individual tree crowns in LiDAR point clouds for coniferous forests that relies on the point shape characteristic of many coniferous species and segments the trees from top to bottom.
 
 @lucasIdentificationLinearVegetation2019 use the set of eigenvalue-based features calculated for each point in a fixed-radius neighborhood, with other geometrical features including maximum local height difference and height standard deviation, local radius and local point density, to identify linear vegetation elements in segmented point clouds.
-They also use two point-based features that don't rely on a neighborhood: the number of returns and the normalized return number, proposed in @guoRelevanceAirborneLidar2011, and use Random Forest classifier to separate the points that belong to vegetation after first removing the planar features corresponding to grass, soil, and water surfaces.
+They also use two point-based features that do not rely on a neighborhood: the number of returns and the normalized return number, proposed in @guoRelevanceAirborneLidar2011, and use Random Forest classifier to separate the points that belong to vegetation after first removing the planar features corresponding to grass, soil, and water surfaces.
 The approach is somewhere in the middle between the area-based and individual tree-based, but still is a useful example of application of classic machine learning to segment out vegetation from larger point clouds.
 
 ### Image-only
@@ -225,7 +225,7 @@ Worth noting that both the synthetic and real forest have relatively well-define
 
 ### Fusion of data
 
-Many works don't just use one data source and instead combine multiple complimentary ones for better representation.
+Many works do not just use one data source and instead combine multiple complimentary ones for better representation.
 This subsection gives an overview of data fusion approaches for forestry applications on individual tree scale.
 
 @lianBiomassCalculationsIndividual2022 describe an approach for calculating individual tree biomass by combining UAV multispectral, UAV LiDAR and terrestrial LiDAR data.

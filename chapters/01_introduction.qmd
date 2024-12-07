@@ -51,7 +51,7 @@ This requires robust algorithms that allow detecting individual trees in dense m
 This is relatively[^2] easy in urban environments, manually planted and managed forest stands, or forests that are either sparse or predominantly coniferous, where the structure of the canopy is easy to interpret.
 In some such environments state-of-the-art results can be achieved by simple local maxima detection algorithms, that rely on the assumption that a tree can be detected by finding peaks of canopies because they correspond to tree tops.
 Forest that are mixed and dense, which are a huge part of forests in countries mentioned earlier, are much harder to work with and are a very active area of research for developing methods of detection of individual trees.
-The canopies in such forests are very complex, especially because the top of the crowns of deciduous tree species often don't have a single pronounced height maximum, and crowns of nearby trees often overlap.
+The canopies in such forests are very complex, especially because the top of the crowns of deciduous tree species often do not have a single pronounced height maximum, and crowns of nearby trees often overlap.
 
 [^2]: The word relatively does a lot of heavy lifting here, as the problem is by no means easy on its own and takes a lot of effort from many researchers to continue to make progress on.
 

@@ -153,7 +153,7 @@ To validate the framework, the results were evaluated on the Lysva field invento
 The mean X and Y coordinates of each segmented tree were calculated to convert the cloud into a set of points, where each point represents a candidate detected tree.
 The maximum height of the points in the cluster was used as the height of the detected tree.
 Then the algorithm described in Section~\ref{sec-matching-algorithm} was applied to match the detected trees their corresponding the ground truth trees, if any.
-The matching algorithm was run with maximum distance between a detected tree candidate and a ground truth tree of 5 meters and maximum height difference of 3 meters (ignored for ground truth trees that don't have measured height).
+The matching algorithm was run with maximum distance between a detected tree candidate and a ground truth tree of 5 meters and maximum height difference of 3 meters (ignored for ground truth trees that do not have measured height).
 Then, precision, recall, and $F_1$-score were calculated for the detection results, and for the true positive matches the average distance between the detected tree and the actual tree, species classification accuracy and macro $F_1$-score, and diameter at breast height errors are calculated.
 
 Table~\ref{tbl-detection-results} shows the tree detection metrics.
