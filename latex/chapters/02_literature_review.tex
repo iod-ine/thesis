@@ -173,7 +173,7 @@ The approach seems to rely on there being semi-clear separation between the tree
 The same network was also successfully used to map tree species in tropical urban environment in Rio de Janeiro, Brazil in \citet{martinsDeepLearningbasedTree2021}.
 They develop a post-processing approach to combine the semantic segmentation map and the distance map to classify tree species with an average $F_1$-score of 79.3\% and resulting in a realistic tree species map.
 
-\citet{oscoConvolutionalNeuralNetwork2020} use a convolutional neural network on UAV multispectral images to count citrus trees in an orchard by predicting a confidence map that shows the likelihood of each pixel containing a tree.
+\citet{oscoConvolutionalNeuralNetwork2020} use a convolutional neural network on \gls{uav} multispectral images to count citrus trees in an orchard by predicting a confidence map that shows the likelihood of each pixel containing a tree.
 They report $F_1$-scores of up to 0.95, which is impressive even for managed stands.
 
 \citet{venturaIndividualTreeDetection2024} describe a network they call HR-SFAnet, consisting of a VGG-16 \citep{simonyanVeryDeepConvolutional2014} backbone feature extractor, a confidence head, and a parallel attention head, for detecting individual trees in urban environments using high-resolution multispectral images.
@@ -239,7 +239,7 @@ Worth noting that both the synthetic and real forest have relatively well-define
 Many works do not just use one data source and instead combine multiple complimentary ones for better representation.
 This subsection gives an overview of data fusion approaches for forestry applications on individual tree scale.
 
-\citet{lianBiomassCalculationsIndividual2022} describe an approach for calculating individual tree biomass by combining UAV multispectral, \gls{uav} \gls{lidar} and terrestrial \gls{lidar} data.
+\citet{lianBiomassCalculationsIndividual2022} describe an approach for calculating individual tree biomass by combining \gls{uav} multispectral, \gls{uav} \gls{lidar} and terrestrial \gls{lidar} data.
 Terrestrial and \gls{uav} \gls{lidar} are merged to get a more representative point cloud, showing the trees equally well both from above and from the ground.
 The multispectral image is used to generate a species classification map, which is then used to segment the point cloud.
 The segmented cloud is then used to estimate diameter at breast height and height and calculate above ground biomass.
@@ -264,7 +264,7 @@ The results show an improvement of 18.5\% in accuracy when using fusion of \gls{
 
 \subsection{Summary}
 
-There is a lot of research going on currently on individual tree-level inventories using UAV remote sensing data.
+There is a lot of research going on currently on individual tree-level inventories using \gls{uav} remote sensing data.
 Most results that can be considered successful are either in more mild environments, such as urban or managed forests, in predominantly coniferous forests, or use a much more detailed, but at the same time much more labor-intensive data source – terrestrial \gls{lidar}.
 Mild forest types usually have canopy structures that are a lot easier to interpret, since the trees often stand far enough apart to be separable.
 At the same time, they allow for much more signal penetration, resulting in a good representation of tree trunks in the data, which is tremendously useful for the task of detecting trees.
@@ -272,6 +272,6 @@ Predominantly coniferous forests, even dense ones, also have a canopy structure 
 Terrestrial \gls{lidar} data is different from \gls{uav} \gls{lidar} in the amount of detail and, most importantly, the perspective.
 It surveys the trees from below, virtually guaranteeing the presence of trunks in the point clouds.
 Several fully automated approaches to detailed forest inventories using terrestrial \gls{lidar} data exist that rely on the detection of trunks.
-A gap persists in solutions that would consistently work on UAV remote sensing data over dense mixed forests, with complex overlapping canopies.
+A gap persists in solutions that would consistently work on \gls{uav} remote sensing data over dense mixed forests, with complex overlapping canopies.
 The active nature and the vertical structure information provided by \gls{lidar} is essential in such complex environments.
 At the same time, many results indicate that fusion of \gls{lidar} point clouds with other data sources consistently improves the results in forestry applications, which is why the proposed framework relies on fusion of \gls{lidar} with \gls{rgb} imagery.
