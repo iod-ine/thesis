@@ -10,7 +10,7 @@ The main original dataset used in the study is the Lysva field inventory dataset
 The dataset is released into open access with an accompanying paper that describes the data in detail and provides a basic baseline for individual tree detection \citep{dubrovinExplorationPropertiesPoint2024}.
 The study area is located in Perm Krai, Russia, 86 kilometers to the east of Perm.
 The dataset consists of a field inventory of 3600 trees across 10 rectangular ground plots 100 meters in lengths and 50 meters in width fully covered by a \gls{uav} \gls{lidar} and \gls{rgb} orthophoto surveys.
-Figure~\ref{fig-lysva-roi} shows the locations of the ground plots over the full size RGB orthophoto and a visualization of the field inventory for a single plot on top of the \gls{lidar} point cloud.
+Figure~\ref{fig-lysva-roi} shows the locations of the ground plots over the full size \gls{rgb} orthophoto and a visualization of the field inventory for a single plot on top of the \gls{lidar} point cloud.
 Colored points represent trees, with different colors mapping to different species.
 The point cloud is visualized as a 2D scatter plot with points colored by height (darker points are lower, brighter points are higher, and points are unsorted – some lower points end up over higher ones).
 The baseline is a simple one-pass local maxima filter applied directly on the point cloud with a fixed window size.
@@ -196,12 +196,12 @@ The NewFor benchmark covers much more diverse regions, including ground plots fr
 The tree species covered by the datasets are also different: both contain spruce and fir, but the NewFor data also has beech, Scots pine, larch, sycamore, and poplar, while ours also has birch, aspen, tilia, alder, and willow.
 Our dataset has more than twice as many individual trees as the Alpine benchmark, and the forest is denser and more complex, making it more complicated to detect trees in.
 Our data contains very mild terrain variations, while the slopes of the terrain in Alpine data are very steep, which plays a role during height normalization, since subtraction of steep terrain introduces artificial slope to the points in the canopy, changing the overall shape of the tree.
-Our dataset has an additional information source – an RGB orthophoto that allows development of algorithms that fuse multimodal data, which, we believe, is a key to success in such complex environments.
+Our dataset has an additional information source – an \gls{rgb} orthophoto that allows development of algorithms that fuse multimodal data, which, we believe, is a key to success in such complex environments.
 Our dataset has species labels for every surveyed tree, but only partial coverage of tree heights and no timber volume information at all.
 
 Another similar dataset is the NeonTreeEvaluation Benchmark \cite{weinsteinDataNeonTreeEvaluationBenchmark2022}, which offers bounding box annotation for tree detection across a wide range of different forest types.
 It offers coregistered \gls{rgb}, \gls{lidar}, and hyperspectral images over 31,000 individual trees.
-The main difference in the reference data between the NeonTreeEvaluation Benchmark and our dataset is the source: our data comes from a field inventory and thus has additional tree information that can be used in downstream tasks, such as species classification or timber volume prediction, while the NeonTreeEvaluation Benchmark annotations are created from the RGB photo and thus only offer the positions and sized of trees.
+The main difference in the reference data between the NeonTreeEvaluation Benchmark and our dataset is the source: our data comes from a field inventory and thus has additional tree information that can be used in downstream tasks, such as species classification or timber volume prediction, while the NeonTreeEvaluation Benchmark annotations are created from the \gls{rgb} photo and thus only offer the positions and sized of trees.
 
 Another dataset is the IDTReeS 2020 Competition Data \cite{gravesIDTReeS2020Competition2020} aimed to develop algorithms for delineation and species classification of individual tree crowns in \gls{rgb}, \gls{lidar}, and hyperspectral data.
 It offers bounding box annotations for 1200 individual trees covered by \gls{rgb}, \gls{lidar}, and hyperspectral images in 3 national forests in the USA.
@@ -215,7 +215,7 @@ We do not mention them here because we specifically focus on \gls{uav} \gls{lida
 The main dataset used for training the models is a collection of point clouds of individual trees, sometimes referred to in this text as tree clouds, extracted manually from larger \gls{uav} \gls{lidar} point clouds.
 The dataset is released into open access, and was originally presented in \citep{dubrovinExplorationPropertiesPoint2024}, although it has been expanded since and now contains twice as many individual trees.
 It consists of 394 trees, 192 of which are extracted from the previously described Lysva survey, and 202 from other surveys in Perm Krai.
-The distinction between the parts is important because the Lysva dataset has RGB orthophoto coverage, making it possible to infuse the tree clouds with orthophoto-based features.
+The distinction between the parts is important because the Lysva dataset has \gls{rgb} orthophoto coverage, making it possible to infuse the tree clouds with orthophoto-based features.
 Thus, for training the tree segmentation networks that rely on these features, the effective size of the dataset is 192 tree clouds, as only the former part is used.
 However, the whole dataset is used for training regression and classification models that process segmented trees.
 
@@ -286,7 +286,7 @@ The trees can be sampled with or without replacement, but since a set of augment
 When trees are placed, their planar bounding boxes are tracked to avoid overlap.
 However, since some overlap might, in fact, be desired to better represent actual forests, a parameter that controls the amount of overlap is added to the dataset generation process.
 Each tree is also assigned a label, which simply tracks its ordinal number in the patch.
-An example of a 20 by 20 meter synthetic forest patch with 0.75 meter overlap and 2 meter height threshold is shown in Figure~\ref{fig-synthetic-forest-patch-example} from two different perspectives and using two color schemes: the label, i.e. the ordinal ID of the tree within a patch, and RGB color sampled from the orthophoto.
+An example of a 20 by 20 meter synthetic forest patch with 0.75 meter overlap and 2 meter height threshold is shown in Figure~\ref{fig-synthetic-forest-patch-example} from two different perspectives and using two color schemes: the label, i.e. the ordinal ID of the tree within a patch, and \gls{rgb} color sampled from the orthophoto.
 
 \begin{figure}
 \centering{
@@ -319,7 +319,7 @@ An alternative approach to creating patches of synthetic forest can be to use a 
 However, it poorly correlates with how the final model will be applied: in windows of fixed size, not windows with varying size but fixed number of trees.
 And size of the patch the model sees is important because the scale is normalized, and using a different patch sizes changes the scaled coordinates and confuses the model that learned to rely on them.
 
-Enriching point clouds using only color information from RGB orthophotos provides limited utility because it adds only local information to the points.
+Enriching point clouds using only color information from \gls{rgb} orthophotos provides limited utility because it adds only local information to the points.
 As was mentioned in the introduction, one of the aspects of the complementary nature of the two data sources is that images provide continuous representations and capture textures.
 To enrich the image features with context, they can be preprocessed with feature extractors that encode context into pixel values and thus provide more information for the segmentation network.
 The feature extractors can be simple algorithms or specialized convolutional network feature extractors.

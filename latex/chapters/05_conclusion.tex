@@ -33,9 +33,9 @@ Some of the most important are as follows:
   As mentioned, the PointNet++ is a pioneering model in the field of deep learning on 3D point clouds that was chosen because it is relatively easy to implement and work with.
   It is still competitive in many tasks, but the field of deep learning is evolving rapidly, and many more powerful architectures were suggested and proven since its release.
   The framework will definitely benefit from a better, more efficient tree segmentation network.
-\item Use of more advanced feature extraction for RGB orthophoto-based features.
-  For the same reason the PointNet++ was chosen as a baseline for tree segmentation, a very basic approach was used to extract features from RGB orthophotos.
-  Despite being better than just RGB colors, these features still offer very limited representation power.
+\item Use of more advanced feature extraction for \gls{rgb} orthophoto-based features.
+  For the same reason the PointNet++ was chosen as a baseline for tree segmentation, a very basic approach was used to extract features from \gls{rgb} RGBorthophotos.
+        Despite being better than just \gls{rgb} colors, these features still offer very limited representation power.
   Instead, convolutional neural networks specialized in creating good representations for downstream tasks can be used.
 \item Use of open-access datasets for pretraining.
   At its current state, the tree segmentation network learns to perform a very hard task from scratch on a dataset of a very limited size.
