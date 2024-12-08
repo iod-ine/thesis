@@ -7,7 +7,7 @@ Where appropriate, references for in-depth materials on topics that are out of s
 \section{Remote sensing for forestry applications}
 
 As was mentioned in the introduction, remote sensing is widely used for extending labor-intensive and time-consuming manual forest inventories.
-This section provides examples of various remote sensing techniques used in various forestry applications, before going in more detail into specifically UAV LiDAR and RGB, which are the focus of the described framework.
+This section provides examples of various remote sensing techniques used in various forestry applications, before going in more detail into specifically \gls{uav} \gls{lidar} and \gls{rgb}, which are the focus of the described framework.
 
 \citet{hansenAssessingForestNonForest2020} explore the usage of C-band SAR data from the Sentinel-1 mission for binary land use classification into forest/non-forest using a collection of classic machine learning classifiers.
 SAR is an active sensor, making it independent on external conditions and observation time, and it penetrates cloud cover, making it very reliable during almost any weather.
@@ -17,14 +17,14 @@ They report accuracies from 80\% in the worst case to the 93\% in the best case,
 They show that fusion performs better than single-modality variant for pixels obscured by clouds.
 This combination of active SAR and passive multispectral data is very common, as the sensors compliment each other nicely, similarly to laser scanning and orthophotos.
 
-\citet{sinica-sinavskisForestStandVolume2022} combine LiDAR point clouds with Sentinel-2 images to predict timber volume on a stand level.
-They use an unusual approach, using Sentinel-2 images for species detection by clustering, LiDAR point clouds for estimating tree counts and average tree heights, and combining them into two variables used to fit the final regression models.
+\citet{sinica-sinavskisForestStandVolume2022} combine \gls{lidar} point clouds with Sentinel-2 images to predict timber volume on a stand level.
+They use an unusual approach, using Sentinel-2 images for species detection by clustering, \gls{lidar} point clouds for estimating tree counts and average tree heights, and combining them into two variables used to fit the final regression models.
 The reported relative RMSE values are 14-22\%, with errors larger for deciduous tree species.
 
-LiDAR has been used for forestry applications for a long time, with publications on the topic dating back 40 years.
-\citet{nelsonDeterminingForestCanopy1984} is one of the earliest studies that explores usage of airborne LiDAR for measuring forest canopy profiles and estimating tree heights and canopy closure (a measure of forest canopy coverage that indicates what proportion of the sky is obscured by the tree crowns when viewed from the ground).
-\citet{nilssonEstimationTreeHeights1996} is a study looking into tree height and timber volume estimation using airborne LiDAR across a range of point densities and seasons on a coniferous forest stand.
-\citet{naessetDeterminationMeanTree1997} and \citet{naessetEstimatingTimberVolume1997} are studies exploring the use of airborne LiDAR for estimating mean tree height and timber volume, suggesting the ways to correct the systematic underestimation of height and showing how regression on LiDAR-derived metrics can predict volume.
+\gls{lidar} has been used for forestry applications for a long time, with publications on the topic dating back 40 years.
+\citet{nelsonDeterminingForestCanopy1984} is one of the earliest studies that explores usage of airborne \gls{lidar} for measuring forest canopy profiles and estimating tree heights and canopy closure (a measure of forest canopy coverage that indicates what proportion of the sky is obscured by the tree crowns when viewed from the ground).
+\citet{nilssonEstimationTreeHeights1996} is a study looking into tree height and timber volume estimation using airborne \gls{lidar} across a range of point densities and seasons on a coniferous forest stand.
+\citet{naessetDeterminationMeanTree1997} and \citet{naessetEstimatingTimberVolume1997} are studies exploring the use of airborne \gls{lidar} for estimating mean tree height and timber volume, suggesting the ways to correct the systematic underestimation of height and showing how regression on \gls{lidar}-derived metrics can predict volume.
 \citet{carson2004lidar} offers an overview of some of the applications and approaches and a summary of contemporary state-of-the-art.
 
 \section{Machine learning and deep learning on point clouds}\label{sec-ml-dl}
@@ -55,7 +55,7 @@ They can be calculated on a per-point basis by using fixed-size or nearest-neigh
 The used features were originally introduced by \citet{westContextdrivenAutomatedTarget2004}, \citet{paulyEfficientSimplificationPointsampled2002}, and \citet{malletRelevanceAssessmentFullwaveform2011}, and include linearity, planarity, and scatter, aiming to indicate the presence of a linear, planar, or volumetric structures, and also omnivariance, anisotropy, eigentropy, the sum of eigenvalues, and curvature.
 The formulas for the features are provided in Section~\ref{sec-training-tree-processors}, where they are used for training parameter prediction models for segmented trees.
 Simpler features, that are especially often used in area-based approach, include various statistics describing height and reflection intensity distributions of points, like percentages of points above mean height, deciles of height, cumulative percentages of points below height deciles, and others.
-Since many LiDAR sensors can record multiple reflections from a single pulse, features that use the reflection numbers are also often used, i.e., relative return number and total number of returns.
+Since many \gls{lidar} sensors can record multiple reflections from a single pulse, features that use the reflection numbers are also often used, i.e., relative return number and total number of returns.
 
 Point clouds are by their nature irregular, and non-uniform point densities across the cloud often become a problem for both manual feature creation and representation learning as part of a deep learning model.
 Many researches explore ways to handle this non-uniformity.
@@ -91,9 +91,9 @@ Figure from (Qi, Yi, et al. 2017)}
 
 \section{Area-based approach}\label{sec-area-based-approach}
 
-The most common way to use LiDAR for mapping forest attributes is the area-based approach (ABA) \citep{whiteABAGuide2013}.
+The most common way to use \gls{lidar} for mapping forest attributes is the area-based approach (ABA) \citep{whiteABAGuide2013}.
 Figure~\ref{fig-aba-schema} shows its schematic representation.
-It consists of a LiDAR survey covering the whole area of interest and a manual forest inventory providing ground truth data for fitting statistical models and validating the results.
+It consists of a \gls{lidar} survey covering the whole area of interest and a manual forest inventory providing ground truth data for fitting statistical models and validating the results.
 The inventory usually consists of many circular ground plots with every tree within counted and attributes of interest either directly measured or calculated and averaged.
 The point cloud is clipped by the extents of the ground plots, and for each plot it is reduced to a collection of manually selected metrics.
 The metrics usually include descriptions of the height distribution of the points, but often reflection intensities and other sensor-provided information is used as well, such as the return number, the number of returns, etc. (a brief discussion on the use of intensity-based features can be found in Section~\ref{sec-intensity-based-features}).
@@ -131,12 +131,12 @@ Their metrics are aimed to capture different aspects of the canopy geometry.
 The authors argue that usage of a very limited set of carefully engineered diverse metrics results in improvement of model generalization ability without loss of accuracy.
 
 \citet{zhangImprovedAreabasedApproach2023} use a modification of the area-based approach to predict plot-level diameter at breast height (dbh) by utilizing known allometric dependencies between tree height and dbh to limit the size of the hypothesis set for fitting regression models.
-They use airborne LiDAR measurements with an average density of 9.6 points per square meter and report a relative error of 11%.
+They use airborne \gls{lidar} measurements with an average density of 9.6 points per square meter and report a relative error of 11%.
 
-\citet{vermeerLidarbasedNorwegianTree2023} use a U-Net \citep{ronnebergerUNetConvolutionalNetworks2015} image semantic segmentation model on LiDAR-derived 1-meter resolution digital terrain models and canopy height maps to predict the distribution of three main tree species in a Norwegian forest.
+\citet{vermeerLidarbasedNorwegianTree2023} use a U-Net \citep{ronnebergerUNetConvolutionalNetworks2015} image semantic segmentation model on \gls{lidar}-derived 1-meter resolution digital terrain models and canopy height maps to predict the distribution of three main tree species in a Norwegian forest.
 They achieve a macro $F_1$ of 0.70 when including the background class, and 0.63 when including only the target species classes, as evaluated on independent field inventory plots.
 
-\citet{kcEstimationAboveGroundForest2024} is a classic example of an area-based approach study utilizing airborne LiDAR survey to predict forest above ground biomass.
+\citet{kcEstimationAboveGroundForest2024} is a classic example of an area-based approach study utilizing airborne \gls{lidar} survey to predict forest above ground biomass.
 They use a set of 32 metrics derived from height distribution of points, an automatic feature selection procedure, and two regression models: linear regression and Random Forest to compare the results.
 They report coefficients of determination of 0.85 and average errors around 83 tons per hectare.
 
@@ -146,7 +146,7 @@ They report coefficients of determination of 0.85 and average errors around 83 t
 With the constant improvement of accessibility and quality of high-resolution remote sensing data, there is a growing interest in the development of methods that operate on the scale of individual trees.
 This subsection gives an overview of some of the research in this area, split by the main data source.
 
-\citet{liNewMethodSegmenting2012} developed a well performing algorithmic method for segmentation of individual tree crowns in LiDAR point clouds for coniferous forests that relies on the point shape characteristic of many coniferous species and segments the trees from top to bottom.
+\citet{liNewMethodSegmenting2012} developed a well performing algorithmic method for segmentation of individual tree crowns in \gls{lidar} point clouds for coniferous forests that relies on the point shape characteristic of many coniferous species and segments the trees from top to bottom.
 
 \citet{lucasIdentificationLinearVegetation2019} use the set of eigenvalue-based features calculated for each point in a fixed-radius neighborhood, with other geometrical features including maximum local height difference and height standard deviation, local radius and local point density, to identify linear vegetation elements in segmented point clouds.
 They also use two point-based features that do not rely on a neighborhood: the number of returns and the normalized return number, proposed in \citet{guoRelevanceAirborneLidar2011}, and use Random Forest classifier to separate the points that belong to vegetation after first removing the planar features corresponding to grass, soil, and water surfaces.
@@ -183,39 +183,39 @@ They report $F_1$-scores of 0.75, with average positioning error of 2.2 meters.
 
 \subsection{Terrestrial LiDAR}
 
-Terrestrial LiDAR surveys usually provide very dense and detailed point clouds.
+Terrestrial \gls{lidar} surveys usually provide very dense and detailed point clouds.
 Most importantly for the task of localizing individual trees, terrestrial measurements always capture the trunks of the trees clearly.
 Tree trunks are very useful for tree detection and segmentation, and there are many algorithms that use bottom-to-top approaches that trace the trunks into the canopies.
 
-\citet{burtExtractingIndividualTrees2018} introduce \texttt{treeseg}, a software package written in C++ for extracting individual trees from LiDAR point clouds.
-Even though it is designed and presented as a platform-agnostic method made to operate on both terrestrial and UAV LiDAR point clouds, it relies on trunk detection, which is common for many methods based on terrestrial LiDAR and often is not applicable to UAV LiDAR data.
+\citet{burtExtractingIndividualTrees2018} introduce \texttt{treeseg}, a software package written in C++ for extracting individual trees from \gls{lidar} point clouds.
+Even though it is designed and presented as a platform-agnostic method made to operate on both terrestrial and \gls{uav} \gls{lidar} point clouds, it relies on trunk detection, which is common for many methods based on terrestrial \gls{lidar} and often is not applicable to \gls{uav} \gls{lidar} data.
 
-\citet{lopezserranoArtificialIntelligencebasedSoftware2022} introduce another software package called \texttt{AID-FOREST} for fully automatic processing of terrestrial LiDAR point clouds based on trunk detection.
+\citet{lopezserranoArtificialIntelligencebasedSoftware2022} introduce another software package called \texttt{AID-FOREST} for fully automatic processing of terrestrial \gls{lidar} point clouds based on trunk detection.
 The software takes in a raw point cloud, performs all required preprocessing steps, and runs an object detection neural network on a series of horizontal slices to find cross-sections of trunks, and then processes the detection results from each level to track individual trees.
 
-\citet{allenTreeSpeciesClassification2022} describe an approach for classifying terrestrial LiDAR point clouds of individual trees extracted by \texttt{treeseg} using multi-view representation based on \citet{goyalRevisitingPointCloud2021} and a convolutional ResNet network \citep{heDeepResidualLearning2016}.
+\citet{allenTreeSpeciesClassification2022} describe an approach for classifying terrestrial \gls{lidar} point clouds of individual trees extracted by \texttt{treeseg} using multi-view representation based on \citet{goyalRevisitingPointCloud2021} and a convolutional ResNet network \citep{heDeepResidualLearning2016}.
 They report high classification accuracies both overall and per-species on a dataset of almost 2500 individual trees.
 
-\citet{wilkesTLS2treesScalableTree2023} introduce `TLS2trees`, another automated framework for segmentation of individual trees in terrestrial LiDAR point clouds, consisting of a set of Python command line tools.
+\citet{wilkesTLS2treesScalableTree2023} introduce `TLS2trees`, another automated framework for segmentation of individual trees in terrestrial \gls{lidar} point clouds, consisting of a set of Python command line tools.
 The framework consists of three steps: preprocessing, semantic segmentation, and instance segmentation into a set of individual trees.
 After that, a set of attributes are computed for each tree.
 The software is designed to be horizontally scalable (meaning it's easy to speed up calculations by using more machines doing them in parallel, as opposed to vertically, meaning by increasing the computational resources available to a single machine) to address huge datasets produced during terrestrial laser scanning surveys.
 
 All these software packages are impressive, but non-applicable to the data described in this work.
 
-\citet{vianaTimberVolumeEstimation2022} use a small dataset to compare tree-level inventory metrics extracted from a terrestrial LiDAR survey and from a manual inventory.
-They report very good results, showing that terrestrial LiDAR can serve as a replacement for manual inventories in diverse secondary forests (secondary forests are forests that regenerate naturally after significant disturbances like logging, storms, or fires).
+\citet{vianaTimberVolumeEstimation2022} use a small dataset to compare tree-level inventory metrics extracted from a terrestrial \gls{lidar} survey and from a manual inventory.
+They report very good results, showing that terrestrial \gls{lidar} can serve as a replacement for manual inventories in diverse secondary forests (secondary forests are forests that regenerate naturally after significant disturbances like logging, storms, or fires).
 
-\citet{nurunnabiDevelopmentPreciseTree2024} offer a compelling example of how detailed terrestrial LiDAR point clouds can be used to provide very detailed analyses on tree level.
+\citet{nurunnabiDevelopmentPreciseTree2024} offer a compelling example of how detailed terrestrial \gls{lidar} point clouds can be used to provide very detailed analyses on tree level.
 The authors report high accuracies on the task of segmenting the point clouds into wood and leaf points by utilizing geometric features mentioned earlier to locate linear and non-linear areas.
 They then apply an octree-based segmentation algorithm to develop a precise 3D structure of a tree.
 
 \subsection{UAV LiDAR}
 
-A common approach to utilize LiDAR point cloud data for tree detection is by calculating canopy height maps – images where each pixel represents the height of vegetation – and applying the same techniques as for image-only approaches.
+A common approach to utilize \gls{lidar} point cloud data for tree detection is by calculating canopy height maps – images where each pixel represents the height of vegetation – and applying the same techniques as for image-only approaches.
 
 A substantial number of different tree detection algorithms are variations of the local maxima filter, differing in what the filter is applied to, how many times, with what windows, and how the results are combined or preprocessed.
-For example, \citet{doussExtractionIndividualTrees2022} offers an exploration of how different window size functions for the local maxima filtering applied to LiDAR-derived canopy height maps affect the quality of individual tree detection.
+For example, \citet{doussExtractionIndividualTrees2022} offers an exploration of how different window size functions for the local maxima filtering applied to \gls{lidar}-derived canopy height maps affect the quality of individual tree detection.
 They show that for a moderately dense forest in France, it is possible to find the parameters for the local maxima filter window that produce satisfactory results.
 It is, however, clear that it requires great deal of manual adjustment, and visual inspection of the results of detection makes it clear that they are only locally consistent.
 Any change in the canopy structure patterns noticeably affects the quality of the detection even for sophisticated window functions.
@@ -225,12 +225,12 @@ Their approach consists of three steps.
 The first step is the classification of segments into correct, under-segmented, or over-segmented using a Random Forest classifier, the second step is the refinement of under-segmentation errors by re-segmenting them with adjusted parameters, and the last step is the refinement of over-segmentation errors by merging with the correct segments using an algorithmic approach based on a collection of intensity-derived features.
 The authors suggest that this approach is universal in terms of forest composition and complexity, unlike many other ad-hoc correction methods based on the study area and thus non-generalizable.
 
-\citet{wangAutomaticDetectionIndividual2023} propose a two-stage network they call Tree Region-Based Convolutional Neural Network (RCNN) to detect trees in UAV LiDAR point clouds.
+\citet{wangAutomaticDetectionIndividual2023} propose a two-stage network they call Tree Region-Based Convolutional Neural Network (RCNN) to detect trees in \gls{uav} \gls{lidar} point clouds.
 The first step is generation of dense anchors across the point cloud that are then processed by the RCNN to generate proposals for individual tree locations.
 The second step involves multi-position feature extraction to refine the proposals.
 The approach is evaluated on the NewFor benchmark \citep{eysnAlpineITDBenchmark2015} and outperforms all benchmark methods that come with it.
 
-\citet{fuIndividualTreeSegmentationUAV2024} propose a method for segmenting individual trees in UAV LiDAR point clouds based on a multiscale adaptive local maximum filter applied to the smoothed canopy height map to detect tree tops, a region-growing method for crown delineation that are then refined by a voxel-based clustering algorithm.
+\citet{fuIndividualTreeSegmentationUAV2024} propose a method for segmenting individual trees in \gls{uav} \gls{lidar} point clouds based on a multiscale adaptive local maximum filter applied to the smoothed canopy height map to detect tree tops, a region-growing method for crown delineation that are then refined by a voxel-based clustering algorithm.
 The method is developed and tested on 21 synthetic plots and one actual survey, and the authors report good accuracy for estimation of both tree locations and heights.
 Worth noting that both the synthetic and real forest have relatively well-defined an unambiguous canopy structure.
 
@@ -239,39 +239,39 @@ Worth noting that both the synthetic and real forest have relatively well-define
 Many works do not just use one data source and instead combine multiple complimentary ones for better representation.
 This subsection gives an overview of data fusion approaches for forestry applications on individual tree scale.
 
-\citet{lianBiomassCalculationsIndividual2022} describe an approach for calculating individual tree biomass by combining UAV multispectral, UAV LiDAR and terrestrial LiDAR data.
-Terrestrial and UAV LiDAR are merged to get a more representative point cloud, showing the trees equally well both from above and from the ground.
+\citet{lianBiomassCalculationsIndividual2022} describe an approach for calculating individual tree biomass by combining UAV multispectral, \gls{uav} \gls{lidar} and terrestrial \gls{lidar} data.
+Terrestrial and \gls{uav} \gls{lidar} are merged to get a more representative point cloud, showing the trees equally well both from above and from the ground.
 The multispectral image is used to generate a species classification map, which is then used to segment the point cloud.
 The segmented cloud is then used to estimate diameter at breast height and height and calculate above ground biomass.
 
-\citet{liFusionApproachesIndividual2023} explore the contributions of multispectral images, very high resolution panchromatic images, and LiDAR data during fusion on feature and decision level for tree species classification using Support Vector Machine and Random Forest classifiers on manually delineated tree crowns from an urban environment.
+\citet{liFusionApproachesIndividual2023} explore the contributions of multispectral images, very high resolution panchromatic images, and \gls{lidar} data during fusion on feature and decision level for tree species classification using Support Vector Machine and Random Forest classifiers on manually delineated tree crowns from an urban environment.
 They report that fusion consistently improves the results over using each of the data sources on its own.
 They also report that fusion on decision level resulted in the highest overall accuracy metrics.
 
-\citet{balestraLiDARDataFusion2024} offers a review of 151 publications concerning fusion of LiDAR data with other remote sensing data.
+\citet{balestraLiDARDataFusion2024} offers a review of 151 publications concerning fusion of \gls{lidar} data with other remote sensing data.
 The authors report that in most cases fusion improves the results.
-Most relevant to this thesis, they report that for individual tree segmentation the results of fusion-based approaches compared to LiDAR-only ones are consistently better.
+Most relevant to this thesis, they report that for individual tree segmentation the results of fusion-based approaches compared to \gls{lidar}-only ones are consistently better.
 \citet{laExtractionIndividualTree2015} show an increase from 63\% to 92\% for low-density forests, and from 62\% to 70\% for high-density forests, \citet{aubry-kientzMultisensorDataFusion2021} show and improvement by 5\%, and \citet{zhenImpactTreeOrientedGrowth2014} and \citet{arenas-corralizaAutomaticMappingTree2020} improved their results by 2-4\%.
 
-\citet{ferreiraImprovingUrbanTree2024} use a U-Net semantic segmentation model for fusion of VNIR images and airborne LiDAR-derived feature maps including surface normals of the canopies, reflection intensities, canopy heights, and leaf-area index for mapping tree species in urban tropical areas.
-Their results show that adding LiDAR-based features improves $F_1$-scores across all considered species, with average $F_1$-score 84.1.
+\citet{ferreiraImprovingUrbanTree2024} use a U-Net semantic segmentation model for fusion of VNIR images and airborne \gls{lidar}-derived feature maps including surface normals of the canopies, reflection intensities, canopy heights, and leaf-area index for mapping tree species in urban tropical areas.
+Their results show that adding \gls{lidar}-based features improves $F_1$-scores across all considered species, with average $F_1$-score 84.1.
 They also use the segment anything model \citep{Kirillov_2023_ICCV} to automatically segment tree crowns with outstanding 98\% boundary $F_1$-score.
 
-\citet{wuFineClassificationUrban2024} use a combination of high-resolution RGB images and LiDAR to classify urban tree species by extracting seven different feature types and using a Random Forest for pixel-level classification.
+\citet{wuFineClassificationUrban2024} use a combination of high-resolution \gls{rgb} images and \gls{lidar} to classify urban tree species by extracting seven different feature types and using a Random Forest for pixel-level classification.
 They report on seven experiments using different combinations of extracted features.
-The results show an improvement of 18.5\% in accuracy when using fusion of LiDAR and RGB compared to RGB-only.
+The results show an improvement of 18.5\% in accuracy when using fusion of \gls{lidar} and \gls{rgb} compared to \gls{rgb}-only.
 
 
 \subsection{Summary}
 
 There is a lot of research going on currently on individual tree-level inventories using UAV remote sensing data.
-Most results that can be considered successful are either in more mild environments, such as urban or managed forests, in predominantly coniferous forests, or use a much more detailed, but at the same time much more labor-intensive data source – terrestrial LiDAR.
+Most results that can be considered successful are either in more mild environments, such as urban or managed forests, in predominantly coniferous forests, or use a much more detailed, but at the same time much more labor-intensive data source – terrestrial \gls{lidar}.
 Mild forest types usually have canopy structures that are a lot easier to interpret, since the trees often stand far enough apart to be separable.
 At the same time, they allow for much more signal penetration, resulting in a good representation of tree trunks in the data, which is tremendously useful for the task of detecting trees.
 Predominantly coniferous forests, even dense ones, also have a canopy structure that is easy to interpret because conifer trees have a characteristic triangle shape that results in spikes in canopy height even when trees are standing close to each other.
-Terrestrial LiDAR data is different from UAV LiDAR in the amount of detail and, most importantly, the perspective.
+Terrestrial \gls{lidar} data is different from \gls{uav} \gls{lidar} in the amount of detail and, most importantly, the perspective.
 It surveys the trees from below, virtually guaranteeing the presence of trunks in the point clouds.
-Several fully automated approaches to detailed forest inventories using terrestrial LiDAR data exist that rely on the detection of trunks.
+Several fully automated approaches to detailed forest inventories using terrestrial \gls{lidar} data exist that rely on the detection of trunks.
 A gap persists in solutions that would consistently work on UAV remote sensing data over dense mixed forests, with complex overlapping canopies.
-The active nature and the vertical structure information provided by LiDAR is essential in such complex environments.
-At the same time, many results indicate that fusion of LiDAR point clouds with other data sources consistently improves the results in forestry applications, which is why the proposed framework relies on fusion of LiDAR with RGB imagery.
+The active nature and the vertical structure information provided by \gls{lidar} is essential in such complex environments.
+At the same time, many results indicate that fusion of \gls{lidar} point clouds with other data sources consistently improves the results in forestry applications, which is why the proposed framework relies on fusion of \gls{lidar} with \gls{rgb} imagery.

@@ -9,8 +9,8 @@ The code of the project on my GitHub might be a helpful addition for that.
 The main original dataset used in the study is the Lysva field inventory dataset, named by the closest town to its location.
 The dataset is released into open access with an accompanying paper that describes the data in detail and provides a basic baseline for individual tree detection \citep{dubrovinExplorationPropertiesPoint2024}.
 The study area is located in Perm Krai, Russia, 86 kilometers to the east of Perm.
-The dataset consists of a field inventory of 3600 trees across 10 rectangular ground plots 100 meters in lengths and 50 meters in width fully covered by a UAV LiDAR and RGB orthophoto surveys.
-Figure~\ref{fig-lysva-roi} shows the locations of the ground plots over the full size RGB orthophoto and a visualization of the field inventory for a single plot on top of the LiDAR point cloud.
+The dataset consists of a field inventory of 3600 trees across 10 rectangular ground plots 100 meters in lengths and 50 meters in width fully covered by a \gls{uav} \gls{lidar} and \gls{rgb} orthophoto surveys.
+Figure~\ref{fig-lysva-roi} shows the locations of the ground plots over the full size RGB orthophoto and a visualization of the field inventory for a single plot on top of the \gls{lidar} point cloud.
 Colored points represent trees, with different colors mapping to different species.
 The point cloud is visualized as a 2D scatter plot with points colored by height (darker points are lower, brighter points are higher, and points are unsorted – some lower points end up over higher ones).
 The baseline is a simple one-pass local maxima filter applied directly on the point cloud with a fixed window size.
@@ -74,7 +74,7 @@ there are 1807 coniferous and 1793 deciduous trees.
 Figure reused from \citet{dubrovinOpenDatasetIndividual2024}.}
 \end{figure}
 
-The LiDAR sensor used for the survey is AGM-MS3 produced by AGM Systems.
+The \gls{lidar} sensor used for the survey is AGM-MS3 produced by AGM Systems.
 It has 640 kHz acquisition rate, 300-meter range, and spatial accuracy of 3–5 centimeters.
 The raw point clouds were processed with the combination of the AGM ScanWorks software from the sensor vendor and the TerraScan software.
 The point clouds were preprocessed by removing duplicate points and high and low noise points.
@@ -116,7 +116,7 @@ LiDAR point cloud of plot 10.}
 plot 10.}
 \end{figure}
 
-Table~\ref{tbl-lysva-plot-stats} shows some descriptive statistics for each plot in the field inventory: the number of trees in the plot, average LiDAR point density in points per square meter, and dominant species type.
+Table~\ref{tbl-lysva-plot-stats} shows some descriptive statistics for each plot in the field inventory: the number of trees in the plot, average \gls{lidar} point density in points per square meter, and dominant species type.
 The overall average point density is 37 points per square meter.
 Exactly half of the plots are predominantly coniferous and half are predominantly deciduous.
 Figure~\ref{fig-lysva-canopy-structure} shows two point clouds clipped by plot bounds in 3D, highlighting the differences in canopy structure complexity between predominantly deciduous and coniferous plots.
@@ -190,7 +190,7 @@ However, relying on intensity-based features limits the applicability of develop
 \subsubsection{Comparison to other datasets}
 
 Our dataset is in many ways similar to the NewFor benchmark \cite{eysnAlpineITDBenchmark2015}.
-It serves the same purpose and also offers overlapping field survey ground plots and UAV LiDAR point clouds.
+It serves the same purpose and also offers overlapping field survey ground plots and \gls{uav} \gls{lidar} point clouds.
 There are, however, many notable differences.
 The NewFor benchmark covers much more diverse regions, including ground plots from France, Italy, Switzerland, Austria, and Slovenia, while all our data comes from the same area.
 The tree species covered by the datasets are also different: both contain spruce and fir, but the NewFor data also has beech, Scots pine, larch, sycamore, and poplar, while ours also has birch, aspen, tilia, alder, and willow.
@@ -200,19 +200,19 @@ Our dataset has an additional information source – an RGB orthophoto that allo
 Our dataset has species labels for every surveyed tree, but only partial coverage of tree heights and no timber volume information at all.
 
 Another similar dataset is the NeonTreeEvaluation Benchmark \cite{weinsteinDataNeonTreeEvaluationBenchmark2022}, which offers bounding box annotation for tree detection across a wide range of different forest types.
-It offers coregistered RGB, LiDAR, and hyperspectral images over 31,000 individual trees.
+It offers coregistered \gls{rgb}, \gls{lidar}, and hyperspectral images over 31,000 individual trees.
 The main difference in the reference data between the NeonTreeEvaluation Benchmark and our dataset is the source: our data comes from a field inventory and thus has additional tree information that can be used in downstream tasks, such as species classification or timber volume prediction, while the NeonTreeEvaluation Benchmark annotations are created from the RGB photo and thus only offer the positions and sized of trees.
 
-Another dataset is the IDTReeS 2020 Competition Data \cite{gravesIDTReeS2020Competition2020} aimed to develop algorithms for delineation and species classification of individual tree crowns in RGB, LiDAR, and hyperspectral data.
-It offers bounding box annotations for 1200 individual trees covered by RGB, LiDAR, and hyperspectral images in 3 national forests in the USA.
+Another dataset is the IDTReeS 2020 Competition Data \cite{gravesIDTReeS2020Competition2020} aimed to develop algorithms for delineation and species classification of individual tree crowns in \gls{rgb}, \gls{lidar}, and hyperspectral data.
+It offers bounding box annotations for 1200 individual trees covered by \gls{rgb}, \gls{lidar}, and hyperspectral images in 3 national forests in the USA.
 Similarly, the source of the data is annotation of images, not a field inventory.
 
-There are also datasets available that do not have LiDAR point cloud coverage, or use terrestrial LiDAR instead of UAV LiDAR, or use photogrammetric point clouds instead of LiDAR  point clouds.
-We do not mention them here because we specifically focus on UAV LiDAR.
+There are also datasets available that do not have \gls{lidar} point cloud coverage, or use terrestrial \gls{lidar} instead of \gls{uav} \gls{lidar}, or use photogrammetric point clouds instead of \gls{lidar} point clouds.
+We do not mention them here because we specifically focus on \gls{uav} \gls{lidar}.
 
 \section{Individual tree point clouds dataset}\label{sec-individual-trees-dataset}
 
-The main dataset used for training the models is a collection of point clouds of individual trees, sometimes referred to in this text as tree clouds, extracted manually from larger UAV LiDAR point clouds.
+The main dataset used for training the models is a collection of point clouds of individual trees, sometimes referred to in this text as tree clouds, extracted manually from larger \gls{uav} \gls{lidar} point clouds.
 The dataset is released into open access, and was originally presented in \citep{dubrovinExplorationPropertiesPoint2024}, although it has been expanded since and now contains twice as many individual trees.
 It consists of 394 trees, 192 of which are extracted from the previously described Lysva survey, and 202 from other surveys in Perm Krai.
 The distinction between the parts is important because the Lysva dataset has RGB orthophoto coverage, making it possible to infuse the tree clouds with orthophoto-based features.
@@ -269,7 +269,7 @@ So there is a selection bias in there favoring the trees that are easily separab
 Because of that the trees do not exactly represent what a tree closely surrounded by other trees is like in a point cloud.
 It is especially apparent in very pronounced trunks of all the visualized trees.
 In a dense forest, such as the one visualized in Figure~\ref{fig-lysva-canopy-structure}, there is hardly ever enough penetration for such detailed trunk coverage.
-In fact, as mentioned in the literature review, good coverage of trunks is an immensely useful feature of terrestrial LiDAR surveys, which consistently show very good results using algorithm that segment trees from the trunk up.
+In fact, as mentioned in the literature review, good coverage of trunks is an immensely useful feature of terrestrial \gls{lidar} surveys, which consistently show very good results using algorithm that segment trees from the trunk up.
 
 \section{Synthetic forests generated from individual trees}\label{sec-synthetic-forest-dataset}
 
@@ -423,7 +423,7 @@ scale factor is uniformly sampled from a set range.}
 
 Another way to change the positions is to slightly translate each point for a random distance in a random direction.
 That transformation is commonly referred to as random jitter.
-Since LiDAR sensors have limited spatial accuracy, introducing random translations within the accuracy range should not have any effect on the result of tree segmentation.
+Since \gls{lidar} sensors have limited spatial accuracy, introducing random translations within the accuracy range should not have any effect on the result of tree segmentation.
 Going further, small translations even outside the accuracy range make sense, since they have very limited effect on the overall shape of the tree.
 Figure~\ref{fig-random-jitter-effect} shows this effect on a single aspen tree.
 The amount of translation is uniformly sampled independently for each point from a set range.

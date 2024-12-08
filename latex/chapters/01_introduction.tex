@@ -15,7 +15,7 @@ This drives the need for accurate, detailed, up-to-date information about variou
 The traditional manual forest inventories that rely on people going out into the forest to count and measure trees are extremely labor-intensive and time-consuming, which makes them infeasible to cover extensive areas with sufficient detail, speed, and frequency \citep{burleyEncyclopediaForestSciences2004}.
 This is especially relevant in countries where massive areas are covered by forests, such as Russia, Brazil, Canada, USA, and China, which are the top five countries for forest area according to \citet{GlobalForestResources2020}.
 For that reason, various remote sensing techniques are widely used to extend and extrapolate the traditional forest inventories.
-All sorts of data, from satellite and aerial imagery to very detailed terrestrial LiDAR (light detection and ranging) surveys, are used in all sorts of applications that require mapping forest attributes.
+All sorts of data, from satellite and aerial imagery to very detailed terrestrial \gls{lidar} surveys, are used in all sorts of applications that require mapping forest attributes.
 Some such applications are mentioned in the next chapter dedicated to reviewing the literature.
 
 \begin{figure}
@@ -40,7 +40,7 @@ Aerial observations with sensors mounted on planes or helicopters are both more 
 A much more affordable and controllable alternative is UAV-based observation.
 It allows for fine-grained control and on the fly adjustment of many important parameters such as flight height, flight path overlap, combination of used sensors, and so on.
 
-The most common way to use UAV remote sensing, be it LiDAR, multispectral, hyperspectral, or other data modalities, for mapping forest attributes in industry is what is known in the LiDAR community as the area-based approach, described in detail in Section~\ref{sec-area-based-approach}.
+The most common way to use \gls{uav} remote sensing, be it \gls{lidar}, multispectral, hyperspectral, or other data modalities, for mapping forest attributes in industry is what is known in the \gls{lidar} community as the area-based approach, described in detail in Section~\ref{sec-area-based-approach}.
 It is based on extrapolating measurements from ground plots made in traditional inventories by aggregating remote sensing data to the grid with cell area of a ground plot, which results in coarse resolution maps.
 It is easy to use, but its results are often not detailed enough when working on smaller scales.
 However, modern sensors and processing techniques allow not aggregating at all and instead working on the level of individual trees, which is as detailed as it can possibly get, allowing for any level of aggregation for downstream tasks.
@@ -51,11 +51,11 @@ In some such environments, state-of-the-art results can be achieved by simple lo
 Forest that are mixed and dense, which are a huge part of forests in countries mentioned earlier, are much harder to work with and are a very active area of research for developing methods of detection of individual trees.
 The canopies in such forests are very complex, especially because the top of the crowns of deciduous tree species often do not have a single pronounced height maximum, and crowns of nearby trees often overlap.
 
-The framework described in this thesis focuses on fusion of two remote sensing data sources, UAV LiDAR point clouds and UAV RGB orthophotos, to detect individual trees in dense mixed forests and predict required attributes for each tree individually, producing the most detailed maps possible.
+The framework described in this thesis focuses on fusion of two remote sensing data sources, \gls{uav} \gls{lidar} point clouds and \gls{uav} \gls{rgb} orthophotos, to detect individual trees in dense mixed forests and predict required attributes for each tree individually, producing the most detailed maps possible.
 The choice of data sources is driven by their complementary nature, which I believe is key for semantically parsing such complex environments.
-LiDAR is an active sensor, which means it does not depend on external conditions such as lighting.
-Cloud and terrain shadows, incidence angles, and weather conditions do not affect LiDAR surveys.
-Moreover, LiDAR provides 3D vertical structural information about the forest, as laser pulses penetrate the canopy and reach both the undergrowth and the ground.
+\gls{lidar} is an active sensor, which means it does not depend on external conditions such as lighting.
+Cloud and terrain shadows, incidence angles, and weather conditions do not affect \gls{lidar} surveys.
+Moreover, \gls{lidar} provides 3D vertical structural information about the forest, as laser pulses penetrate the canopy and reach both the undergrowth and the ground.
 This structural information is essential for understanding complex environments like dense forests.
 High-resolution RGB imagery does depend on the illumination conditions, but is still an invaluable tool, as it offers detailed data with fixed resolution, continuous coverage of surfaces, unlike the discrete representation of laser scanning, and captures many fine details and textures.
 It can also benefit from a huge variety of well-established tools and processing techniques from the field of computer vision.
@@ -64,7 +64,7 @@ Neither of these data sources on their own is enough to reliably and with suffic
 \section{Research question and hypothesis}\label{sec-research-question}
 
 The main research question could be formulated as follows: "How to reduce effort and cost required for detailed inventories of dense mixed forests without losing accuracy?"
-The main hypothesis is then: "An accurate and detailed inventory with reduced effort and cost can be achieved through fusion of UAV LiDAR and RGB data using machine learning".
+The main hypothesis is then: "An accurate and detailed inventory with reduced effort and cost can be achieved through fusion of \gls{uav} \gls{lidar} and \gls{rgb} data using machine learning".
 The benchmarks to measure against are both the traditional manual forest inventory and the widely used area-based approach.
 
 Cost and effort are closely connected, as any effort is in the end converted to cost.
@@ -74,8 +74,8 @@ The effort reduction comes from greatly decreasing the amount of field inventory
 
 \section{Overview of the framework}
 
-The proposed framework described in this thesis consist of a neural-network based tree segmentation in UAV LiDAR point clouds enhanced with RGB orthophoto-based features and processing the segments with a collection of specialized classic machine learning models that predict the parameters of interest for each detected tree.
-The tree segmentation model is trained on synthetic forest patches constructed from a dataset of point clouds of individual trees extracted manually from a large UAV LiDAR survey, heavily relying on augmentations to make the synthetic forest closer to real forest.
+The proposed framework described in this thesis consist of a neural-network based tree segmentation in \gls{uav} \gls{lidar} point clouds enhanced with \gls{rgb} orthophoto-based features and processing the segments with a collection of specialized classic machine learning models that predict the parameters of interest for each detected tree.
+The tree segmentation model is trained on synthetic forest patches constructed from a dataset of point clouds of individual trees extracted manually from a large \gls{uav} \gls{lidar} survey, heavily relying on augmentations to make the synthetic forest closer to real forest.
 The parameter prediction classification and regression models are trained on the same dataset of individual trees using a collection of widely used manual point cloud features.
 Figure~\ref{fig-framework-apply} is a schematic representation of the framework, showing the required inputs in red, processing steps in yellow, and artifacts in cyan.
 The field inventory is phased out, but it is still required, as application of any framework requires quality assessment and validation.
