@@ -143,7 +143,7 @@ Data like that are very labor-intensive to label.
 An alternative way to create such data is by generating it from a set of tree clouds, as the per point labels arise naturally in this case.
 I used the dataset of individual tree point clouds described in the previous section to generate a synthetic forest to train a tree segmentation PointNet++.
 
-Synthetic forest is generated in patches of set height and width by placing trees sampled from the full set from left to right, until the set width is extended, then from bottom to top, until the set height is extended.
+Synthetic forest is generated in patches of set height and width by sampling individual trees from the full set and placing them from left to right, until the set width is extended, then from bottom to top, until the set height is extended.
 A height threshold is applied to each tree before placing it to remove ground points and non-tree reflections.
 This results in patches that are slightly bigger than the set size, but that can be cropped into the exact size.
 This has an added benefit of mimicking cutoff trees at the edges of the patch that are inevitable when the model is applied in a sliding window.
@@ -287,15 +287,15 @@ The learning rate schedule is set to follow a fast linear warm up and slow linea
 Learning rate is set to ramp up from 0.001 to 0.01 in a span of 2 epochs, and then decay back to 0.001 in a span of 30 epochs.
 Adam optimizer is used [@kingmaAdamMethodStochastic2014].
 
-Training was performed on an NVIDIA A100 GPU with 80G of memory.
-Inference, depending on the point density of the input, might work even on a much smaller GPU like Tesla T4 with 16G of memory.
+Training was performed on an NVIDIA A100 GPU with 80 Gb of memory.
+Inference, depending on the point density of the input, might work even on a much smaller GPU like Tesla T4 with 16 Gb of memory.
 GPUs of this size are available with limits on usage for free on services like Google Colab and Kaggle.
 
 ### On implementation of PointNet++
 
 As mentioned in the introduction, the deep learning code, including the code for PointNet++, is implemented using the PyTorch Geometric library designed for writing and training graph neural networks.
 This makes the implementation not exactly the same as described in the PointNet papers.
-The main ideas, namely local feature learning in a k-nearest neighbors neighborhood and max pulling for permutation-invariant aggregation, are there.
+The main ideas, namely local feature learning in a k-nearest neighbors neighborhood and max pooling for permutation-invariant aggregation, are there.
 Input transform and feature transform networks are not defined explicitly, but networks that process features learn to perform a similar function.
 
 ## Training segmented trees processing models {#sec-training-tree-processors}
