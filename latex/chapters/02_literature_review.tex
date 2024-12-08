@@ -9,13 +9,13 @@ Where appropriate, references for in-depth materials on topics that are out of s
 As was mentioned in the introduction, remote sensing is widely used for extending labor-intensive and time-consuming manual forest inventories.
 This section provides examples of various remote sensing techniques used in various forestry applications, before going in more detail into specifically \gls{uav} \gls{lidar} and \gls{rgb}, which are the focus of the described framework.
 
-\citet{hansenAssessingForestNonForest2020} explore the usage of C-band SAR data from the Sentinel-1 mission for binary land use classification into forest/non-forest using a collection of classic machine learning classifiers.
-SAR is an active sensor, making it independent on external conditions and observation time, and it penetrates cloud cover, making it very reliable during almost any weather.
+\citet{hansenAssessingForestNonForest2020} explore the usage of C-band \gls{sar} data from the Sentinel-1 mission for binary land use classification into forest/non-forest using a collection of classic machine learning classifiers.
+\gls{sar} is an active sensor, making it independent on external conditions and observation time, and it penetrates cloud cover, making it very reliable during almost any weather.
 They report accuracies from 80\% in the worst case to the 93\% in the best case, depending on the area of application.
 
-\citet{ferrariFusingSentinel1Sentinel22023} use Fully Convolutional Networks \citep{longFullyConvolutionalNetworks2015} for fusion of multispectral Sentinel-2 and C-band SAR Sentinel-1 data for clear-cut logging detection in the presence of clouds, which limit the use of optical-only approaches and are very common in tropical areas.
+\citet{ferrariFusingSentinel1Sentinel22023} use Fully Convolutional Networks \citep{longFullyConvolutionalNetworks2015} for fusion of multispectral Sentinel-2 and C-band \gls{sar} Sentinel-1 data for clear-cut logging detection in the presence of clouds, which limit the use of optical-only approaches and are very common in tropical areas.
 They show that fusion performs better than single-modality variant for pixels obscured by clouds.
-This combination of active SAR and passive multispectral data is very common, as the sensors compliment each other nicely, similarly to laser scanning and orthophotos.
+This combination of active \gls{sar} and passive multispectral data is very common, as the sensors compliment each other nicely, similarly to laser scanning and orthophotos.
 
 \citet{sinica-sinavskisForestStandVolume2022} combine \gls{lidar} point clouds with Sentinel-2 images to predict timber volume on a stand level.
 They use an unusual approach, using Sentinel-2 images for species detection by clustering, \gls{lidar} point clouds for estimating tree counts and average tree heights, and combining them into two variables used to fit the final regression models.
@@ -64,8 +64,8 @@ For example, \citet{ozdemirDeepLearningFramework2021} proposes a framework for s
 The first deep learning model to work directly on point clouds without constructing any intermediate representation that can be processed by convolutional models is the PointNet introduced by \citet{qiPointNet2017}.
 Figure~\ref{fig-pointnet-architecture} shows its architecture.
 A critical aspect of any model that aims to operate directly on point clouds is permutation invariance, as point clouds are unordered sets, and shuffling the points does not change the point cloud semantically.
-PointNet achieves that invariance by using a combination of shared multilayer perceptrons (MLP) to process point coordinates and features and max pooling for construction of global feature vector.
-That feature vector can then be used directly for point cloud classification tasks, or concatenated with point features and processed further by shared MLPs for per-point predictions.
+PointNet achieves that invariance by using a combination of shared \glspl{mlp} to process point coordinates and features and max pooling for construction of global feature vector.
+That feature vector can then be used directly for point cloud classification tasks, or concatenated with point features and processed further by shared \glspl{mlp} for per-point predictions.
 
 \begin{figure}
 \centering{
@@ -130,7 +130,7 @@ This subsection offers some examples of its continuing use in research.
 Their metrics are aimed to capture different aspects of the canopy geometry.
 The authors argue that usage of a very limited set of carefully engineered diverse metrics results in improvement of model generalization ability without loss of accuracy.
 
-\citet{zhangImprovedAreabasedApproach2023} use a modification of the area-based approach to predict plot-level diameter at breast height (dbh) by utilizing known allometric dependencies between tree height and dbh to limit the size of the hypothesis set for fitting regression models.
+\citet{zhangImprovedAreabasedApproach2023} use a modification of the area-based approach to predict plot-level \gls{dbh} by utilizing known allometric dependencies between tree height and \gls{dbh} to limit the size of the hypothesis set for fitting regression models.
 They use airborne \gls{lidar} measurements with an average density of 9.6 points per square meter and report a relative error of 11%.
 
 \citet{vermeerLidarbasedNorwegianTree2023} use a U-Net \citep{ronnebergerUNetConvolutionalNetworks2015} image semantic segmentation model on \gls{lidar}-derived 1-meter resolution digital terrain models and canopy height maps to predict the distribution of three main tree species in a Norwegian forest.
@@ -225,8 +225,8 @@ Their approach consists of three steps.
 The first step is the classification of segments into correct, under-segmented, or over-segmented using a Random Forest classifier, the second step is the refinement of under-segmentation errors by re-segmenting them with adjusted parameters, and the last step is the refinement of over-segmentation errors by merging with the correct segments using an algorithmic approach based on a collection of intensity-derived features.
 The authors suggest that this approach is universal in terms of forest composition and complexity, unlike many other ad-hoc correction methods based on the study area and thus non-generalizable.
 
-\citet{wangAutomaticDetectionIndividual2023} propose a two-stage network they call Tree Region-Based Convolutional Neural Network (RCNN) to detect trees in \gls{uav} \gls{lidar} point clouds.
-The first step is generation of dense anchors across the point cloud that are then processed by the RCNN to generate proposals for individual tree locations.
+\citet{wangAutomaticDetectionIndividual2023} propose a two-stage network they call Tree \gls{rcnn} to detect trees in \gls{uav} \gls{lidar} point clouds.
+The first step is generation of dense anchors across the point cloud that are then processed by the \gls{rcnn} to generate proposals for individual tree locations.
 The second step involves multi-position feature extraction to refine the proposals.
 The approach is evaluated on the NewFor benchmark \citep{eysnAlpineITDBenchmark2015} and outperforms all benchmark methods that come with it.
 
@@ -253,7 +253,7 @@ The authors report that in most cases fusion improves the results.
 Most relevant to this thesis, they report that for individual tree segmentation the results of fusion-based approaches compared to \gls{lidar}-only ones are consistently better.
 \citet{laExtractionIndividualTree2015} show an increase from 63\% to 92\% for low-density forests, and from 62\% to 70\% for high-density forests, \citet{aubry-kientzMultisensorDataFusion2021} show and improvement by 5\%, and \citet{zhenImpactTreeOrientedGrowth2014} and \citet{arenas-corralizaAutomaticMappingTree2020} improved their results by 2-4\%.
 
-\citet{ferreiraImprovingUrbanTree2024} use a U-Net semantic segmentation model for fusion of VNIR images and airborne \gls{lidar}-derived feature maps including surface normals of the canopies, reflection intensities, canopy heights, and leaf-area index for mapping tree species in urban tropical areas.
+\citet{ferreiraImprovingUrbanTree2024} use a U-Net semantic segmentation model for fusion of \gls{vnir} images and airborne \gls{lidar}-derived feature maps including surface normals of the canopies, reflection intensities, canopy heights, and leaf-area index for mapping tree species in urban tropical areas.
 Their results show that adding \gls{lidar}-based features improves $F_1$-scores across all considered species, with average $F_1$-score 84.1.
 They also use the segment anything model \citep{Kirillov_2023_ICCV} to automatically segment tree crowns with outstanding 98\% boundary $F_1$-score.
 
