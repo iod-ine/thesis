@@ -196,7 +196,7 @@ The software takes in a raw point cloud, performs all required preprocessing ste
 \citet{allenTreeSpeciesClassification2022} describe an approach for classifying terrestrial \gls{lidar} point clouds of individual trees extracted by \texttt{treeseg} using multi-view representation based on \citet{goyalRevisitingPointCloud2021} and a convolutional ResNet network \citep{heDeepResidualLearning2016}.
 They report high classification accuracies both overall and per-species on a dataset of almost 2500 individual trees.
 
-\citet{wilkesTLS2treesScalableTree2023} introduce `TLS2trees`, another automated framework for segmentation of individual trees in terrestrial \gls{lidar} point clouds, consisting of a set of Python command line tools.
+\citet{wilkesTLS2treesScalableTree2023} introduce \textttt{TLS2trees}, another automated framework for segmentation of individual trees in terrestrial \gls{lidar} point clouds, consisting of a set of Python command line tools.
 The framework consists of three steps: preprocessing, semantic segmentation, and instance segmentation into a set of individual trees.
 After that, a set of attributes are computed for each tree.
 The software is designed to be horizontally scalable (meaning it's easy to speed up calculations by using more machines doing them in parallel, as opposed to vertically, meaning by increasing the computational resources available to a single machine) to address huge datasets produced during terrestrial laser scanning surveys.
