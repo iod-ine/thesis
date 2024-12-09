@@ -7,10 +7,16 @@
 This thesis is dedicated to designing, implementing, and testing of a framework for estimating forest parameters at the scale of individual trees.
 The proposed framework relies on fusion of UAV LiDAR point clouds and RGB orthophotos data, deep neural networks designed for processing 3D points clouds to segment the data into individual trees, and a collection of parameter-specific classic machine learning models to process the segmented trees and predict forest parameters of interest.
 An end-to-end implementation is described in detail, with parts of the system evaluated separately, and the overall system validated on a detailed manual field inventory dataset.
-The main contributions of this thesis are thus the design, implementation, and experimental verification of said framework.
-Moreover, during the work on the thesis, both original datasets used for training the models were published into open access, to hopefully be useful to the research community with a rapidly growing interest in detailed digital forest inventories [@dubrovinExplorationPropertiesPoint2024; @dubrovinOpenDatasetIndividual2024].
-I believe the release of data into open access is worthy of including as a contribution, especially in the current era of commercial machine learning[^1].
+
+The main contributions of the thesis can be summarized as follows:
+
+- Publication of two original open access datasets that will undoubtedly be useful to the research community with a rapidly growing interest in detailed digital forest inventories [@dubrovinExplorationPropertiesPoint2024; @dubrovinOpenDatasetIndividual2024].
+I believe the release of data into open access is an important contribution, especially in the current era of commercial machine learning[^1].
 When having good data is an advantage, less people are willing to make their data public, which makes it harder for researchers to explore, develop, and compare novel approaches.
+- A novel approach to training individual tree segmentation neural networks on forest patches synthetically generated from individual trees with heavy use of augmentations to make the data more closely represent real data.
+- Design, implementation, and experimental verification of the framework mentioned in the first paragraph.
+The framework is still in the early prototype stage, since the components are far behind the current state of the art.
+The focus was on creating a proof of concept, thus prioritizing ease of integration over potential performance to show that the end-to-end system has potential.
 
 [^1]: I am purposefully avoiding the term "artificial intelligence" as it seems to have been abused so much as to become practically meaningless, and thus not useful in technical context.
 
