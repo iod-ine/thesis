@@ -212,7 +212,7 @@ They then apply an octree-based segmentation algorithm to develop a precise 3D s
 
 \subsection{UAV LiDAR}
 
-A common approach to utilize \gls{lidar} point cloud data for tree detection is by calculating canopy height maps – images where each pixel represents the height of vegetation – and applying the same techniques as for image-only approaches.
+A common approach to utilize \gls{lidar} point cloud data for tree detection is by calculating \glspl{chm} – images where each pixel represents the height of vegetation – and applying the same techniques as for image-only approaches.
 
 A substantial number of different tree detection algorithms are variations of the local maxima filter, differing in what the filter is applied to, how many times, with what windows, and how the results are combined or preprocessed.
 For example, \citet{doussExtractionIndividualTrees2022} offers an exploration of how different window size functions for the local maxima filtering applied to \gls{lidar}-derived canopy height maps affect the quality of individual tree detection.
