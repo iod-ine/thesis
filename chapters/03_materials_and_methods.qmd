@@ -34,6 +34,10 @@ The field inventory is a tabular dataset where every row represents a single tre
 According to the state-mandated requirements that were in place during the collection of the data, all trees with dbh starting from 6.1 centimeters were included.
 @tbl-inventory-example shows a random sample of entries from the field inventory table.
 Every tree is represented by a point in UTM 40N coordinate reference system (EPSG:32640).
+The coordinates of the trees were determined using the South NTS-360R total station with a reflector prism using the closed traverse method.
+The total station measurements used two points basis determined using a dual-frequency South G1 Plus IMU GNSS receiver in RTK mode.
+The basis points were selected to have reliable satellite signal.
+The average error of coordinate measurements is 10 centimeters, with a maximum of 30 centimeters.
 Every tree has a species label and diameter at breast height (dbh), measured with calipers at 1.3 m from the ground at two perpendicular directions and averaged.
 @fig-lysva-species-distribution shows the distribution of species in the data: the dominant species is spruce, but overall the trees are evenly split between deciduous and coniferous, 1793 and 1807 respectively, with seven species in total: spruce, birch, fir, aspen, tilia, alder, and willow.
 Approximately 20% of the trees have height data measured during the inventory, and 10% have ages measured on core samples, shown in the table in meters and years respectively.
