@@ -97,7 +97,13 @@ And, finally, a related plot on the bottom right, comparing distributions of the
 The same lack of extreme can be observed.
 The final holdout set RMSE is 5.76 cm, MAE is 4.11, $R^2$ is 0.52.
 
+@fig-dbh-distribution show the distributions of the field measured dbh in the full Lysva dataset for reference.
+On the top it show a boxplot with every individual observation plotted as a point, jittered along the Y axis to reduce overlap.
+On the bottom, a histogram and an empirical cumulative density function are shown, along with the mean, median, and standard deviation.
+
 {{< embed ../../notebooks/train-tree-models.ipynb#fig-reg-residuals >}}
+
+{{< embed 03a_lysva_dataset.ipynb#fig-dbh-distribution >}}
 
 ## Validation on the Lysva field inventory data
 

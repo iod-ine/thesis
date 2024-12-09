@@ -132,6 +132,10 @@ And, finally, a related plot on the bottom right, comparing distributions of the
 The same lack of extreme can be observed.
 The final holdout set \gls{rmse} is 5.76 cm, \gls{mae} is 4.11, $R^2$ is 0.52.
 
+Figure~\ref{fig-dbh-distribution} show the distributions of the field measured \gls{dbh} in the full Lysva dataset for reference.
+On the top it show a boxplot with every individual observation plotted as a point, with random jitter along the Y axis to reduce overlap.
+On the bottom, a histogram and an empirical cumulative density function are shown, along with the mean, median, and standard deviation.
+
 \begin{figure}
 \centering{
 \includegraphics[width=\textwidth]{../images/train-tree-models-fig-reg-residuals-output-1.png}
@@ -145,6 +149,17 @@ Left:} Predicted vs.~actual scatter plot. Ideally should be as close to
 a line as possible. \textbf{Top right:} Distribution of the residuals.
 \textbf{Bottom right:} Distribution of the predicted and actual values
 of dbh.}
+\end{figure}
+
+\begin{figure}
+\centering{
+\includegraphics[width=\textwidth]{../images/dbh-distribution.png}
+}
+\caption[Distribution of field mesured dbh in the Lysva dataset.]{\label{fig-reg-residuals}
+    Distributions of the field measured dbh in the Lysva dataset.
+    \textbf{Top:} Boxplot with individual ovservations marked by points (jittered along the Y axis to reduce overlap). 
+    \textbf{Bottom:} Histogtam and the empirical cumulative density function of field measured dbh in the Lysva dataset. 
+}
 \end{figure}
 
 \section{Validation on the Lysva field inventory data}
