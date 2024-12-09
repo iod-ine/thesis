@@ -61,7 +61,11 @@ The resolution of the orthophoto is 7 centimeters per pixel.
 @fig-example-3d-point-cloud is a 3D visualization of the point cloud over plot number 10.
 It shows the unmodified point cloud on the left, with points colored by height above ground, and a point cloud enriched with color information by sampling the orthophoto at the planar coordinates of the points.
 @fig-example-ortho shows the orthophoto for the same plot.
-The carrier UAV was configured to follow the terrain at 150 meter height using the SRTM elevation map as a reference [@farrShuttleRadarTopography2000].
+The carrier UAV used for the LiDAR survey is DJI Matrice 600 Pro hexacopter.
+The speed during the survey was 10 meters per second.
+The UAV was configured to follow the terrain at 150 meter height using the SRTM elevation map as a reference [@farrShuttleRadarTopography2000].
+The carrier UAV used for the orthophoto survey is the fixed-wing Geoscan 201.
+The speed during the survey was 16.6 meters per second.
 
 {{< embed 03a_lysva_dataset.ipynb#fig-example-3d-point-cloud >}}
 
