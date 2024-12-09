@@ -25,7 +25,7 @@ The baseline is a simple one-pass local maxima filter applied directly on the po
 \caption[The study region for the Lysva field inventory.]{\label{fig-lysva-roi}The study region for the Lysva field
 inventory dataset. \textbf{Left}: The locations of field survey plot
 boundaries on a full-size RGB orthophoto. Each plot is a 50 by 100 meter
-rectangle, with every tree within measured and recorded. Buffered
+rectangle, with every tree with dbh of 6.1 cm or higher measured and recorded. Buffered
 cutouts of the orthophoto come with the dataset, along with LiDAR point
 clouds. \textbf{Right}: A close up of plot number 4. Each colored point
 represents a single tree of a different species, on top of a point cloud
@@ -37,9 +37,10 @@ Figure reused from \citet{dubrovinOpenDatasetIndividual2024}.}
 
 
 The field inventory is a tabular dataset where every row represents a single tree.
+According to the state-mandated requirements that were in place during the collection of the data, all trees with \gls{dbh} starting from 6.1 centimeters were included.
 Table~\ref{tbl-inventory-example} shows a random sample of entries from the field inventory table.
 Every tree is represented by a point in \gls{utm} 40N coordinate reference system (\gls{epsg}:32640).
-Every tree has a species label and \gls{dbh}, measured with calipers at 1.3 m from the ground at two perpendicular directions and averaged.
+Every tree has a species label and \acrfull{dbh}, measured with calipers at 1.3 m from the ground at two perpendicular directions and averaged.
 Figure~\ref{fig-lysva-species-distribution} shows the distribution of species in the data: the dominant species is spruce, but overall the trees are evenly split between deciduous and coniferous, 1793 and 1807 respectively, with seven species in total: spruce, birch, fir, aspen, tilia, alder, and willow.
 Approximately 20\% of the trees have height data measured during the inventory, and 10\% have ages measured on core samples, shown in the table in meters and years respectively.
 
