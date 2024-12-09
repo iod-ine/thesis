@@ -191,6 +191,15 @@ The same features but on a coarser scale are shown in @fig-basic-features-large.
 
 {{< embed 03c_synthetic_forest.ipynb#fig-basic-features-large >}}
 
+It is worth mentioning that using synthetic data for training comes with potential biases that are important to keep in mind.
+The biases present in the source dataset can easily become exaggerated.
+In this case, the selection bias mentioned in @sec-individual-trees-dataset is the main potential culprit.
+The limited size of the source dataset also limits the variability of the examples, which can easily lead to complex overfitting.
+In this case, the range of shapes of the trees within each species is small, making it hard to generalize well.
+Moreover, different species will most likely have different accuracies associated with them.
+Models trained entirely on synthetic datasets are also a lot harder to properly evaluate.
+These drawbacks are partially addressed by carefully choosing the augmentations for the training procedure, but they cannot be completely circumvented.
+
 ## Training tree segmentation neural networks
 
 The architecture chosen to serve as the tree segmentation network is the PointNet++ [@qiPointNetPlusPlus2017], described in detail in @sec-ml-dl.

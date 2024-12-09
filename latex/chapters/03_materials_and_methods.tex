@@ -367,6 +367,15 @@ for plot 10. \textbf{Top right}: Intensity feature. \textbf{Bottom
 left}: Edges feature. \textbf{Bottom right}: Texture feature.}
 \end{figure}
 
+It is worth mentioning that using synthetic data for training comes with potential biases that are important to keep in mind.
+The biases present in the source dataset can easily become exaggerated.
+In this case, the selection bias mentioned in Section~\ref{sec-individual-trees-dataset} is the main potential culprit.
+The limited size of the source dataset also limits the variability of the examples, which can easily lead to complex overfitting.
+In this case, the range of shapes of the trees within each species is small, making it hard to generalize well.
+Moreover, different species will most likely have different accuracies associated with them.
+Models trained entirely on synthetic datasets are also a lot harder to properly evaluate.
+These drawbacks are partially addressed by carefully choosing the augmentations for the training procedure, but they cannot be completely circumvented.
+
 \section{Training tree segmentation neural networks}
 
 The architecture chosen to serve as the tree segmentation network is the PointNet++ \citep{qiPointNetPlusPlus2017}, described in detail in Section~\ref{sec-ml-dl}.
