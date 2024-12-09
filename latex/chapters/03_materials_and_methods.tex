@@ -9,8 +9,11 @@ The code of the project on my GitHub might be a helpful addition for that.
 The main original dataset used in the study is the Lysva field inventory dataset, named by the closest town to its location.
 The dataset is released into open access with an accompanying paper that describes the data in detail and provides a basic baseline for individual tree detection \citep{dubrovinExplorationPropertiesPoint2024}.
 The study area is located in Perm Krai, Russia, 86 kilometers to the east of Perm.
+The forest in the region is natural, with the average age of coniferous trees over 85 years and deciduous over 60 years.
 The dataset consists of a field inventory of 3600 trees across 10 rectangular ground plots 100 meters in lengths and 50 meters in width fully covered by a \gls{uav} \gls{lidar} and \gls{rgb} orthophoto surveys.
 Figure~\ref{fig-lysva-roi} shows the locations of the ground plots over the full size \gls{rgb} orthophoto and a visualization of the field inventory for a single plot on top of the \gls{lidar} point cloud.
+The low vegetation areas visible on the orthophoto are naturally regenerating old logging and agricultural sites.
+No artificial afforestation has been done in the area.
 Colored points represent trees, with different colors mapping to different species.
 The point cloud is visualized as a 2D scatter plot with points colored by height (darker points are lower, brighter points are higher, and points are unsorted – some lower points end up over higher ones).
 The baseline is a simple one-pass local maxima filter applied directly on the point cloud with a fixed window size.
