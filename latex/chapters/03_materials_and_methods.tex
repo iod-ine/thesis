@@ -90,7 +90,9 @@ The duplicate removal was run with a threshold distance between points of 1 mm.
 Noise was removed by visually inspecting the point cloud and manually selecting height thresholds to cut off points that are lower than the ground or higher than the canopies.
 Ground point classification was performed and ground points were used to normalize height by subtracting the ground level from the Z coordinate of every point.
 Height normalization allows treating the Z coordinate as height above ground rather than the absolute elevation, which simplifies many subsequent steps.
-The camera used for the orthophoto survey is Sony A6000.
+The camera used to collect raw digital images for creating the orthophoto is Sony A6000.
+Agisoft Metashape software was used to generate the orthophoto mosaic.
+A canopy-height map was created from the \gls{lidar} point cloud and used as a reference for adjusting the planar coordinates of the orthophoto to align them.
 The resolution of the orthophoto is 7 centimeters per pixel.
 Figure~\ref{fig-example-3d-point-cloud} is a 3D visualization of the point cloud over plot number 10.
 It shows the unmodified point cloud on the left, with points colored by height above ground, and a point cloud enriched with color information by sampling the orthophoto at the planar coordinates of the points.
