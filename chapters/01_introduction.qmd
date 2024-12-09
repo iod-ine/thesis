@@ -13,7 +13,9 @@ Forests are an essential renewable natural resource and a huge, dynamic part of 
 Responsible management of forests allows using the resources efficiently and sustainably, preserving the biodiversity, and regulating atmospheric $CO_2$, which is becoming especially important as the anthropogenic climate change is ongoing and accelerating [@faheyForestCarbonStorage2010; @forsterIndicatorsGlobalClimate2024].
 This drives the need for accurate, detailed, up-to-date information about various forest attributes such as distributions of tree species, average heights and ages of trees, estimates of trunk diameter, timber volume, and above ground biomass, and others.
 
-The traditional manual forest inventories that rely on people going out into the forest to count and measure trees are extremely labor-intensive and time-consuming, which makes them infeasible to cover extensive areas with sufficient detail, speed, and frequency [@burleyEncyclopediaForestSciences2004].
+The traditional manual forest inventories that rely on people going out into the forest to count and measure trees will always remain the most reliable and accurate way to assess forest parameters [@burleyEncyclopediaForestSciences2004].
+However, they are also extremely labor-intensive and time-consuming, which makes them infeasible to cover extensive areas with sufficient detail, speed, and frequency.
+They will always be required for quality assessment and validation of any indirect method of estimating forest parameters through remote sensing, but better methods of estimation will help to reduce these the time and effort.
 This is especially relevant in countries where massive areas are covered by forests, such as Russia, Brazil, Canada, USA, and China, which are the top five countries for forest area according to @GlobalForestResources2020.
 For that reason, various remote sensing techniques are widely used to extend and extrapolate the traditional forest inventories.
 All sorts of data, from satellite and aerial imagery to very detailed terrestrial LiDAR (light detection and ranging) surveys, are used in all sorts of applications that require mapping forest attributes.
