@@ -66,9 +66,10 @@ all of the folds.}
 The holdout set was used to take a more in-depth look at the classification results.
 Figure~\ref{fig-clf-confusion-matrix} shows the confusion matrix for the holdout set, with values normalized by row.
 The set is relatively small – 158 examples, but enough to see some patterns emerge in the predictions.
-The best overall species is spruce, and all coniferous species are better than all the deciduous species.
+The best overall species is spruce, having the larges accuracy.
+All coniferous species have higher accuracies than all deciduous species.
 The model often confuses deciduous species, classifying alder as birch or tilia, aspen as birch, tilia as alder or birch.
-This behavior is to be expected, as the shapes of deciduous species are very similar to each other and in complex in general.
+This behavior is to be expected, as the shapes of deciduous species are very similar to each other and are complex in general.
 The overall accuracy in the holdout set is 61\%.
 
 \begin{figure}

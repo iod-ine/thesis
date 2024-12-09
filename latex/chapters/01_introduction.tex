@@ -45,7 +45,8 @@ It allows for fine-grained control and on the fly adjustment of many important p
 The most common way to use \gls{uav} remote sensing, be it \gls{lidar}, multispectral, hyperspectral, or other data modalities, for mapping forest attributes in industry is what is known in the \gls{lidar} community as the area-based approach, described in detail in Section~\ref{sec-area-based-approach}.
 It is based on extrapolating measurements from ground plots made in traditional inventories by aggregating remote sensing data to the grid with cell area of a ground plot, which results in coarse resolution maps.
 It is easy to use, but its results are often not detailed enough when working on smaller scales.
-However, modern sensors and processing techniques allow not aggregating at all and instead working on the level of individual trees, which is as detailed as it can possibly get, allowing for any level of aggregation for downstream tasks.
+However, modern sensors and processing techniques allow working on the level of individual trees without any aggregation on data level.
+This is as detailed as survey can possibly get, allowing for any level of aggregation for downstream tasks.
 This requires robust algorithms that allow detecting individual trees in dense multimodal data.
 This is relatively\footnote{The word relatively does a lot of heavy lifting here, as the problem is by no means easy on its own and takes a lot of effort from many researchers to continue to make progress on.
 } easy in urban environments, manually planted and managed forest stands, or forests that are either sparse or predominantly coniferous, where the structure of the canopy is easy to interpret.
