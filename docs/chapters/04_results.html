@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -37,10 +57,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-626149efe8f5d16e1d391ba177679bf0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -277,17 +297,17 @@ Figure&nbsp;4.3: 10-fold cross-validation results of the species classification 
 </div>
 </div>
 </div>
-<p>The holdout set was used to take a more in-depth look at the classification results. <a href="#fig-clf-confusion-matrix" class="quarto-xref">Figure&nbsp;<span>4.4</span></a> shows the confusion matrix for the holdout set, with values normalized by row. The set is relatively small – 158 examples, but enough to see some patterns emerge in the predictions. The best overall species is spruce, and all coniferous species are better than all the deciduous species. The model often confuses deciduous species, classifying alder as birch or tilia, aspen as birch, tilia as alder or birch. This behavior is to be expected, as the shapes of deciduous species are very similar to each other and in complex in general. The overall accuracy in the holdout set is 61%.</p>
+<p>The holdout set was used to take a more in-depth look at the classification results. <a href="#fig-clf-confusion-matrix" class="quarto-xref">Figure&nbsp;<span>4.4</span></a> shows the confusion matrix for the holdout set, with values normalized by row. The set is relatively small – 158 examples, but enough to see some patterns emerge in the predictions. The best overall species is spruce, having the larges accuracy. All coniferous species have higher accuracies than all deciduous species. The model often confuses deciduous species, classifying alder as birch or tilia, aspen as birch, tilia as alder or birch. This behavior is to be expected, as the shapes of deciduous species are very similar to each other and are complex in general. The overall accuracy in the holdout set is 61%.</p>
 <div class="quarto-embed-nb-cell" data-notebook="/Users/ivandubrovin/src/phd/notebooks/train-tree-models.ipynb" data-notebook-cellid="cell-fig-clf-confusion-matrix">
 <div id="cell-fig-clf-confusion-matrix" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div id="fig-clf-confusion-matrix" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-clf-confusion-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="04_results_files/figure-html/..-..-notebooks-train-tree-models-fig-clf-confusion-matrix-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4.4: Confusion matrix for the tree species classification Random Forest. Calulated on the 40% holdout set of 158 examples. Values normalized by row. The model confuses deciduous species a lot more than coniferous ones."><img src="04_results_files/figure-html/..-..-notebooks-train-tree-models-fig-clf-confusion-matrix-output-1.png" class="img-fluid figure-img"></a>
+<a href="04_results_files/figure-html/..-..-notebooks-train-tree-models-fig-clf-confusion-matrix-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4.4: Confusion matrix for the tree species classification Random Forest. Calculated on the 40% holdout set of 158 examples. Values normalized by row (represent producer accuracy). The model confuses deciduous species a lot more than coniferous ones."><img src="04_results_files/figure-html/..-..-notebooks-train-tree-models-fig-clf-confusion-matrix-output-1.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-clf-confusion-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.4: Confusion matrix for the tree species classification Random Forest. Calulated on the 40% holdout set of 158 examples. Values normalized by row. The model confuses deciduous species a lot more than coniferous ones.
+Figure&nbsp;4.4: Confusion matrix for the tree species classification Random Forest. Calculated on the 40% holdout set of 158 examples. Values normalized by row (represent producer accuracy). The model confuses deciduous species a lot more than coniferous ones.
 </figcaption>
 </figure>
 </div>
@@ -323,6 +343,7 @@ Figure&nbsp;4.5: 10-fold cross-validation results of the dbh regression Random F
 </div>
 </div>
 <p>Similar to the classification model, the holdout set was used to take a more in-depth look at the regression results. Here the holdout set is even smaller than for regression – 68 samples. <a href="#fig-reg-residuals" class="quarto-xref">Figure&nbsp;<span>4.6</span></a> offers a collection of diagnostic visualizations aimed to help better understand the regression performance. On the top left is the residual plot, where the differences between the actual dbh and the predicted dbh are plotted against the actual dbh values. Ideally, the points should be around a horizontal line at zero, shown in black, without any patterns. This would mean that the size of the error does not depend on the value of dbh. The resulting dbh regression model shows a trend, which means it tends to overestimate low dbh values and underestimate high dbh values. A related plot is on the top right, showing the distribution of the residuals across the holdout set. It should be centered around zero and as narrow as possible. On the bottom left is a scatter plot of predicted dbh against the actual dbh. Ideally, this should be a 45-degree line, shown in black. Because of the underestimation on the high end and overestimation in the low end, the points seem to lie on a line with a smaller slope. Although most points are in the middle, where the line is followed a lot more closely. And, finally, a related plot on the bottom right, comparing distributions of the actual dbh and predicted dbh in the holdout set. The same lack of extreme can be observed. The final holdout set RMSE is 5.76 cm, MAE is 4.11, <span class="math inline">\(R^2\)</span> is 0.52.</p>
+<p><a href="#fig-dbh-distribution" class="quarto-xref">Figure&nbsp;<span>4.7</span></a> show the distributions of the field measured dbh in the full Lysva dataset for reference. On the top it show a boxplot with every individual observation plotted as a point, jittered along the Y axis to reduce overlap. On the bottom, a histogram and an empirical cumulative density function are shown, along with the mean, median, and standard deviation.</p>
 <div class="quarto-embed-nb-cell" data-notebook="/Users/ivandubrovin/src/phd/notebooks/train-tree-models.ipynb" data-notebook-cellid="cell-fig-reg-residuals">
 <div id="cell-fig-reg-residuals" class="cell" data-execution_count="23">
 <div class="cell-output cell-output-display">
@@ -339,12 +360,28 @@ Figure&nbsp;4.6: Quality assessment plots for the diameter at breast height regr
 </div>
 </div>
 </div>
+<div class="quarto-embed-nb-cell" data-notebook="/Users/ivandubrovin/src/phd/rendered/chapters/03a_lysva_dataset.ipynb" data-notebook-cellid="cell-fig-dbh-distribution">
+<div id="cell-fig-dbh-distribution" class="cell" data-execution_count="19">
+<div class="cell-output cell-output-display">
+<div id="fig-dbh-distribution" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dbh-distribution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="04_results_files/figure-html/03a_lysva_dataset-fig-dbh-distribution-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;4.7: Distributions of the field measured dbh in the Lysva dataset. Top: Boxplot with individual ovservations marked by points (jittered along the Y axis to reduce overlap). Bottom: Histogtam and the empirical cumulative density function of field measured dbh in the Lysva dataset."><img src="04_results_files/figure-html/03a_lysva_dataset-fig-dbh-distribution-output-1.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dbh-distribution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.7: Distributions of the field measured dbh in the Lysva dataset. <strong>Top:</strong> Boxplot with individual ovservations marked by points (jittered along the Y axis to reduce overlap). <strong>Bottom:</strong> Histogtam and the empirical cumulative density function of field measured dbh in the Lysva dataset.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="validation-on-the-lysva-field-inventory-data" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="validation-on-the-lysva-field-inventory-data"><span class="header-section-number">4.3</span> Validation on the Lysva field inventory data</h2>
-<p>To validate the framework, the results were evaluated on the Lysva field inventory dataset, described in <a href="03_materials_and_methods.html#sec-lysva-dataset" class="quarto-xref"><span>Section 3.1</span></a>. The mean X and Y coordinates of each segmented tree were calculated to convert the cloud into a set of points, where each point represents a candidate detected tree. The maximum height of the points in the cluster was used as the height of the detected tree. Then the algorithm described in <a href="03_materials_and_methods.html#sec-matching-algorithm" class="quarto-xref"><span>Section 3.6</span></a> was applied to match the detected trees their corresponding the ground truth trees, if any. The matching algorithm was run with maximum distance between a detected tree candidate and a ground truth tree of 5 meters and maximum height difference of 3 meters (ignored for ground truth trees that don’t have measured height). Then, precision, recall, and <span class="math inline">\(F_1\)</span>-score were calculated for the detection results, and for the true positive matches the average distance between the detected tree and the actual tree, species classification accuracy and macro <span class="math inline">\(F_1\)</span>-score, and diameter at breast height errors are calculated.</p>
-<p><a href="#tbl-detection-results" class="quarto-xref">Table&nbsp;<span>4.1</span></a> shows the tree detection metrics. When interpreting the metrics, the reader is advised to keep in mind the limitations of the distance metric mentioned in <a href="03_materials_and_methods.html#sec-matching-algorithm" class="quarto-xref"><span>Section 3.6</span></a>, and instead focus on the <span class="math inline">\(F_1\)</span>-score as the most informative metric. The overall average <span class="math inline">\(F_1\)</span>-score for tree detection by the described system is 0.63.</p>
+<p>To validate the framework, the results were evaluated on the Lysva field inventory dataset, described in <a href="03_materials_and_methods.html#sec-lysva-dataset" class="quarto-xref"><span>Section 3.1</span></a>. The mean X and Y coordinates of each segmented tree were calculated to convert the cloud into a set of points, where each point represents a candidate detected tree. The maximum height of the points in the cluster was used as the height of the detected tree. Then the algorithm described in <a href="03_materials_and_methods.html#sec-matching-algorithm" class="quarto-xref"><span>Section 3.6</span></a> was applied to match the detected trees their corresponding the ground truth trees, if any. The matching algorithm was run with maximum distance between a detected tree candidate and a ground truth tree of 5 meters and maximum height difference of 3 meters (ignored for ground truth trees that do not have measured height). Then, precision, recall, and <span class="math inline">\(F_1\)</span>-score were calculated for the detection results, and for the true positive matches the average distance between the detected tree and the actual tree, species classification accuracy and macro <span class="math inline">\(F_1\)</span>-score, and diameter at breast height errors are calculated.</p>
+<p><a href="#tbl-detection-results" class="quarto-xref">Table&nbsp;<span>4.1</span></a> shows the tree detection metrics. When interpreting the metrics, the reader is advised to keep in mind the limitations of the distance metric mentioned in <a href="03_materials_and_methods.html#sec-matching-algorithm" class="quarto-xref"><span>Section 3.6</span></a>, and instead focus on the <span class="math inline">\(F_1\)</span>-score as the most informative metric. The overall average <span class="math inline">\(F_1\)</span>-score for tree detection by the described system is 0.63. This approach thus outperforms the basic individual local maximum filter in tree detection in the Lysva region as reported in <span class="citation" data-cites="dubrovinOpenDatasetIndividual2024">Dubrovin, Fortin, and Kedrov (<a href="99_references.html#ref-dubrovinOpenDatasetIndividual2024" role="doc-biblioref">2024</a>)</span> by 0.13.</p>
 <div id="tbl-detection-results" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-detection-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -490,30 +527,35 @@ Table&nbsp;4.1: Results of the tree detection across all plots in the Lysva fiel
 </div>
 </figure>
 </div>
-<p><a href="#fig-lysva-confusion-matrix" class="quarto-xref">Figure&nbsp;<span>4.7</span></a> shows the confusion matrix for species prediction calculated for true positive matches. Note that willow trees are not included, as the model has not seen any in the training data, and all pine predictions are counted as spruce instead. The pattern of the confusion matrix is similar to the evaluation on the holdout set. The overall accuracy is 66.1%. The overall macro <span class="math inline">\(F_1\)</span>-score is 55.4%.</p>
+<p><a href="#fig-lysva-confusion-matrix" class="quarto-xref">Figure&nbsp;<span>4.8</span></a> shows the confusion matrix for species prediction calculated for true positive matches. Note that willow trees are not included, as the model has not seen any in the training data, and all pine predictions are counted as spruce instead. The pattern of the confusion matrix is similar to the evaluation on the holdout set. The overall accuracy is 66.1%. The overall macro <span class="math inline">\(F_1\)</span>-score is 55.4%.</p>
 <div id="fig-lysva-confusion-matrix" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-lysva-confusion-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../images/lysva-confusion-matrix.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;4.7: Confusion matrix for the tree species classification on true positive detected trees in the Lysva field inventory plots."><img src="../images/lysva-confusion-matrix.png" class="img-fluid figure-img"></a>
+<a href="../images/lysva-confusion-matrix.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;4.8: Confusion matrix for the tree species classification on true positive detected trees in the Lysva field inventory plots."><img src="../images/lysva-confusion-matrix.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lysva-confusion-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.7: Confusion matrix for the tree species classification on true positive detected trees in the Lysva field inventory plots.
+Figure&nbsp;4.8: Confusion matrix for the tree species classification on true positive detected trees in the Lysva field inventory plots.
 </figcaption>
 </figure>
 </div>
-<p><a href="#fig-lysva-regression-metrics" class="quarto-xref">Figure&nbsp;<span>4.8</span></a> show the quality assessment plots for the results of diameter at breast height regression. It’s obvious from the plots that the individual tree dataset is not representative of the entire Lysva dataset in terms of dbh, as the range of dbh in there is not wide enough. The distributions show that the individual trees dataset has higher mean dbh values than the overall distribution, which makes the model eager to overestimate a lot. This effect is no doubt connected to the sampling bias mentioned in the description of the individual trees dataset: trees were selected by humans based on how easy they are to extract from a large point cloud. As the result, the predictions outside the range seen by the Random Forest are constant. Within the covered range, however, the behavior is similar to what was observed on the holdout set: a trend in the residual plot indicating over- and underestimation of low and high values, and errors close to zero near the middle of the range. The overall root mean squared error is 5.37 centimeters. The overall mean absolute error is 4.21 centimeters. The overall coefficient of determination <span class="math inline">\(R^2\)</span> is 0.65.</p>
+<p><a href="#fig-lysva-regression-metrics" class="quarto-xref">Figure&nbsp;<span>4.9</span></a> show the quality assessment plots for the results of diameter at breast height regression. It’s obvious from the plots that the individual tree dataset is not representative of the entire Lysva dataset in terms of dbh, as the range of dbh in there is not wide enough. The distributions show that the individual trees dataset has higher mean dbh values than the overall distribution, which makes the model eager to overestimate a lot. This effect is no doubt connected to the sampling bias mentioned in the description of the individual trees dataset: trees were selected by humans based on how easy they are to extract from a large point cloud. As the result, the predictions outside the range seen by the Random Forest are constant. Within the covered range, however, the behavior is similar to what was observed on the holdout set: a trend in the residual plot indicating over- and underestimation of low and high values, and errors close to zero near the middle of the range. The overall root mean squared error is 5.37 centimeters. The overall mean absolute error is 4.21 centimeters. The overall coefficient of determination <span class="math inline">\(R^2\)</span> is 0.65.</p>
 <div id="fig-lysva-regression-metrics" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-lysva-regression-metrics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="../images/lysva-regression-metrics.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;4.8: Regression quality assessment plots plots for the diameter at breast height regression on true positive detected trees in the Lysva field inventory plots."><img src="../images/lysva-regression-metrics.png" class="img-fluid figure-img"></a>
+<a href="../images/lysva-regression-metrics.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;4.9: Regression quality assessment plots plots for the diameter at breast height regression on true positive detected trees in the Lysva field inventory plots."><img src="../images/lysva-regression-metrics.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lysva-regression-metrics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.8: Regression quality assessment plots plots for the diameter at breast height regression on true positive detected trees in the Lysva field inventory plots.
+Figure&nbsp;4.9: Regression quality assessment plots plots for the diameter at breast height regression on true positive detected trees in the Lysva field inventory plots.
 </figcaption>
 </figure>
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-dubrovinOpenDatasetIndividual2024" class="csl-entry" role="listitem">
+Dubrovin, Ivan, Clement Fortin, and Alexander Kedrov. 2024. <span>“An Open Dataset for Individual Tree Detection in <span>UAV LiDAR</span> Point Clouds and <span>RGB</span> Orthophotos in Dense Mixed Forests.”</span> <em>Scientific Reports</em> 14 (1): 21938. <a href="https://doi.org/10.1038/s41598-024-72669-5">https://doi.org/10.1038/s41598-024-72669-5</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -599,8 +641,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -711,7 +751,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -950,7 +989,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/iod-ine/thesis/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/iod-ine/thesis/blob/main/chapters/04_results.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/iod-ine/thesis/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li><li><a href="https://github.com/iod-ine/thesis/blob/main/chapters/04_results.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
