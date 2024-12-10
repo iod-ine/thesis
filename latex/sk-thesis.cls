@@ -398,6 +398,8 @@ reserved.\par\permission}}
 \def\maketitle{\begin{titlepage}
 \includegraphics[width=5cm]{graphics/Skoltech-Logo.png}
 \par
+Skolkovo Institute of Science and Technology
+\par
 \vskip 2\baselineskip
 \large
 {\def\baselinestretch{1.2}\Large\bf \choosecase{\@title} \par}
