@@ -13,29 +13,32 @@ Forests are an essential renewable natural resource and a huge, dynamic part of 
 Responsible management of forests allows using the resources efficiently and sustainably, preserving the biodiversity, and regulating atmospheric $CO_2$, which is becoming especially important as the anthropogenic climate change is ongoing and accelerating [@faheyForestCarbonStorage2010; @forsterIndicatorsGlobalClimate2024].
 This drives the need for accurate, detailed, up-to-date information about various forest attributes such as distributions of tree species, average heights and ages of trees, estimates of trunk diameter, timber volume, and above ground biomass, and others.
 
-The traditional manual forest inventories that rely on people going out into the forest to count and measure trees are extremely labor-intensive and time-consuming, which makes them infeasible to cover extensive areas with sufficient detail, speed, and frequency [@burleyEncyclopediaForestSciences2004].
+The traditional manual forest inventories that rely on people going out into the forest to count and measure trees will always remain the most reliable and accurate way to assess forest parameters [@burleyEncyclopediaForestSciences2004].
+However, they are also extremely labor-intensive and time-consuming, which makes them infeasible to cover extensive areas with sufficient detail, speed, and frequency.
+They will always be required for quality assessment and validation of any indirect method of estimating forest parameters through remote sensing, but better methods of estimation will help to reduce these the time and effort.
 This is especially relevant in countries where massive areas are covered by forests, such as Russia, Brazil, Canada, USA, and China, which are the top five countries for forest area according to @GlobalForestResources2020.
 For that reason, various remote sensing techniques are widely used to extend and extrapolate the traditional forest inventories.
-All sorts of data, from satellite and aerial imagery to very detailed terrestrial LiDAR surveys, are used in all sorts of applications that require mapping forest attributes.
+All sorts of data, from satellite and aerial imagery to very detailed terrestrial LiDAR (light detection and ranging) surveys, are used in all sorts of applications that require mapping forest attributes.
 Some such applications are mentioned in the next chapter dedicated to reviewing the literature.
 
 ::: {#fig-forest-coverage}
 ![](../images/global-forest-cover.jpg)
 
 Global tree cover for 2010.
+Area occupied by tree canopies relative to the total area of the pixel.
 Data from @hansenHighResolutionGlobalMaps2013
 :::
 
 Many national space agencies provide open access to satellite data that can be used for mapping forests.
-European Space Agency offers free and open access[^1] to the Sentinel missions, including C-band SAR data from Sentinel-1 and medium-resolution multispectral data from Sentinel-2, both with global coverage.
+European Space Agency offers free and open access[^1] to the Sentinel missions through its [Copernicus Data Space Ecosystem](https://dataspace.copernicus.eu/) platform, including C-band SAR data from Sentinel-1 and medium-resolution multispectral data from Sentinel-2, both with global coverage.
 They also have an upcoming P-band SAR mission called BIOMASS, designed specifically to study global forest biomass and carbon cycles [@queganEuropeanSpaceAgency2019], which further indicates the growing importance and interest in the topic of forest mapping.
-NASA provides free access to an abundance of satellite data through its Earthdata platform, Landsat mission with the Operation Land Imager (OLI) instrument and Terra mission with Moderate Resolution Imaging Spectroradiometer (MODIS) instrument being the most relevant for forest mapping applications.
+NASA provides free access to an abundance of satellite data through its [Earthdata platform](https://www.earthdata.nasa.gov/), Landsat mission with the Operation Land Imager (OLI) instrument and Terra mission with Moderate Resolution Imaging Spectroradiometer (MODIS) instrument being the most relevant for forest mapping applications.
 The Indian Space Research Organisation (ISRO), Brazilian National Institute for Space Research, National Space Research and Development Agency of Nigeria all offer free satellite data that can be used for this purpose.
 NASA and the ISRO also have a joint upcoming mission called NISAR with two fully-polarimetric SAR sensors at L-band and S-band [@kelloggNASAISROSyntheticAperture2020], which will benefit forestry applications greatly.
 
-[^1]: Although the access is not open for everyone equally, as I have observed silent bans of the accounts connecting from Russian IP-addresses without any response to support inquires.
+[^1]: Although the access is not open for everyone equally, as I have observed silent bans of the accounts connecting from Russian IP addresses without any response to support inquires in the previous platform, and an outright IP ban in the current one.
 
-The open satellite data is an essential tool for wide-area studies, but it usually has coarse resolution, which limits the achievable accuracy and level of detail.
+The open satellite data is an essential tool for wide-area studies, but it usually has coarse resolution (tens to hundreds of meters per pixel), which limits the achievable accuracy and level of detail.
 It also offers no ability to control the observation parameters, as they are fixed by the instrument configuration and orbit parameters, both of which are outside the data consumer control.
 Higher resolution data with a limited ability to control the acquisition parameters is available commercially, but the prices are steep.
 Aerial observations with sensors mounted on planes or helicopters are both more controllable and cheaper alternatives, although still expensive and sill limited in the flexibility of the control of acquisition parameters.
@@ -45,24 +48,28 @@ It allows for fine-grained control and on the fly adjustment of many important p
 The most common way to use UAV remote sensing, be it LiDAR, multispectral, hyperspectral, or other data modalities, for mapping forest attributes in industry is what is known in the LiDAR community as the area-based approach, described in detail in @sec-area-based-approach.
 It is based on extrapolating measurements from ground plots made in traditional inventories by aggregating remote sensing data to the grid with cell area of a ground plot, which results in coarse resolution maps.
 It is easy to use, but its results are often not detailed enough when working on finer scales.
-However, modern sensors and processing techniques allow not aggregating at all and instead working on the level of individual trees, which is as detailed as it can possibly get, allowing for any level of aggregation for downstream tasks.
+However, modern sensors and processing techniques allow working on the level of individual trees without any aggregation on data level.
+This is as detailed as survey can possibly get, allowing for any level of aggregation for downstream tasks.
 This requires robust algorithms that allow detecting individual trees in dense multimodal data.
 This is relatively[^2] easy in urban environments, manually planted and managed forest stands, or forests that are either sparse or predominantly coniferous, where the structure of the canopy is easy to interpret.
 In some such environments state-of-the-art results can be achieved by simple local maxima detection algorithms, that rely on the assumption that a tree can be detected by finding peaks of canopies because they correspond to tree tops.
 Forest that are mixed and dense, which are a huge part of forests in countries mentioned earlier, are much harder to work with and are a very active area of research for developing methods of detection of individual trees.
-The canopies in such forests are very complex, especially because the top of the crowns of deciduous tree species often don't have a single pronounced height maximum, and crowns of nearby trees often overlap.
+The canopies in such forests are very complex, especially because the top of the crowns of deciduous tree species often do not have a single pronounced height maximum, and crowns of nearby trees often overlap.
 
 [^2]: The word relatively does a lot of heavy lifting here, as the problem is by no means easy on its own and takes a lot of effort from many researchers to continue to make progress on.
 
 The framework described in this thesis focuses on fusion of two remote sensing data sources, UAV LiDAR point clouds and UAV RGB orthophotos, to detect individual trees in dense mixed forests and predict required attributes for each tree individually, producing the most detailed maps possible.
 The choice of data sources is driven by their complementary nature, which I believe is key for semantically parsing such complex environments.
-LiDAR is an active sensor, which means it does not depend on external conditions such as lightning.
+LiDAR is an active sensor, which means it does not depend on external conditions such as lighting.
 Cloud and terrain shadows, incidence angles, and weather conditions do not affect LiDAR surveys.
 Moreover, LiDAR provides 3D vertical structural information about the forest, as laser pulses penetrate the canopy and reach both the undergrowth and the ground.
 This structural information is essential for understanding complex environments like dense forests.
-High-resolution RGB imagery does depend on the lighting, but is still an invaluable tool, as it offers detailed data with fixed resolution, continuous coverage of surfaces, unlike the discrete representation of laser scanning, and captures many fine details and textures.
+High-resolution RGB imagery does depend on the illumination conditions, but is still an invaluable tool, as it offers detailed data with fixed resolution, continuous coverage of surfaces, unlike the discrete representation of laser scanning, and captures many fine details and textures.
 It can also benefit from a huge variety of well-established tools and processing techniques from the field of computer vision.
 Neither of these data sources on their own is enough to reliably and with sufficient robustness separate individual trees in dense mixed forests, and the key to success lies in their fusion.
+
+According to the Design Research Methodology framework [@blessingDRMDesignResearch2009], this research project can be classified as type 3: Development of Support.
+The Descriptive Study I is review-based, as understanding of the existing situation is obtained primarily from the literature review, and the most focus is on the comprehensive prescriptive study, followed by an initial Descriptive Study II to evaluate the results.
 
 ## Research question and hypothesis {#sec-research-question}
 

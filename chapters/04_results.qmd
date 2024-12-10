@@ -51,9 +51,10 @@ The model is overall relatively consistent across all ten folds, showing that th
 The holdout set was used to take a more in-depth look at the classification results.
 @fig-clf-confusion-matrix shows the confusion matrix for the holdout set, with values normalized by row.
 The set is relatively small – 158 examples, but enough to see some patterns emerge in the predictions.
-The best overall species is spruce, and all coniferous species are better than all the deciduous species.
+The best overall species is spruce, having the larges accuracy.
+All coniferous species have higher accuracies than all deciduous species.
 The model often confuses deciduous species, classifying alder as birch or tilia, aspen as birch, tilia as alder or birch.
-This behavior is to be expected, as the shapes of deciduous species are very similar to each other and in complex in general.
+This behavior is to be expected, as the shapes of deciduous species are very similar to each other and are complex in general.
 The overall accuracy in the holdout set is 61%.
 
 {{< embed ../../notebooks/train-tree-models.ipynb#fig-clf-confusion-matrix >}}
@@ -97,7 +98,13 @@ And, finally, a related plot on the bottom right, comparing distributions of the
 The same lack of extreme can be observed.
 The final holdout set RMSE is 5.76 cm, MAE is 4.11, $R^2$ is 0.52.
 
+@fig-dbh-distribution show the distributions of the field measured dbh in the full Lysva dataset for reference.
+On the top it show a boxplot with every individual observation plotted as a point, jittered along the Y axis to reduce overlap.
+On the bottom, a histogram and an empirical cumulative density function are shown, along with the mean, median, and standard deviation.
+
 {{< embed ../../notebooks/train-tree-models.ipynb#fig-reg-residuals >}}
+
+{{< embed 03a_lysva_dataset.ipynb#fig-dbh-distribution >}}
 
 ## Validation on the Lysva field inventory data
 
@@ -105,12 +112,13 @@ To validate the framework, the results were evaluated on the Lysva field invento
 The mean X and Y coordinates of each segmented tree were calculated to convert the cloud into a set of points, where each point represents a candidate detected tree.
 The maximum height of the points in the cluster was used as the height of the detected tree.
 Then the algorithm described in @sec-matching-algorithm was applied to match the detected trees their corresponding the ground truth trees, if any.
-The matching algorithm was run with maximum distance between a detected tree candidate and a ground truth tree of 5 meters and maximum height difference of 3 meters (ignored for ground truth trees that don't have measured height).
+The matching algorithm was run with maximum distance between a detected tree candidate and a ground truth tree of 5 meters and maximum height difference of 3 meters (ignored for ground truth trees that do not have measured height).
 Then, precision, recall, and $F_1$-score were calculated for the detection results, and for the true positive matches the average distance between the detected tree and the actual tree, species classification accuracy and macro $F_1$-score, and diameter at breast height errors are calculated.
 
 @tbl-detection-results shows the tree detection metrics.
 When interpreting the metrics, the reader is advised to keep in mind the limitations of the distance metric mentioned in @sec-matching-algorithm, and instead focus on the $F_1$-score as the most informative metric.
 The overall average $F_1$-score for tree detection by the described system is 0.63.
+This approach thus outperforms the basic individual local maximum filter in tree detection in the Lysva region as reported in @dubrovinOpenDatasetIndividual2024 by 0.13.
 
 ::: {#tbl-detection-results}
 | Plot | Tree count | Dominant type | Point density | Recall | Precision | F1-score | Distance |

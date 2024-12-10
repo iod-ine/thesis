@@ -34,7 +34,9 @@ For an introduction or a refresher, one of the best resources is @goodfellowDeep
 For a more detailed exploration, @wangRecentAdvancesDeep2020 offer a selection of papers on topics relevant to modern deep learning techniques.
 As point clouds are a less well-known modality in machine learning and deep learning, the reader is also referred to @belloReviewDeepLearning2020 and @guoDeepLearning3D2021, offering detailed reviews of the deep learning approaches used in various problems related to processing point clouds.
 @fig-deep-learnin-on-point-clouds is a high-level taxonomy of these approaches.
-Two main groups are structured grid-based, which rely on transformation of point clouds into regular structures that are then processed by 2D or 3D convolutional neural networks, and row point cloud based, which consume point clouds directly.
+Two main groups are structured grid-based, which rely on transformation of point clouds into regular structures that are then processed by 2D or 3D convolutional neural networks, and raw point cloud based, which consume point clouds directly.
+There are also more modern and powerful approaches, like the transformer-based Point Transformer [@zhaoPointTransformer2021; @wuPointTransformerV22022; @wuPointTransformerV32024] that utilizes the power of the attention mechanisms that dominates natural language applications and performs well in computer vision.
+Another novel addition is PointMamba [@liangPointMambaSimpleState2024], another architecture popularized in the natural language processing domain, aiming to improve on the transformer architecture by using a less computationally complex algorithm called state space model.
 The section is focused on providing a very short overview of these topics as it relates to the framework that is the focus of the thesis.
 
 ::: {#fig-deep-learnin-on-point-clouds}
@@ -44,7 +46,7 @@ A high-level taxonomy of deep learning approaches for point clouds. Figure from 
 :::
 
 Classic machine learning approaches rely on feature engineering: manual preparation of features used as inputs for models based on domain expertise and various feature selection techniques.
-Two main groups of tasks are per-point predictions, which is in many ways similar to the task of semantic segmentation of images, that requires per-point features, and per-cloud predictions that either process entire point clouds or individual segments, separated be some preprocessing routine.
+Two main groups of tasks are per-point predictions, which is in many ways similar to the task of semantic segmentation of images, that requires per-point features, and per-cloud predictions that either process entire point clouds or individual segments, separated by some preprocessing routine.
 @weinmannFeatureRelevanceAssessment2013 show that careful selection of features is crucial for accurate and efficient semantic interpretation of point cloud data: a shotgun approach of using many simple features without much consideration results in worse performance than a surgical approach of using a few carefully selected ones.
 They also provide definitions of some of the most used manual features that aim to describe the 3D structure of point sets.
 The features are based on combinations of eigenvalues of local covariance matrices of coordinate vectors of a set of points.
@@ -84,7 +86,7 @@ PointNet++ architecture. Figure from @qiPointNetPlusPlus2017
 
 ## Area-based approach {#sec-area-based-approach}
 
-The most common way to use LiDAR for mapping forest attributes is the area-based approach [@whiteABAGuide2013].
+The most common way to use LiDAR for mapping forest attributes is the area-based approach (ABA) [@whiteABAGuide2013].
 @fig-aba-schema shows its schematic representation.
 It consists of a LiDAR survey covering the whole area of interest and a manual forest inventory providing ground truth data for fitting statistical models and validating the results.
 The inventory usually consists of many circular ground plots with every tree within counted and attributes of interest either directly measured or calculated and averaged.
@@ -107,7 +109,7 @@ In fact, basic familiarity with the R programming language is enough to create y
 It is also straightforward to extend with other data sources such as satellite or aerial images, and it works even with sparse data: for successful plot and stand level modeling point densities as low as 0.5 points per square meter have been reported to be enough [@treitzLiDARSamplingDensity2012; @jakubowskiTradeoffsLidarPulse2013].
 Still, it requires a lot of field inventory data to work, since every ground plot becomes a single example for the models.
 The models that can be used are also relatively simple, because of how expensive the data collection is.
-Data-hungry approaches like neural networks usually don't have enough data to train.
+Data-hungry approaches like neural networks usually do not have enough data to train.
 The results are also very coarse – predicted on a grid with the size defined by the area of a plot (a common plot shape is a circle with 9-meter radius, which is approximately equivalent to a square grid cell with 16-meter side).
 This is why they are usually further aggregated to stand level.
 
@@ -136,10 +138,10 @@ They report coefficients of determination of 0.85 and average errors around 83 t
 With the constant improvement of accessibility and quality of high-resolution remote sensing data, there is a growing interest in the development of methods that operate on the scale of individual trees.
 This subsection gives an overview of some of the research in this area, split by the main data source.
 
-@liNewMethodSegmenting2012 developed a well performing algorithmic method for segmentation of individual tree crowns in LiDAR point clouds for coniferous forests that relies on the pointy shape characteristic of many coniferous species and segments the trees from top to bottom.
+@liNewMethodSegmenting2012 developed a well performing algorithmic method for segmentation of individual tree crowns in LiDAR point clouds for coniferous forests that relies on the point shape characteristic of many coniferous species and segments the trees from top to bottom.
 
 @lucasIdentificationLinearVegetation2019 use the set of eigenvalue-based features calculated for each point in a fixed-radius neighborhood, with other geometrical features including maximum local height difference and height standard deviation, local radius and local point density, to identify linear vegetation elements in segmented point clouds.
-They also use two point-based features that don't rely on a neighborhood: the number of returns and the normalized return number, proposed in @guoRelevanceAirborneLidar2011, and use Random Forest classifier to separate the points that belong to vegetation after first removing the planar features corresponding to grass, soil, and water surfaces.
+They also use two point-based features that do not rely on a neighborhood: the number of returns and the normalized return number, proposed in @guoRelevanceAirborneLidar2011, and use Random Forest classifier to separate the points that belong to vegetation after first removing the planar features corresponding to grass, soil, and water surfaces.
 The approach is somewhere in the middle between the area-based and individual tree-based, but still is a useful example of application of classic machine learning to segment out vegetation from larger point clouds.
 
 ### Image-only
@@ -225,7 +227,7 @@ Worth noting that both the synthetic and real forest have relatively well-define
 
 ### Fusion of data
 
-Many works don't just use one data source and instead combine multiple complimentary ones for better representation.
+Many works do not just use one data source and instead combine multiple complimentary ones for better representation.
 This subsection gives an overview of data fusion approaches for forestry applications on individual tree scale.
 
 @lianBiomassCalculationsIndividual2022 describe an approach for calculating individual tree biomass by combining UAV multispectral, UAV LiDAR and terrestrial LiDAR data.
@@ -242,7 +244,7 @@ The authors report that in most cases fusion improves the results.
 Most relevant to this thesis, they report that for individual tree segmentation the results of fusion-based approaches compared to LiDAR-only ones are consistently better.
 @laExtractionIndividualTree2015 show an increase from 63% to 92% for low-density forests, and from 62% to 70% for high-density forests, @aubry-kientzMultisensorDataFusion2021 show and improvement by 5%, and @zhenImpactTreeOrientedGrowth2014 and @arenas-corralizaAutomaticMappingTree2020 improved their results by 2-4%.
 
-@ferreiraImprovingUrbanTree2024 use a U-Net semantic segmentation model for fusion of VNIR images and UAV LiDAR-derived feature maps including surface normals of the canopies, reflection intensities, canopy heights, and leaf-area index for mapping tree species in urban tropical areas.
+@ferreiraImprovingUrbanTree2024 use a U-Net semantic segmentation model for fusion of VNIR images and airborne LiDAR-derived feature maps including surface normals of the canopies, reflection intensities, canopy heights, and leaf-area index for mapping tree species in urban tropical areas.
 Their results show that adding LiDAR-based features improves $F_1$-scores across all considered species, with average $F_1$-score 84.1.
 They also use the segment anything model [@Kirillov_2023_ICCV] to automatically segment tree crowns with outstanding 98% boundary $F_1$-score.
 
