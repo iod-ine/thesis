@@ -71,6 +71,18 @@ The speed during the survey was 16.6 meters per second.
 
 {{< embed 03a_lysva_dataset.ipynb#fig-example-ortho >}}
 
+::: {#fig-uavs layout-ncol=2}
+![](../images/dji-matrice-600-pro.jpeg)
+
+![](../images/geoscan_201_geodesy.jpg)
+
+UAVs used for data collection (photos from vendor websites).
+**Left**: DJI Matrice 600 Pro.
+The same UAV model was used for the LiDAR survey.
+**Right**: Geoscan 201 Geodesy.
+The same UAV model was used for the orthophoto survey.
+:::
+
 @tbl-lysva-plot-stats shows some descriptive statistics for each plot in the field inventory: the number of trees in the plot, average LiDAR point density in points per square meter, and dominant species type.
 The overall average point density is 37 points per square meter.
 Exactly half of the plots are predominantly coniferous and half are predominantly deciduous.
