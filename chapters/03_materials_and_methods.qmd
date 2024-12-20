@@ -77,10 +77,8 @@ The speed during the survey was 16.6 meters per second.
 ![](../images/geoscan_201_geodesy.jpg)
 
 UAVs used for data collection (photos from vendor websites).
-**Left**: DJI Matrice 600 Pro.
-The same UAV model was used for the LiDAR survey.
-**Right**: Geoscan 201 Geodesy.
-The same UAV model was used for the orthophoto survey.
+**Left**: DJI Matrice 600 Pro that was used for the LiDAR survey.
+**Right**: Geoscan 201 Geodesy that was used for the orthophoto survey.
 :::
 
 ::: {#tbl-lysva-equipment}
