@@ -87,6 +87,7 @@ The same UAV model was used for the orthophoto survey.
 |                        | LiDAR survey             | Orthophoto survey   |
 |-----------------------:|--------------------------|---------------------|
 | **Sensor**             | AGM-MS3                  | Sony A6000          |
+| **Resolution**         | 37 points/m²             | 7 cm/px             |
 | **Carrier UAV**        | DJI Matrice 600 Pro      | Geoscan 201 Geodesy |
 | **Carrier UAV type**   | Rotary-wing (hexacopter) | Fixed-wing          |
 | **Acquisition height** | 150 m                    | 150 m               |
