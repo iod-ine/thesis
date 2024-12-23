@@ -31,7 +31,7 @@ The reported experimental results achieved by the implemented system are by no m
 The current state of the system, described in the previous chapter, can be seen as a baseline, since it prioritizes simple components to show that the overall system has potential.
 And I believe the resulting framework has potential, with specific steps I would try if I had unlimited time, listed in the next section.
 
-## Potential further improvements
+## Potential further improvements {#sec-improvements}
 
 I see numerous ways to potentially improve the results of the proposed system.
 Some of the most important are as follows:

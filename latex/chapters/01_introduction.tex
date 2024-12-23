@@ -80,9 +80,24 @@ The effort reduction comes from greatly decreasing the amount of field inventory
 
 \section{Overview of the framework}
 
-The proposed framework described in this thesis consist of a neural-network based tree segmentation in \gls{uav} \gls{lidar} point clouds enhanced with \gls{rgb} orthophoto-based features and processing the segments with a collection of specialized classic machine learning models that predict the parameters of interest for each detected tree.
+The thesis describes a framework – details a possible way that a system for estimating forest parameters on the scale of individual trees can be built, with a relatively accessible amount of data and effort.
+Potential ways to create all the components a system like that needs are described, as well as the way they are assembled into a complete system.
+The heart of the proposed approach is the reduction of effort required for data collection for training a tree segmentation model.
+It is achieved by circumventing the need to create very labor-intensive datasets of fully segmented point clouds of forests where each point is assigned an ID of the tree it belongs to, by using a significantly easier to create data of individual trees extracted from a larger point cloud of a forest.
+The individual trees are then arranged into synthetic forest patches, in which the per-point tree ID labels arise naturally from ordinal numbers and positioning of the trees within a patch, creating a reasonable alternative to manual segmentation.
+
+The proposed framework consists of a neural network-based tree segmentation in \gls{uav} \gls{lidar} point clouds enhanced with \gls{rgb} orthophoto-based features, with further processing of the segments using a collection of specialized classic machine learning models that predict the parameters of interest for each detected tree.
 The tree segmentation model is trained on synthetic forest patches constructed from a dataset of point clouds of individual trees extracted manually from a large \gls{uav} \gls{lidar} survey, heavily relying on augmentations to make the synthetic forest closer to real forest.
-The parameter prediction classification and regression models are trained on the same dataset of individual trees using a collection of widely used manual point cloud features.
+The parameter prediction classification and regression models are trained on the same dataset of individual trees.
+
+The most important parts of the framework are the approach to generation of data for training the tree segmentation network and the arrangement of the components into a single system.
+All other components can be swapped with different ones that serve a similar purpose.
+In fact, as mentioned in Section~\ref{sec:improvements}, such replacement are encouraged to improve the system.
+For example, the example implementation described in the thesis uses PointNet++ as the backbone for the segmentation network, but any other architecture that can operate directly on point clouds and output per-point predictions can be used instead.
+Using a more modern and powerful architecture will be beneficial, as the PointNet++ was chosen for ease of implementation and experimentation.
+Similarly, the specialized parameter prediction models in the example implementation are Random Forests trained using a collection of widely used manual point cloud features.
+Models trained on better feature sets, or any other models that can reduce a point cloud to a single prediction can be used instead, even neural network ones, even though the source dataset will probably need to be considerably larger for training even a small network.
+
 Figure~\ref{fig-framework-apply} is a schematic representation of the framework, showing the required inputs in red, processing steps in yellow, and artifacts in cyan.
 The field inventory is phased out, but it is still required, as application of any framework requires quality assessment and validation.
 
