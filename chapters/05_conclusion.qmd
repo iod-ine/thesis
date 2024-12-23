@@ -12,7 +12,7 @@ The main contributions of the thesis can be summarized as follows:
 
 - Publication of two original open access datasets that will undoubtedly be useful to the research community with a rapidly growing interest in detailed digital forest inventories [@dubrovinExplorationPropertiesPoint2024; @dubrovinOpenDatasetIndividual2024].
 I believe the release of data into open access is an important contribution, especially in the current era of commercial machine learning[^1].
-When having good data is an advantage, less people are willing to make their data public, which makes it harder for researchers to explore, develop, and compare novel approaches.
+When having good data is an advantage, fewer people are willing to make their data public, which makes it harder for researchers to explore, develop, and compare novel approaches.
 - A novel approach to training individual tree segmentation neural networks on forest patches synthetically generated from individual trees with heavy use of augmentations to make the data more closely represent real data.
 - Design, implementation, and experimental verification of the framework mentioned in the first paragraph.
 The framework is still in the early prototype stage, since the components are far behind the current state of the art.
@@ -25,7 +25,7 @@ As already mentioned there, the baselines are the manual forest inventory and th
 The cost reduction mainly comes from the choice of the platform for remote sensing observations.
 Using UAVs is cheaper than purchasing high-resolution data from satellites or planes, and it offers a lot more control over the acquisition parameters, although it requires trained operators.
 The effort reduction mainly comes from a dramatic decrease in the amount of required field inventory data, which is very labor-intensive to collect.
-UAVs also allow to cover huge areas easily by a few people, unlike fully manual inventories or those based on terrestrial LiDAR measurements, where a forester or an operator needs to cover the entire area of interest by foot.
+UAVs also allow covering huge areas easily by a few people, unlike fully manual inventories or those based on terrestrial LiDAR measurements, where a forester or an operator needs to cover the entire area of interest by foot.
 
 The reported experimental results achieved by the implemented system are by no means state of the art, but they do serve as a proof of concept.
 The current state of the system, described in the previous chapter, can be seen as a baseline, since it prioritizes simple components to show that the overall system has potential.
