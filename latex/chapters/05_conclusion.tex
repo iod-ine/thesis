@@ -45,19 +45,22 @@ Some of the most important are as follows:
   For the same reason the PointNet++ was chosen as a baseline for tree segmentation, a very basic approach was used to extract features from \gls{rgb} RGBorthophotos.
         Despite being better than just \gls{rgb} colors, these features still offer very limited representation power.
   Instead, convolutional neural networks specialized in creating good representations for downstream tasks can be used.
-\item Use of open-access datasets for pretraining.
+\item Use of open-access datasets for pretraining and additional validation.
   At its current state, the tree segmentation network learns to perform a very hard task from scratch on a dataset of a very limited size.
   I believe it can benefit from first training on similar, but larger dataset, for example, the NeonTreeEvaluation Benchmark \citep{weinsteinDataNeonTreeEvaluationBenchmark2022}.
   It is briefly described in the comparison subsection of the Lysva field inventory section.
   The bounding boxes from the orthophoto can be used to label the point cloud for tree segmentation.
   The labels will be noisy, but pretraining on a large amount of noisy data often shows good results.
+  Including other data for validation will also make it significantly more reliable.
 \item Use of more sophisticated techniques for creating synthetic forest patches.
   Both the sampling of the trees and the placement onto the patch can be improved.
-  For example, sampling can take into consideration the species of the trees, to make the patches more realistic: some fully coniferous, some fully deciduous, some mixed.
-  Placing of the trees can use packing algorithms, or try to mimic the spatial distribution of trees in the inventory.
+  For example, sampling can take into consideration the species of the trees, to make the patches more realistic: some fully coniferous, some fully deciduous, some mixed in various proportions.
+  Placing of the trees can use packing algorithms, or try to mimic the spatial distribution of trees observed in the inventory, where the tree density is not constant.
 \item Use of more sophisticated augmentations to make the synthetic forest patches look as close as possible to real forest patches.
-  For example, the height-depended dropout can be improved to take into account canopy density and overlap.
+  For example, the height-depended dropout can be improved to take into account canopy density and canopy overlap, since dense and overlapping canopies are more likely to block the laser.
   A shorter tree almost completely covered from above by a larger tree should have fewer points overall, not just at low heights relative to its highest point.
+  It will also be beneficial to generate patches slightly larger than the desired target size and crop them to it randomly as an augmentation.
+  This will mimic the way the data will come to the model during inference, where trees on the edges of the patch are highly likely to be cropped.
 \item Use of a more careful approach to training attribute prediction models.
 The results of the second step can be further improved by adopting a more careful approach to modeling, including a more careful approach to feature engineering and model selection.
 
