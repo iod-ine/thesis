@@ -63,5 +63,9 @@ Some of the most important are as follows:
   This will mimic the way the data will come to the model during inference, where trees on the edges of the patch are highly likely to be cropped.
 \item Use of a more careful approach to training attribute prediction models.
 The results of the second step can be further improved by adopting a more careful approach to modeling, including a more careful approach to feature engineering and model selection.
+\item Use of synthetic data for pretraining and fine-tuning on the real data.
+  The most common way to enhance training deep learning models with synthetic data usually consist of pretraining on large amount of synthetic data and then careful fine-tuning on the small amount of real data.
+  The current iteration of the dataset does not have labeling to enable direct fine-tuning, but it is possible to create such labels to enable this in the future.
+  Release of the dataset into open access allows the community to enhance the it in many ways, and adding such labels would be one of the most useful ones.
 
 \end{itemize}
