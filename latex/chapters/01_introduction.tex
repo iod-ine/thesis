@@ -100,25 +100,41 @@ Models trained on better feature sets, or any other models that can reduce a poi
 
 Figure~\ref{fig-framework-apply} is a schematic representation of the framework, showing the required inputs in red, processing steps in yellow, and artifacts in cyan.
 The field inventory is phased out, but it is still required, as application of any framework requires quality assessment and validation.
+The system consists of a trained tree segmentation neural network and a collection of trained attribute prediction models.
+The inputs for the framework are a \gls{uav} \gls{lidar} point cloud and an \gls{rgb} orthophoto.
+The point cloud is preprocessed by removing duplicates and noise points, classifying the ground points, and normalizing height.
+The orthophoto is processed by a feature extractor that encodes context information, and the planar coordinates of points of the point cloud are used to sample the orthophoto to combine both data sources into one.
+The tree segmentation neural network is then applied to the augmented point cloud to separate it into individual trees.
+The segments are then processed by a collection of specialized models, each predicting a single parameter of interest, like tree species, diameter at breast height, or others.
+The overall result is the required predictions of the parameters for individual trees.
 
 \begin{figure}
 \centering{
 \includegraphics[width=\textwidth]{../images/framework_application_schematic.jpg}
 }
 \caption[Schematic representation of the framework: application]{\label{fig-framework-apply}The schematic representation of the
-framework in the application stage.}
+framework in the application stage.
+The required inputs are a UAV LiDAR point cloud and an RGB orthophoto used to augment the point cloud.
+The augmented point cloud is segmented into individual trees by the segmentation neural network.
+The segments are then processed by a set of specialized tree parameter prediction models.}
 \end{figure}
 
 Figure~\ref{fig-framework-prepare} is a schematic of the preparation step for the framework.
 Each individual node is described in detail in Chapter~\ref{cap:materials}.
-
+To create a working implementation, a manual forest inventory covered by a \gls{uav} \gls{lidar} point cloud and an \gls{rgb} orthophoto are required.
+The inputs are used to create a dataset of point clouds of individual trees – which is significantly easier than to fully segment the point cloud into individual trees.
+This dataset is then used for generating synthetic forest patches for training the neural network and for training the tree parameter prediction models.
+The trained models are then used during inference as described in the previous paragraph.
 
 \begin{figure}
 \centering{
 \includegraphics[width=\textwidth]{../images/framework_preparation_schematic.jpg}
 }
 \caption[Schematic representation of the framework: preparation]{\label{fig-framework-prepare}The schematic representation of
-the framework in the preparation stage.}
+the framework in the preparation stage.
+The required inputs are a manual forest inventory and a UAV LiDAR point cloud and an RGB orthophoto that cover it.
+The inputs are used to create a dataset of individual tree point clouds used for generation of synthetic forest patches for training the segmentation network and for training the parameter prediction models directly.
+The resulting trained models are then used for inference as shown in Figure~\ref{fig-framework-apply}.}
 \end{figure}
 
 \section{Thesis Structure}
