@@ -34,7 +34,7 @@ European Space Agency offers free and open access[^1] to the Sentinel missions t
 They also have an upcoming P-band SAR mission called BIOMASS, designed specifically to study global forest biomass and carbon cycles [@queganEuropeanSpaceAgency2019], which further indicates the growing importance and interest in the topic of forest mapping.
 NASA provides free access to an abundance of satellite data through its [Earthdata platform](https://www.earthdata.nasa.gov/), Landsat mission with the Operation Land Imager (OLI) instrument and Terra mission with the Moderate Resolution Imaging Spectroradiometer (MODIS) instrument being the most relevant for forest mapping applications.
 The Indian Space Research Organisation (ISRO), Brazilian National Institute for Space Research, National Space Research and Development Agency of Nigeria all offer free satellite data that can be used for this purpose.
-NASA and the ISRO also have a joint upcoming mission called NISAR with two fully-polarimetric SAR sensors at L-band and S-band [@kelloggNASAISROSyntheticAperture2020], which will benefit forestry applications greatly.
+NASA and ISRO also have a joint upcoming mission called NISAR with two fully-polarimetric SAR sensors at L-band and S-band [@kelloggNASAISROSyntheticAperture2020], which will benefit forestry applications greatly.
 
 [^1]: Although the access is not open for everyone equally, as I have observed silent bans of the accounts connecting from Russian IP addresses without any response to support inquires in the previous platform, and an outright IP ban in the current one.
 
