@@ -21,6 +21,14 @@ This combination of active SAR and passive multispectral data is very common, as
 They use an unusual approach, using Sentinel-2 images for species detection by clustering, LiDAR point clouds for estimating tree counts and average tree heights, and combining them into two variables used to fit the final regression models.
 The reported relative RMSE values are 14-22%, with errors larger for deciduous tree species.
 
+@illarionovaNeuralBasedHierarchicalApproach2021 use multispectral satellite imagery for mapping dominant tree species.
+They utilize a hierarchical set of binary classification neural networks, first separating the image into forest/non-forest, then separating the forest into coniferous and deciduous, and finally separating deciduous forest into aspen and birch and coniferous into spruce and pine.
+The proposed approach achieved a significantly better $F_1$-score than straightforward multiclass classification: 0.84 versus 0.70.
+
+@illarionovaEstimationCanopyHeight2022 use 5-meter resolution WorldView-2 VNIR data to predict canopy height with a convolutional neural network.
+They use airborne LiDAR data to create the canopy height map used as the target for training the model.
+They achieve a mean absolute error of 2.4 meters and show that the predicted canopy height map can be successfully used as an additional input for the tree species classification task.
+
 LiDAR has been used for forestry applications for a long time, with publications on the topic dating back 40 years.
 @nelsonDeterminingForestCanopy1984 is one of the earliest studies that explores usage of airborne LiDAR for measuring forest canopy profiles and estimating tree heights and canopy closure (a measure of forest canopy coverage that indicates what proportion of the sky is obscured by the tree crowns when viewed from the ground).
 @nilssonEstimationTreeHeights1996 is a study looking into tree height and timber volume estimation using airborne LiDAR across a range of point densities and seasons on a coniferous forest stand.

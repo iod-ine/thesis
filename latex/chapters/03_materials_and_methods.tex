@@ -100,8 +100,10 @@ Figure~\ref{fig-example-ortho} shows the orthophoto for the same plot.
 The carrier \gls{uav} used for the \gls{lidar} survey is DJI Matrice 600 Pro hexacopter.
 The speed during the survey was 10 meters per second.
 The \gls{uav} was configured to follow the terrain at 150 meter height using the \gls{srtm} elevation map as a reference \citep{farrShuttleRadarTopography2000}.
-The carrier \gls{uav} used for the orthophoto survey is the fixed-wing Geoscan 201.
+The carrier \gls{uav} used for the orthophoto survey is the fixed-wing Geoscan 201 Geodesy.
 The speed during the survey was 16.6 meters per second.
+Figure~\ref{fig-uavs} shows the \glspl{uav} used for the remote sensing data collections.
+Table~\ref{tbl-lysva-equipment} summarizes the sensor and platform characteristics, as well as some of the acquisition parameters.
 
 \begin{figure}
 \begin{minipage}{0.50\linewidth}
@@ -129,6 +131,42 @@ LiDAR point cloud of plot 10.}
 \caption{\label{fig-example-ortho}A visualization of the orthophoto of
 plot 10.}
 \end{figure}
+
+\begin{figure}
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{../images/dji-matrice-600-pro.jpeg}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{../images/geoscan_201_geodesy.jpg}
+\end{subfigure}
+\caption[UAVs used for data collection.]{
+    UAVs used for data collection (photos from vendor websites).
+    \textbf{Left}: DJI Matrice 600 Pro that was used for the LiDAR survey.
+    \textbf{Right}: Geoscan 201 Geodesy that was used for the orthophoto survey.
+}
+\label{fig-uavs}
+\end{figure}
+
+\begin{table}
+    \centering
+    \caption{Summary of the equipment used for remote sensing data collection in for the Lysva dataset.}
+    \label{tbl-lysva-equipment}
+    \begin{tabular}{rll}
+        & \textbf{LiDAR survey} & \textbf{Orthophoto survey} \\
+        \toprule
+        \textbf{Sensor} & AGM-MS3 & Sony A6000 \\
+        \textbf{Resolution} & 37 points/m² & 7 cm/px \\
+        \textbf{Carrier UAV} & DJI Matrice 600 Pro & Geoscan 201 Geodesy \\
+        \textbf{Carrier UAV type} & Rotary-wing (hexacopter) & Fixed-wing \\
+        \textbf{Acquisition height} & 150 m & 150 m \\
+        \textbf{Acquisition speed} & 10 m/s & 16.6 m/s \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 Table~\ref{tbl-lysva-plot-stats} shows some descriptive statistics for each plot in the field inventory: the number of trees in the plot, average \gls{lidar} point density in points per square meter, and dominant species type.
 The overall average point density is 37 points per square meter.
@@ -165,7 +203,7 @@ Plot & Tree count & Point density & Dominant type \\
 \caption[Comparison of canopy structure in 3D point clouds.]{\label{fig-lysva-canopy-structure}3D visualizations of point
 clouds from plot 1 (predominantly deciduous) and plot 6 (predominantly
 coniferous). Note the difference in the canopy structure: it is
-relatively easy to tell confifiers apart visually, while deciduous
+relatively easy to tell conifers apart visually, while deciduous
 species do not have pronounced shapes and are hard to discriminate.
 Figure reused from (Dubrovin and Fortin 2024).}
 \end{figure}

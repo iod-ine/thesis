@@ -32,9 +32,9 @@ Data from @hansenHighResolutionGlobalMaps2013
 Many national space agencies provide open access to satellite data that can be used for mapping forests.
 European Space Agency offers free and open access[^1] to the Sentinel missions through its [Copernicus Data Space Ecosystem](https://dataspace.copernicus.eu/) platform, including C-band SAR data from Sentinel-1 and medium-resolution multispectral data from Sentinel-2, both with global coverage.
 They also have an upcoming P-band SAR mission called BIOMASS, designed specifically to study global forest biomass and carbon cycles [@queganEuropeanSpaceAgency2019], which further indicates the growing importance and interest in the topic of forest mapping.
-NASA provides free access to an abundance of satellite data through its [Earthdata platform](https://www.earthdata.nasa.gov/), Landsat mission with the Operation Land Imager (OLI) instrument and Terra mission with Moderate Resolution Imaging Spectroradiometer (MODIS) instrument being the most relevant for forest mapping applications.
+NASA provides free access to an abundance of satellite data through its [Earthdata platform](https://www.earthdata.nasa.gov/), Landsat mission with the Operation Land Imager (OLI) instrument and Terra mission with the Moderate Resolution Imaging Spectroradiometer (MODIS) instrument being the most relevant for forest mapping applications.
 The Indian Space Research Organisation (ISRO), Brazilian National Institute for Space Research, National Space Research and Development Agency of Nigeria all offer free satellite data that can be used for this purpose.
-NASA and the ISRO also have a joint upcoming mission called NISAR with two fully-polarimetric SAR sensors at L-band and S-band [@kelloggNASAISROSyntheticAperture2020], which will benefit forestry applications greatly.
+NASA and ISRO also have a joint upcoming mission called NISAR with two fully-polarimetric SAR sensors at L-band and S-band [@kelloggNASAISROSyntheticAperture2020], which will benefit forestry applications greatly.
 
 [^1]: Although the access is not open for everyone equally, as I have observed silent bans of the accounts connecting from Russian IP addresses without any response to support inquires in the previous platform, and an outright IP ban in the current one.
 
@@ -49,17 +49,17 @@ The most common way to use UAV remote sensing, be it LiDAR, multispectral, hyper
 It is based on extrapolating measurements from ground plots made in traditional inventories by aggregating remote sensing data to the grid with cell area of a ground plot, which results in coarse resolution maps.
 It is easy to use, but its results are often not detailed enough when working on finer scales.
 However, modern sensors and processing techniques allow working on the level of individual trees without any aggregation on data level.
-This is as detailed as survey can possibly get, allowing for any level of aggregation for downstream tasks.
+This is as detailed as a survey can possibly get, allowing for any level of aggregation for downstream tasks.
 This requires robust algorithms that allow detecting individual trees in dense multimodal data.
-This is relatively[^2] easy in urban environments, manually planted and managed forest stands, or forests that are either sparse or predominantly coniferous, where the structure of the canopy is easy to interpret.
-In some such environments state-of-the-art results can be achieved by simple local maxima detection algorithms, that rely on the assumption that a tree can be detected by finding peaks of canopies because they correspond to tree tops.
+The task is relatively[^2] easy in urban environments, manually planted and managed forest stands, or forests that are either sparse or predominantly coniferous, where the structure of the canopy is easy to interpret.
+In some such environments, state-of-the-art results can be achieved by simple local maxima detection algorithms, that rely on the assumption that a tree can be detected by finding peaks of canopies because they correspond to tree tops.
 Forest that are mixed and dense, which are a huge part of forests in countries mentioned earlier, are much harder to work with and are a very active area of research for developing methods of detection of individual trees.
 The canopies in such forests are very complex, especially because the top of the crowns of deciduous tree species often do not have a single pronounced height maximum, and crowns of nearby trees often overlap.
 
 [^2]: The word relatively does a lot of heavy lifting here, as the problem is by no means easy on its own and takes a lot of effort from many researchers to continue to make progress on.
 
-The framework described in this thesis focuses on fusion of two remote sensing data sources, UAV LiDAR point clouds and UAV RGB orthophotos, to detect individual trees in dense mixed forests and predict required attributes for each tree individually, producing the most detailed maps possible.
-The choice of data sources is driven by their complementary nature, which I believe is key for semantically parsing such complex environments.
+The framework described in this thesis focuses on the fusion of two remote sensing data sources, UAV LiDAR point clouds and UAV RGB orthophotos, to detect individual trees in dense mixed forests and predict required attributes for each tree individually, producing the most detailed maps possible.
+The choice of data sources is driven by their complementary nature, which is key for semantically parsing such complex environments.
 LiDAR is an active sensor, which means it does not depend on external conditions such as lighting.
 Cloud and terrain shadows, incidence angles, and weather conditions do not affect LiDAR surveys.
 Moreover, LiDAR provides 3D vertical structural information about the forest, as laser pulses penetrate the canopy and reach both the undergrowth and the ground.
@@ -84,25 +84,57 @@ The effort reduction comes from greatly decreasing the amount of field inventory
 
 ## Overview of the framework
 
-The proposed framework described in this thesis consist of a neural-network based tree segmentation in UAV LiDAR point clouds enhanced with RGB orthophoto-based features and processing the segments with a collection of specialized classic machine learning models that predict the parameters of interest for each detected tree.
-The tree segmentation model is trained on synthetic forest patches constructed from a dataset of point clouds of individual trees extracted manually from a large UAV LiDAR survey, heavily relying on augmentations to make the synthetic forest closer to real forest.
-The parameter prediction classification and regression models are trained on the same dataset of individual trees using a collection of widely used manual point cloud features.
+The thesis describes a framework – details a possible way that a system for estimating forest parameters on the scale of individual trees can be built, with a relatively accessible amount of data and effort.
+Potential ways to create all the components a system like that needs are described, as well as the way they are assembled into a complete system.
+The heart of the proposed approach is the reduction of effort required for data collection for training a tree segmentation model.
+It is achieved by circumventing the need to create very labor-intensive datasets of fully segmented point clouds of forests where each point is assigned an ID of the tree it belongs to by using a significantly easier to create data of individual trees extracted from a larger point cloud of a forest.
+The individual trees are then arranged into synthetic forest patches, in which the per-point tree ID labels arise naturally from ordinal numbers and positioning of the trees within a patch, creating a reasonable alternative to manual segmentation.
+
+The proposed framework consists of neural network-based tree segmentation in UAV LiDAR point clouds enhanced with RGB orthophoto-based features, with further processing of the segments using a collection of specialized classic machine learning models that predict the parameters of interest for each detected tree.
+The tree segmentation model is trained on synthetic forest patches constructed from a dataset of point clouds of individual trees extracted manually from a large UAV LiDAR survey, heavily relying on augmentations to make the synthetic forest closer to the real forest.
+The parameter prediction classification and regression models are trained on the same dataset of individual trees, each specializing in a single parameter of interest that is available for the extracted tree – species, dbh, etc.
+
+The most important parts of the framework are the approach to generation of data for training the tree segmentation network and the arrangement of the components into a single system.
+All other components can be swapped with different ones that serve a similar purpose.
+In fact, as mentioned in @sec-improvements, such replacement are encouraged to improve the system.
+For example, the example implementation described in the thesis uses PointNet++ as the backbone for the segmentation network, but any other architecture that can operate directly on point clouds and output per-point predictions can be used instead.
+Using a more modern and powerful architecture will be beneficial, as the PointNet++ was chosen for ease of implementation and experimentation.
+Similarly, the specialized parameter prediction models in the example implementation are Random Forests trained using a collection of widely used manual point cloud features.
+Models trained on better feature sets, or any other models that can reduce a point cloud to a single prediction can be used instead, even neural network ones, even though the source dataset will probably need to be considerably larger for training even a small network.
+
 @fig-framework-apply is a schematic representation of the framework, showing the required inputs in red, processing steps in yellow, and artifacts in cyan.
 The field inventory is phased out, but it is still required, as application of any framework requires quality assessment and validation.
+The system consists of a trained tree segmentation neural network and a collection of trained attribute prediction models.
+The inputs for the framework are a UAV LiDAR point cloud and an RGB orthophoto.
+The point cloud is preprocessed by removing duplicates and noise points, classifying the ground points, and normalizing height.
+The orthophoto is processed by a feature extractor that encodes context information, and the planar coordinates of points of the point cloud are used to sample the orthophoto to combine both data sources into one.
+The tree segmentation neural network is then applied to the augmented point cloud to separate it into individual trees.
+The segments are then processed by a collection of specialized models, each predicting a single parameter of interest, like tree species, diameter at breast height, or others.
+The overall results are both the map with locations of individual trees, that can be created by reducing the segments into single planar points, and the required predictions of the parameters for each of the trees.
 
 ::: {#fig-framework-apply}
 ![](../images/framework_application_schematic.jpg)
 
 The schematic representation of the framework in the application stage.
+The required inputs are a UAV LiDAR point cloud and an RGB orthophoto used to augment the point cloud.
+The augmented point cloud is segmented into individual trees by the segmentation neural network.
+The segments are then processed by a set of specialized tree parameter prediction models.
 :::
 
 @fig-framework-prepare is a schematic of the preparation step for the framework.
 Each individual node is described in detail in @sec-materials-and-methods.
+To create a working implementation, a manual forest inventory covered by a UAV LiDAR point cloud and an RGB orthophoto are required.
+The inputs are used to create a dataset of point clouds of individual trees – which is significantly easier than to fully segment the point cloud into individual trees.
+This dataset is then used for generating synthetic forest patches for training the neural network and for training the tree parameter prediction models.
+The trained models are then used during inference as described in the previous paragraph.
 
 ::: {#fig-framework-prepare}
 ![](../images/framework_preparation_schematic.jpg)
 
 The schematic representation of the framework in the preparation stage.
+The required inputs are a manual forest inventory and a UAV LiDAR point cloud and an RGB orthophoto that cover it.
+The inputs are used to create a dataset of individual tree point clouds used for generation of synthetic forest patches for training the segmentation network and for training the parameter prediction models directly.
+The resulting trained models are then used for inference as shown in @fig-framework-apply.
 :::
 
 ## Thesis structure

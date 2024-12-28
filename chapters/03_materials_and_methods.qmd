@@ -64,12 +64,37 @@ It shows the unmodified point cloud on the left, with points colored by height a
 The carrier UAV used for the LiDAR survey is DJI Matrice 600 Pro hexacopter.
 The speed during the survey was 10 meters per second.
 The UAV was configured to follow the terrain at 150 meter height using the SRTM elevation map as a reference [@farrShuttleRadarTopography2000].
-The carrier UAV used for the orthophoto survey is the fixed-wing Geoscan 201.
+The carrier UAV used for the orthophoto survey is the fixed-wing Geoscan 201 Geodesy.
 The speed during the survey was 16.6 meters per second.
+@fig-uavs shows the UAVs used for the remote sensing data collections.
+@tbl-lysva-equipment summarizes the sensor and platform characteristics, as well as some of the acquisition parameters.
 
 {{< embed 03a_lysva_dataset.ipynb#fig-example-3d-point-cloud >}}
 
 {{< embed 03a_lysva_dataset.ipynb#fig-example-ortho >}}
+
+::: {#fig-uavs layout-ncol=2}
+![](../images/dji-matrice-600-pro.jpeg)
+
+![](../images/geoscan_201_geodesy.jpg)
+
+UAVs used for data collection (photos from vendor websites).
+**Left**: DJI Matrice 600 Pro that was used for the LiDAR survey.
+**Right**: Geoscan 201 Geodesy that was used for the orthophoto survey.
+:::
+
+::: {#tbl-lysva-equipment}
+|                        | LiDAR survey             | Orthophoto survey   |
+|-----------------------:|--------------------------|---------------------|
+| **Sensor**             | AGM-MS3                  | Sony A6000          |
+| **Resolution**         | 37 points/m²             | 7 cm/px             |
+| **Carrier UAV**        | DJI Matrice 600 Pro      | Geoscan 201 Geodesy |
+| **Carrier UAV type**   | Rotary-wing (hexacopter) | Fixed-wing          |
+| **Acquisition height** | 150 m                    | 150 m               |
+| **Acquisition speed**  | 10 m/s                   | 16.6 m/s            |
+
+Summary of the equipment used for remote sensing data collection in for the Lysva dataset.
+:::
 
 @tbl-lysva-plot-stats shows some descriptive statistics for each plot in the field inventory: the number of trees in the plot, average LiDAR point density in points per square meter, and dominant species type.
 The overall average point density is 37 points per square meter.
