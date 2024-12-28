@@ -4,8 +4,8 @@ This chapter describes the results of each stage of the framework preparation an
 
 \section{Tree segmentation network training results}
 
-The results of training a tree segmentation PointNet++ are challenging to evaluate on their own because there are not inherently good metrics that would put the performance into easily understandable numbers.
-As was mentioned in Section~\ref{sec-other-training-params}, during training model checkpointing is set up to track average validation accuracy – proportion of points for which the final predicted label is correct.
+The results of training a tree segmentation PointNet++ are challenging to evaluate on their own because there are no inherently good metrics that would put the performance into easily understandable numbers.
+As was mentioned in Section~\ref{sec-other-training-params}, during training model checkpointing is set up to track average validation accuracy – the proportion of points for which the final predicted label is correct.
 However, the predictions are quite noisy, resulting in low accuracies even for results that are not bad.
 Figure~\ref{fig-example-prediction-2d} shows the prediction on a sample from the validation dataset used to monitor the training process, and Figure~\ref{fig-example-prediction-3d} shows the same prediction in 3D.
 The accuracy of the model on the figures is 33.6\%, and it is around the best accuracy of all the experiments I ran, excluding ones with simpler data.
@@ -37,6 +37,31 @@ every point). \textbf{Right:} Points colored by the rounded prediction
 \end{figure}
 
 Overall, the final model was selected less based on raw numbers such as maximum average validation accuracy or minimum average validation loss, but by expecting the visualizations of the predictions on a subset of samples from the validation dataset.
+
+\subsection{Effect of dropout augmentation}
+
+An essential part of the framework is training of the tree segmentation network on synthetic forest patches, which requires heavy use of augmentations to make the data look more realistic and make the model applicable to real-world data.
+The most important augmentation that addresses the selection bias present in the dataset of individual tree point clouds is the height-dependent dropout described in Section~\ref{sec-augmentations}.
+It would undoubtedly be beneficial to conduct a comprehensive exploration of the effect this augmentation itself and its parameters have on the results of the tree segmentation task specifically and the framework overall.
+Unfortunately, this thesis does not go into that much detail on that topic because of the time constraints.
+Still, despite not being properly recorded for the purpose of comprehensive qualitative evaluation, there were many experiments ran with various parameters, and their results are summarized qualitatively below.
+
+Not using the dropout augmentation at all makes the task of segmenting the patches significantly easier – almost all the trees are complete, with a clearly separable trunks.
+Average validation accuracies in the setup without the augmentation are significantly higher, and validation loss is significantly lower.
+However, this does not translate to improved results when applying the network to real data, since the training data looks very different when the augmentation is not applied.
+In such a setup, during inference the network essentially operates completely outside the distribution of its training dataset, making the task impossible and resulting in almost random assignment of IDs to the points.
+
+The sigmoid used to calculate the probability threshold for the dropout is parametrized by scale, which controls how steep the increase in the probability is with height, and shift, which controls the position of the incline.
+Examples of threshold curves for different values of the parameters are shown in Figure~\ref{fig-height-dropout} and Figure~\ref{fig-height-dropout-aggressive}.
+Milder variations, which are characterized by lower positions of the incline and more gradual slopes, as in Figure~\ref{fig-height-dropout}, have similar effects to not using the augmentations at all.
+When not enough points are removed, the task remains simple, leading to higher training metrics and worse performance on real data.
+As the dropout becomes more aggressive, with the position of the incline higher and slopes steeper, as in Figure~\ref{fig-height-dropout-aggressive}, the training data becomes more similar to the real data.
+It leads to the decrease in the average validation training accuracy and increase in values of the loss function during training, but the performance translates much better to the real data.
+At some point, the dropout becomes too aggressive, almost completely destroying the individual trees and making their shapes almost unrecognizable.
+The training metrics continue to decline, as the task becomes even more complicated, but so does the performance on real data, since the augmentation no longer makes the training data look similar to the real data.
+
+The optimal parameters for the augmentation were selected by manual search.
+Automating their selection is not immediately available, since there are no direct metrics that tie the performance of the network during training to its performance on the validation data.
 
 \section{Attribute prediction model training results}
 
